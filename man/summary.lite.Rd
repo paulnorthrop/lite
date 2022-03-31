@@ -16,7 +16,7 @@ arguments are used.}
 \value{
 An object containing the original function call and a matrix of
   estimates and estimated standard errors with row names
-  \code{c("p_u", "sigma_u", "xi", "theta")}.  The object is printed by
+  \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The object is printed by
   \code{\link{print.summary.lite}}.
 }
 \description{

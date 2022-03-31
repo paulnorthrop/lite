@@ -17,7 +17,7 @@ arguments are used.}
 }
 \value{
 A numeric vector of length 3 with names
-  \code{c("p_u", "gp", "theta")}.
+  \code{c("p[u]", "gp", "theta")}.
 }
 \description{
 \code{nobs} method for class \code{"lite"}.

@@ -16,7 +16,7 @@ arguments are used.}
 }
 \value{
 A 4 by 4 numeric matrix with row and column names
-  \code{c("p_u", "sigma_u", "xi", "theta")}.
+  \code{c("p[u]", "sigma[u]", "xi", "theta")}.
 }
 \description{
 \code{vcov} method for class \code{"lite"}.
