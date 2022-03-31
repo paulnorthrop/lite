@@ -72,6 +72,9 @@ fitGP <- function(data, u) {
   if (!is.vector(data)) {
     stop("'data' must be a vector")
   }
+  if (length(u) != 1) {
+    stop("'u' must have length 1")
+  }
   # Remove missing values
   data <- na.omit(data)
   # Create excesses of threshold u
