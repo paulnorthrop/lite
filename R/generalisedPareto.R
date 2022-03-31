@@ -29,7 +29,7 @@
 #' log-likelihood based on the generalised Pareto distribution.
 #'
 #' \code{gpObsInfo} returns a 2 by 2 matrix with row and columns names
-#' \code{c("sigma_u", "xi")}.
+#' \code{c("sigma[u]", "xi")}.
 #' \code{nobs, coef, vcov} and \code{logLik} methods are provided.
 #' @return
 #' \code{fitGP} returns an object of class \code{"GP"}, a list
@@ -83,7 +83,7 @@ fitGP <- function(data, u) {
   grimshaw_fit <- revdbayes::grimshaw_gp_mle(excesses)
   res <- list()
   # mle for (sigma, xi)
-  res$mle <- c(sigma_u = grimshaw_fit$a, xi = -grimshaw_fit$k)
+  res$mle <- c("sigma[u]" = grimshaw_fit$a, xi = -grimshaw_fit$k)
   # number of threshold excesses
   res$nexc <- length(excesses)
   sc <- rep_len(res$mle[1], res$nexc)
@@ -111,7 +111,7 @@ gpObsInfo <- function(pars, excesses) {
   i[1, 2] <- i[2, 1] <- -sum(y * (1 - y / s) / (1 + x * y / s) ^ 2 / s ^ 2)
   i[2, 2] <- sum(2 * log(1 + x * y / s) / x ^ 3 - 2 * y / (s + x * y) / x ^ 2 -
                   (1 + 1 / x) * y ^ 2 / (s + x * y) ^ 2)
-  dimnames(i) <- list(c("sigma_u", "xi"), c("sigma_u", "xi"))
+  dimnames(i) <- list(c("sigma[u]", "xi"), c("sigma[u]", "xi"))
   return(i)
 }
 
@@ -155,7 +155,7 @@ nobs.GP <- function(object, ...) {
 #' @export
 coef.GP <- function(object, ...) {
   val <- object$mle
-  names(val) <- c("sigma_u", "xi")
+  names(val) <- c("sigma[u]", "xi")
   return(val)
 }
 
@@ -163,7 +163,7 @@ coef.GP <- function(object, ...) {
 #' @export
 vcov.GP <- function(object, ...) {
   vc <- object$vcov
-  dimnames(vc) <- list(c("sigma_u", "xi"), c("sigma_u", "xi"))
+  dimnames(vc) <- list(c("sigma[u]", "xi"), c("sigma[u]", "xi"))
   return(vc)
 }
 

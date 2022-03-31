@@ -15,7 +15,7 @@ arguments are used.}
 }
 \value{
 A numeric vector of length 4 with names
-  \code{c("p_u", "sigma_u", "xi", "theta")}.
+  \code{c("p[u]", "sigma[u]", "xi", "theta")}.
 }
 \description{
 \code{coef} method for class \code{"lite"}.

@@ -33,6 +33,6 @@ Add details
 \examples{
 cdata <- exdex::cheeseboro
 u <- quantile(cdata, probs = 0.9, na.rm = TRUE)
-cloglik <- flite(cdata, u)
-summary(cloglik)
+cfit <- flite(cdata, u)
+summary(cfit)
 }

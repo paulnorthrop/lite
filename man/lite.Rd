@@ -10,7 +10,8 @@ Explain what the package does
 \details{
 Add details
 
-The main function is
+The main function is \code{\link{flite}}, which performs frequentist
+inference for time series extremes.
 
 See \code{vignette("lite-vignette", package = "lite")} for an overview of the
 package.

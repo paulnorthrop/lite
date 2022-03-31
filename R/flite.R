@@ -19,8 +19,8 @@
 #' @examples
 #' cdata <- exdex::cheeseboro
 #' u <- quantile(cdata, probs = 0.9, na.rm = TRUE)
-#' cloglik <- flite(cdata, u)
-#' summary(cloglik)
+#' cfit <- flite(cdata, u)
+#' summary(cfit)
 #' @export
 flite <- function(data, u, cluster, ...) {
   #
@@ -58,14 +58,14 @@ flite <- function(data, u, cluster, ...) {
   # Subset cluster to contain only values for threshold exceedances
   gp_cluster <- cluster[data_vector > u]
   #
-  # 2. Fit GP(sigma_u, xi) to excesses of u using an independence
+  # 2. Fit GP(sigma[u], xi) to excesses of u using an independence
   #    log-likelihood and adjust the inferences using the chandwich package
   #
   # The returned object has class "GP"
   gp_fit <- fitGP(data_vector, u)
   aloglik_gp <- adjust_object(gp_fit, cluster = gp_cluster, ...)
   #
-  # 3. Fit Bernoulli(p_u) to indicators of threshold exceedance and adjust
+  # 3. Fit Bernoulli(p[u]) to indicators of threshold exceedance and adjust
   #    the inferences using chandwich::adjust_loglik()
   #
   # The returned object has class "Bernoulli"
@@ -87,7 +87,7 @@ flite <- function(data, u, cluster, ...) {
   }
   #
   # 5. Put GP, binomial and K-gaps inferences together to return an adjusted
-  #    log-likelihood for the parameters (sigma_u, xi, p_u, theta)
+  #    log-likelihood for the parameters (p[u], sigma[u], xi, theta)
   #
   bernoulli_gp_theta_loglik <- function(pars, type) {
     bernoulli_loglik <- aloglik_bernoulli(pars[1], type = type)

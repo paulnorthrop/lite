@@ -72,7 +72,7 @@ log-likelihood, evaluated at \code{pars}.
 log-likelihood based on the generalised Pareto distribution.
 
 \code{gpObsInfo} returns a 2 by 2 matrix with row and columns names
-\code{c("sigma_u", "xi")}.
+\code{c("sigma[u]", "xi")}.
 \code{nobs, coef, vcov} and \code{logLik} methods are provided.
 }
 \examples{
