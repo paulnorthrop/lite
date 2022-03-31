@@ -7,14 +7,13 @@
 \method{print}{summary.lite}(x, ...)
 }
 \arguments{
-\item{x}{An object of class "summary.pm", a result of a call to
-\code{\link{summary.kgaps}}.}
+\item{x}{An object of class "summary.lite", a result of a call to
+\code{\link{summary.lite}}.}
 
 \item{...}{Additional arguments passed on to \code{\link{print.default}}.}
 }
 \value{
-Prints the numeric matrix \code{x$summary} returned from
-\code{\link{summary.kgaps}}.
+Prints the numeric matrix returned from \code{\link{summary.lite}}.
 }
 \description{
 \code{print} method for an object \code{x} of class \code{"summary.kgaps"}.
