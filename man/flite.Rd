@@ -31,7 +31,8 @@ Explain
 Add details
 }
 \examples{
-x <- exdex::cheeseboro
-u <- quantile(x, probs = 0.9, na.rm = TRUE)
-y <- flite(x, u)
+cdata <- exdex::cheeseboro
+u <- quantile(cdata, probs = 0.9, na.rm = TRUE)
+cloglik <- flite(cdata, u)
+summary(cloglik)
 }

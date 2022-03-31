@@ -17,9 +17,10 @@
 #'   \code{k} and/or \code{inc_cens}.
 #' @details Add details
 #' @examples
-#' x <- exdex::cheeseboro
-#' u <- quantile(x, probs = 0.9, na.rm = TRUE)
-#' y <- flite(x, u)
+#' cdata <- exdex::cheeseboro
+#' u <- quantile(cdata, probs = 0.9, na.rm = TRUE)
+#' cloglik <- flite(cdata, u)
+#' summary(cloglik)
 #' @export
 flite <- function(data, u, cluster, ...) {
   #
