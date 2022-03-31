@@ -2,7 +2,7 @@
 % Please edit documentation in R/lite_methods.R
 \name{print.summary.lite}
 \alias{print.summary.lite}
-\title{Print method for objects of class \code{"summary.kgaps"}}
+\title{Print method for objects of class \code{"summary.lite"}}
 \usage{
 \method{print}{summary.lite}(x, ...)
 }
@@ -16,7 +16,7 @@
 Prints the numeric matrix returned from \code{\link{summary.lite}}.
 }
 \description{
-\code{print} method for an object \code{x} of class \code{"summary.kgaps"}.
+\code{print} method for an object \code{x} of class \code{"summary.lite"}.
 }
 \section{Examples}{
 

@@ -150,9 +150,9 @@ summary.lite <- function(object, digits = max(3, getOption("digits") - 3L),
 
 # ============================ print.summary.lite =========================== #
 
-#' Print method for objects of class \code{"summary.kgaps"}
+#' Print method for objects of class \code{"summary.lite"}
 #'
-#' \code{print} method for an object \code{x} of class \code{"summary.kgaps"}.
+#' \code{print} method for an object \code{x} of class \code{"summary.lite"}.
 #'
 #' @param x An object of class "summary.lite", a result of a call to
 #'   \code{\link{summary.lite}}.
@@ -170,4 +170,3 @@ print.summary.lite <- function(x, ...) {
   print(x$matrix, ...)
   invisible(x)
 }
-
