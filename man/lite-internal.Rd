@@ -2,16 +2,10 @@
 % Please edit documentation in R/lite-internal.R
 \name{lite-internal}
 \alias{lite-internal}
-\alias{gp_mle}
-\alias{gp_obs_info}
 \alias{adjust_object}
 \alias{kgaps_loglik}
 \title{Internal lite functions}
 \usage{
-gp_mle(gp_data, u)
-
-gp_obs_info(gp_pars, y)
-
 adjust_object(x, cluster = NULL, ...)
 
 kgaps_loglik(theta, N0, N1, sum_qs, n_kgaps)
