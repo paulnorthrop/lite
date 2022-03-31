@@ -18,7 +18,7 @@ coef.lite <- function(object, ...) {
   bfit <- attr(object, "bernoulli")
   gfit <- attr(object, "gp")
   kfit <- attr(object, "kgaps")
-  cf <- c(attr(bfit, "MLE"), attr(gfit, "MLE"), coef(kfit))
+  cf <- c(attr(bfit, "MLE"), attr(gfit, "MLE"), kfit$theta)
   names(cf) <- c("p_u", "sigma_u", "xi", "theta")
   return(cf)
 }
@@ -139,7 +139,7 @@ summary.lite <- function(object, digits = max(3, getOption("digits") - 3L),
   if (!inherits(object, "lite")) {
     stop("use only with \"lite\" objects")
   }
-  res <- attr(object, "call")
+  res <- attributes(object)["call"]
   mles <- signif(coef(object), digits = digits)
   ses <- signif(sqrt(diag(vcov(object))), digits = digits)
   res$matrix <- cbind(`Estimate` = mles, `Std. Error` = ses)
@@ -154,11 +154,10 @@ summary.lite <- function(object, digits = max(3, getOption("digits") - 3L),
 #'
 #' \code{print} method for an object \code{x} of class \code{"summary.kgaps"}.
 #'
-#' @param x An object of class "summary.pm", a result of a call to
-#'   \code{\link{summary.kgaps}}.
+#' @param x An object of class "summary.lite", a result of a call to
+#'   \code{\link{summary.lite}}.
 #' @param ... Additional arguments passed on to \code{\link{print.default}}.
-#' @return Prints the numeric matrix \code{x$summary} returned from
-#' \code{\link{summary.kgaps}}.
+#' @return Prints the numeric matrix returned from \code{\link{summary.lite}}.
 #' @section Examples:
 #' See the examples in \code{\link{flite}}.
 #' @export
@@ -166,50 +165,9 @@ print.summary.lite <- function(x, ...) {
   if (!inherits(x, "summary.lite")) {
     stop("use only with \"summary.lite\" objects")
   }
-  cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"),
-      "\n\n", sep = "")
+  cat("\nCall:\n", paste(deparse(x$call), sep = "\n",
+                         collapse = "\n"), "\n\n", sep = "")
   print(x$matrix, ...)
   invisible(x)
 }
 
-# ============================== print.lite() =============================== #
-
-#' Print method for a \code{"lite"} object
-#'
-#' \code{print} method for an object \code{x} of class \code{"lite"}.
-#'
-#' @param x An object of class \code{"lite"}, a result of a call to
-#'   \code{\link{flite}}.
-#' @param digits The argument \code{digits} to \code{\link{print.default}}.
-#' @param ... Additional arguments.  None are used in this function.
-#' @details Prints the original call to \code{\link{flite}}
-#'   and the estimates of the parameters \eqn{p_u, \sigma_u, \xi, \theta}.
-#' @return The argument \code{x}, invisibly, as for all
-#'   \code{\link[base]{print}} methods.
-#' @export
-print.lite <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
-  if (!inherits(x, "lite")) {
-    stop("use only with \"lite\" objects")
-  }
-  cat("\nCall:\n", paste(deparse(attr(x, "call")), sep = "\n", collapse = "\n"),
-      "\n\n", sep = "")
-  cat("Estimates:\n")
-  print.default(format(coef(x), digits = digits), print.gap = 2L,
-                quote = FALSE)
-  return(invisible(x))
-}
-
-function (x, digits = max(3L, getOption("digits") - 3L),
-          ...)
-{
-  cat("\nCall:\n", paste(deparse(x$call), sep = "\n",
-                         collapse = "\n"), "\n\n", sep = "")
-  if (length(coef(x))) {
-    cat("Coefficients:\n")
-    print.default(format(coef(x), digits = digits), print.gap = 2L,
-                  quote = FALSE)
-  }
-  else cat("No coefficients\n")
-  cat("\n")
-  invisible(x)
-}
