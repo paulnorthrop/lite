@@ -52,7 +52,7 @@ adjust_object <- function(x, cluster = NULL, ...) {
   }
   # Add the original fitted model object as an attribute
   attr(res, "original_fit") <- x
-  class(res) <- c("lite", "chandwich", class(x))
+  class(res) <- c("chandwich", class(x))
   return(res)
 }
 
