@@ -61,7 +61,7 @@ flite <- function(data, u, cluster, ...) {
   #    log-likelihood and adjust the inferences using the chandwich package
   #
   # The returned object has class "GP"
-  gp_fit <- gp_mle(data_vector, u)
+  gp_fit <- fitGP(data_vector, u)
   aloglik_gp <- adjust_object(gp_fit, cluster = gp_cluster, ...)
   #
   # 3. Fit Bernoulli(p_u) to indicators of threshold exceedance and adjust
