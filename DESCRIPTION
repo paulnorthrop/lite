@@ -1,0 +1,30 @@
+Package: lite
+Title: Likelihood-based Inference for Time Series Extremes
+Version: 1.0.0.9000
+Date: 2022-03-30
+Authors@R: person(c("Paul", "J."), "Northrop", email = "p.northrop@ucl.ac.uk",
+  role = c("aut", "cre", "cph"))
+Description: Performs adjusted inferences based on model objects fitted, using 
+    maximum likelihood estimation, by the extreme value analysis packages
+    'exdex' <https://cran.r-project.org/package=exdex>, 
+    'lax' <https://cran.r-project.org/package=lax>, 
+    'revdbayes' <https://cran.r-project.org/package=revdbayes>. 
+Imports: exdex,
+    graphics,
+    numDeriv,
+    revdbayes,
+    sandwich,
+    stats
+License: GPL (>= 2)
+LazyData: FALSE
+Encoding: UTF-8
+Depends:
+    R (>= 3.3.0)
+RoxygenNote: 7.1.2
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: knitr
+URL: https://paulnorthrop.github.io/lite/, https://github.com/paulnorthrop/lite
+BugReports: https://github.com/paulnorthrop/lite/issues
