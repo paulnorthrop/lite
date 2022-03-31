@@ -63,9 +63,16 @@ estimation.
 \code{fitGP}: fit a generalised Pareto distribution using maximum likelihood
   estimation.  This function calls \code{\link[revdbayes]{grimshaw_gp_mle}}.
 
+\code{gpObsInfo}: calculates the observed information matrix for a random
+sample \code{excesses} from the generalized Pareto distribution, that is,
+the negated Hessian matrix of the generalized Pareto independence
+log-likelihood, evaluated at \code{pars}.
+
 \code{logLikVector.GP}: calculates contributions to an independence
 log-likelihood based on the generalised Pareto distribution.
 
+\code{gpObsInfo} returns a 2 by 2 matrix with row and columns names
+\code{c("sigma_u", "xi")}.
 \code{nobs, coef, vcov} and \code{logLik} methods are provided.
 }
 \examples{

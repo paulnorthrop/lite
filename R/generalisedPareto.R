@@ -20,9 +20,16 @@
 #' \code{fitGP}: fit a generalised Pareto distribution using maximum likelihood
 #'   estimation.  This function calls \code{\link[revdbayes]{grimshaw_gp_mle}}.
 #'
+#' \code{gpObsInfo}: calculates the observed information matrix for a random
+#' sample \code{excesses} from the generalized Pareto distribution, that is,
+#' the negated Hessian matrix of the generalized Pareto independence
+#' log-likelihood, evaluated at \code{pars}.
+#'
 #' \code{logLikVector.GP}: calculates contributions to an independence
 #' log-likelihood based on the generalised Pareto distribution.
 #'
+#' \code{gpObsInfo} returns a 2 by 2 matrix with row and columns names
+#' \code{c("sigma_u", "xi")}.
 #' \code{nobs, coef, vcov} and \code{logLik} methods are provided.
 #' @return
 #' \code{fitGP} returns an object of class \code{"GP"}, a list
@@ -62,25 +69,6 @@ NULL
 #' @rdname generalisedPareto
 #' @export
 fitGP <- function(data, u) {
-  # Maximum likelihood estimation for the generalized Pareto distribution
-  #
-  # Performs maximum likelihood estimation for the generalized Pareto
-  # distribution.  Uses the function \code{gpdmle} associated with
-  # Grimshaw (1993), which returns MLEs of sigma and k = - \xi.
-  #
-  # Grimshaw, S. D. (1993) Computing Maximum Likelihood Estimates
-  #   for the Generalized Pareto Distribution.  Technometrics, 35(2), 185-191.
-  #   and Computing (1991) 1, 129-133. https://doi.org/10.1007/BF01889987.
-  #
-  # Args:
-  #   gp_data : A numeric vector containing positive values, assumed to be a
-  #             random sample from a generalized Pareto distribution.
-  #
-  # Returns:
-  #   A list with components
-  #     mle  : A numeric vector.  MLEs of GP parameters sigma and xi.
-  #     nllh : A numeric scalar.  The negated log-likelihood at the MLE.
-  #
   if (!is.vector(data)) {
     stop("'data' must be a vector")
   }
@@ -112,20 +100,6 @@ fitGP <- function(data, u) {
 #' @rdname generalisedPareto
 #' @export
 gpObsInfo <- function(pars, excesses) {
-  # Observed information for the generalized Pareto distribution
-  #
-  # Calculates the observed information matrix for a random sample \code{y}
-  # from the generalized Pareto distribution, i.e. the negated Hessian matrix
-  # of the generalized Pareto log-likelihood, evaluated at \code{gp_pars}.
-  #
-  # Args:
-  #   gp_pars : A numeric vector. Parameters sigma and xi of the
-  #   generalized Pareto distribution.
-  #   y       : A numeric vector. A sample of positive data values.
-  #
-  # Returns:
-  #   A 2 by 2 numeric matrix.  The observed information matrix.
-  #
   y <- excesses
   s <- pars[1]
   x <- pars[2]
@@ -134,6 +108,7 @@ gpObsInfo <- function(pars, excesses) {
   i[1, 2] <- i[2, 1] <- -sum(y * (1 - y / s) / (1 + x * y / s) ^ 2 / s ^ 2)
   i[2, 2] <- sum(2 * log(1 + x * y / s) / x ^ 3 - 2 * y / (s + x * y) / x ^ 2 -
                   (1 + 1 / x) * y ^ 2 / (s + x * y) ^ 2)
+  dimnames(i) <- list(c("sigma_u", "xi"), c("sigma_u", "xi"))
   return(i)
 }
 
