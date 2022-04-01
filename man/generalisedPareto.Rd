@@ -46,7 +46,8 @@ or \code{\link[sandwich:vcovCL]{meatCL}} (if \code{cluster} is not
 }
 \value{
 \code{fitGP} returns an object of class \code{"GP"}, a list
-with components: \code{maxLogLik, threshold, mle, vcov, exceedances, nexc},
+with components: \code{maxLogLik}, \code{threshold}, \code{mle},
+\code{vcov}, \code{exceedances}, \code{nexc},
 where \code{exceedances} is a vector containing the values that exceed the
 threshold \code{threshold} and \code{nexc} is the length of this vector.
 
