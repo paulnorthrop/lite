@@ -35,4 +35,10 @@ cdata <- exdex::cheeseboro
 u <- quantile(cdata, probs = 0.9, na.rm = TRUE)
 cfit <- flite(cdata, u)
 summary(cfit)
+plot(cfit)
+plot(cfit, which = "gp")
+}
+\seealso{
+\code{\link{plot.lite}} for plotting (adjusted) log-likelihoods
+  and confidence intervals/regions.
 }
