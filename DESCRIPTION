@@ -9,7 +9,8 @@ Description: Performs adjusted inferences based on model objects fitted, using
     'exdex' <https://cran.r-project.org/package=exdex>, 
     'lax' <https://cran.r-project.org/package=lax>, 
     'revdbayes' <https://cran.r-project.org/package=revdbayes>. 
-Imports: exdex,
+Imports: chandwich,
+    exdex,
     graphics,
     numDeriv,
     revdbayes,
