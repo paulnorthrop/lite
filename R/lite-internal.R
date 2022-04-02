@@ -76,3 +76,25 @@ kgaps_loglik <- function(theta, N0, N1, sum_qs, n_kgaps){
   }
   return(loglik)
 }
+
+# ============================ check_logLik_lite ============================ #
+# Included to provide a check of logLik.lite()
+
+#' @keywords internal
+#' @rdname lite-internal
+check_logLik_lite <- function(object, ...) {
+  if (!inherits(object, "lite")) {
+    stop("use only with \"lite\" objects")
+  }
+  bfit <- attr(object, "bernoulli")
+  gfit <- attr(object, "gp")
+  kfit <- attr(object, "kgaps")
+  bloglik <- attr(bfit, "max_loglik")
+  gloglik <- attr(gfit, "max_loglik")
+  kloglik <- kfit$max_loglik
+  val <- bloglik + gloglik + kloglik
+  attr(val, "nobs") <- nobs(object)
+  attr(val, "df") <- 4
+  class(val) <- "logLik"
+  return(val)
+}
