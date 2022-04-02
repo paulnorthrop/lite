@@ -4,7 +4,7 @@
 \alias{flite}
 \title{Frequentist inference for time series extremes}
 \usage{
-flite(data, u, cluster, ...)
+flite(data, u, cluster, k = 1, ...)
 }
 \arguments{
 \item{data}{A numeric vector or numeric matrix of raw data.  If \code{data}
@@ -17,28 +17,155 @@ flite(data, u, cluster, ...)
   stored in different columns in a matrix.  Again, the log-likelihood
   is constructed as a sum of contributions from different columns.}
 
-\item{u}{A numeric scalar.  Extreme value threshold applied to data.}
+\item{u}{A numeric scalar.  The extreme value threshold applied to the data.
+See \strong{Details}.}
 
-\item{cluster}{Explain ... vector if data is a vector, matrix if data is a matrix}
+\item{cluster}{This argument is used to set the argument \code{cluster} to
+  \code{\link[chandwich]{cluster}}.  If \code{data} is a matrix and
+  \code{cluster} is missing then \code{cluster} is set so that data in
+  different columns are in different clusters.  If \code{data} is a vector
+  and \code{cluster} is missing then cluster is set so that each observation
+  forms its own cluster.
+
+  If \code{cluster} is supplied then it must have the same structure as
+  \code{data}: if \code{data} is a matrix then \code{cluster} must be a
+  matrix with the same dimensions as \code{data} and if  \code{data} is a
+  vector then \code{cluster} must be a vector of the same length as
+  \code{data}.  Each entry in \code{cluster} sets the cluster of the
+  corresponding component of \code{data}.}
+
+\item{k}{A numeric scalar to be passed as the argument \code{k} to
+\code{\link[exdex]{kgaps}}, which sets the value of the run parameter
+\eqn{K} in the \eqn{K}-gaps model for the extremal index. See
+\strong{Details}.}
 
 \item{...}{Arguments to be passed to \code{\link[exdex]{kgaps}}, namely
 \code{k} and/or \code{inc_cens}.}
 }
+\value{
+An object of class \code{"lite", "chandwich", "bernoulli_gp_theta"}.
+  Objecting inheriting from class \code{"lite"} have \code{coef},
+  \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
+  methods.  This object is a function with 2 arguments:
+    \itemize{
+      \item{\code{pars}, a numeric vector of length 4 to supply the value of
+        the parameter vector \eqn{(p_u, \sigma_u, \xi, \theta)},}
+      \item{\code{type}, a character scalar specifying the type of
+        adjustment made to the independence log-likelihood in parts
+        1 and 2, one of \code{"vertical"}, \code{"none"}, \code{"cholesky"},
+        or \code{"spectral"}.  For details see Chandler and Bate (2007).
+        The default is \code{"vertical"} for the reason given in
+        the description of the argument \code{adj_type} in
+        \code{\link{plot.lite}}.}
+    }
+ The object also has the attributes \code{"bernoulli"}, \code{"gp"},
+ \code{"kgaps"}, which provide the fitted model objects returned from
+ \code{\link[chandwich]{adjust_loglik}} (for \code{"bernoulli"} and
+ \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"kgaps"}).
+}
 \description{
-Explain
+Performs threshold-based frequentist inference for 3 aspects of time
+series extremes: the probability that the threshold is exceeded, the
+marginal distribution of threshold excesses and the extent of clustering of
+extremes, as summarised by the extremal index.
 }
 \details{
-Add details
+There are 3 independent parts to the inference, all performed using
+  maximum likelihood estimation.
+    \enumerate{
+      \item{A Bernoulli model for the probability \eqn{p_u} that the
+        threshold \eqn{u} is exceeded.}
+      \item{A generalised Pareto, GP(\eqn{\sigma_u}, \eqn{\xi}), model for
+        the marginal distribution of threshold excesses.}
+      \item{The \eqn{K}-gaps model for the extremal index \eqn{\theta}.}
+    }
+  For parts 1 and 2 the general approach developed by Fawcett and
+  Walshaw (2012) is taken, where inferences based on a mis-specified
+  independence log-likelihood are adjusted to account for clustering in the
+  data. Here, we follow Chandler and Bate (2007) to estimate adjusted
+  log-likelihood functions for \eqn{p_u} and for
+  (\eqn{\sigma_u}, \eqn{\xi}), with the argument \code{cluster}
+  defining the clusters. This aspect of the calculations is performed using
+  the \code{\link[chandwich]{adjust_loglik}} in the
+  \code{\link[chandwich]{chandwich}} package (Northrop and Chandler, 2021).
+  The GP distribution initial fit of the GP distribution to threshold
+  excesses is performed using the \code{\link[revdbayes]{grimshaw_gp_mle}}
+  function in the \code{\link[revdbayes]{revdbayes}} package
+  (Northrop, 2020).
+
+  In part 3 the methodology described in Suveges and Davison (2010) is
+  implemented using the \code{\link[exdex]{exdex}} package
+  (Northrop and Christodoulides, 2022).
+
+  Two tuning parameters need to be chosen: a threshold \eqn{u} and the
+  \eqn{K}-gaps run parameter \eqn{K}.  The \code{\link[exdex]{exdex}}
+  package has a function \code{\link[exdex]{choose_uk}} to inform this
+  choice.
+
+  Each of part of the inference produces a log-likelihood function (adjusted
+  for parts 1 and 2).  These log-likelihoods are combined (summed) to form
+  a log-likelihood function for the parameter vector
+  \eqn{(p_u, \sigma_u, \xi, \theta)}.  Return levels are a function of these
+  parameters and therefore inferences for return levels can be based on
+  this log-likelihood.
 }
 \examples{
+### Cheeseboro wind gusts
+
+# Make inferences
 cdata <- exdex::cheeseboro
-u <- quantile(cdata, probs = 0.9, na.rm = TRUE)
-cfit <- flite(cdata, u)
+# Each column of the matrix cdata corresponds to data from a different year
+# flite() sets cluster automatically to correspond to column (year)
+cfit <- flite(cdata, u = 45, k = 3)
 summary(cfit)
+
+# 2 ways to find the maximised log-likelihood value
+cfit(coef(cfit))
+logLik(cfit)
+
+# Plots of (adjusted) log-likelihoods
 plot(cfit)
 plot(cfit, which = "gp")
 }
+\references{
+Chandler, R. E. and Bate, S. (2007). Inference for clustered
+  data using the independence loglikelihood. \emph{Biometrika},
+  \strong{94}(1), 167-183. \doi{10.1093/biomet/asm015}
+
+Fawcett, L. and Walshaw, D. (2012), Estimating return levels
+  from serially dependent extremes. \emph{Environmetrics}, \strong{23},
+  272-283. \doi{10.1002/env.2133}
+
+Northrop, P. J. and Chandler, R. E. (2021).
+  chandwich: Chandler-Bate Sandwich Loglikelihood Adjustment. R package
+  version 1.1.5. \url{https://CRAN.R-project.org/package=chandwich}.
+
+Northrop, P. J. and Christodoulides, C. (2022). exdex:
+Estimation of the Extremal Index. R package version 1.1.1.
+\url{https://CRAN.R-project.org/package=exdex/}.
+
+Northrop, P. J. (2020). revdbayes: Ratio-of-Uniforms Sampling
+for Bayesian Extreme Value Analysis. R package version 1.3.9.
+\url{https://paulnorthrop.github.io/revdbayes/}
+
+Suveges, M. and Davison, A. C. (2010) Model
+  misspecification in peaks over threshold analysis, \emph{Annals of
+  Applied Statistics}, \strong{4}(1), 203-221.
+  \doi{10.1214/09-AOAS292}
+}
 \seealso{
+\code{\link{Bernoulli}} for maximum likelihood inference for the
+  Bernoulli distribution.
+
+\code{\link[revdbayes]{grimshaw_gp_mle}} for maximum likelihood
+  fitting of a generalised Pareto distribution.
+
+\code{\link[exdex]{kgaps}} for maximum likelihood inference from
+  the \eqn{K}-gaps model for the extremal index.
+
+\code{\link[exdex]{choose_uk}} to inform the choice of the
+  threshold \eqn{u} and run parameter \eqn{K}.
+
 \code{\link{plot.lite}} for plotting (adjusted) log-likelihoods
   and confidence intervals/regions.
 }
