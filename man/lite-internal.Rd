@@ -4,11 +4,14 @@
 \alias{lite-internal}
 \alias{adjust_object}
 \alias{kgaps_loglik}
+\alias{check_logLik_lite}
 \title{Internal lite functions}
 \usage{
 adjust_object(x, cluster = NULL, ...)
 
 kgaps_loglik(theta, N0, N1, sum_qs, n_kgaps)
+
+check_logLik_lite(object, ...)
 }
 \description{
 Internal lite functions
