@@ -37,8 +37,8 @@ the generalised Pareto scale and shape parameters.}
 \item{excesses}{A numeric vector of threshold excesses, that is, amounts
 by which exceedances of \code{u} exceed \code{u}.}
 
-\item{eps}{A (small) numeric scalar.  Direct calculation of the element
-\code{[2, 2]} of the observed information in \code{gpObsInfo} is
+\item{eps}{A (small, positive) numeric scalar.  Direct calculation of the
+element \code{[2, 2]} of the observed information in \code{gpObsInfo} is
 unreliable if the GP shape parameter \eqn{\xi} is very close to zero.  If
 the absolute value of the input value of \eqn{\xi}, that is,
 \code{pars[2]}, is smaller than \code{eps} then we approximate the

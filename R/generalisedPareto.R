@@ -12,8 +12,8 @@
 #' @param excesses A numeric vector of threshold excesses, that is, amounts
 #'   by which exceedances of \code{u} exceed \code{u}.
 #' @param object A fitted model object returned from \code{fitGP()}.
-#' @param eps A (small) numeric scalar.  Direct calculation of the element
-#'   \code{[2, 2]} of the observed information in \code{gpObsInfo} is
+#' @param eps A (small, positive) numeric scalar.  Direct calculation of the
+#'   element \code{[2, 2]} of the observed information in \code{gpObsInfo} is
 #'   unreliable if the GP shape parameter \eqn{\xi} is very close to zero.  If
 #'   the absolute value of the input value of \eqn{\xi}, that is,
 #'   \code{pars[2]}, is smaller than \code{eps} then we approximate the
@@ -111,6 +111,9 @@ fitGP <- function(data, u) {
 #' @rdname generalisedPareto
 #' @export
 gpObsInfo <- function(pars, excesses, eps = 1e-5) {
+  if (eps <= 0) {
+    stop("'eps' must be positive")
+  }
   y <- excesses
   # sigma
   s <- pars[1]
@@ -119,12 +122,15 @@ gpObsInfo <- function(pars, excesses, eps = 1e-5) {
   i <- matrix(NA, 2, 2)
   i[1, 1] <- -sum((1 - (1 + x) * y * (2 * s + x * y) / (s + x * y) ^ 2) / s ^ 2)
   i[1, 2] <- i[2, 1] <- -sum(y * (1 - y / s) / (1 + x * y / s) ^ 2 / s ^ 2)
-  # Direct calculation of i22 is unrelaible for x close to zero.
+  # Direct calculation of i22 is unreliable for x close to zero.
   # If abs(x) < eps then we expand the problematic terms (all but t4 below)
   # in powers of z up to z ^ 2. The terms in 1/z and 1/z^2 cancel leaving
   # only a quadratic in z.
   z <- x / s
   t0 <- 1 + z * y
+  if (any(t0 <= 0)) {
+    stop("The log-likelihood is 0 for this combination of data and parameters")
+  }
   if (abs(x) < eps) {
     s1 <- 12 * z ^ 2 * y ^ 2 / 5
     s2 <- 3 * z * y / 2
