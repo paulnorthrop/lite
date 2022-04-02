@@ -4,7 +4,7 @@
 \alias{flite}
 \title{Frequentist inference for time series extremes}
 \usage{
-flite(data, u, cluster, k = 1, ...)
+flite(data, u, cluster, k = 1, npy, ...)
 }
 \arguments{
 \item{data}{A numeric vector or numeric matrix of raw data.  If \code{data}
@@ -43,8 +43,8 @@ See \strong{Details}.}
 \code{k} and/or \code{inc_cens}.}
 }
 \value{
-An object of class \code{"lite", "chandwich", "bernoulli_gp_theta"}.
-  Objecting inheriting from class \code{"lite"} have \code{coef},
+An object of class \code{"flite", "lite", "chandwich"}.
+  Objects inheriting from class \code{"flite"} have \code{coef},
   \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
   methods.  This object is a function with 2 arguments:
     \itemize{
@@ -56,7 +56,7 @@ An object of class \code{"lite", "chandwich", "bernoulli_gp_theta"}.
         or \code{"spectral"}.  For details see Chandler and Bate (2007).
         The default is \code{"vertical"} for the reason given in
         the description of the argument \code{adj_type} in
-        \code{\link{plot.lite}}.}
+        \code{\link{plot.flite}}.}
     }
  The object also has the attributes \code{"bernoulli"}, \code{"gp"},
  \code{"kgaps"}, which provide the fitted model objects returned from
@@ -166,6 +166,6 @@ Suveges, M. and Davison, A. C. (2010) Model
 \code{\link[exdex]{choose_uk}} to inform the choice of the
   threshold \eqn{u} and run parameter \eqn{K}.
 
-\code{\link{plot.lite}} for plotting (adjusted) log-likelihoods
+\code{\link{plot.flite}} for plotting (adjusted) log-likelihoods
   and confidence intervals/regions.
 }

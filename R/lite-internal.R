@@ -77,14 +77,14 @@ kgaps_loglik <- function(theta, N0, N1, sum_qs, n_kgaps){
   return(loglik)
 }
 
-# ============================ check_logLik_lite ============================ #
-# Included to provide a check of logLik.lite()
+# ============================ check_logLik_flite =========================== #
+# Included to provide a check of logLik.flite()
 
 #' @keywords internal
 #' @rdname lite-internal
-check_logLik_lite <- function(object, ...) {
-  if (!inherits(object, "lite")) {
-    stop("use only with \"lite\" objects")
+check_logLik_flite <- function(object, ...) {
+  if (!inherits(object, "flite")) {
+    stop("use only with \"flite\" objects")
   }
   bfit <- attr(object, "bernoulli")
   gfit <- attr(object, "gp")

@@ -1,19 +1,19 @@
-# ================================ coef.lite =============================== #
+# ================================ coef.flite =============================== #
 
-#' Extract model coefficients method for objects of class \code{"lite"}
+#' Extract model coefficients method for objects of class \code{"flite"}
 #'
-#' \code{coef} method for class \code{"lite"}.
+#' \code{coef} method for class \code{"flite"}.
 #'
-#' @param object An object inheriting from class \code{"lite"}, a result of a
+#' @param object An object inheriting from class \code{"flite"}, a result of a
 #'   call to \code{\link{flite}}.
 #' @param ... Additional optional arguments. At present no optional
 #'   arguments are used.
 #' @return A numeric vector of length 4 with names
 #'   \code{c("p[u]", "sigma[u]", "xi", "theta")}.
 #' @export
-coef.lite <- function(object, ...) {
-  if (!inherits(object, "lite")) {
-    stop("use only with \"lite\" objects")
+coef.flite <- function(object, ...) {
+  if (!inherits(object, "flite")) {
+    stop("use only with \"flite\" objects")
   }
   bfit <- attr(object, "bernoulli")
   gfit <- attr(object, "gp")
@@ -23,14 +23,14 @@ coef.lite <- function(object, ...) {
   return(cf)
 }
 
-# ================================ vcov.lite =============================== #
+# ================================ vcov.flite =============================== #
 
 #' Calculate the variance-covariance matrix for an object of class
-#' \code{"lite"}
+#' \code{"flite"}
 #'
-#' \code{vcov} method for class \code{"lite"}.
+#' \code{vcov} method for class \code{"flite"}.
 #'
-#' @param object An object inheriting from class \code{"lite"}, a result of a
+#' @param object An object inheriting from class \code{"flite"}, a result of a
 #'   call to \code{\link{flite}}.
 #' @param adjust A logical scalar.  If \code{adjust = TRUE} then the elements
 #'   of the variance-covariance matrix corresponding to
@@ -42,9 +42,9 @@ coef.lite <- function(object, ...) {
 #' @return A 4 by 4 numeric matrix with row and column names
 #'   \code{c("p[u]", "sigma[u]", "xi", "theta")}.
 #' @export
-vcov.lite <- function(object, adjust = TRUE, ...) {
-  if (!inherits(object, "lite")) {
-    stop("use only with \"lite\" objects")
+vcov.flite <- function(object, adjust = TRUE, ...) {
+  if (!inherits(object, "flite")) {
+    stop("use only with \"flite\" objects")
   }
   bfit <- attr(object, "bernoulli")
   gfit <- attr(object, "gp")
@@ -64,13 +64,13 @@ vcov.lite <- function(object, adjust = TRUE, ...) {
   return(vc)
 }
 
-# ================================ nobs.lite =============================== #
+# ================================ nobs.flite =============================== #
 
-#' Extract the number of observations from a fit for class \code{"lite"}
+#' Extract the number of observations from a fit for class \code{"flite"}
 #'
-#' \code{nobs} method for class \code{"lite"}.
+#' \code{nobs} method for class \code{"flite"}.
 #'
-#' @param object An object inheriting from class \code{"lite"}, a result of a
+#' @param object An object inheriting from class \code{"flite"}, a result of a
 #'   call to \code{\link{flite}}.
 #' @param model One of \code{c("gp", "kgaps", "bernoulli")}.
 #' @param ... Additional optional arguments. At present no optional
@@ -79,9 +79,9 @@ vcov.lite <- function(object, adjust = TRUE, ...) {
 #'   \code{c("p[u]", "gp", "theta")}.
 #'
 #' @export
-nobs.lite <- function(object,  ...) {
-  if (!inherits(object, "lite")) {
-    stop("use only with \"lite\" objects")
+nobs.flite <- function(object,  ...) {
+  if (!inherits(object, "flite")) {
+    stop("use only with \"flite\" objects")
   }
   bnobs <- attr(attr(object, "bernoulli"), "nobs")
   gnobs <- attr(attr(object, "gp"), "nobs")
@@ -91,13 +91,13 @@ nobs.lite <- function(object,  ...) {
   return(n)
 }
 
-# ================================ logLik.lite ============================== #
+# ================================ logLik.flite ============================== #
 
-#' Extract log-likelihood for objects of class \code{"lite"}
+#' Extract log-likelihood for objects of class \code{"flite"}
 #'
-#' \code{logLik} method for class \code{"lite"}.
+#' \code{logLik} method for class \code{"flite"}.
 #'
-#' @param object An object of class \code{"lite"}, a result of a call to
+#' @param object An object of class \code{"flite"}, a result of a call to
 #'   \code{\link{flite}}.
 #' @param ... Additional optional arguments. At present no optional
 #'   arguments are used.
@@ -110,9 +110,9 @@ nobs.lite <- function(object,  ...) {
 #' observations used in each of these model fits, and \code{"df"}, which is
 #' equal to the number of total number of parameters estimated (4).
 #' @export
-logLik.lite <- function(object, ...) {
-  if (!inherits(object, "lite")) {
-    stop("use only with \"lite\" objects")
+logLik.flite <- function(object, ...) {
+  if (!inherits(object, "flite")) {
+    stop("use only with \"flite\" objects")
   }
   # Note: the value of type does not affect the value of logLik
   val <- object(coef(object))
@@ -122,13 +122,13 @@ logLik.lite <- function(object, ...) {
   return(val)
 }
 
-# =============================== summary.lite ============================== #
+# =============================== summary.flite ============================== #
 
 #' Summarising times series extreme fits
 #'
-#' \code{summary} method for class \code{"lite"}
+#' \code{summary} method for class \code{"flite"}
 #'
-#' @param object An object inheriting from class \code{"lite"}, a result of a
+#' @param object An object inheriting from class \code{"flite"}, a result of a
 #'   call to \code{\link{flite}}.
 #' @param adjust A logical scalar.  If \code{adjust = TRUE} then the
 #'   standard errors of \eqn{(p_u, \sigma_u, \xi)} are estimated via a sandwich
@@ -141,40 +141,40 @@ logLik.lite <- function(object, ...) {
 #' @return An object containing the original function call and a matrix of
 #'   estimates and estimated standard errors with row names
 #'   \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The object is printed by
-#'   \code{\link{print.summary.lite}}.
+#'   \code{\link{print.summary.flite}}.
 #' @section Examples:
 #' See the examples in \code{\link{flite}}.
 #' @export
-summary.lite <- function(object, adjust = TRUE,
+summary.flite <- function(object, adjust = TRUE,
                          digits = max(3, getOption("digits") - 3L), ...) {
-  if (!inherits(object, "lite")) {
-    stop("use only with \"lite\" objects")
+  if (!inherits(object, "flite")) {
+    stop("use only with \"flite\" objects")
   }
   res <- attributes(object)["call"]
   mles <- signif(coef(object), digits = digits)
   ses <- signif(sqrt(diag(vcov(object, adjust = adjust))), digits = digits)
   res$matrix <- cbind(`Estimate` = mles, `Std. Error` = ses)
   rownames(res$matrix) <- names(mles)
-  class(res) <- "summary.lite"
+  class(res) <- "summary.flite"
   return(res)
 }
 
-# ============================ print.summary.lite =========================== #
+# ============================ print.summary.flite =========================== #
 
-#' Print method for objects of class \code{"summary.lite"}
+#' Print method for objects of class \code{"summary.flite"}
 #'
-#' \code{print} method for an object \code{x} of class \code{"summary.lite"}.
+#' \code{print} method for an object \code{x} of class \code{"summary.flite"}.
 #'
-#' @param x An object of class "summary.lite", a result of a call to
-#'   \code{\link{summary.lite}}.
+#' @param x An object of class "summary.flite", a result of a call to
+#'   \code{\link{summary.flite}}.
 #' @param ... Additional arguments passed on to \code{\link{print.default}}.
-#' @return Prints the numeric matrix returned from \code{\link{summary.lite}}.
+#' @return Prints the numeric matrix returned from \code{\link{summary.flite}}.
 #' @section Examples:
 #' See the examples in \code{\link{flite}}.
 #' @export
-print.summary.lite <- function(x, ...) {
-  if (!inherits(x, "summary.lite")) {
-    stop("use only with \"summary.lite\" objects")
+print.summary.flite <- function(x, ...) {
+  if (!inherits(x, "summary.flite")) {
+    stop("use only with \"summary.flite\" objects")
   }
   cat("\nCall:\n", paste(deparse(x$call), sep = "\n",
                          collapse = "\n"), "\n\n", sep = "")
@@ -183,13 +183,13 @@ print.summary.lite <- function(x, ...) {
 }
 
 
-# ================================= plot.lite =============================== #
+# ================================= plot.flite =============================== #
 
-#' Plot method for objects of class \code{"lite"}
+#' Plot method for objects of class \code{"flite"}
 #'
-#' \code{print} method for an object \code{x} of class \code{"lite"}.
+#' \code{print} method for an object \code{x} of class \code{"flite"}.
 #'
-#' @param x An object of class "lite", a result of a call to
+#' @param x An object of class "flite", a result of a call to
 #'   \code{\link{flite}}.
 #' @param which A character scalar indicating which plot(s) to produce.
 #'   If \code{which = "all"} then all 4 plots described in \strong{Details}
@@ -227,11 +227,11 @@ print.summary.lite <- function(x, ...) {
 #' @section Examples:
 #' See the examples in \code{\link{flite}}.
 #' @export
-plot.lite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
+plot.flite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
                       adj_type = c("vertical", "none", "cholesky", "spectral"),
                       ...) {
-  if (!inherits(x, "lite")) {
-    stop("use only with \"lite\" objects")
+  if (!inherits(x, "flite")) {
+    stop("use only with \"flite\" objects")
   }
   adj_type <- match.arg(adj_type)
   which <- match.arg(which)

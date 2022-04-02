@@ -73,8 +73,8 @@
 #'   \eqn{(p_u, \sigma_u, \xi, \theta)}.  Return levels are a function of these
 #'   parameters and therefore inferences for return levels can be based on
 #'   this log-likelihood.
-#' @return An object of class \code{"lite", "chandwich", "bernoulli_gp_theta"}.
-#'   Objecting inheriting from class \code{"lite"} have \code{coef},
+#' @return An object of class \code{"flite", "lite", "chandwich"}.
+#'   Objects inheriting from class \code{"flite"} have \code{coef},
 #'   \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
 #'   methods.  This object is a function with 2 arguments:
 #'     \itemize{
@@ -86,7 +86,7 @@
 #'         or \code{"spectral"}.  For details see Chandler and Bate (2007).
 #'         The default is \code{"vertical"} for the reason given in
 #'         the description of the argument \code{adj_type} in
-#'         \code{\link{plot.lite}}.}
+#'         \code{\link{plot.flite}}.}
 #'     }
 #'  The object also has the attributes \code{"bernoulli"}, \code{"gp"},
 #'  \code{"kgaps"}, which provide the fitted model objects returned from
@@ -119,7 +119,7 @@
 #'   the \eqn{K}-gaps model for the extremal index.
 #' @seealso \code{\link[exdex]{choose_uk}} to inform the choice of the
 #'   threshold \eqn{u} and run parameter \eqn{K}.
-#' @seealso \code{\link{plot.lite}} for plotting (adjusted) log-likelihoods
+#' @seealso \code{\link{plot.flite}} for plotting (adjusted) log-likelihoods
 #'   and confidence intervals/regions.
 #' @examples
 #' ### Cheeseboro wind gusts
@@ -139,7 +139,7 @@
 #' plot(cfit)
 #' plot(cfit, which = "gp")
 #' @export
-flite <- function(data, u, cluster, k = 1, ...) {
+flite <- function(data, u, cluster, k = 1, npy, ...) {
   #
   # 1. Check and manipulate data and cluster
   #
@@ -214,8 +214,7 @@ flite <- function(data, u, cluster, k = 1, ...) {
     names(val) <- NULL
     return(val)
   }
-  class(bernoulli_gp_theta_loglik) <- c("lite", "chandwich",
-                                        "bernoulli_gp_theta")
+  class(bernoulli_gp_theta_loglik) <- c("flite", "lite", "chandwich")
   attr(bernoulli_gp_theta_loglik, "bernoulli") <- aloglik_bernoulli
   attr(bernoulli_gp_theta_loglik, "gp") <- aloglik_gp
   attr(bernoulli_gp_theta_loglik, "kgaps") <- theta_fit
