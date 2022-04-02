@@ -4,7 +4,7 @@
 #'
 #' \code{coef} method for class \code{"lite"}.
 #'
-#' @param object an object inheriting from class \code{"lite"}, a result of a
+#' @param object An object inheriting from class \code{"lite"}, a result of a
 #'   call to \code{\link{flite}}.
 #' @param ... Additional optional arguments. At present no optional
 #'   arguments are used.
@@ -30,14 +30,19 @@ coef.lite <- function(object, ...) {
 #'
 #' \code{vcov} method for class \code{"lite"}.
 #'
-#' @param object an object inheriting from class \code{"lite"}, a result of a
+#' @param object An object inheriting from class \code{"lite"}, a result of a
 #'   call to \code{\link{flite}}.
+#' @param adjust A logical scalar.  If \code{adjust = TRUE} then the elements
+#'   of the variance-covariance matrix corresponding to
+#'   \eqn{(p_u, \sigma_u, \xi)} are estimated using a sandwich estimator.
+#'   See \code{\link{flite}}.  Otherwise, this matrix is the inverse of the
+#'   observed information matrix.
 #' @param ... Additional optional arguments. At present no optional
 #'   arguments are used.
 #' @return A 4 by 4 numeric matrix with row and column names
 #'   \code{c("p[u]", "sigma[u]", "xi", "theta")}.
 #' @export
-vcov.lite <- function(object, ...) {
+vcov.lite <- function(object, adjust = TRUE, ...) {
   if (!inherits(object, "lite")) {
     stop("use only with \"lite\" objects")
   }
@@ -45,8 +50,13 @@ vcov.lite <- function(object, ...) {
   gfit <- attr(object, "gp")
   kfit <- attr(object, "kgaps")
   vc <- matrix(0, 4, 4)
-  vc[1, 1] <- attr(bfit, "adjVC")
-  vc[2:3, 2:3] <- attr(gfit, "adjVC")
+  if (adjust) {
+    vc[1, 1] <- attr(bfit, "adjVC")
+    vc[2:3, 2:3] <- attr(gfit, "adjVC")
+  } else {
+    vc[1, 1] <- attr(bfit, "VC")
+    vc[2:3, 2:3] <- attr(gfit, "VC")
+  }
   vc[4, 4] <- vcov(kfit)
   vc_names <- c("p[u]", "sigma[u]", "xi", "theta")
   dim(vc) <- c(length(vc_names), length(vc_names))
@@ -60,7 +70,7 @@ vcov.lite <- function(object, ...) {
 #'
 #' \code{nobs} method for class \code{"lite"}.
 #'
-#' @param object an object inheriting from class \code{"lite"}, a result of a
+#' @param object An object inheriting from class \code{"lite"}, a result of a
 #'   call to \code{\link{flite}}.
 #' @param model One of \code{c("gp", "kgaps", "bernoulli")}.
 #' @param ... Additional optional arguments. At present no optional
@@ -87,7 +97,7 @@ nobs.lite <- function(object,  ...) {
 #'
 #' \code{logLik} method for class \code{"lite"}.
 #'
-#' @param object an object of class \code{"lite"}, a result of a call to
+#' @param object An object of class \code{"lite"}, a result of a call to
 #'   \code{\link{flite}}.
 #' @param ... Additional optional arguments. At present no optional
 #'   arguments are used.
@@ -118,8 +128,14 @@ logLik.lite <- function(object, ...) {
 #'
 #' \code{summary} method for class \code{"lite"}
 #'
-#' @param object an object inheriting from class \code{"lite"}, a result of a
+#' @param object An object inheriting from class \code{"lite"}, a result of a
 #'   call to \code{\link{flite}}.
+#' @param adjust A logical scalar.  If \code{adjust = TRUE} then the
+#'   standard errors of \eqn{(p_u, \sigma_u, \xi)} are estimated via a sandwich
+#'   estimator of the variance-covariance matrix. See \code{\link{flite}}.
+#'   Otherwise, the inverse of the observed information matrix is used.
+#' @param digits An integer. Passed to \code{\link[base:Round]{signif}} to
+#'   round the values in the summary.
 #' @param ... Additional optional arguments. At present no optional
 #'   arguments are used.
 #' @return An object containing the original function call and a matrix of
@@ -129,14 +145,14 @@ logLik.lite <- function(object, ...) {
 #' @section Examples:
 #' See the examples in \code{\link{flite}}.
 #' @export
-summary.lite <- function(object, digits = max(3, getOption("digits") - 3L),
-                          ...) {
+summary.lite <- function(object, adjust = TRUE,
+                         digits = max(3, getOption("digits") - 3L), ...) {
   if (!inherits(object, "lite")) {
     stop("use only with \"lite\" objects")
   }
   res <- attributes(object)["call"]
   mles <- signif(coef(object), digits = digits)
-  ses <- signif(sqrt(diag(vcov(object))), digits = digits)
+  ses <- signif(sqrt(diag(vcov(object, adjust = adjust))), digits = digits)
   res$matrix <- cbind(`Estimate` = mles, `Std. Error` = ses)
   rownames(res$matrix) <- names(mles)
   class(res) <- "summary.lite"

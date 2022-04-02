@@ -7,7 +7,7 @@
 \method{coef}{lite}(object, ...)
 }
 \arguments{
-\item{object}{an object inheriting from class \code{"lite"}, a result of a
+\item{object}{An object inheriting from class \code{"lite"}, a result of a
 call to \code{\link{flite}}.}
 
 \item{...}{Additional optional arguments. At present no optional

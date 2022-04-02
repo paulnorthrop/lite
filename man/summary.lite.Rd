@@ -4,11 +4,19 @@
 \alias{summary.lite}
 \title{Summarising times series extreme fits}
 \usage{
-\method{summary}{lite}(object, digits = max(3, getOption("digits") - 3L), ...)
+\method{summary}{lite}(object, adjust = TRUE, digits = max(3, getOption("digits") - 3L), ...)
 }
 \arguments{
-\item{object}{an object inheriting from class \code{"lite"}, a result of a
+\item{object}{An object inheriting from class \code{"lite"}, a result of a
 call to \code{\link{flite}}.}
+
+\item{adjust}{A logical scalar.  If \code{adjust = TRUE} then the
+standard errors of \eqn{(p_u, \sigma_u, \xi)} are estimated via a sandwich
+estimator of the variance-covariance matrix. See \code{\link{flite}}.
+Otherwise, the inverse of the observed information matrix is used.}
+
+\item{digits}{An integer. Passed to \code{\link[base:Round]{signif}} to
+round the values in the summary.}
 
 \item{...}{Additional optional arguments. At present no optional
 arguments are used.}

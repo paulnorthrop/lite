@@ -7,7 +7,7 @@
 \method{logLik}{lite}(object, ...)
 }
 \arguments{
-\item{object}{an object of class \code{"lite"}, a result of a call to
+\item{object}{An object of class \code{"lite"}, a result of a call to
 \code{\link{flite}}.}
 
 \item{...}{Additional optional arguments. At present no optional

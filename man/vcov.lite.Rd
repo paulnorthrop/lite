@@ -5,11 +5,17 @@
 \title{Calculate the variance-covariance matrix for an object of class
 \code{"lite"}}
 \usage{
-\method{vcov}{lite}(object, ...)
+\method{vcov}{lite}(object, adjust = TRUE, ...)
 }
 \arguments{
-\item{object}{an object inheriting from class \code{"lite"}, a result of a
+\item{object}{An object inheriting from class \code{"lite"}, a result of a
 call to \code{\link{flite}}.}
+
+\item{adjust}{A logical scalar.  If \code{adjust = TRUE} then the elements
+of the variance-covariance matrix corresponding to
+\eqn{(p_u, \sigma_u, \xi)} are estimated using a sandwich estimator.
+See \code{\link{flite}}.  Otherwise, this matrix is the inverse of the
+observed information matrix.}
 
 \item{...}{Additional optional arguments. At present no optional
 arguments are used.}
