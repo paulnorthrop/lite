@@ -21,11 +21,12 @@ flite(data, u, cluster, k = 1, npy, ...)
 See \strong{Details}.}
 
 \item{cluster}{This argument is used to set the argument \code{cluster} to
-  \code{\link[chandwich]{cluster}}.  If \code{data} is a matrix and
-  \code{cluster} is missing then \code{cluster} is set so that data in
-  different columns are in different clusters.  If \code{data} is a vector
-  and \code{cluster} is missing then cluster is set so that each observation
-  forms its own cluster.
+  \code{\link[sandwich:vcovCL]{meatCL}}, which calculates the matrix \eqn{V}
+  passed as the argument \code{V} to \code{\link[chandwich]{adjust_loglik}}.
+  If \code{data} is a matrix and \code{cluster} is missing then
+  \code{cluster} is set so that data in different columns are in different
+  clusters.  If \code{data} is a vector and \code{cluster} is missing then
+  cluster is set so that each observation forms its own cluster.
 
   If \code{cluster} is supplied then it must have the same structure as
   \code{data}: if \code{data} is a matrix then \code{cluster} must be a
