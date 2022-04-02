@@ -12,6 +12,13 @@
 #' @param excesses A numeric vector of threshold excesses, that is, amounts
 #'   by which exceedances of \code{u} exceed \code{u}.
 #' @param object A fitted model object returned from \code{fitGP()}.
+#' @param eps A (small) numeric scalar.  Direct calculation of the element
+#'   \code{[2, 2]} of the observed information in \code{gpObsInfo} is
+#'   unreliable if the GP shape parameter \eqn{\xi} is very close to zero.  If
+#'   the absolute value of the input value of \eqn{\xi}, that is,
+#'   \code{pars[2]}, is smaller than \code{eps} then we approximate the
+#'   \code{[2, 2]} element using a Taylor series expansion in
+#'   \eqn{\xi / \sigma_u} evaluated up to and including the quadratic term.
 #' @param ... Further arguments to be passed to the functions in the
 #'   sandwich package \code{\link[sandwich]{meat}} (if \code{cluster = NULL}),
 #'   or \code{\link[sandwich:vcovCL]{meatCL}} (if \code{cluster} is not
@@ -103,15 +110,33 @@ fitGP <- function(data, u) {
 
 #' @rdname generalisedPareto
 #' @export
-gpObsInfo <- function(pars, excesses) {
+gpObsInfo <- function(pars, excesses, eps = 1e-5) {
   y <- excesses
+  # sigma
   s <- pars[1]
+  # xi
   x <- pars[2]
   i <- matrix(NA, 2, 2)
   i[1, 1] <- -sum((1 - (1 + x) * y * (2 * s + x * y) / (s + x * y) ^ 2) / s ^ 2)
   i[1, 2] <- i[2, 1] <- -sum(y * (1 - y / s) / (1 + x * y / s) ^ 2 / s ^ 2)
-  i[2, 2] <- sum(2 * log(1 + x * y / s) / x ^ 3 - 2 * y / (s + x * y) / x ^ 2 -
-                  (1 + 1 / x) * y ^ 2 / (s + x * y) ^ 2)
+  # Direct calculation of i22 is unrelaible for x close to zero.
+  # If abs(x) < eps then we expand the problematic terms (all but t4 below)
+  # in powers of z up to z ^ 2. The terms in 1/z and 1/z^2 cancel leaving
+  # only a quadratic in z.
+  z <- x / s
+  t0 <- 1 + z * y
+  if (abs(x) < eps) {
+    s1 <- 12 * z ^ 2 * y ^ 2 / 5
+    s2 <- 3 * z * y / 2
+    s3 <- 2 / 3
+    i[2, 2] <- sum(y ^ 3 * (s1 - s2 + s3) / s ^ 3 - (y / s) ^ 2 / t0 ^ 2)
+  } else {
+    t1 <- 2 * log(t0) / z ^ 3
+    t2 <- 2 * y / (z ^ 2 * t0)
+    t3 <- y ^ 2 / (z * t0 ^ 2)
+    t4 <- y ^ 2 / t0 ^ 2
+    i[2, 2] <- sum((t1 - t2 - t3) / s ^ 3 - t4 / s ^ 2)
+  }
   dimnames(i) <- list(c("sigma[u]", "xi"), c("sigma[u]", "xi"))
   return(i)
 }
