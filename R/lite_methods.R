@@ -104,13 +104,8 @@ logLik.lite <- function(object, ...) {
   if (!inherits(object, "lite")) {
     stop("use only with \"lite\" objects")
   }
-  bfit <- attr(object, "bernoulli")
-  gfit <- attr(object, "gp")
-  kfit <- attr(object, "kgaps")
-  bloglik <- attr(bfit, "max_loglik")
-  gloglik <- attr(gfit, "max_loglik")
-  kloglik <- kfit$max_loglik
-  val <- bloglik + gloglik + kloglik
+  # Note: the value of type does not affect the value of logLik
+  val <- object(coef(object))
   attr(val, "nobs") <- nobs(object)
   attr(val, "df") <- 4
   class(val) <- "logLik"
@@ -224,18 +219,19 @@ plot.lite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
   }
   adj_type <- match.arg(adj_type)
   which <- match.arg(which)
+  old_par <- graphics::par(no.readonly = TRUE)
+  on.exit(graphics::par(old_par))
+  graphics::par(mar = c(4, 4, 1, 1))
   if (which == "all") {
     which <- c("pu", "gp", "xi", "theta")
-    oldpar <- graphics::par(mfrow = c(2, 2))
-  } else {
-    oldpar <- graphics::par(mfrow = c(1, 1))
+    graphics::layout(matrix(c(1,2,3,4), 2, 2, byrow = TRUE))
   }
-  on.exit(graphics::par(oldpar))
   # Bernoulli (p[u])
   if ("pu" %in% which) {
     ci <- chandwich::conf_intervals(attr(x, "bernoulli"), type = adj_type)
-    bplot <- function(obj, ..., xlab = expression(p[u])) {
-      plot(obj, ..., xlab = xlab)
+    bplot <- function(obj, ..., xlab = expression(p[u]),
+                      ylab = "log-likelihood") {
+      plot(obj, ..., xlab = xlab, ylab = ylab)
     }
     bplot(ci, ...)
   }
@@ -254,7 +250,10 @@ plot.lite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
   # GP shape parameter xi
   if ("xi" %in% which) {
     ci_xi <- chandwich::conf_intervals(gp, which_pars = "xi", type = adj_type)
-    plot(ci_xi, ...)
+    xiplot <- function(obj, ..., ylab = "profile log-likelihood") {
+      plot(obj, ..., ylab = ylab)
+    }
+    xiplot(ci_xi, ...)
   }
   # K-gaps for theta
   if ("theta" %in% which) {
