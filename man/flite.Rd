@@ -2,7 +2,7 @@
 % Please edit documentation in R/flite.R
 \name{flite}
 \alias{flite}
-\title{Frequentist inference for time series extremes}
+\title{Frequentist threshold-based inference for time series extremes}
 \usage{
 flite(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...)
 }
@@ -75,8 +75,8 @@ An object of class \code{"flite", "lite", "chandwich"}.
  If \code{npy} was not supplied then this is \code{NA}.
 }
 \description{
-Performs threshold-based frequentist inference for 3 aspects of time
-series extremes: the probability that the threshold is exceeded, the
+Performs threshold-based frequentist inference for 3 aspects of stationary
+time series extremes: the probability that the threshold is exceeded, the
 marginal distribution of threshold excesses and the extent of clustering of
 extremes, as summarised by the extremal index.
 }

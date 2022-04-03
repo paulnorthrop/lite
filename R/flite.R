@@ -1,7 +1,7 @@
-#' Frequentist inference for time series extremes
+#' Frequentist threshold-based inference for time series extremes
 #'
-#' Performs threshold-based frequentist inference for 3 aspects of time
-#' series extremes: the probability that the threshold is exceeded, the
+#' Performs threshold-based frequentist inference for 3 aspects of stationary
+#' time series extremes: the probability that the threshold is exceeded, the
 #' marginal distribution of threshold excesses and the extent of clustering of
 #' extremes, as summarised by the extremal index.
 #'
