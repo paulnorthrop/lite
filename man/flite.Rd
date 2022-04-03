@@ -42,7 +42,9 @@ contributions from right-censored inter-exceedance times are used.
 See \strong{Details} for information about choosing \code{k}.}
 
 \item{npy}{A numeric scalar.  The (mean) number of observations per year.
-\strong{Setting this appropriately is important}.}
+Setting this appropriately is important, but this value is not used
+inside \code{flite()}.  It is used later when making inferences about
+return levels \strong{GIVE LINK TO FUNCTION}.}
 
 \item{...}{Further arguments to be passed to the function
 \code{\link[sandwich:vcovCL]{meatCL}} in the sandwich package.
@@ -69,6 +71,8 @@ An object of class \code{"flite", "lite", "chandwich"}.
  \code{"kgaps"}, which provide the fitted model objects returned from
  \code{\link[chandwich]{adjust_loglik}} (for \code{"Bernoulli"} and
  \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"kgaps"}).
+ The input value of \code{npy} is stored as an attribute \code{"npy"}.
+ If \code{npy} was not supplied then this is \code{NA}.
 }
 \description{
 Performs threshold-based frequentist inference for 3 aspects of time
@@ -135,7 +139,7 @@ plot(cfit)
 plot(cfit, which = "gp")
 }
 \references{
-Chandler, R. E. and Bate, S. (2007). Inference for clustered
+Chandler, R. E. and Bate, S. (2007). Inference for clustered.
   data using the independence loglikelihood. \emph{Biometrika},
   \strong{94}(1), 167-183. \doi{10.1093/biomet/asm015}
 

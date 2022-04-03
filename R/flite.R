@@ -36,7 +36,9 @@
 #'   contributions from right-censored inter-exceedance times are used.
 #'   See \strong{Details} for information about choosing \code{k}.
 #' @param npy A numeric scalar.  The (mean) number of observations per year.
-#'   \strong{Setting this appropriately is important}.
+#'   Setting this appropriately is important, but this value is not used
+#'   inside \code{flite()}.  It is used later when making inferences about
+#'   return levels \strong{GIVE LINK TO FUNCTION}.
 #' @param ... Further arguments to be passed to the function
 #'   \code{\link[sandwich:vcovCL]{meatCL}} in the sandwich package.
 #'   In particular, the clustering adjustment argument \code{cadjust}
@@ -98,7 +100,9 @@
 #'  \code{"kgaps"}, which provide the fitted model objects returned from
 #'  \code{\link[chandwich]{adjust_loglik}} (for \code{"Bernoulli"} and
 #'  \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"kgaps"}).
-#' @references Chandler, R. E. and Bate, S. (2007). Inference for clustered
+#'  The input value of \code{npy} is stored as an attribute \code{"npy"}.
+#'  If \code{npy} was not supplied then this is \code{NA}.
+#' @references Chandler, R. E. and Bate, S. (2007). Inference for clustered.
 #'   data using the independence loglikelihood. \emph{Biometrika},
 #'   \strong{94}(1), 167-183. \doi{10.1093/biomet/asm015}
 #' @references Fawcett, L. and Walshaw, D. (2012), Estimating return levels
@@ -146,6 +150,10 @@
 #' plot(cfit, which = "gp")
 #' @export
 flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...) {
+  # If npy is not supplied then store NA
+  if (missing(npy)) {
+    npy <- NA
+  }
   #
   # 1. Check and manipulate data and cluster
   #
@@ -225,5 +233,6 @@ flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...) {
   attr(bernoulli_gp_theta_loglik, "gp") <- aloglik_gp
   attr(bernoulli_gp_theta_loglik, "kgaps") <- theta_fit
   attr(bernoulli_gp_theta_loglik, "call") <- match.call(expand.dots = TRUE)
+  attr(bernoulli_gp_theta_loglik, "npy") <- npy
   return(bernoulli_gp_theta_loglik)
 }
