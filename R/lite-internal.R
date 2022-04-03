@@ -28,15 +28,10 @@ adjust_object <- function(x, cluster = NULL, ...) {
   mle <- coef(x)
   n_obs <- nobs(x)
   #
-  # Set V, using meat() or meatCL() from the sandwich package ----------
+  # Set V, using meatCL() from the sandwich package ----------
   #
-  if (is.null(cluster)) {
-    V <- sandwich::meat(x, fitted_object = x, loglik_fn = loglik_fn,
-                        ...) * n_obs
-  } else {
-    V <- sandwich::meatCL(x, cluster = cluster, fitted_object = x,
-                          loglik_fn = loglik_fn, ...) * n_obs
-  }
+  V <- sandwich::meatCL(x, cluster = cluster, fitted_object = x,
+                        loglik_fn = loglik_fn, ...) * n_obs
   # We don't pass cluster because it would only be used in the estimation of
   # V: we have already estimated V using sandwich::meat() or sandwich::meatCL()
   res <- chandwich::adjust_loglik(loglik = loglik_fn,
