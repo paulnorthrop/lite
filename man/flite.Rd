@@ -43,9 +43,14 @@ inter-exceedance times are used. See \strong{Details} for information
 about choosing \code{k}.}
 
 \item{npy}{A numeric scalar.  The (mean) number of observations per year.
-Setting this appropriately is important, but this value is not used
-inside \code{flite()}.  It is used later when making inferences about
-return levels \strong{GIVE LINK TO FUNCTION}.}
+Setting this appropriately is important when making inferences about
+return levels, using \code{\link{returnLevel}}, but \code{npy} is not
+used by \code{flite} so it need not be supplied now.  If \code{npy} is
+supplied to \code{flite} then it is stored for use by
+\code{\link{returnLevel}}.  Alternatively, \code{npy} can be supplied in
+a later call to \code{\link{returnLevel}}.  If \code{npy} is supplied to
+both \code{flite} and \code{\link{returnLevel}} then the value supplied to
+\code{\link{returnLevel}} will take precedence.}
 
 \item{...}{Further arguments to be passed to the function
 \code{\link[sandwich:vcovCL]{meatCL}} in the sandwich package.
