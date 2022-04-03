@@ -72,8 +72,6 @@ fitBernoulli <- function(data) {
   n1 <- sum(obs_data)
   n0 <- res$nobs - n1
   res$maxLogLik <- n1 * log(res$mle) + n0 * log(1 - res$mle)
-  res$n0 <- n0
-  res$n1 <- n1
   class(res) <- "Bernoulli"
   return(res)
 }
