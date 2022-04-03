@@ -115,6 +115,9 @@ gpObsInfo <- function(pars, excesses, eps = 1e-5, m = 3) {
   if (eps <= 0) {
     stop("'eps' must be positive")
   }
+  if (m < 0) {
+    stop("'m' must be non-negative")
+  }
   y <- excesses
   # sigma
   s <- pars[1]

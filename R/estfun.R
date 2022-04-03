@@ -13,6 +13,12 @@ estfun.default <- function(x, loglik_fn, ...) {
 
 #' @export
 estfun.GP <- function(x, eps = 1e-5, m = 3, ...) {
+  if (eps <= 0) {
+    stop("'eps' must be positive")
+  }
+  if (m < 0) {
+    stop("'m' must be non-negative")
+  }
   pars <- coef(x)
   sigma <- pars[1]
   xi <- pars[2]
