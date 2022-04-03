@@ -5,6 +5,10 @@
 \alias{adjust_object}
 \alias{kgaps_loglik}
 \alias{check_logLik_flite}
+\alias{return_level_bingp}
+\alias{bingp_rl_CI}
+\alias{bingp_rl_prof}
+\alias{box_cox_deriv}
 \title{Internal lite functions}
 \usage{
 adjust_object(x, cluster = NULL, ...)
@@ -12,6 +16,14 @@ adjust_object(x, cluster = NULL, ...)
 kgaps_loglik(theta, N0, N1, sum_qs, n_kgaps)
 
 check_logLik_flite(object, ...)
+
+return_level_bingp(x, m, level, npy, prof, inc, type, npy_given)
+
+bingp_rl_CI(x, m, level, npy, type, u)
+
+bingp_rl_prof(x, m, level, npy, inc, type, rl_sym, u)
+
+box_cox_deriv(x, lambda = 1, lambda_tol = 1/50, poly_order = 3)
 }
 \description{
 Internal lite functions

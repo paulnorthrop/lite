@@ -93,3 +93,198 @@ check_logLik_flite <- function(object, ...) {
   class(val) <- "logLik"
   return(val)
 }
+
+# ==================== Binomial-GP return levels functions ================== #
+
+#' @keywords internal
+#' @rdname lite-internal
+return_level_bingp <- function(x, m, level, npy, prof, inc, type, npy_given) {
+  # Extract the threshold and npy from the original fitted model object
+  u <- attr(x, "inputs")$u
+  if (!npy_given) {
+    npy <- attr(x, "inputs")$npy
+  }
+  if (is.na(npy)) {
+    stop("'npy' has not been supplied")
+  }
+  # MLE and symmetric conf% CI for the return level
+  rl_sym <- bingp_rl_CI(x, m, level, npy, type, u)
+  # Extract SE
+  rl_se <- rl_sym["se"]
+  # Remove SE
+  rl_sym <- rl_sym[c("lower", "mle", "upper")]
+  if (!prof) {
+    return(list(rl_sym = rl_sym, rl_prof = NULL, rl_se = rl_se))
+  }
+  temp <- bingp_rl_prof(x, m, level, npy, inc, type, rl_sym, u)
+  return(list(rl_sym = rl_sym, rl_prof = temp$rl_prof, rl_se = rl_se,
+              max_loglik = logLik(x), crit = temp$crit,
+              for_plot = temp$for_plot))
+}
+
+#' @keywords internal
+#' @rdname lite-internal
+bingp_rl_CI <- function (x, m, level, npy, type, u) {
+  # Extract the MLEs
+  mles <- coef(x)
+  pu <- mles["p[u]"]
+  sigmau <- mles["sigma[u]"]
+  xi <- mles["xi"]
+  theta <- mles["theta"]
+  # Create the covariance matrix for all 4 parameters: (pu, sigmau, xi, theta)
+  # Get the correct matrix by supplying adjust = FALSE for type = "none" and
+  # adjust = TRUE otherwise
+  adjust <- ifelse(type == "none", FALSE, TRUE)
+  mat <- vcov(x, adjust = adjust)
+  # pmnpy is approximately equal to 1 / (m * npy * theta)
+  con <- 1 - 1 / m
+  nt <- npy * theta
+  pmnpy <- 1 - con ^ (1 / nt)
+  p <- pmnpy / pu
+  rp <- 1 / p
+  rl_mle <- revdbayes::qgp(p, loc = u, scale = sigmau, shape = xi,
+                           lower.tail = FALSE)
+  delta <- matrix(0, 4, 1)
+  delta[1, ] <- sigmau * pu ^ (xi - 1) / pmnpy ^ xi
+  delta[2, ] <- revdbayes::qgp(p, loc = 0, scale = 1, shape = xi,
+                               lower.tail = FALSE)
+  delta[3, ] <- sigmau * box_cox_deriv(rp, lambda = xi)
+  # Add information about theta
+  delta[4, ] <- -sigmau * rp ^ (xi - 1) * pu * con ^ (1 / nt) * log(con) /
+    (npy * theta ^ 2 * pmnpy ^ 2)
+  rl_var <- t(delta) %*% mat %*% delta
+  rl_se <- sqrt(rl_var)
+  z_val <- stats::qnorm(1 - (1 - level) / 2)
+  rl_lower <- rl_mle - z_val * rl_se
+  rl_upper <- rl_mle + z_val * rl_se
+  res <- c(lower = rl_lower, mle = rl_mle, upper = rl_upper, se = rl_se)
+  return(res)
+}
+
+#' @keywords internal
+#' @rdname lite-internal
+bingp_rl_prof <- function(x, m, level, npy, inc, type, rl_sym, u) {
+  if (is.null(inc)) {
+    inc <- (rl_sym["upper"] - rl_sym["lower"]) / 100
+  }
+  bingptheta_mle <- coef(x)
+  # Function to calculate the negated adjusted binomial-GP log-likelihood
+  bingp_negloglik <- function(pars, type) {
+    return(-x(pars, type = type))
+  }
+  # Calculates the negated profile log-likelihood of the m-year return level
+  bingp_neg_prof_loglik <- function(a, xp) {
+    # a[1] is pu, a[2] is xi, a[3] is theta
+    # Check that pu is in (0, 1) and theta is in (0, 1]
+    if (a[1] <= 0 || a[1] >= 1 || a[3] <= 0 || a[3] > 1) {
+      return(10 ^ 10)
+    }
+    pmnpy <- 1 - (1 - 1 / m) ^ (1 / (npy * a[3]))
+    p <- pmnpy / a[1]
+    sigmau <- (xp - u) / revdbayes::qgp(p, loc = 0, scale = 1, shape = a[2],
+                                        lower.tail = FALSE)
+    # Check that sigmau is positive
+    if (sigmau <= 0) {
+      return(10 ^ 10)
+    }
+    bingp_pars <- c(a[1], sigmau, a[2], a[3])
+    return(bingp_negloglik(bingp_pars, type = type))
+  }
+  max_loglik <- logLik(x)
+  rl_mle <- rl_sym["mle"]
+  conf_line <- max_loglik - 0.5 * stats::qchisq(level, 1)
+  v1 <- v2 <- x1 <- x2 <- NULL
+  x2[1] <- x1[1] <- rl_mle
+  v2[1] <- v1[1] <- max_loglik
+  #
+  # Starting from the MLE, we search upwards and downwards until we pass the
+  # cutoff for the 100level% confidence interval
+  #
+  ### Upper tail ...
+  xp <- rl_mle
+  my_val <- max_loglik
+  ii <- 1
+  sol <- bingptheta_mle[-2]
+  while (my_val > conf_line){
+    xp <- xp + inc
+    opt <- stats::optim(sol, bingp_neg_prof_loglik, method = "BFGS", xp = xp)
+    sol <- opt$par
+    ii <- ii + 1
+    x2[ii] <- xp
+    v2[ii] <- -opt$value
+    my_val <- v2[ii]
+  }
+  sol_up <- sol
+  ### Lower tail ...
+  xp <- rl_mle
+  my_val <- max_loglik
+  ii <- 1
+  sol <- bingptheta_mle[-2]
+  while (my_val > conf_line){
+    xp <- xp - inc
+    opt <- stats::optim(sol, bingp_neg_prof_loglik, method = "BFGS", xp = xp)
+    sol <- opt$par
+    ii <- ii + 1
+    x1[ii] <- xp
+    v1[ii] <- -opt$value
+    my_val <- v1[ii]
+  }
+  sol_low <- sol
+  #
+  # Find the limits of the confidence interval
+  #
+  prof_lik <- c(rev(v1), v2)
+  ret_levs <- c(rev(x1), x2)
+  # Find where the curve crosses conf_line
+  temp <- diff(prof_lik - conf_line > 0)
+  # Find the upper limit of the confidence interval
+  loc <- which(temp == -1)
+  x1 <- ret_levs[loc]
+  x2 <- ret_levs[loc + 1]
+  y1 <- prof_lik[loc]
+  y2 <- prof_lik[loc + 1]
+  up_lim <- x1 + (conf_line - y1) * (x2 - x1) / (y2 - y1)
+  # Find the lower limit of the confidence interval
+  loc <- which(temp == 1)
+  x1 <- ret_levs[loc]
+  x2 <- ret_levs[loc+1]
+  y1 <- prof_lik[loc]
+  y2 <- prof_lik[loc+1]
+  low_lim <- x1 + (conf_line - y1) * (x2 - x1) / (y2 - y1)
+  rl_prof <- c(lower = low_lim, rl_mle, upper = up_lim)
+  return(list(rl_prof = rl_prof, crit = conf_line,
+              for_plot = cbind(ret_levs = ret_levs, prof_loglik = prof_lik)))
+}
+
+# ============================== box_cox_deriv ============================== #
+
+#' @keywords internal
+#' @rdname lite-internal
+box_cox_deriv <- function(x, lambda = 1, lambda_tol = 1 / 50,
+                          poly_order = 3) {
+  #
+  # Computes the derivative with respect to lambda the Box-Cox
+  # transformation.
+  #
+  # Args:
+  #   x          : A numeric vector. (Positive) values to be Box-Cox
+  #                transformed.
+  #   lambda     : A numeric scalar.  Transformation parameter.
+  #   lambda_tol : A numeric scalar.  For abs(lambda) < lambda_tol use
+  #                a Taylor series expansion.
+  #   poly_order : order of Taylor series polynomial in lambda used as
+  #                an approximation if abs(lambda) < lambda_tol
+  #
+  # Returns:
+  #   A numeric vector.  The derivative with respect to lambda of
+  #     (x^lambda - 1) / lambda
+  #
+  lnx <- log(x)
+  if (abs(lambda) > lambda_tol) {
+    retval <- (lambda * x ^ lambda * lnx - x ^ lambda + 1) / lambda ^ 2
+  } else {
+    i <- 0:poly_order
+    retval <- sum(lnx ^ (i + 2) * lambda ^ i / ((i + 2) * factorial(i)))
+  }
+  return(retval)
+}
