@@ -35,7 +35,8 @@
 #'   model for the extremal index. \code{inc_cens} determines whether
 #'   contributions from right-censored inter-exceedance times are used.
 #'   See \strong{Details} for information about choosing \code{k}.
-#' @param npy  Describe carefully!
+#' @param npy A numeric scalar.  The (mean) number of observations per year.
+#'   \strong{Setting this appropriately is important}.
 #' @param ... Further arguments to be passed to the function
 #'   \code{\link[sandwich:vcovCL]{meatCL}} in the sandwich package.
 #'   In particular, the clustering adjustment argument \code{cadjust}

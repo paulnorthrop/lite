@@ -41,7 +41,8 @@ model for the extremal index. \code{inc_cens} determines whether
 contributions from right-censored inter-exceedance times are used.
 See \strong{Details} for information about choosing \code{k}.}
 
-\item{npy}{Describe carefully!}
+\item{npy}{A numeric scalar.  The (mean) number of observations per year.
+\strong{Setting this appropriately is important}.}
 
 \item{...}{Further arguments to be passed to the function
 \code{\link[sandwich:vcovCL]{meatCL}} in the sandwich package.
