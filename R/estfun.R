@@ -1,6 +1,8 @@
-# Create an estfun method for the "GP" class default estfun method and, for safety, create individual methods
-# for all the classes currently involved in lax.  At the moment they all
-# use numDeriv::jacobian() to do the calculation
+# Create an estfun methods for the "Bernoulli" and GP" classes.
+# Leave the default method here for the moment, even though it is not used.
+# It could be useful for testing.
+
+# Default
 
 #' @export
 estfun.default <- function(x, loglik_fn, ...) {
@@ -9,10 +11,22 @@ estfun.default <- function(x, loglik_fn, ...) {
   return(U)
 }
 
+# Bernoulli
+
+#' @export
+estfun.Bernoulli <- function(x, ...) {
+  print("my Bernoulli code")
+  U <- x$data / x$mle - (1 - x$data) / (1 - x$mle)
+  dim(U)<- c(length(U), 1)
+  colnames(U) <- names(coef(x))
+  return(U)
+}
+
 # GP
 
 #' @export
 estfun.GP <- function(x, eps = 1e-5, m = 3, ...) {
+  print("my GP code")
   if (eps <= 0) {
     stop("'eps' must be positive")
   }
