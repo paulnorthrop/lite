@@ -77,8 +77,9 @@ An object of class \code{"flite", "lite", "chandwich"}.
  \code{"kgaps"}, which provide the fitted model objects returned from
  \code{\link[chandwich]{adjust_loglik}} (for \code{"Bernoulli"} and
  \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"kgaps"}).
- The input value of \code{npy} is stored as an attribute \code{"npy"}.
- If \code{npy} was not supplied then this is \code{NA}.
+
+ The named input arguments are returned in a list as the attribute
+ \code{inputs}.  If \code{npy} was not supplied then its value is \code{NA}.
 }
 \description{
 Performs threshold-based frequentist inference for 3 aspects of stationary

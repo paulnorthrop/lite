@@ -106,8 +106,9 @@
 #'  \code{"kgaps"}, which provide the fitted model objects returned from
 #'  \code{\link[chandwich]{adjust_loglik}} (for \code{"Bernoulli"} and
 #'  \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"kgaps"}).
-#'  The input value of \code{npy} is stored as an attribute \code{"npy"}.
-#'  If \code{npy} was not supplied then this is \code{NA}.
+#'
+#'  The named input arguments are returned in a list as the attribute
+#'  \code{inputs}.  If \code{npy} was not supplied then its value is \code{NA}.
 #' @references Chandler, R. E. and Bate, S. (2007). Inference for clustered.
 #'   data using the independence loglikelihood. \emph{Biometrika},
 #'   \strong{94}(1), 167-183. \doi{10.1093/biomet/asm015}
@@ -243,6 +244,8 @@ flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...) {
   attr(bernoulli_gp_theta_loglik, "gp") <- aloglik_gp
   attr(bernoulli_gp_theta_loglik, "kgaps") <- theta_fit
   attr(bernoulli_gp_theta_loglik, "call") <- match.call(expand.dots = TRUE)
-  attr(bernoulli_gp_theta_loglik, "npy") <- npy
+  inputs <- list(data = data, u = u, cluster = cluster, k = k,
+                 inc_cens = inc_cens, npy = npy)
+  attr(bernoulli_gp_theta_loglik, "inputs") <- inputs
   return(bernoulli_gp_theta_loglik)
 }
