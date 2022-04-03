@@ -26,9 +26,11 @@
 #' @return
 #' \code{fitBernoulli} returns an object of class \code{"Bernoulli"}, a list
 #' with components: \code{maxLogLik}, \code{mle}, \code{nobs}, \code{vcov},
-#' \code{data}, \code{obs_data}, where \code{data} are the input data and
-#' \code{obs_data} are the input data after any missing values have been
-#' removed, using \code{\link[stats:na.fail]{na.omit}}.
+#' \code{n0}, \code{n1}, \code{data}, \code{obs_data}, where \code{data} are
+#' the input data and, \code{obs_data} are the input data after any missing
+#' values have been removed, using \code{\link[stats:na.fail]{na.omit}} and
+#' \code{n0} and \code{n1} are, respectively, the number of failures and the
+#' number of successes.
 #'
 #' \code{logLikVector.Bernoulli} returns an object of class
 #' \code{"logLikVector"}, a vector length \code{length(data)} containing the
@@ -72,6 +74,8 @@ fitBernoulli <- function(data) {
   n1 <- sum(obs_data)
   n0 <- res$nobs - n1
   res$maxLogLik <- n1 * log(res$mle) + n0 * log(1 - res$mle)
+  res$n0 <- n0
+  res$n1 <- n1
   class(res) <- "Bernoulli"
   return(res)
 }

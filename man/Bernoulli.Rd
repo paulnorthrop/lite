@@ -41,9 +41,11 @@ or \code{\link[sandwich:vcovCL]{meatCL}} (if \code{cluster} is not
 \value{
 \code{fitBernoulli} returns an object of class \code{"Bernoulli"}, a list
 with components: \code{maxLogLik}, \code{mle}, \code{nobs}, \code{vcov},
-\code{data}, \code{obs_data}, where \code{data} are the input data and
-\code{obs_data} are the input data after any missing values have been
-removed, using \code{\link[stats:na.fail]{na.omit}}.
+\code{n0}, \code{n1}, \code{data}, \code{obs_data}, where \code{data} are
+the input data and, \code{obs_data} are the input data after any missing
+values have been removed, using \code{\link[stats:na.fail]{na.omit}} and
+\code{n0} and \code{n1} are, respectively, the number of failures and the
+number of successes.
 
 \code{logLikVector.Bernoulli} returns an object of class
 \code{"logLikVector"}, a vector length \code{length(data)} containing the
