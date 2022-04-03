@@ -47,8 +47,8 @@
 #' @details There are 3 independent parts to the inference, all performed using
 #'   maximum likelihood estimation.
 #'     \enumerate{
-#'       \item{A Bernoulli model for the probability \eqn{p_u} that the
-#'         threshold \eqn{u} is exceeded.}
+#'       \item{A Bernoulli(\eqn{p_u}) model for whether a given observation
+#'         exceeds the threshold \eqn{u}.}
 #'       \item{A generalised Pareto, GP(\eqn{\sigma_u}, \eqn{\xi}), model for
 #'         the marginal distribution of threshold excesses.}
 #'       \item{The \eqn{K}-gaps model for the extremal index \eqn{\theta}.}
