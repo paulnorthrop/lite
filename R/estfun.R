@@ -12,8 +12,7 @@ estfun.default <- function(x, loglik_fn, ...) {
 # GP
 
 #' @export
-estfun.GP <- function(x, eps = 1e-5, ...) {
-  print("Using my code")
+estfun.GP <- function(x, eps = 1e-5, m = 3, ...) {
   pars <- coef(x)
   sigma <- pars[1]
   xi <- pars[2]
@@ -24,10 +23,13 @@ estfun.GP <- function(x, eps = 1e-5, ...) {
   U <- matrix(NA, nrow = length(y), ncol = 2)
   U[, 1] <- -1 / sigma + (xi + 1) * y / (t0 * sigma ^ 2)
   if (abs(xi) < eps) {
-    s1 <- 1 / 2
-    s2 <- 2 * z * y / 3
-    s3 <- 3 * z ^ 2 * y ^ 2 / 4
-    U[, 2] <- y ^ 2 * (s1 - s2 + s3) / sigma ^ 2 - y / (sigma * t0)
+    i <- 0:m
+    zy <- z * y
+    sum_fn <- function(zy) {
+      return(sum((-1) ^ i * (i + 1) * zy ^ i / (i + 2)))
+    }
+    tsum <- vapply(zy, sum_fn, 0.0)
+    U[, 2] <- y ^ 2 * tsum / sigma ^ 2 - y / (sigma * t0)
   } else {
     t1 <- log(t0) / z ^ 2
     t2 <- y / (z * t0)

@@ -12,13 +12,14 @@
 #' @param excesses A numeric vector of threshold excesses, that is, amounts
 #'   by which exceedances of \code{u} exceed \code{u}.
 #' @param object A fitted model object returned from \code{fitGP()}.
-#' @param eps A (small, positive) numeric scalar.  Direct calculation of the
-#'   element \code{[2, 2]} of the observed information in \code{gpObsInfo} is
-#'   unreliable if the GP shape parameter \eqn{\xi} is very close to zero.  If
-#'   the absolute value of the input value of \eqn{\xi}, that is,
-#'   \code{pars[2]}, is smaller than \code{eps} then we approximate the
-#'   \code{[2, 2]} element using a Taylor series expansion in
-#'   \eqn{\xi / \sigma_u} evaluated up to and including the quadratic term.
+#' @param eps,m These arguments control the estimation of the observed
+#'   information in \code{gpObsInfo} when the GP shape parameter \eqn{\xi} is
+#'   very close to zero.  In these cases, direct calculation is unreliable.
+#'   \code{eps} is a (small, positive) numeric scalar.  If the absolute value
+#'   of the input value of \eqn{\xi}, that is, \code{pars[2]}, is smaller than
+#'   \code{eps} then we approximate the \code{[2, 2]} element using a Taylor
+#'   series expansion in \eqn{\xi}, evaluated up to and including the
+#'   \code{m}th term.
 #' @param ... Further arguments to be passed to the functions in the
 #'   sandwich package \code{\link[sandwich]{meat}} (if \code{cluster = NULL}),
 #'   or \code{\link[sandwich:vcovCL]{meatCL}} (if \code{cluster} is not
@@ -110,7 +111,7 @@ fitGP <- function(data, u) {
 
 #' @rdname generalisedPareto
 #' @export
-gpObsInfo <- function(pars, excesses, eps = 1e-5) {
+gpObsInfo <- function(pars, excesses, eps = 1e-5, m = 3) {
   if (eps <= 0) {
     stop("'eps' must be positive")
   }
@@ -128,20 +129,22 @@ gpObsInfo <- function(pars, excesses, eps = 1e-5) {
   # only a quadratic in z.
   z <- x / s
   t0 <- 1 + z * y
+  t4 <- y ^ 2 / t0 ^ 2
   if (any(t0 <= 0)) {
     stop("The log-likelihood is 0 for this combination of data and parameters")
   }
   if (abs(x) < eps) {
-    s1 <- 12 * z ^ 2 * y ^ 2 / 5
-    s2 <- 3 * z * y / 2
-    s3 <- 2 / 3
-    s4 <- y ^ 2 / t0 ^ 2
-    i[2, 2] <- sum(y ^ 3 * (s1 - s2 + s3) / s ^ 3 - s4 / s ^ 2)
+    j <- 0:m
+    zy <- z * y
+    sum_fn <- function(zy) {
+      return(sum((-1) ^ j * (j ^ 2 + 3 * j + 2) * zy ^ j / (j + 3)))
+    }
+    tsum <- vapply(zy, sum_fn, 0.0)
+    i[2, 2] <- sum(y ^ 3 * tsum / s ^ 3 - t4 / s ^ 2)
   } else {
     t1 <- 2 * log(t0) / z ^ 3
     t2 <- 2 * y / (z ^ 2 * t0)
     t3 <- y ^ 2 / (z * t0 ^ 2)
-    t4 <- y ^ 2 / t0 ^ 2
     i[2, 2] <- sum((t1 - t2 - t3) / s ^ 3 - t4 / s ^ 2)
   }
   dimnames(i) <- list(c("sigma[u]", "xi"), c("sigma[u]", "xi"))
