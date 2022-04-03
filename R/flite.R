@@ -231,7 +231,9 @@ flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...) {
   # 5. Put GP, binomial and K-gaps inferences together to return an adjusted
   #    log-likelihood for the parameters (p[u], sigma[u], xi, theta)
   #
-  bernoulli_gp_theta_loglik <- function(pars, type = "vertical") {
+  bernoulli_gp_theta_loglik <- function(pars, type = c("vertical", "cholesky",
+                                                       "spectral", "none")) {
+    type <- match.arg(type)
     bernoulli_loglik <- aloglik_bernoulli(pars[1], type = type)
     gp_loglik <- aloglik_gp(pars[2:3], type = type)
     theta_loglik <- loglik_theta(pars[4])
