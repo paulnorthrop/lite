@@ -4,7 +4,7 @@
 \alias{flite}
 \title{Frequentist inference for time series extremes}
 \usage{
-flite(data, u, cluster, k = 1, npy, ...)
+flite(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...)
 }
 \arguments{
 \item{data}{A numeric vector or numeric matrix of raw data.  If \code{data}
@@ -18,7 +18,7 @@ flite(data, u, cluster, k = 1, npy, ...)
   is constructed as a sum of contributions from different columns.}
 
 \item{u}{A numeric scalar.  The extreme value threshold applied to the data.
-See \strong{Details}.}
+See \strong{Details} for information about choosing \code{u}.}
 
 \item{cluster}{This argument is used to set the argument \code{cluster} to
   \code{\link[sandwich:vcovCL]{meatCL}}, which calculates the matrix \eqn{V}
@@ -35,13 +35,18 @@ See \strong{Details}.}
   \code{data}.  Each entry in \code{cluster} sets the cluster of the
   corresponding component of \code{data}.}
 
-\item{k}{A numeric scalar to be passed as the argument \code{k} to
-\code{\link[exdex]{kgaps}}, which sets the value of the run parameter
-\eqn{K} in the \eqn{K}-gaps model for the extremal index. See
-\strong{Details}.}
+\item{k, inc_cens}{Arguments passed to \code{\link[exdex]{kgaps}}.
+\code{k} sets the value of the run parameter \eqn{K} in the \eqn{K}-gaps
+model for the extremal index. \code{inc_cens} determines whether
+contributions from right-censored inter-exceedance times are used.
+See \strong{Details} for information about choosing \code{k}.}
 
-\item{...}{Arguments to be passed to \code{\link[exdex]{kgaps}}, namely
-\code{k} and/or \code{inc_cens}.}
+\item{npy}{Describe carefully!}
+
+\item{...}{Further arguments to be passed to the function
+\code{\link[sandwich:vcovCL]{meatCL}} in the sandwich package.
+In particular, the clustering adjustment argument \code{cadjust}
+may make a difference if the number of clusters is not large.}
 }
 \value{
 An object of class \code{"flite", "lite", "chandwich"}.

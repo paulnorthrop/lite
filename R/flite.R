@@ -15,7 +15,7 @@
 #'   stored in different columns in a matrix.  Again, the log-likelihood
 #'   is constructed as a sum of contributions from different columns.
 #' @param u A numeric scalar.  The extreme value threshold applied to the data.
-#'   See \strong{Details}.
+#'   See \strong{Details} for information about choosing \code{u}.
 #' @param cluster This argument is used to set the argument \code{cluster} to
 #'   \code{\link[sandwich:vcovCL]{meatCL}}, which calculates the matrix \eqn{V}
 #'   passed as the argument \code{V} to \code{\link[chandwich]{adjust_loglik}}.
@@ -30,12 +30,16 @@
 #'   vector then \code{cluster} must be a vector of the same length as
 #'   \code{data}.  Each entry in \code{cluster} sets the cluster of the
 #'   corresponding component of \code{data}.
-#' @param k A numeric scalar to be passed as the argument \code{k} to
-#'   \code{\link[exdex]{kgaps}}, which sets the value of the run parameter
-#'   \eqn{K} in the \eqn{K}-gaps model for the extremal index. See
-#'   \strong{Details}.
-#' @param ... Arguments to be passed to \code{\link[exdex]{kgaps}}, namely
-#'   \code{k} and/or \code{inc_cens}.
+#' @param k,inc_cens Arguments passed to \code{\link[exdex]{kgaps}}.
+#'   \code{k} sets the value of the run parameter \eqn{K} in the \eqn{K}-gaps
+#'   model for the extremal index. \code{inc_cens} determines whether
+#'   contributions from right-censored inter-exceedance times are used.
+#'   See \strong{Details} for information about choosing \code{k}.
+#' @param npy  Describe carefully!
+#' @param ... Further arguments to be passed to the function
+#'   \code{\link[sandwich:vcovCL]{meatCL}} in the sandwich package.
+#'   In particular, the clustering adjustment argument \code{cadjust}
+#'   may make a difference if the number of clusters is not large.
 #' @details There are 3 independent parts to the inference, all performed using
 #'   maximum likelihood estimation.
 #'     \enumerate{
@@ -140,7 +144,7 @@
 #' plot(cfit)
 #' plot(cfit, which = "gp")
 #' @export
-flite <- function(data, u, cluster, k = 1, npy, ...) {
+flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...) {
   #
   # 1. Check and manipulate data and cluster
   #
