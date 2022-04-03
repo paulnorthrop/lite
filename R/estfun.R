@@ -15,7 +15,6 @@ estfun.default <- function(x, loglik_fn, ...) {
 
 #' @export
 estfun.Bernoulli <- function(x, ...) {
-  print("my Bernoulli code")
   U <- x$data / x$mle - (1 - x$data) / (1 - x$mle)
   dim(U)<- c(length(U), 1)
   colnames(U) <- names(coef(x))
@@ -26,7 +25,6 @@ estfun.Bernoulli <- function(x, ...) {
 
 #' @export
 estfun.GP <- function(x, eps = 1e-5, m = 3, ...) {
-  print("my GP code")
   if (eps <= 0) {
     stop("'eps' must be positive")
   }
