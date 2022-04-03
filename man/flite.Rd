@@ -37,9 +37,10 @@ See \strong{Details} for information about choosing \code{u}.}
 
 \item{k, inc_cens}{Arguments passed to \code{\link[exdex]{kgaps}}.
 \code{k} sets the value of the run parameter \eqn{K} in the \eqn{K}-gaps
-model for the extremal index. \code{inc_cens} determines whether
-contributions from right-censored inter-exceedance times are used.
-See \strong{Details} for information about choosing \code{k}.}
+model for the extremal index.
+\code{inc_cens} determines whether contributions from right-censored
+inter-exceedance times are used. See \strong{Details} for information
+about choosing \code{k}.}
 
 \item{npy}{A numeric scalar.  The (mean) number of observations per year.
 Setting this appropriately is important, but this value is not used

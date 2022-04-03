@@ -32,9 +32,10 @@
 #'   corresponding component of \code{data}.
 #' @param k,inc_cens Arguments passed to \code{\link[exdex]{kgaps}}.
 #'   \code{k} sets the value of the run parameter \eqn{K} in the \eqn{K}-gaps
-#'   model for the extremal index. \code{inc_cens} determines whether
-#'   contributions from right-censored inter-exceedance times are used.
-#'   See \strong{Details} for information about choosing \code{k}.
+#'   model for the extremal index.
+#'   \code{inc_cens} determines whether contributions from right-censored
+#'   inter-exceedance times are used. See \strong{Details} for information
+#'   about choosing \code{k}.
 #' @param npy A numeric scalar.  The (mean) number of observations per year.
 #'   Setting this appropriately is important, but this value is not used
 #'   inside \code{flite()}.  It is used later when making inferences about
@@ -150,6 +151,14 @@
 #' plot(cfit, which = "gp")
 #' @export
 flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...) {
+  # Check that the threshold does not lie above all the data
+  if (u >= max(data, na.rm = TRUE)) {
+    stop("'u' must be less than 'max(data, na.rm = TRUE)'")
+  }
+  # Check that the threshold does not lie below all the data
+  if (u < min(data, na.rm = TRUE)) {
+    stop("'u' must be greater than 'min(data, na.rm = TRUE)'")
+  }
   # If npy is not supplied then store NA
   if (missing(npy)) {
     npy <- NA
@@ -206,10 +215,6 @@ flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...) {
   # 4. Make inferences about the extremal index theta using the K-gaps model
   #    via the exdex::kgaps()
   #
-  # Check k
-#  if (!is.wholenumber(k) || k < 0 || length(k) != 1) {
-#    stop("k must be a positive integer")
-#  }
   # exdex::kgaps() accept the original data matrix and omit missings itself
   theta_fit <- exdex::kgaps(data = data, u = u, k = 1, inc_cens = TRUE)
   loglik_theta <- function(tval) {
