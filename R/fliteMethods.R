@@ -15,7 +15,7 @@ coef.flite <- function(object, ...) {
   if (!inherits(object, "flite")) {
     stop("use only with \"flite\" objects")
   }
-  bfit <- attr(object, "bernoulli")
+  bfit <- attr(object, "Bernoulli")
   gfit <- attr(object, "gp")
   kfit <- attr(object, "kgaps")
   cf <- c(attr(bfit, "MLE"), attr(gfit, "MLE"), kfit$theta)
@@ -46,7 +46,7 @@ vcov.flite <- function(object, adjust = TRUE, ...) {
   if (!inherits(object, "flite")) {
     stop("use only with \"flite\" objects")
   }
-  bfit <- attr(object, "bernoulli")
+  bfit <- attr(object, "Bernoulli")
   gfit <- attr(object, "gp")
   kfit <- attr(object, "kgaps")
   vc <- matrix(0, 4, 4)
@@ -72,7 +72,6 @@ vcov.flite <- function(object, adjust = TRUE, ...) {
 #'
 #' @param object An object inheriting from class \code{"flite"}, a result of a
 #'   call to \code{\link{flite}}.
-#' @param model One of \code{c("gp", "kgaps", "bernoulli")}.
 #' @param ... Additional optional arguments. At present no optional
 #'   arguments are used.
 #' @return A numeric vector of length 3 with names
@@ -83,7 +82,7 @@ nobs.flite <- function(object,  ...) {
   if (!inherits(object, "flite")) {
     stop("use only with \"flite\" objects")
   }
-  bnobs <- attr(attr(object, "bernoulli"), "nobs")
+  bnobs <- attr(attr(object, "Bernoulli"), "nobs")
   gnobs <- attr(attr(object, "gp"), "nobs")
   knobs <-  attr(object, "kgaps")$ss$n_kgaps
   n <- c(bnobs, gnobs, knobs)
@@ -244,7 +243,7 @@ plot.flite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
   }
   # Bernoulli (p[u])
   if ("pu" %in% which) {
-    ci <- chandwich::conf_intervals(attr(x, "bernoulli"), type = adj_type)
+    ci <- chandwich::conf_intervals(attr(x, "Bernoulli"), type = adj_type)
     bplot <- function(obj, ..., xlab = expression(p[u]),
                       ylab = "log-likelihood") {
       plot(obj, ..., xlab = xlab, ylab = ylab)

@@ -59,9 +59,9 @@ An object of class \code{"flite", "lite", "chandwich"}.
         the description of the argument \code{adj_type} in
         \code{\link{plot.flite}}.}
     }
- The object also has the attributes \code{"bernoulli"}, \code{"gp"},
+ The object also has the attributes \code{"Bernoulli"}, \code{"gp"},
  \code{"kgaps"}, which provide the fitted model objects returned from
- \code{\link[chandwich]{adjust_loglik}} (for \code{"bernoulli"} and
+ \code{\link[chandwich]{adjust_loglik}} (for \code{"Bernoulli"} and
  \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"kgaps"}).
 }
 \description{

@@ -86,7 +86,7 @@ check_logLik_flite <- function(object, ...) {
   if (!inherits(object, "flite")) {
     stop("use only with \"flite\" objects")
   }
-  bfit <- attr(object, "bernoulli")
+  bfit <- attr(object, "Bernoulli")
   gfit <- attr(object, "gp")
   kfit <- attr(object, "kgaps")
   bloglik <- attr(bfit, "max_loglik")

@@ -24,13 +24,13 @@
 #'
 #' \code{nobs, coef, vcov} and \code{logLik} methods are provided.
 #' @return
-#' \code{fitBernoulli} returns an object of class \code{"bernoulli"}, a list
+#' \code{fitBernoulli} returns an object of class \code{"Bernoulli"}, a list
 #' with components: \code{maxLogLik}, \code{mle}, \code{nobs}, \code{vcov},
 #' \code{data}, \code{obs_data}, where \code{data} are the input data and
 #' \code{obs_data} are the input data after any missing values have been
 #' removed, using \code{\link[stats:na.fail]{na.omit}}.
 #'
-#' \code{logLikVector.bernoulli} returns an object of class
+#' \code{logLikVector.Bernoulli} returns an object of class
 #' \code{"logLikVector"}, a vector length \code{length(data)} containing the
 #' likelihood contributions from the individual observations in \code{data}.
 #' @seealso \code{\link[stats]{Binomial}}.  The Bernoulli distribution is the

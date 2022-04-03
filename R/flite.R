@@ -89,9 +89,9 @@
 #'         the description of the argument \code{adj_type} in
 #'         \code{\link{plot.flite}}.}
 #'     }
-#'  The object also has the attributes \code{"bernoulli"}, \code{"gp"},
+#'  The object also has the attributes \code{"Bernoulli"}, \code{"gp"},
 #'  \code{"kgaps"}, which provide the fitted model objects returned from
-#'  \code{\link[chandwich]{adjust_loglik}} (for \code{"bernoulli"} and
+#'  \code{\link[chandwich]{adjust_loglik}} (for \code{"Bernoulli"} and
 #'  \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"kgaps"}).
 #' @references Chandler, R. E. and Bate, S. (2007). Inference for clustered
 #'   data using the independence loglikelihood. \emph{Biometrika},
@@ -216,7 +216,7 @@ flite <- function(data, u, cluster, k = 1, npy, ...) {
     return(val)
   }
   class(bernoulli_gp_theta_loglik) <- c("flite", "lite", "chandwich")
-  attr(bernoulli_gp_theta_loglik, "bernoulli") <- aloglik_bernoulli
+  attr(bernoulli_gp_theta_loglik, "Bernoulli") <- aloglik_bernoulli
   attr(bernoulli_gp_theta_loglik, "gp") <- aloglik_gp
   attr(bernoulli_gp_theta_loglik, "kgaps") <- theta_fit
   attr(bernoulli_gp_theta_loglik, "call") <- match.call(expand.dots = TRUE)
