@@ -125,8 +125,7 @@ coef.Bernoulli <- function(object, ...) {
 #' @export
 vcov.Bernoulli <- function(object, ...) {
   vc <- object$vcov
-  par_names <- "prob"
-  dimnames(vc) <- list(par_names, par_names)
+  dimnames(vc) <- list("prob", "prob")
   return(vc)
 }
 
