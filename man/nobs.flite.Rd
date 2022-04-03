@@ -12,8 +12,6 @@ call to \code{\link{flite}}.}
 
 \item{...}{Additional optional arguments. At present no optional
 arguments are used.}
-
-\item{model}{One of \code{c("gp", "kgaps", "bernoulli")}.}
 }
 \value{
 A numeric vector of length 3 with names
