@@ -1,15 +1,47 @@
+#' Methods for objects of class \code{"flite"}
+#'
+#' Methods for obects of class \code{"flite"} returned from
+#' \code{\link{flite}}.
+#' @param ... For \code{print.summary.flite}: additional arguments passed to
+#'   \code{\link{print.default}}.
+#' @return
+#'   \code{coef.flite}: a numeric vector of length 4 with names
+#'     \code{c("p[u]", "sigma[u]", "xi", "theta")}.
+#'
+#'   \code{vcov.flite}: a 4 by 4 numeric matrix with row and column names
+#'     \code{c("p[u]", "sigma[u]", "xi", "theta")}.
+#'
+#'   \code{nobs.flite}: a numeric vector of length 3 with names
+#'     \code{c("p[u]", "gp", "theta")}.
+#'
+#'   \code{logLik.flite}: an object of class \code{"logLik"}: a numeric scalar
+#'     with value equal to the maximised log-likelihood.  This is the sum of
+#'     contributions from three fitted models, from a Bernoulli model for
+#'     occurrences of threshold exceedances, a generalised Pareto model for
+#'     threshold excesses and a \eqn{K}-gaps model for the extremal index.
+#'     The returned object also has attributes \code{nobs}, the numbers of
+#'     observations used in each of these model fits, and \code{"df"}, which is
+#'     equal to the number of total number of parameters estimated (4).
+#'
+#'   \code{summary.flite}: an object containing the original function call and
+#'     a matrix of estimates and estimated standard errors with row names
+#'     \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The object is printed by
+#'     \code{\link{print.summary.flite}}.
+#'
+#'   \code{print.summary.flite}: prints the numeric matrix returned from
+#'     \code{\link{summary.flite}}.
+#' @name fliteMethods
+NULL
+## NULL
+
+
 # ================================ coef.flite =============================== #
 
 #' Extract model coefficients method for objects of class \code{"flite"}
 #'
-#' \code{coef} method for class \code{"flite"}.
-#'
 #' @param object An object inheriting from class \code{"flite"}, a result of a
 #'   call to \code{\link{flite}}.
-#' @param ... Additional optional arguments. At present no optional
-#'   arguments are used.
-#' @return A numeric vector of length 4 with names
-#'   \code{c("p[u]", "sigma[u]", "xi", "theta")}.
+#' @rdname fliteMethods
 #' @export
 coef.flite <- function(object, ...) {
   if (!inherits(object, "flite")) {
@@ -28,8 +60,6 @@ coef.flite <- function(object, ...) {
 #' Calculate the variance-covariance matrix for an object of class
 #' \code{"flite"}
 #'
-#' \code{vcov} method for class \code{"flite"}.
-#'
 #' @param object An object inheriting from class \code{"flite"}, a result of a
 #'   call to \code{\link{flite}}.
 #' @param adjust A logical scalar.  If \code{adjust = TRUE} then the elements
@@ -37,10 +67,7 @@ coef.flite <- function(object, ...) {
 #'   \eqn{(p_u, \sigma_u, \xi)} are estimated using a sandwich estimator.
 #'   See \code{\link{flite}}.  Otherwise, this matrix is the inverse of the
 #'   observed information matrix.
-#' @param ... Additional optional arguments. At present no optional
-#'   arguments are used.
-#' @return A 4 by 4 numeric matrix with row and column names
-#'   \code{c("p[u]", "sigma[u]", "xi", "theta")}.
+#' @rdname fliteMethods
 #' @export
 vcov.flite <- function(object, adjust = TRUE, ...) {
   if (!inherits(object, "flite")) {
@@ -68,15 +95,9 @@ vcov.flite <- function(object, adjust = TRUE, ...) {
 
 #' Extract the number of observations from a fit for class \code{"flite"}
 #'
-#' \code{nobs} method for class \code{"flite"}.
-#'
 #' @param object An object inheriting from class \code{"flite"}, a result of a
 #'   call to \code{\link{flite}}.
-#' @param ... Additional optional arguments. At present no optional
-#'   arguments are used.
-#' @return A numeric vector of length 3 with names
-#'   \code{c("p[u]", "gp", "theta")}.
-#'
+#' @rdname fliteMethods
 #' @export
 nobs.flite <- function(object,  ...) {
   if (!inherits(object, "flite")) {
@@ -94,20 +115,9 @@ nobs.flite <- function(object,  ...) {
 
 #' Extract log-likelihood for objects of class \code{"flite"}
 #'
-#' \code{logLik} method for class \code{"flite"}.
-#'
 #' @param object An object of class \code{"flite"}, a result of a call to
 #'   \code{\link{flite}}.
-#' @param ... Additional optional arguments. At present no optional
-#'   arguments are used.
-#' @return An object of class \code{"logLik"}: a numeric scalar with
-#' value equal to the maximised log-likelihood.  This is the sum of
-#' contributions from three fitted models, from a Bernoulli model for
-#' occurrences of threshold exceedances, a generalised Pareto model for
-#' threshold excesses and a \eqn{K}-gaps model for the extremal index.
-#' The returned object also has attributes \code{nobs}, the numbers of
-#' observations used in each of these model fits, and \code{"df"}, which is
-#' equal to the number of total number of parameters estimated (4).
+#' @rdname fliteMethods
 #' @export
 logLik.flite <- function(object, ...) {
   if (!inherits(object, "flite")) {
@@ -125,8 +135,6 @@ logLik.flite <- function(object, ...) {
 
 #' Summarising times series extreme fits
 #'
-#' \code{summary} method for class \code{"flite"}
-#'
 #' @param object An object inheriting from class \code{"flite"}, a result of a
 #'   call to \code{\link{flite}}.
 #' @param adjust A logical scalar.  If \code{adjust = TRUE} then the
@@ -135,14 +143,7 @@ logLik.flite <- function(object, ...) {
 #'   Otherwise, the inverse of the observed information matrix is used.
 #' @param digits An integer. Passed to \code{\link[base:Round]{signif}} to
 #'   round the values in the summary.
-#' @param ... Additional optional arguments. At present no optional
-#'   arguments are used.
-#' @return An object containing the original function call and a matrix of
-#'   estimates and estimated standard errors with row names
-#'   \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The object is printed by
-#'   \code{\link{print.summary.flite}}.
-#' @section Examples:
-#' See the examples in \code{\link{flite}}.
+#' @rdname fliteMethods
 #' @export
 summary.flite <- function(object, adjust = TRUE,
                          digits = max(3, getOption("digits") - 3L), ...) {
@@ -162,14 +163,9 @@ summary.flite <- function(object, adjust = TRUE,
 
 #' Print method for objects of class \code{"summary.flite"}
 #'
-#' \code{print} method for an object \code{x} of class \code{"summary.flite"}.
-#'
 #' @param x An object of class "summary.flite", a result of a call to
 #'   \code{\link{summary.flite}}.
-#' @param ... Additional arguments passed on to \code{\link{print.default}}.
-#' @return Prints the numeric matrix returned from \code{\link{summary.flite}}.
-#' @section Examples:
-#' See the examples in \code{\link{flite}}.
+#' @rdname fliteMethods
 #' @export
 print.summary.flite <- function(x, ...) {
   if (!inherits(x, "summary.flite")) {
@@ -181,12 +177,11 @@ print.summary.flite <- function(x, ...) {
   invisible(x)
 }
 
-
 # ================================= plot.flite =============================== #
 
 #' Plot method for objects of class \code{"flite"}
 #'
-#' \code{print} method for an object \code{x} of class \code{"flite"}.
+#' \code{plot} method for an object \code{x} of class \code{"flite"}.
 #'
 #' @param x An object of class "flite", a result of a call to
 #'   \code{\link{flite}}.
@@ -223,8 +218,6 @@ print.summary.flite <- function(x, ...) {
 #'         with a horizontal line indicating a 95\% confidence interval for
 #'         \eqn{\theta}.}
 #'     }
-#' @section Examples:
-#' See the examples in \code{\link{flite}}.
 #' @export
 plot.flite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
                       adj_type = c("vertical", "none", "cholesky", "spectral"),
