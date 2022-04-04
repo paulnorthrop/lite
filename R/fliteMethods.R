@@ -3,7 +3,7 @@
 #' Methods for obects of class \code{"flite"} returned from
 #' \code{\link{flite}}.
 #' @param ... For \code{plot.flite}: arguments passed to
-#'   \code{\link[stats]{plot}}, such as graphical parameters.
+#'   \code{\link[graphics:plot.default]{plot}}, such as graphical parameters.
 #'
 #'   For \code{print.summary.flite}: additional arguments passed to
 #'   \code{\link{print.default}}.

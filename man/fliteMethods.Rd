@@ -52,7 +52,7 @@ where \eqn{x_{(n)}}{x_(n)} is the largest excesses of the threshold \eqn{u},
 is preserved.}
 
 \item{...}{For \code{plot.flite}: arguments passed to
-  \code{\link[stats]{plot}}, such as graphical parameters.
+  \code{\link[graphics:plot.default]{plot}}, such as graphical parameters.
 
   For \code{print.summary.flite}: additional arguments passed to
   \code{\link{print.default}}.}
