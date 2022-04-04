@@ -8,7 +8,7 @@ returnLevel(
   x,
   m = 100,
   level = 0.95,
-  npy,
+  ny,
   prof = TRUE,
   inc = NULL,
   type = c("vertical", "cholesky", "spectral", "none")
@@ -23,7 +23,7 @@ returnLevel(
 \item{level}{A numeric scalar in (0, 1).  The confidence level required for
 confidence interval for the \code{m}-year return level.}
 
-\item{npy}{A numeric scalar.  The (mean) number of observations per year.
+\item{ny}{A numeric scalar.  The (mean) number of observations per year.
 \strong{Setting this appropriately is important}. See \strong{Details}.}
 
 \item{prof}{A logical scalar.  Should we calculate intervals based on
@@ -67,15 +67,15 @@ estimate, and (b) profile likelihood-based intervals based on an (adjusted)
 log-likelihood.
 }
 \details{
-\code{npy} provides information about the (intended) frequency of
+\code{ny} provides information about the (intended) frequency of
   sampling in time, that is, the number of observations that would be
   observed in a year if there are no missing values.  If the number of
-  observations may vary between years then \code{npy} should be set equal to
+  observations may vary between years then \code{ny} should be set equal to
   the mean number of observations per year.
 
-  \strong{Supplying \code{npy}.}
-  The value of \code{npy} may have been set in the call to
-  \code{\link{flite}}.  If \code{npy} is supplied by the user in the call to
+  \strong{Supplying \code{ny}.}
+  The value of \code{ny} may have been set in the call to
+  \code{\link{flite}}.  If \code{ny} is supplied by the user in the call to
   \code{returnLevel} then this will be used in preference to the value
   stored in the fitted model object.  If these two values differ then no
   warning will be given.
@@ -103,9 +103,9 @@ cdata <- exdex::cheeseboro
 # flite() sets cluster automatically to correspond to column (year)
 cfit <- flite(cdata, u = 45, k = 3)
 
-# These data are hourly for one month (January) year so npy = 31 * 24
+# These data are hourly for one month (January) year so ny = 31 * 24
 # Large inc set here for speed, sacrificing accuracy
-rl <- returnLevel(cfit, inc = 2.5, npy = 31 * 24)
+rl <- returnLevel(cfit, inc = 2.5, ny = 31 * 24)
 summary(rl)
 rl
 plot(rl)

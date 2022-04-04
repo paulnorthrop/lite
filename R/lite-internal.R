@@ -98,17 +98,17 @@ check_logLik_flite <- function(object, ...) {
 
 #' @keywords internal
 #' @rdname lite-internal
-return_level_bingp <- function(x, m, level, npy, prof, inc, type, npy_given) {
-  # Extract the threshold and npy from the original fitted model object
+return_level_bingp <- function(x, m, level, ny, prof, inc, type, ny_given) {
+  # Extract the threshold and ny from the original fitted model object
   u <- attr(x, "inputs")$u
-  if (!npy_given) {
-    npy <- attr(x, "inputs")$npy
+  if (!ny_given) {
+    ny <- attr(x, "inputs")$ny
   }
-  if (is.na(npy)) {
-    stop("'npy' has not been supplied")
+  if (is.na(ny)) {
+    stop("'ny' has not been supplied")
   }
   # MLE and symmetric conf% CI for the return level
-  rl_sym <- bingp_rl_CI(x, m, level, npy, type, u)
+  rl_sym <- bingp_rl_CI(x, m, level, ny, type, u)
   # Extract SE
   rl_se <- rl_sym["se"]
   # Remove SE
@@ -116,7 +116,7 @@ return_level_bingp <- function(x, m, level, npy, prof, inc, type, npy_given) {
   if (!prof) {
     return(list(rl_sym = rl_sym, rl_prof = NULL, rl_se = rl_se))
   }
-  temp <- bingp_rl_prof(x, m, level, npy, inc, type, rl_sym, u)
+  temp <- bingp_rl_prof(x, m, level, ny, inc, type, rl_sym, u)
   return(list(rl_sym = rl_sym, rl_prof = temp$rl_prof, rl_se = rl_se,
               max_loglik = logLik(x), crit = temp$crit,
               for_plot = temp$for_plot))
@@ -124,7 +124,7 @@ return_level_bingp <- function(x, m, level, npy, prof, inc, type, npy_given) {
 
 #' @keywords internal
 #' @rdname lite-internal
-bingp_rl_CI <- function (x, m, level, npy, type, u) {
+bingp_rl_CI <- function (x, m, level, ny, type, u) {
   # Extract the MLEs
   mles <- coef(x)
   pu <- mles["p[u]"]
@@ -136,22 +136,22 @@ bingp_rl_CI <- function (x, m, level, npy, type, u) {
   # adjust = TRUE otherwise
   adjust <- ifelse(type == "none", FALSE, TRUE)
   mat <- vcov(x, adjust = adjust)
-  # pmnpy is approximately equal to 1 / (m * npy * theta)
+  # pmny is approximately equal to 1 / (m * ny * theta)
   con <- 1 - 1 / m
-  nt <- npy * theta
-  pmnpy <- 1 - con ^ (1 / nt)
-  p <- pmnpy / pu
+  nt <- ny * theta
+  pmny <- 1 - con ^ (1 / nt)
+  p <- pmny / pu
   rp <- 1 / p
   rl_mle <- revdbayes::qgp(p, loc = u, scale = sigmau, shape = xi,
                            lower.tail = FALSE)
   delta <- matrix(0, 4, 1)
-  delta[1, ] <- sigmau * pu ^ (xi - 1) / pmnpy ^ xi
+  delta[1, ] <- sigmau * pu ^ (xi - 1) / pmny ^ xi
   delta[2, ] <- revdbayes::qgp(p, loc = 0, scale = 1, shape = xi,
                                lower.tail = FALSE)
   delta[3, ] <- sigmau * box_cox_deriv(rp, lambda = xi)
   # Add information about theta
   delta[4, ] <- -sigmau * rp ^ (xi - 1) * pu * con ^ (1 / nt) * log(con) /
-    (npy * theta ^ 2 * pmnpy ^ 2)
+    (ny * theta ^ 2 * pmny ^ 2)
   rl_var <- t(delta) %*% mat %*% delta
   rl_se <- sqrt(rl_var)
   z_val <- stats::qnorm(1 - (1 - level) / 2)
@@ -163,7 +163,7 @@ bingp_rl_CI <- function (x, m, level, npy, type, u) {
 
 #' @keywords internal
 #' @rdname lite-internal
-bingp_rl_prof <- function(x, m, level, npy, inc, type, rl_sym, u) {
+bingp_rl_prof <- function(x, m, level, ny, inc, type, rl_sym, u) {
   if (is.null(inc)) {
     inc <- (rl_sym["upper"] - rl_sym["lower"]) / 100
   }
@@ -179,8 +179,8 @@ bingp_rl_prof <- function(x, m, level, npy, inc, type, rl_sym, u) {
     if (a[1] <= 0 || a[1] >= 1 || a[3] <= 0 || a[3] > 1) {
       return(10 ^ 10)
     }
-    pmnpy <- 1 - (1 - 1 / m) ^ (1 / (npy * a[3]))
-    p <- pmnpy / a[1]
+    pmny <- 1 - (1 - 1 / m) ^ (1 / (ny * a[3]))
+    p <- pmny / a[1]
     sigmau <- (xp - u) / revdbayes::qgp(p, loc = 0, scale = 1, shape = a[2],
                                         lower.tail = FALSE)
     # Check that sigmau is positive

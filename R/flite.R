@@ -36,13 +36,13 @@
 #'   \code{inc_cens} determines whether contributions from right-censored
 #'   inter-exceedance times are used. See \strong{Details} for information
 #'   about choosing \code{k}.
-#' @param npy A numeric scalar.  The (mean) number of observations per year.
+#' @param ny A numeric scalar.  The (mean) number of observations per year.
 #'   Setting this appropriately is important when making inferences about
-#'   return levels, using \code{\link{returnLevel}}, but \code{npy} is not
-#'   used by \code{flite} so it need not be supplied now.  If \code{npy} is
+#'   return levels, using \code{\link{returnLevel}}, but \code{ny} is not
+#'   used by \code{flite} so it need not be supplied now.  If \code{ny} is
 #'   supplied to \code{flite} then it is stored for use by
-#'   \code{\link{returnLevel}}.  Alternatively, \code{npy} can be supplied in
-#'   a later call to \code{\link{returnLevel}}.  If \code{npy} is supplied to
+#'   \code{\link{returnLevel}}.  Alternatively, \code{ny} can be supplied in
+#'   a later call to \code{\link{returnLevel}}.  If \code{ny} is supplied to
 #'   both \code{flite} and \code{\link{returnLevel}} then the value supplied to
 #'   \code{\link{returnLevel}} will take precedence.
 #' @param ... Further arguments to be passed to the function
@@ -58,21 +58,21 @@
 #'         the marginal distribution of threshold excesses.}
 #'       \item{The \eqn{K}-gaps model for the extremal index \eqn{\theta}.}
 #'     }
-#'   For parts 1 and 2 the general approach developed by Fawcett and
-#'   Walshaw (2012) is taken, where inferences based on a mis-specified
-#'   independence log-likelihood are adjusted to account for clustering in the
-#'   data. Here, we follow Chandler and Bate (2007) to estimate adjusted
-#'   log-likelihood functions for \eqn{p_u} and for
-#'   (\eqn{\sigma_u}, \eqn{\xi}), with the argument \code{cluster}
-#'   defining the clusters. This aspect of the calculations is performed using
-#'   the \code{\link[chandwich]{adjust_loglik}} in the
-#'   \code{\link[chandwich]{chandwich}} package (Northrop and Chandler, 2021).
-#'   The GP distribution initial fit of the GP distribution to threshold
+#'   The general approach follows Fawcett and Walshaw (2012).
+#'
+#'   For parts 1 and 2, inferences based on a mis-specified independence
+#'   log-likelihood are adjusted to account for clustering in the data. Here,
+#'   we follow Chandler and Bate (2007) to estimate adjusted log-likelihood
+#'   functions for \eqn{p_u} and for (\eqn{\sigma_u}, \eqn{\xi}), with the
+#'   argument \code{cluster} defining the clusters. This aspect of the
+#'   calculations is performed using the \code{\link[chandwich]{adjust_loglik}}
+#'   in the \code{\link[chandwich]{chandwich}} package (Northrop and Chandler,
+#'   2021). The GP distribution initial fit of the GP distribution to threshold
 #'   excesses is performed using the \code{\link[revdbayes]{grimshaw_gp_mle}}
 #'   function in the \code{\link[revdbayes]{revdbayes}} package
 #'   (Northrop, 2020).
 #'
-#'   In part 3 the methodology described in Suveges and Davison (2010) is
+#'   In part 3, the methodology described in Suveges and Davison (2010) is
 #'   implemented using the \code{\link[exdex]{exdex}} package
 #'   (Northrop and Christodoulides, 2022).
 #'
@@ -108,7 +108,7 @@
 #'  \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"kgaps"}).
 #'
 #'  The named input arguments are returned in a list as the attribute
-#'  \code{inputs}.  If \code{npy} was not supplied then its value is \code{NA}.
+#'  \code{inputs}.  If \code{ny} was not supplied then its value is \code{NA}.
 #' @references Chandler, R. E. and Bate, S. (2007). Inference for clustered.
 #'   data using the independence loglikelihood. \emph{Biometrika},
 #'   \strong{94}(1), 167-183. \doi{10.1093/biomet/asm015}
@@ -156,7 +156,7 @@
 #' plot(cfit)
 #' plot(cfit, which = "gp")
 #' @export
-flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...) {
+flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, ny, ...) {
   # Check that the threshold does not lie above all the data
   if (u >= max(data, na.rm = TRUE)) {
     stop("'u' must be less than 'max(data, na.rm = TRUE)'")
@@ -165,9 +165,9 @@ flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...) {
   if (u < min(data, na.rm = TRUE)) {
     stop("'u' must be greater than 'min(data, na.rm = TRUE)'")
   }
-  # If npy is not supplied then store NA
-  if (missing(npy)) {
-    npy <- NA
+  # If ny is not supplied then store NA
+  if (missing(ny)) {
+    ny <- NA
   }
   #
   # 1. Check and manipulate data and cluster
@@ -247,7 +247,7 @@ flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...) {
   attr(bernoulli_gp_theta_loglik, "kgaps") <- theta_fit
   attr(bernoulli_gp_theta_loglik, "call") <- match.call(expand.dots = TRUE)
   inputs <- list(data = data, u = u, cluster = cluster, k = k,
-                 inc_cens = inc_cens, npy = npy)
+                 inc_cens = inc_cens, ny = ny)
   attr(bernoulli_gp_theta_loglik, "inputs") <- inputs
   return(bernoulli_gp_theta_loglik)
 }

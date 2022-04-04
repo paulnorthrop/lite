@@ -4,7 +4,7 @@
 \alias{flite}
 \title{Frequentist threshold-based inference for time series extremes}
 \usage{
-flite(data, u, cluster, k = 1, inc_cens = TRUE, npy, ...)
+flite(data, u, cluster, k = 1, inc_cens = TRUE, ny, ...)
 }
 \arguments{
 \item{data}{A numeric vector or numeric matrix of raw data.  If \code{data}
@@ -42,13 +42,13 @@ model for the extremal index.
 inter-exceedance times are used. See \strong{Details} for information
 about choosing \code{k}.}
 
-\item{npy}{A numeric scalar.  The (mean) number of observations per year.
+\item{ny}{A numeric scalar.  The (mean) number of observations per year.
 Setting this appropriately is important when making inferences about
-return levels, using \code{\link{returnLevel}}, but \code{npy} is not
-used by \code{flite} so it need not be supplied now.  If \code{npy} is
+return levels, using \code{\link{returnLevel}}, but \code{ny} is not
+used by \code{flite} so it need not be supplied now.  If \code{ny} is
 supplied to \code{flite} then it is stored for use by
-\code{\link{returnLevel}}.  Alternatively, \code{npy} can be supplied in
-a later call to \code{\link{returnLevel}}.  If \code{npy} is supplied to
+\code{\link{returnLevel}}.  Alternatively, \code{ny} can be supplied in
+a later call to \code{\link{returnLevel}}.  If \code{ny} is supplied to
 both \code{flite} and \code{\link{returnLevel}} then the value supplied to
 \code{\link{returnLevel}} will take precedence.}
 
@@ -79,7 +79,7 @@ An object of class \code{"flite", "lite", "chandwich"}.
  \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"kgaps"}).
 
  The named input arguments are returned in a list as the attribute
- \code{inputs}.  If \code{npy} was not supplied then its value is \code{NA}.
+ \code{inputs}.  If \code{ny} was not supplied then its value is \code{NA}.
 }
 \description{
 Performs threshold-based frequentist inference for 3 aspects of stationary
@@ -97,21 +97,21 @@ There are 3 independent parts to the inference, all performed using
         the marginal distribution of threshold excesses.}
       \item{The \eqn{K}-gaps model for the extremal index \eqn{\theta}.}
     }
-  For parts 1 and 2 the general approach developed by Fawcett and
-  Walshaw (2012) is taken, where inferences based on a mis-specified
-  independence log-likelihood are adjusted to account for clustering in the
-  data. Here, we follow Chandler and Bate (2007) to estimate adjusted
-  log-likelihood functions for \eqn{p_u} and for
-  (\eqn{\sigma_u}, \eqn{\xi}), with the argument \code{cluster}
-  defining the clusters. This aspect of the calculations is performed using
-  the \code{\link[chandwich]{adjust_loglik}} in the
-  \code{\link[chandwich]{chandwich}} package (Northrop and Chandler, 2021).
-  The GP distribution initial fit of the GP distribution to threshold
+  The general approach follows Fawcett and Walshaw (2012).
+
+  For parts 1 and 2, inferences based on a mis-specified independence
+  log-likelihood are adjusted to account for clustering in the data. Here,
+  we follow Chandler and Bate (2007) to estimate adjusted log-likelihood
+  functions for \eqn{p_u} and for (\eqn{\sigma_u}, \eqn{\xi}), with the
+  argument \code{cluster} defining the clusters. This aspect of the
+  calculations is performed using the \code{\link[chandwich]{adjust_loglik}}
+  in the \code{\link[chandwich]{chandwich}} package (Northrop and Chandler,
+  2021). The GP distribution initial fit of the GP distribution to threshold
   excesses is performed using the \code{\link[revdbayes]{grimshaw_gp_mle}}
   function in the \code{\link[revdbayes]{revdbayes}} package
   (Northrop, 2020).
 
-  In part 3 the methodology described in Suveges and Davison (2010) is
+  In part 3, the methodology described in Suveges and Davison (2010) is
   implemented using the \code{\link[exdex]{exdex}} package
   (Northrop and Christodoulides, 2022).
 

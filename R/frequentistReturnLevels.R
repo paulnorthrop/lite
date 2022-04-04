@@ -13,7 +13,7 @@
 #' @param m A numeric scalar.  The return period, in years.
 #' @param level A numeric scalar in (0, 1).  The confidence level required for
 #'   confidence interval for the \code{m}-year return level.
-#' @param npy A numeric scalar.  The (mean) number of observations per year.
+#' @param ny A numeric scalar.  The (mean) number of observations per year.
 #'   \strong{Setting this appropriately is important}. See \strong{Details}.
 #' @param prof A logical scalar.  Should we calculate intervals based on
 #'   profile log-likelihood?
@@ -27,15 +27,15 @@
 #'   adjustment made to the independence log-likelihood function in creating
 #'   an adjusted log-likelihood function.  See \strong{Details} and
 #'   \strong{Value} in \code{\link[chandwich]{adjust_loglik}}.
-#' @details \code{npy} provides information about the (intended) frequency of
+#' @details \code{ny} provides information about the (intended) frequency of
 #'   sampling in time, that is, the number of observations that would be
 #'   observed in a year if there are no missing values.  If the number of
-#'   observations may vary between years then \code{npy} should be set equal to
+#'   observations may vary between years then \code{ny} should be set equal to
 #'   the mean number of observations per year.
 #'
-#'   \strong{Supplying \code{npy}.}
-#'   The value of \code{npy} may have been set in the call to
-#'   \code{\link{flite}}.  If \code{npy} is supplied by the user in the call to
+#'   \strong{Supplying \code{ny}.}
+#'   The value of \code{ny} may have been set in the call to
+#'   \code{\link{flite}}.  If \code{ny} is supplied by the user in the call to
 #'   \code{returnLevel} then this will be used in preference to the value
 #'   stored in the fitted model object.  If these two values differ then no
 #'   warning will be given.
@@ -81,16 +81,16 @@
 #' # flite() sets cluster automatically to correspond to column (year)
 #' cfit <- flite(cdata, u = 45, k = 3)
 #'
-#' # These data are hourly for one month (January) year so npy = 31 * 24
+#' # These data are hourly for one month (January) year so ny = 31 * 24
 #' # Large inc set here for speed, sacrificing accuracy
-#' rl <- returnLevel(cfit, inc = 2.5, npy = 31 * 24)
+#' rl <- returnLevel(cfit, inc = 2.5, ny = 31 * 24)
 #' summary(rl)
 #' rl
 #' plot(rl)
 #'
 #' ###
 #' @export
-returnLevel <- function(x, m = 100, level = 0.95, npy, prof = TRUE,
+returnLevel <- function(x, m = 100, level = 0.95, ny, prof = TRUE,
                          inc = NULL,
                          type = c("vertical", "cholesky", "spectral", "none")) {
   if (!inherits(x, "flite")) {
@@ -98,10 +98,10 @@ returnLevel <- function(x, m = 100, level = 0.95, npy, prof = TRUE,
   }
   Call <- match.call(expand.dots = TRUE)
   type <- match.arg(type)
-  # Check whether npy is supplied in the call to return_level
-  npy_given <- ifelse(missing(npy), FALSE, TRUE)
+  # Check whether ny is supplied in the call to return_level
+  ny_given <- ifelse(missing(ny), FALSE, TRUE)
   # Make inferences about return levels
-  temp <- return_level_bingp(x, m, level, npy, prof, inc, type, npy_given)
+  temp <- return_level_bingp(x, m, level, ny, prof, inc, type, ny_given)
   temp$m <- m
   temp$level <- level
   temp$call <- Call
