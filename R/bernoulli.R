@@ -85,9 +85,6 @@ fitBernoulli <- function(data) {
 #' @rdname Bernoulli
 #' @export
 logLikVector.Bernoulli <- function(object, pars = NULL, ...) {
-  if (!missing(...)) {
-    warning("extra arguments discarded")
-  }
   # If the parameter estimates have not been provided in pars then extract
   # them from the fitted object
   if (is.null(pars)) {

@@ -161,9 +161,6 @@ gpObsInfo <- function(pars, excesses, eps = 1e-5, m = 3) {
 #' @rdname generalisedPareto
 #' @export
 logLikVector.GP <- function(object, pars = NULL, ...) {
-  if (!missing(...)) {
-    warning("extra arguments discarded")
-  }
   # If the parameter estimates have not been provided in pars then extract
   # them from the fitted object
   if (is.null(pars)) {
