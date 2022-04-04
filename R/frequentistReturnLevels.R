@@ -53,7 +53,7 @@
 #'   estimated by interpolating linearly between the cases lying either side of
 #'   the critical value. The smaller \code{inc} the more accurate (but slower)
 #'   the calculation will be.
-#' @return A object (a list) of class \code{"retlev", "lax"} with the
+#' @return A object (a list) of class \code{"returnLevels", "lite"} with the
 #'   components
 #'   \item{rl_sym,rl_prof }{Named numeric vectors containing the respective
 #'     lower 100\code{level}\% limit, the MLE and the upper
@@ -70,8 +70,8 @@
 #' @references Coles, S. G. (2001) \emph{An Introduction to Statistical
 #'   Modeling of Extreme Values}, Springer-Verlag, London.
 #'   \doi{10.1007/978-1-4471-3675-0_3}
-#' @seealso \code{\link{plot.retlev}} for plotting the profile log-likelihood
-#'   for a return level.
+#' @seealso \code{\link{plot.returnLevel}} for plotting the profile
+#'   log-likelihood for a return level.
 #' @examples
 #' got_exdex <- requireNamespace("exdex", quietly = TRUE)
 #' if (got_exdex) {
@@ -106,17 +106,17 @@ returnLevel <- function(x, m = 100, level = 0.95, ny, prof = TRUE,
   temp$m <- m
   temp$level <- level
   temp$call <- Call
-  class(temp) <- c("retlev", "lax")
+  class(temp) <- c("returnLevel", "lite")
   return(temp)
 }
 
-# ------------------------------- plot.retlev ------------------------------- #
+# ------------------------------- plot.returnLevel ------------------------------- #
 
-#' Plot diagnostics for a retlev object
+#' Plot diagnostics for a returnLevel object
 #'
-#' \code{plot} method for an objects of class \code{c("retlev", "lax")}.
+#' \code{plot} method for an objects of class \code{c("returnLevel", "lite")}.
 #'
-#' @param x an object of class \code{c("retlev", "lax")}, a result of
+#' @param x an object of class \code{c("returnLevel", "lite")}, a result of
 #'   a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.
 #' @param y Not used.
 #' @param level A numeric scalar in (0, 1).  The confidence level required for
@@ -148,13 +148,13 @@ returnLevel <- function(x, m = 100, level = 0.95, ny, prof = TRUE,
 #' @section Examples:
 #' See \code{\link{returnLevel}}.
 #' @export
-plot.retlev <- function(x, y = NULL, level = NULL, legend = TRUE, digits = 3,
+plot.returnLevel <- function(x, y = NULL, level = NULL, legend = TRUE, digits = 3,
                         plot= TRUE, ...) {
-  if (!inherits(x, "retlev")) {
-    stop("use only with \"retlev\" objects")
+  if (!inherits(x, "returnLevel")) {
+    stop("use only with \"returnLevel\" objects")
   }
-  if (!inherits(x, "lax")) {
-    stop("use only with \"lax\" objects")
+  if (!inherits(x, "lite")) {
+    stop("use only with \"lite\" objects")
   }
   if (is.null(x$rl_prof)) {
     stop("No prof loglik info: call returnLevel() using prof = TRUE")
@@ -214,13 +214,13 @@ plot.retlev <- function(x, y = NULL, level = NULL, legend = TRUE, digits = 3,
   return(invisible(res))
 }
 
-# ------------------------------ print.retlev ------------------------------- #
+# ------------------------------ print.returnLevel ------------------------------- #
 
-#' Print method for retlev object
+#' Print method for returnLevel object
 #'
-#' \code{print} method for an objects of class \code{c("retlev", "lax")}.
+#' \code{print} method for an objects of class \code{c("returnLevel", "lite")}.
 #'
-#' @param x an object of class \code{c("retlev", "lax")}, a result of
+#' @param x an object of class \code{c("returnLevel", "lite")}, a result of
 #'   a call to \code{\link{returnLevel}}.
 #' @param digits The argument \code{digits} to \code{\link{print.default}}.
 #' @param ... Additional arguments.  None are used in this function.
@@ -233,12 +233,12 @@ plot.retlev <- function(x, y = NULL, level = NULL, legend = TRUE, digits = 3,
 #' @section Examples:
 #' See \code{\link{returnLevel}}.
 #' @export
-print.retlev <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
-  if (!inherits(x, "retlev")) {
-    stop("use only with \"retlev\" objects")
+print.returnLevel <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
+  if (!inherits(x, "returnLevel")) {
+    stop("use only with \"returnLevel\" objects")
   }
-  if (!inherits(x, "lax")) {
-    stop("use only with \"lax\" objects")
+  if (!inherits(x, "lite")) {
+    stop("use only with \"lite\" objects")
   }
   cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"),
       "\n\n", sep = "")
@@ -255,13 +255,13 @@ print.retlev <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
   return(invisible(x))
 }
 
-# ----------------------------- summary.retlev ------------------------------ #
+# ----------------------------- summary.returnLevel ------------------------------ #
 
-#' Summary method for a \code{"retlev"} object
+#' Summary method for a \code{"returnLevel"} object
 #'
-#' \code{summary} method for an objects of class \code{c("retlev", "lax")}.
+#' \code{summary} method for an objects of class \code{c("returnLevel", "lite")}.
 #'
-#' @param object an object of class \code{c("retlev", "lax")}, a result of
+#' @param object an object of class \code{c("returnLevel", "lite")}, a result of
 #'   a call to \code{\link{returnLevel}}.
 #' @param digits An integer. Used for number formatting with
 #'   \code{\link[base:Round]{signif}}.  If \code{digits} is not specified
@@ -275,12 +275,12 @@ print.retlev <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 #' @section Examples:
 #' See \code{\link{returnLevel}}.
 #' @export
-summary.retlev <- function(object, digits, ...) {
-  if (!inherits(object, "retlev")) {
-    stop("use only with \"retlev\" objects")
+summary.returnLevel <- function(object, digits, ...) {
+  if (!inherits(object, "returnLevel")) {
+    stop("use only with \"returnLevel\" objects")
   }
-  if (!inherits(object, "lax")) {
-    stop("use only with \"lax\" objects")
+  if (!inherits(object, "lite")) {
+    stop("use only with \"lite\" objects")
   }
   res <- object["call"]
   if (missing(digits)) {
@@ -292,21 +292,21 @@ summary.retlev <- function(object, digits, ...) {
                         `Std. Error` = signif(object$rl_se, digits = digits))
   }
   rownames(res$matrix) <- paste0("m = ", object$m)
-  class(res) <- "summary.retlev"
+  class(res) <- "summary.returnLevel"
   return(res)
 }
 
 # ---------------------------- print.summary.spm ---------------------------- #
 
-#' Print method for objects of class \code{"summary.retlev"}
+#' Print method for objects of class \code{"summary.returnLevel"}
 #'
-#' \code{print} method for an object \code{x} of class \code{"summary.retlev"}.
+#' \code{print} method for an object \code{x} of class \code{"summary.returnLevel"}.
 #'
-#' @param x An object of class "summary.retlev", a result of a call to
-#'   \code{\link{summary.retlev}}.
+#' @param x An object of class "summary.returnLevel", a result of a call to
+#'   \code{\link{summary.returnLevel}}.
 #' @param ... Additional arguments passed on to \code{\link{print.default}}.
 #' @details Prints the call and the numeric matrix \code{x$matrix} returned from
-#'   \code{\link{summary.retlev}}.
+#'   \code{\link{summary.returnLevel}}.
 #' @return The argument \code{x}, invisibly, as for all
 #'   \code{\link[base]{print}} methods.
 #' @seealso \code{\link{returnLevel}} to perform inferences about return
@@ -314,9 +314,9 @@ summary.retlev <- function(object, digits, ...) {
 #' @section Examples:
 #' See \code{\link{returnLevel}}.
 #' @export
-print.summary.retlev <- function(x, ...) {
-  if (!inherits(x, "summary.retlev")) {
-    stop("use only with \"summary.retlev\" objects")
+print.summary.returnLevel <- function(x, ...) {
+  if (!inherits(x, "summary.returnLevel")) {
+    stop("use only with \"summary.returnLevel\" objects")
   }
   cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"),
       "\n\n", sep = "")

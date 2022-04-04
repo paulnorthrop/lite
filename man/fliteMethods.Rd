@@ -8,6 +8,7 @@
 \alias{logLik.flite}
 \alias{summary.flite}
 \alias{print.summary.flite}
+\alias{plot.flite}
 \title{Methods for objects of class \code{"flite"}}
 \usage{
 \method{coef}{flite}(object, ...)
@@ -21,13 +22,23 @@
 \method{summary}{flite}(object, adjust = TRUE, digits = max(3, getOption("digits") - 3L), ...)
 
 \method{print}{summary.flite}(x, ...)
+
+\method{plot}{flite}(
+  object,
+  which = c("all", "pu", "gp", "xi", "theta"),
+  adj_type = c("vertical", "none", "cholesky", "spectral"),
+  ...
+)
 }
 \arguments{
 \item{object}{An object inheriting from class \code{"flite"}, a result of a
 call to \code{\link{flite}}.}
 
-\item{...}{For \code{print.summary.flite}: additional arguments passed to
-\code{\link{print.default}}.}
+\item{...}{For \code{plot.flite}: arguments passed to
+  \code{\link[stats]{plot}}, such as graphical parameters.
+
+  For \code{print.summary.flite}: additional arguments passed to
+  \code{\link{print.default}}.}
 
 \item{adjust}{A logical scalar.  If \code{adjust = TRUE} then the
 standard errors of \eqn{(p_u, \sigma_u, \xi)} are estimated via a sandwich
@@ -39,6 +50,23 @@ round the values in the summary.}
 
 \item{x}{An object of class "summary.flite", a result of a call to
 \code{\link{summary.flite}}.}
+
+\item{which}{A character scalar indicating which plot(s) to produce.
+If \code{which = "all"} then all 4 plots described in \strong{Details}
+are produced.  Otherwise, only one of these plots is produced, with the
+possible names of the arguments being in the order that the plots are
+described in \strong{Details}.}
+
+\item{adj_type}{A character scalar passed to
+\code{\link[chandwich]{conf_intervals}} and
+\code{\link[chandwich]{conf_region}} as the argument \code{type} to select
+the type of adjustment applied to the independence log-likelihood.  Of the
+3 adjustments, \code{"vertical"} is preferred because it preserves
+constraints on the parameters, whereas the \code{"cholesky"} and
+\code{"spectral"} adjustment do not.  In the generalised Pareto case the
+constraint that \eqn{\xi > - \sigma_u / x_{(n)}}{\xi > \sigma_u / x_(n)},
+where \eqn{x_{(n)}}{x_(n)} is the largest excesses of the threshold \eqn{u},
+is preserved.}
 }
 \value{
 \code{coef.flite}: a numeric vector of length 4 with names
@@ -70,4 +98,22 @@ round the values in the summary.}
 \description{
 Methods for obects of class \code{"flite"} returned from
 \code{\link{flite}}.
+}
+\details{
+For \code{plot.flite}, if \code{which = "all"} then 4 plots are produced.
+    \itemize{
+      \item{Top left: (adjusted) log-likelihood for the threshold exceedence
+        probability \eqn{p_u}, with a horizontal line indicating a
+        95\% confidence interval for \eqn{p_u}.}
+      \item{Top right: contour plot of the (adjusted) log-likelihood for the
+        GP parameters \eqn{(\sigma_u, \xi)}, showing
+        (25, 50, 75, 90, 95)\% confidence regions. The linear constraint
+        \eqn{\xi > - \sigma_u / x_{(n)}}{\xi > \sigma_u / x_(n)} is drawn
+        on the plot.}
+      \item{Bottom left: (adjusted) log-likelihood for \eqn{\xi}, with a
+        horizontal line indicating a 95\% confidence interval for \eqn{\xi}.}
+      \item{Bottom right: log-likelihood for the extremal index \eqn{\theta},
+        with a horizontal line indicating a 95\% confidence interval for
+        \eqn{\theta}.}
+    }
 }

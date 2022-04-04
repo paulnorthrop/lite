@@ -42,7 +42,7 @@ an adjusted log-likelihood function.  See \strong{Details} and
 \strong{Value} in \code{\link[chandwich]{adjust_loglik}}.}
 }
 \value{
-A object (a list) of class \code{"retlev", "lax"} with the
+A object (a list) of class \code{"returnLevels", "lite"} with the
   components
   \item{rl_sym,rl_prof }{Named numeric vectors containing the respective
     lower 100\code{level}\% limit, the MLE and the upper
@@ -119,6 +119,6 @@ Coles, S. G. (2001) \emph{An Introduction to Statistical
   \doi{10.1007/978-1-4471-3675-0_3}
 }
 \seealso{
-\code{\link{plot.retlev}} for plotting the profile log-likelihood
-  for a return level.
+\code{\link{plot.returnLevel}} for plotting the profile
+  log-likelihood for a return level.
 }
