@@ -116,7 +116,6 @@ plot.returnLevel <- function(x, level = NULL, legend = TRUE, digits = 3,
   if (plot) {
     my_plot(x$for_plot[, "ret_levs"], x$for_plot[, "prof_loglik"],
             ...)
-    hline(x$max_loglik, ...)
     hline(crit_value, ...)
     # Add a legend, if requested
     if (legend && length(level) == 1) {
