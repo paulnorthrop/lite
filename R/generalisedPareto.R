@@ -99,7 +99,7 @@ fitGP <- function(data, u) {
   xi <- res$mle[2]
   res$vcov <- solve(gpObsInfo(res$mle, excesses))
   res$maxLogLik <- -sum(log(sc)) -
-    sum(log(1 + xi * excesses / sc) * (1 / xi + 1))
+    sum(log1p(xi * excesses / sc) * (1 / xi + 1))
   # Return the exceedances (values that lie above the threshold)
   res$exceedances <- data[data > u]
   res$threshold <- u
@@ -131,21 +131,21 @@ gpObsInfo <- function(pars, excesses, eps = 1e-5, m = 3) {
   # in powers of z up to z ^ 2. The terms in 1/z and 1/z^2 cancel leaving
   # only a quadratic in z.
   z <- x / s
-  t0 <- 1 + z * y
+  zy <- z * y
+  t0 <- 1 + zy
   t4 <- y ^ 2 / t0 ^ 2
   if (any(t0 <= 0)) {
     stop("The log-likelihood is 0 for this combination of data and parameters")
   }
   if (abs(x) < eps) {
     j <- 0:m
-    zy <- z * y
     sum_fn <- function(zy) {
       return(sum((-1) ^ j * (j ^ 2 + 3 * j + 2) * zy ^ j / (j + 3)))
     }
     tsum <- vapply(zy, sum_fn, 0.0)
     i[2, 2] <- sum(y ^ 3 * tsum / s ^ 3 - t4 / s ^ 2)
   } else {
-    t1 <- 2 * log(t0) / z ^ 3
+    t1 <- 2 * log1p(zy) / z ^ 3
     t2 <- 2 * y / (z ^ 2 * t0)
     t3 <- y ^ 2 / (z * t0 ^ 2)
     i[2, 2] <- sum((t1 - t2 - t3) / s ^ 3 - t4 / s ^ 2)
