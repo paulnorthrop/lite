@@ -16,7 +16,6 @@ Imports: chandwich,
     sandwich,
     stats
 License: GPL (>= 2)
-LazyData: FALSE
 Encoding: UTF-8
 Depends:
     R (>= 3.3.0)
