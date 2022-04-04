@@ -1,6 +1,6 @@
 #' Methods for objects of class \code{"flite"}
 #'
-#' Methods for obects of class \code{"flite"} returned from
+#' Methods for objects of class \code{"flite"} returned from
 #' \code{\link{flite}}.
 #' @param ... For \code{plot.flite}: arguments passed to
 #'   \code{\link[graphics:plot.default]{plot}}, such as graphical parameters.

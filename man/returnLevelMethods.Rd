@@ -57,7 +57,7 @@ Otherwise, it is not, but the MLE and confidence limits are returned.}
   \code{print.summary.returnLevel}: the argument \code{object}, invisibly.
 }
 \description{
-Methods for obects of class \code{"returnLevel"} returned from
+Methods for objects of class \code{"returnLevel"} returned from
 \code{\link{returnLevel}}.
 }
 \details{

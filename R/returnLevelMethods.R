@@ -1,6 +1,6 @@
 #' Methods for objects of class \code{"returnLevel"}
 #'
-#' Methods for obects of class \code{"returnLevel"} returned from
+#' Methods for objects of class \code{"returnLevel"} returned from
 #' \code{\link{returnLevel}}.
 #' @param ... For \code{plot.returnLevel}: arguments passed to
 #'   \code{\link[graphics:plot.default]{plot}}, such as graphical parameters.

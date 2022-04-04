@@ -95,7 +95,7 @@ round the values in the summary.}
   \code{print.summary.flite}: the argument \code{x}, invisibly.
 }
 \description{
-Methods for obects of class \code{"flite"} returned from
+Methods for objects of class \code{"flite"} returned from
 \code{\link{flite}}.
 }
 \details{
