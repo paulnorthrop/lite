@@ -26,9 +26,15 @@ For parts 1 and 2 it is necessary to adjust the inferences because we
 expect that the data will exhibit cluster dependence. This is achieved
 using the methodology developed in [Chandler and Bate
 (2007)](https://doi.org/10.1002/env.2133%7D10.1093/biomet/asm015) to
-produce a log-likelihood that is adjusted for this dependence. The
-(adjusted) log-likelihoods from parts 1, 2 and 3 are combined to make
-inferences about return levels.
+produce a log-likelihood that is adjusted for this dependence. This is
+achieved using the [chandwich
+package](https://cran.r-project.org/package=chandwich). For part 3, the
+methodology described in [Süveges and Davison
+(2010)](https://doi.org/10.1214/09-AOAS292) is used, implemented by the
+function `kgaps` in the [exdex
+package](https://cran.r-project.org/package=exdex). The (adjusted)
+log-likelihoods from parts 1, 2 and 3 are combined to make inferences
+about return levels.
 
 ### An example: Cheeseboro wind gusts
 
