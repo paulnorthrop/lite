@@ -1,26 +1,33 @@
 #' lite: Likelihood-based Inference for Time Series Extremes
 #'
-#' Explain what the package does
-#' @details
-#' Add details
+#' Performs likelihood-based inference for stationary time series extremes.
+#' The general approach follows Fawcett and Walshaw (2012). Marginal extreme
+#' value inferences are adjusted for cluster dependence in the data using the
+#' methodology in Chandler and Bate (2007), producing an adjusted
+#' log-likelihood for the model parameters.  A log-likelihood for the extremal
+#' index is produced using the K-gaps model of Suveges and Davison (2010).
+#' These log-likelihoods are combined to make inferences about return levels.
+#'
+#' @details The main functions are
+#' \itemize{
+#'   \item{\code{\link{flite}}: makes frequentist threshold-based inference for
+#'   time series extremes to produce an adjusted log-likelihood for the model
+#'   parameters.}
+#'   \item{\code{\link{returnLevel}}: performs inference for return levels
+#'   using the adjusted log-likelihood.}
+#' }
 #'
 #' The main function is \code{\link{flite}}, which performs frequentist
 #' inference for time series extremes.
 #'
-#' See \code{vignette("lite-vignette", package = "lite")} for an overview of the
-#' package.
+#' See \code{vignette("introduction-to-lite", package = "lite")} for an
+#' overview of the package.
 #' @references Chandler, R. E. and Bate, S. (2007). Inference for clustered.
 #'   data using the independence loglikelihood. \emph{Biometrika},
 #'   \strong{94}(1), 167-183. \doi{10.1093/biomet/asm015}
 #' @references Fawcett, L. and Walshaw, D. (2012), Estimating return levels
 #'   from serially dependent extremes. \emph{Environmetrics}, \strong{23},
 #'   272-283. \doi{10.1002/env.2133}
-#' @references Northrop, P. J. and Chandler, R. E. (2021).
-#'   chandwich: Chandler-Bate Sandwich Loglikelihood Adjustment. R package
-#'   version 1.1.5. \url{https://CRAN.R-project.org/package=chandwich}.
-#' @references Northrop, P. J. and Christodoulides, C. (2022). exdex:
-#' Estimation of the Extremal Index. R package version 1.1.1.
-#' \url{https://CRAN.R-project.org/package=exdex/}.
 #' @references Suveges, M. and Davison, A. C. (2010) Model
 #'   misspecification in peaks over threshold analysis, \emph{Annals of
 #'   Applied Statistics}, \strong{4}(1), 203-221.
