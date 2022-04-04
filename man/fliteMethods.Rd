@@ -31,8 +31,8 @@
 \method{print}{summary.flite}(x, ...)
 }
 \arguments{
-\item{x}{An object of class "summary.flite", a result of a call to
-\code{\link{summary.flite}}.}
+\item{x}{An object inheriting from class \code{"flite"}, a result of a
+call to \code{\link{flite}}.}
 
 \item{which}{A character scalar indicating which plot(s) to produce.
 If \code{which = "all"} then all 4 plots described in \strong{Details}
@@ -60,10 +60,11 @@ is preserved.}
 \item{object}{An object inheriting from class \code{"flite"}, a result of a
 call to \code{\link{flite}}.}
 
-\item{adjust}{A logical scalar.  If \code{adjust = TRUE} then the
-standard errors of \eqn{(p_u, \sigma_u, \xi)} are estimated via a sandwich
-estimator of the variance-covariance matrix. See \code{\link{flite}}.
-Otherwise, the inverse of the observed information matrix is used.}
+\item{adjust}{A logical scalar.  If \code{adjust = TRUE} then the elements
+of the variance-covariance matrix corresponding to
+\eqn{(p_u, \sigma_u, \xi)} are estimated using a sandwich estimator.
+See \code{\link{flite}}.  Otherwise, this matrix is the inverse of the
+observed information matrix.}
 
 \item{digits}{An integer. Passed to \code{\link[base:Round]{signif}} to
 round the values in the summary.}

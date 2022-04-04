@@ -155,8 +155,6 @@ coef.flite <- function(object, ...) {
 #' Calculate the variance-covariance matrix for an object of class
 #' \code{"flite"}
 #'
-#' @param object An object inheriting from class \code{"flite"}, a result of a
-#'   call to \code{\link{flite}}.
 #' @param adjust A logical scalar.  If \code{adjust = TRUE} then the elements
 #'   of the variance-covariance matrix corresponding to
 #'   \eqn{(p_u, \sigma_u, \xi)} are estimated using a sandwich estimator.
@@ -190,8 +188,6 @@ vcov.flite <- function(object, adjust = TRUE, ...) {
 
 #' Extract the number of observations from a fit for class \code{"flite"}
 #'
-#' @param object An object inheriting from class \code{"flite"}, a result of a
-#'   call to \code{\link{flite}}.
 #' @rdname fliteMethods
 #' @export
 nobs.flite <- function(object,  ...) {
@@ -210,8 +206,6 @@ nobs.flite <- function(object,  ...) {
 
 #' Extract log-likelihood for objects of class \code{"flite"}
 #'
-#' @param object An object of class \code{"flite"}, a result of a call to
-#'   \code{\link{flite}}.
 #' @rdname fliteMethods
 #' @export
 logLik.flite <- function(object, ...) {
@@ -230,12 +224,6 @@ logLik.flite <- function(object, ...) {
 
 #' Summarising times series extreme fits
 #'
-#' @param object An object inheriting from class \code{"flite"}, a result of a
-#'   call to \code{\link{flite}}.
-#' @param adjust A logical scalar.  If \code{adjust = TRUE} then the
-#'   standard errors of \eqn{(p_u, \sigma_u, \xi)} are estimated via a sandwich
-#'   estimator of the variance-covariance matrix. See \code{\link{flite}}.
-#'   Otherwise, the inverse of the observed information matrix is used.
 #' @param digits An integer. Passed to \code{\link[base:Round]{signif}} to
 #'   round the values in the summary.
 #' @rdname fliteMethods
@@ -258,8 +246,6 @@ summary.flite <- function(object, adjust = TRUE,
 
 #' Print method for objects of class \code{"summary.flite"}
 #'
-#' @param x An object of class "summary.flite", a result of a call to
-#'   \code{\link{summary.flite}}.
 #' @rdname fliteMethods
 #' @export
 print.summary.flite <- function(x, ...) {

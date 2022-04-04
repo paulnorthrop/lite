@@ -6,6 +6,16 @@
 #'   of a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.
 #' @param object an object of class \code{c("returnLevel", "lite")}, a result
 #'   of a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.
+#' @param digits For \code{plot.returnLevel}: an integer. Passed to
+#'   \code{\link[base:Round]{signif}} to round the values in the legend.
+#'
+#'   For \code{print.returnLevel}: the argument \code{digits} to
+#'   \code{\link{print.default}}.
+#'
+#'   For \code{summary.returnLevel}: an integer. Used for number formatting
+#'   with \code{\link[base:Round]{signif}}.  If \code{digits} is not specified
+#'   (i.e. \code{\link{missing}}) then \code{signif()} will not be called
+#'   (i.e. no rounding will be performed).
 #' @param ... For \code{plot.returnLevel}: arguments passed to
 #'   \code{\link[graphics:plot.default]{plot}}, such as graphical parameters.
 #'
@@ -37,8 +47,6 @@ NULL
 #' @param legend A logical scalar.  Should we add a legend (in the top right
 #'   of the plot) that gives the approximate values of the MLE and
 #'   100\code{level}\% confidence limits?
-#' @param digits An integer. Passed to \code{\link[base:Round]{signif}} to
-#'   round the values in the legend.
 #' @param plot A logical scalar.  If \code{TRUE} then the plot is produced.
 #'   Otherwise, it is not, but the MLE and confidence limits are returned.
 #' @details \code{plot.returnLevel} plots the profile log-likelihood for a
@@ -127,7 +135,6 @@ plot.returnLevel <- function(x, level = NULL, legend = TRUE, digits = 3,
 
 #' Print method for returnLevel object
 #'
-#' @param digits The argument \code{digits} to \code{\link{print.default}}.
 #' @details \code{print.returnLevel} prints the call to
 #'   \code{\link{returnLevel}} and the estimates and 100\code{x$level}\%
 #'   confidence limits for the \code{x$m}-year return level.
@@ -160,10 +167,6 @@ print.returnLevel <- function(x, digits =
 
 #' Summary method for a \code{"returnLevel"} object
 #'
-#' @param digits An integer. Used for number formatting with
-#'   \code{\link[base:Round]{signif}}.  If \code{digits} is not specified
-#'   (i.e. \code{\link{missing}}) then \code{signif()} will not be called
-#'   (i.e. no rounding will be performed).
 #' @rdname returnLevelMethods
 #' @export
 summary.returnLevel <- function(object, digits, ...) {

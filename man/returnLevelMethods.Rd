@@ -29,10 +29,16 @@ If \code{level} is not supplied then \code{x$level} is used.
 of the plot) that gives the approximate values of the MLE and
 100\code{level}\% confidence limits?}
 
-\item{digits}{An integer. Used for number formatting with
-\code{\link[base:Round]{signif}}.  If \code{digits} is not specified
-(i.e. \code{\link{missing}}) then \code{signif()} will not be called
-(i.e. no rounding will be performed).}
+\item{digits}{For \code{plot.returnLevel}: an integer. Passed to
+  \code{\link[base:Round]{signif}} to round the values in the legend.
+
+  For \code{print.returnLevel}: the argument \code{digits} to
+  \code{\link{print.default}}.
+
+  For \code{summary.returnLevel}: an integer. Used for number formatting
+  with \code{\link[base:Round]{signif}}.  If \code{digits} is not specified
+  (i.e. \code{\link{missing}}) then \code{signif()} will not be called
+  (i.e. no rounding will be performed).}
 
 \item{plot}{A logical scalar.  If \code{TRUE} then the plot is produced.
 Otherwise, it is not, but the MLE and confidence limits are returned.}
