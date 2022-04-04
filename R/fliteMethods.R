@@ -108,7 +108,7 @@ plot.flite <- function(object, which = c("all", "pu", "gp", "xi", "theta"),
     gpplot(cr, ...)
     ofit <- attr(gp, "original_fit")
     m <- max(ofit$exceedances) - ofit$threshold
-    abline(a = 0, b = -1 / m)
+    graphics::abline(a = 0, b = -1 / m)
   }
   # GP shape parameter xi
   if ("xi" %in% which) {
