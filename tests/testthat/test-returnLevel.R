@@ -32,4 +32,16 @@ if (got_exdex) {
   test_that("old vs new RL: new upper is lower", {
     testthat::expect_lt(newrl["upper"], oldrl["upper"])
   })
+
+  # Not supplying ny
+  test_that("returnLevel no ny error case", {
+    testthat::expect_error(returnLevel(cfit))
+  })
+
+  # Suppling ny twice
+  cfit2 <- flite(cdata, u = 45, k = 3, ny = 1)
+  rl2 <- returnLevel(cfit2, prof = FALSE, ny = 31 * 24)
+  test_that("returnLevel ny twice", {
+    testthat::expect_equal(rl2$ny, 31 * 24)
+  })
 }
