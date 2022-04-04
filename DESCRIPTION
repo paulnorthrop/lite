@@ -1,14 +1,18 @@
 Package: lite
 Title: Likelihood-based Inference for Time Series Extremes
 Version: 1.0.0
-Date: 2022-04-04
+Date: 2022-04-05
 Authors@R: person(c("Paul", "J."), "Northrop", email = "p.northrop@ucl.ac.uk",
   role = c("aut", "cre", "cph"))
-Description: Performs adjusted inferences based on model objects fitted, using 
-    maximum likelihood estimation, by the extreme value analysis packages
-    'exdex' <https://cran.r-project.org/package=exdex>, 
-    'lax' <https://cran.r-project.org/package=lax>, 
-    'revdbayes' <https://cran.r-project.org/package=revdbayes>. 
+Description: Performs likelihood-based inference for stationary time series 
+    extremes.  The general approach follows Fawcett and Walshaw (2012)
+    <doi:10.1002/env.2133>.  Marginal extreme value inferences are adjusted for 
+    cluster dependence in the data using the methodology in Chandler and Bate 
+    (2007) <doi:10.1093/biomet/asm015>, producing an adjusted log-likelihood 
+    for the model parameters.  A log-likelihood for the extremal index is 
+    produced using the K-gaps model of Suveges and Davison (2010) 
+    <doi:10.1214/09-AOAS292>. These log-likelihoods are combined to make 
+    inferences about return levels.
 Imports: chandwich,
     exdex,
     graphics,
