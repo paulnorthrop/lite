@@ -8,22 +8,22 @@
 \alias{print.summary.returnLevel}
 \title{Methods for objects of class \code{"returnLevel"}}
 \usage{
-\method{plot}{returnLevel}(object, level = NULL, legend = TRUE, digits = 3, plot = TRUE, ...)
+\method{plot}{returnLevel}(x, level = NULL, legend = TRUE, digits = 3, plot = TRUE, ...)
 
-\method{print}{returnLevel}(object, digits = max(3L, getOption("digits") - 3L), ...)
+\method{print}{returnLevel}(x, digits = max(3L, getOption("digits") - 3L), ...)
 
-\method{summary}{returnLevel}(object, digits, ...)
+\method{summary}{returnLevel}(x, digits, ...)
 
-\method{print}{summary.returnLevel}(object, ...)
+\method{print}{summary.returnLevel}(x, ...)
 }
 \arguments{
-\item{object}{An object of class "summary.returnLevel", a result of a call
+\item{x}{An object of class "summary.returnLevel", a result of a call
 to \code{\link{summary.returnLevel}}.}
 
 \item{level}{A numeric scalar in (0, 1).  The confidence level required for
 the confidence interval for the \code{m}-year return level.
-If \code{level} is not supplied then \code{object$level} is used.
-\code{level} must be no larger than \code{object$level}.}
+If \code{level} is not supplied then \code{x$level} is used.
+\code{level} must be no larger than \code{x$level}.}
 
 \item{legend}{A logical scalar.  Should we add a legend (in the top right
 of the plot) that gives the approximate values of the MLE and
@@ -62,17 +62,17 @@ Methods for objects of class \code{"returnLevel"} returned from
 }
 \details{
 \code{plot.returnLevel} plots the profile log-likelihood for a
-  return level, provided that \code{object} returned by a call to
+  return level, provided that \code{x} returned by a call to
   \code{\link{returnLevel}} using \code{prof = TRUE}.  Horizontal lines
   indicate the values of the maximised log-likelihood and the critical level
   used to calculate the confidence limits.
-  If \code{level} is smaller than \code{object$level} then approximate
+  If \code{level} is smaller than \code{x$level} then approximate
   100\code{level}\% confidence limits are recalculated based on the
-  information contained in \code{object$for_plot}.
+  information contained in \code{x$for_plot}.
 
 \code{print.returnLevel} prints the call to
-  \code{\link{returnLevel}} and the estimates and 100\code{object$level}\%
-  confidence limits for the \code{object$m}-year return level.
+  \code{\link{returnLevel}} and the estimates and 100\code{x$level}\%
+  confidence limits for the \code{x$m}-year return level.
 }
 \section{Examples}{
 
