@@ -12,7 +12,6 @@ if (got_exdex) {
   # Make inferences
   cdata <- exdex::cheeseboro
   cfit <- flite(cdata, u = 45, k = 3)
-  summary(cfit)
 
   # 2 ways to find the maximised log-likelihood value
   res1 <- logLik(cfit)
