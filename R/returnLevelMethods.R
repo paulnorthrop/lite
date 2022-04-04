@@ -2,6 +2,10 @@
 #'
 #' Methods for objects of class \code{"returnLevel"} returned from
 #' \code{\link{returnLevel}}.
+#' @param x an object of class \code{c("returnLevel", "lite")}, a result
+#'   of a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.
+#' @param object an object of class \code{c("returnLevel", "lite")}, a result
+#'   of a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.
 #' @param ... For \code{plot.returnLevel}: arguments passed to
 #'   \code{\link[graphics:plot.default]{plot}}, such as graphical parameters.
 #'
@@ -26,8 +30,6 @@ NULL
 
 #' Plot diagnostics for a returnLevel object
 #'
-#' @param x an object of class \code{c("returnLevel", "lite")}, a result
-#'   of a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.
 #' @param level A numeric scalar in (0, 1).  The confidence level required for
 #'   the confidence interval for the \code{m}-year return level.
 #'   If \code{level} is not supplied then \code{x$level} is used.
@@ -125,8 +127,6 @@ plot.returnLevel <- function(x, level = NULL, legend = TRUE, digits = 3,
 
 #' Print method for returnLevel object
 #'
-#' @param x an object of class \code{c("returnLevel", "lite")}, a result of
-#'   a call to \code{\link{returnLevel}}.
 #' @param digits The argument \code{digits} to \code{\link{print.default}}.
 #' @details \code{print.returnLevel} prints the call to
 #'   \code{\link{returnLevel}} and the estimates and 100\code{x$level}\%
@@ -160,8 +160,6 @@ print.returnLevel <- function(x, digits =
 
 #' Summary method for a \code{"returnLevel"} object
 #'
-#' @param x an object of class \code{c("returnLevel", "lite")}, a result of
-#'   a call to \code{\link{returnLevel}}.
 #' @param digits An integer. Used for number formatting with
 #'   \code{\link[base:Round]{signif}}.  If \code{digits} is not specified
 #'   (i.e. \code{\link{missing}}) then \code{signif()} will not be called
@@ -193,8 +191,6 @@ summary.returnLevel <- function(object, digits, ...) {
 
 #' Print method for objects of class \code{"summary.returnLevel"}
 #'
-#' @param x An object of class "summary.returnLevel", a result of a call
-#'   to \code{\link{summary.returnLevel}}.
 #' @rdname returnLevelMethods
 #' @export
 print.summary.returnLevel <- function(x, ...) {

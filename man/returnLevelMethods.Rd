@@ -17,8 +17,8 @@
 \method{print}{summary.returnLevel}(x, ...)
 }
 \arguments{
-\item{x}{An object of class "summary.returnLevel", a result of a call
-to \code{\link{summary.returnLevel}}.}
+\item{x}{an object of class \code{c("returnLevel", "lite")}, a result
+of a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.}
 
 \item{level}{A numeric scalar in (0, 1).  The confidence level required for
 the confidence interval for the \code{m}-year return level.
@@ -42,6 +42,9 @@ Otherwise, it is not, but the MLE and confidence limits are returned.}
 
   For \code{print.summary.returnLevel}: additional arguments passed to
   \code{\link{print.default}}.}
+
+\item{object}{an object of class \code{c("returnLevel", "lite")}, a result
+of a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.}
 }
 \value{
 \code{plot.returnLevel}: a numeric vector of length 3 containing the
