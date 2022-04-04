@@ -28,7 +28,7 @@ Prints the call to \code{\link{returnLevel}} and the estimates
 }
 \section{Examples}{
 
-See the examples in \code{\link{returnLevel}}.
+See \code{\link{returnLevel}}.
 }
 
 \seealso{

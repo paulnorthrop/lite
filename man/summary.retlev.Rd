@@ -27,7 +27,7 @@ Returns a list containing the list element \code{object$call}
 }
 \section{Examples}{
 
-See the examples in \code{\link{returnLevel}}.
+See \code{\link{returnLevel}}.
 }
 
 \seealso{

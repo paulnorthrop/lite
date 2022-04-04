@@ -50,24 +50,26 @@
 #' vector length \code{length(data)} containing the likelihood contributions
 #' from the individual observations in \code{data}.
 #' @examples
-#' # Set up data and set a threshold
-#' cdata <- c(exdex::cheeseboro)
-#' u <- quantile(cdata, probs = 0.9, na.rm = TRUE)
+#' got_exdex <- requireNamespace("exdex", quietly = TRUE)
+#' if (got_exdex) {
+#'  # Set up data and set a threshold
+#'  cdata <- c(exdex::cheeseboro)
 #'
-#' # Fit a generalised Pareto distribution
-#' fit <- fitGP(cdata, u)
+#'  # Fit a generalised Pareto distribution
+#'  fit <- fitGP(cdata, 45)
 #'
-#' # Calculate the log-likelihood at the MLE
-#' res <- logLikVector(fit)
+#'  # Calculate the log-likelihood at the MLE
+#'  res <- logLikVector(fit)
 #'
-#' # The logLik method sums the individual log-likelihood contributions.
-#' logLik(res)
+#'  # The logLik method sums the individual log-likelihood contributions.
+#'  logLik(res)
 #'
-#' # nobs, coef, vcov, logLik methods for objects returned from fitGP()
-#' nobs(fit)
-#' coef(fit)
-#' vcov(fit)
-#' logLik(fit)
+#'  # nobs, coef, vcov, logLik methods for objects returned from fitGP()
+#'  nobs(fit)
+#'  coef(fit)
+#'  vcov(fit)
+#'  logLik(fit)
+#' }
 #' @name generalisedPareto
 NULL
 ## NULL

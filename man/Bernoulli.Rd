@@ -32,11 +32,6 @@ fitBernoulli(data)
 
 \item{pars}{A numeric parameter vector of length 1 containing a value of
 the Bernoulli success probability.}
-
-\item{...}{Further arguments to be passed to the functions in the
-sandwich package \code{\link[sandwich]{meat}} (if \code{cluster = NULL}),
-or \code{\link[sandwich:vcovCL]{meatCL}} (if \code{cluster} is not
-\code{NULL}).}
 }
 \value{
 \code{fitBernoulli} returns an object of class \code{"Bernoulli"}, a list
@@ -59,32 +54,35 @@ in a Bernoulli distribution using maximum likelihood estimation.
 \code{fitBernoulli}: fit a Bernoulli distribution using maximum likelihood
   estimation.
 
-\code{logLikVector.bernoulli}: calculates contributions to an independence
+\code{logLikVector.Bernoulli}: calculates contributions to an independence
 log-likelihood based on the Bernoulli distribution.  The log-likelihood is
 calculated up to an additive constant.
 
 \code{nobs, coef, vcov} and \code{logLik} methods are provided.
 }
 \examples{
-# Set up data
-x <- exdex::newlyn
-u <- quantile(x, probs = 0.9)
-exc <- x > u
+got_exdex <- requireNamespace("exdex", quietly = TRUE)
+if (got_exdex) {
+ # Set up data
+ cdata <- c(exdex::cheeseboro)
+ u <- 45
+ exc <- cdata > u
 
-# Fit a Bernoulli distribution
-fit <- fitBernoulli(exc)
+ # Fit a Bernoulli distribution
+ fit <- fitBernoulli(exc)
 
-# Calculate the log-likelihood at the MLE
-res <- logLikVector(fit)
+ # Calculate the log-likelihood at the MLE
+ res <- logLikVector(fit)
 
-# The logLik method sums the individual log-likelihood contributions.
-logLik(res)
+ # The logLik method sums the individual log-likelihood contributions.
+ logLik(res)
 
-# nobs, coef, vcov, logLik methods for objects returned from fitBernoulli()
-nobs(fit)
-coef(fit)
-vcov(fit)
-logLik(fit)
+ # nobs, coef, vcov, logLik methods for objects returned from fitBernoulli()
+ nobs(fit)
+ coef(fit)
+ vcov(fit)
+ logLik(fit)
+}
 }
 \seealso{
 \code{\link[stats]{Binomial}}.  The Bernoulli distribution is the

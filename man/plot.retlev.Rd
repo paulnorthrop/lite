@@ -50,7 +50,7 @@ Plots the profile log-likelihood for a return level, provided that
 }
 \section{Examples}{
 
-See the examples in \code{\link{returnLevel}}.
+See \code{\link{returnLevel}}.
 }
 
 \seealso{

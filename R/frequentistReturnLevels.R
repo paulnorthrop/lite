@@ -73,22 +73,23 @@
 #' @seealso \code{\link{plot.retlev}} for plotting the profile log-likelihood
 #'   for a return level.
 #' @examples
-#' ### Cheeseboro wind gusts
+#' got_exdex <- requireNamespace("exdex", quietly = TRUE)
+#' if (got_exdex) {
+#'  ### Cheeseboro wind gusts
 #'
-#' # Make inferences
-#' cdata <- exdex::cheeseboro
-#' # Each column of the matrix cdata corresponds to data from a different year
-#' # flite() sets cluster automatically to correspond to column (year)
-#' cfit <- flite(cdata, u = 45, k = 3)
+#'  # Make inferences
+#'  cdata <- exdex::cheeseboro
+#'  # Each column of the matrix cdata corresponds to data from a different year
+#'  # flite() sets cluster automatically to correspond to column (year)
+#'  cfit <- flite(cdata, u = 45, k = 3)
 #'
-#' # These data are hourly for one month (January) year so ny = 31 * 24
-#' # Large inc set here for speed, sacrificing accuracy
-#' rl <- returnLevel(cfit, inc = 2.5, ny = 31 * 24)
-#' summary(rl)
-#' rl
-#' plot(rl)
-#'
-#' ###
+#'  # These data are hourly for one month (January) year so ny = 31 * 24
+#'  # Large inc set here for speed, sacrificing accuracy
+#'  rl <- returnLevel(cfit, inc = 2.5, ny = 31 * 24)
+#'  summary(rl)
+#'  rl
+#'  plot(rl)
+#' }
 #' @export
 returnLevel <- function(x, m = 100, level = 0.95, ny, prof = TRUE,
                          inc = NULL,
@@ -145,7 +146,7 @@ returnLevel <- function(x, m = 100, level = 0.95, ny, prof = TRUE,
 #' @seealso \code{\link{returnLevel}} to perform inferences about return
 #'   levels.
 #' @section Examples:
-#' See the examples in \code{\link{returnLevel}}.
+#' See \code{\link{returnLevel}}.
 #' @export
 plot.retlev <- function(x, y = NULL, level = NULL, legend = TRUE, digits = 3,
                         plot= TRUE, ...) {
@@ -230,7 +231,7 @@ plot.retlev <- function(x, y = NULL, level = NULL, legend = TRUE, digits = 3,
 #'   \code{\link[base]{print}} methods.
 #' @seealso \code{\link{returnLevel}}.
 #' @section Examples:
-#' See the examples in \code{\link{returnLevel}}.
+#' See \code{\link{returnLevel}}.
 #' @export
 print.retlev <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
   if (!inherits(x, "retlev")) {
@@ -272,7 +273,7 @@ print.retlev <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 #'   SE of the return level.
 #' @seealso \code{\link{returnLevel}}.
 #' @section Examples:
-#' See the examples in \code{\link{returnLevel}}.
+#' See \code{\link{returnLevel}}.
 #' @export
 summary.retlev <- function(object, digits, ...) {
   if (!inherits(object, "retlev")) {
@@ -311,7 +312,7 @@ summary.retlev <- function(object, digits, ...) {
 #' @seealso \code{\link{returnLevel}} to perform inferences about return
 #'   levels.
 #' @section Examples:
-#' See the examples in \code{\link{returnLevel}}.
+#' See \code{\link{returnLevel}}.
 #' @export
 print.summary.retlev <- function(x, ...) {
   if (!inherits(x, "summary.retlev")) {

@@ -95,22 +95,23 @@ log-likelihood.
   the calculation will be.
 }
 \examples{
-### Cheeseboro wind gusts
+got_exdex <- requireNamespace("exdex", quietly = TRUE)
+if (got_exdex) {
+ ### Cheeseboro wind gusts
 
-# Make inferences
-cdata <- exdex::cheeseboro
-# Each column of the matrix cdata corresponds to data from a different year
-# flite() sets cluster automatically to correspond to column (year)
-cfit <- flite(cdata, u = 45, k = 3)
+ # Make inferences
+ cdata <- exdex::cheeseboro
+ # Each column of the matrix cdata corresponds to data from a different year
+ # flite() sets cluster automatically to correspond to column (year)
+ cfit <- flite(cdata, u = 45, k = 3)
 
-# These data are hourly for one month (January) year so ny = 31 * 24
-# Large inc set here for speed, sacrificing accuracy
-rl <- returnLevel(cfit, inc = 2.5, ny = 31 * 24)
-summary(rl)
-rl
-plot(rl)
-
-###
+ # These data are hourly for one month (January) year so ny = 31 * 24
+ # Large inc set here for speed, sacrificing accuracy
+ rl <- returnLevel(cfit, inc = 2.5, ny = 31 * 24)
+ summary(rl)
+ rl
+ plot(rl)
+}
 }
 \references{
 Coles, S. G. (2001) \emph{An Introduction to Statistical

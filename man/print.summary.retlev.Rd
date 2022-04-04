@@ -25,7 +25,7 @@ Prints the call and the numeric matrix \code{x$matrix} returned from
 }
 \section{Examples}{
 
-See the examples in \code{\link{returnLevel}}.
+See \code{\link{returnLevel}}.
 }
 
 \seealso{
