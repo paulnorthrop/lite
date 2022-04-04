@@ -11,14 +11,13 @@
 #'   lower 100\code{level}\% confidence limit, the MLE and the upper
 #'   100\code{level}\% confidence limit is returned invisibly.
 #'
-#'   \code{print.returnLevel}: the argument \code{x}, invisibly, as for all
-#'   \code{\link[base]{print}} methods.
+#'   \code{print.returnLevel}: the argument \code{object}, invisibly.
 #'
 #'   \code{summary.returnLevel}: a list containing the list element
 #'   \code{object$call} and a numeric matrix \code{matrix} containing the MLE
 #'   and estimated SE of the return level.
 #'
-#'   \code{print.summary.returnLevel}: the argument \code{x}, invisibly.
+#'   \code{print.summary.returnLevel}: the argument \code{object}, invisibly.
 #' @name returnLevelMethods
 NULL
 ## NULL
@@ -27,12 +26,12 @@ NULL
 
 #' Plot diagnostics for a returnLevel object
 #'
-#' @param x an object of class \code{c("returnLevel", "lite")}, a result of
-#'   a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.
+#' @param object an object of class \code{c("returnLevel", "lite")}, a result
+#'   of a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.
 #' @param level A numeric scalar in (0, 1).  The confidence level required for
 #'   the confidence interval for the \code{m}-year return level.
-#'   If \code{level} is not supplied then \code{x$level} is used.
-#'   \code{level} must be no larger than \code{x$level}.
+#'   If \code{level} is not supplied then \code{object$level} is used.
+#'   \code{level} must be no larger than \code{object$level}.
 #' @param legend A logical scalar.  Should we add a legend (in the top right
 #'   of the plot) that gives the approximate values of the MLE and
 #'   100\code{level}\% confidence limits?
@@ -41,44 +40,44 @@ NULL
 #' @param plot A logical scalar.  If \code{TRUE} then the plot is produced.
 #'   Otherwise, it is not, but the MLE and confidence limits are returned.
 #' @details \code{plot.returnLevel} plots the profile log-likelihood for a
-#'   return level, provided that \code{x} returned by a call to
+#'   return level, provided that \code{object} returned by a call to
 #'   \code{\link{returnLevel}} using \code{prof = TRUE}.  Horizontal lines
 #'   indicate the values of the maximised log-likelihood and the critical level
 #'   used to calculate the confidence limits.
-#'   If \code{level} is smaller than \code{x$level} then approximate
+#'   If \code{level} is smaller than \code{object$level} then approximate
 #'   100\code{level}\% confidence limits are recalculated based on the
-#'   information contained in \code{x$for_plot}.
+#'   information contained in \code{object$for_plot}.
 #' @seealso \code{\link{returnLevel}} to perform inferences about return
 #'   levels.
 #' @section Examples:
 #' See \code{\link{returnLevel}}.
 #' @rdname returnLevelMethods
 #' @export
-plot.returnLevel <- function(x, level = NULL, legend = TRUE, digits = 3,
+plot.returnLevel <- function(object, level = NULL, legend = TRUE, digits = 3,
                              plot = TRUE, ...) {
-  if (!inherits(x, "returnLevel")) {
+  if (!inherits(object, "returnLevel")) {
     stop("use only with \"returnLevel\" objects")
   }
-  if (!inherits(x, "lite")) {
+  if (!inherits(object, "lite")) {
     stop("use only with \"lite\" objects")
   }
-  if (is.null(x$rl_prof)) {
+  if (is.null(object$rl_prof)) {
     stop("No prof loglik info: call returnLevel() using prof = TRUE")
   }
-  # If level is NULL then we use the intervals stored in x
+  # If level is NULL then we use the intervals stored in object
   # Otherwise, we recalculate the confidence intervals
   if (is.null(level)) {
-    level <- x$level
-    crit_value <- x$crit
-    low_lim <- x$rl_prof["lower"]
-    up_lim <- x$rl_prof["upper"]
-  } else if (level > x$level) {
-    stop("level must be no larger than x$level")
+    level <- object$level
+    crit_value <- object$crit
+    low_lim <- object$rl_prof["lower"]
+    up_lim <- object$rl_prof["upper"]
+  } else if (level > object$level) {
+    stop("level must be no larger than object$level")
   } else {
-    crit_value <- x$max_loglik - 0.5 * stats::qchisq(level, 1)
+    crit_value <- object$max_loglik - 0.5 * stats::qchisq(level, 1)
     # Find where the curve crosses conf_line
-    prof_loglik <- x$for_plot[, "prof_loglik"]
-    ret_levs <- x$for_plot[, "ret_levs"]
+    prof_loglik <- object$for_plot[, "prof_loglik"]
+    ret_levs <- object$for_plot[, "ret_levs"]
     temp <- diff(prof_loglik - crit_value > 0)
     # Find the upper limit of the confidence interval
     loc <- which(temp == -1)
@@ -95,27 +94,29 @@ plot.returnLevel <- function(x, level = NULL, legend = TRUE, digits = 3,
     y2 <- prof_loglik[loc+1]
     low_lim <- x1 + (crit_value - y1) * (x2 - x1) / (y2 - y1)
   }
-  my_xlab <- paste0(x$m, "-year return level")
+  my_xlab <- paste0(object$m, "-year return level")
   my_ylab <- "profile log-likelihood"
-  my_plot <- function(x, y, ..., xlab = my_xlab, ylab = my_ylab, type = "l") {
+  my_plot <- function(x, y, ..., xlab = my_xlab, ylab = my_ylab,
+                      type = "l") {
     graphics::plot(x, y, ..., xlab = xlab, ylab = ylab, type = type)
   }
   hline <- function(x, ..., col = "blue", lty = 2) {
     graphics::abline(h = x, ..., col = col, lty = lty)
   }
   if (plot) {
-    my_plot(x$for_plot[, "ret_levs"], x$for_plot[, "prof_loglik"], ...)
-    hline(x$max_loglik, ...)
+    my_plot(object$for_plot[, "ret_levs"], object$for_plot[, "prof_loglik"],
+            ...)
+    hline(object$max_loglik, ...)
     hline(crit_value, ...)
     # Add a legend, if requested
     if (legend && length(level) == 1) {
-      mle_leg <- paste0("     MLE ", signif(x$rl_prof["mle"], digits))
-      conf_leg <- paste0(100 * x$level, "% CI (", signif(low_lim, digits), ",",
-                         signif(up_lim, digits), ")")
+      mle_leg <- paste0("     MLE ", signif(object$rl_prof["mle"], digits))
+      conf_leg <- paste0(100 * object$level, "% CI (", signif(low_lim, digits),
+                         ",", signif(up_lim, digits), ")")
       graphics::legend("topright", legend = c(mle_leg, conf_leg))
     }
   }
-  res <- c(low_lim, x$rl_prof["mle"], up_lim)
+  res <- c(low_lim, object$rl_prof["mle"], up_lim)
   names(res) <- c("lower", "mle", "upper")
   return(invisible(res))
 }
@@ -124,34 +125,35 @@ plot.returnLevel <- function(x, level = NULL, legend = TRUE, digits = 3,
 
 #' Print method for returnLevel object
 #'
-#' @param x an object of class \code{c("returnLevel", "lite")}, a result of
+#' @param object an object of class \code{c("returnLevel", "lite")}, a result of
 #'   a call to \code{\link{returnLevel}}.
 #' @param digits The argument \code{digits} to \code{\link{print.default}}.
 #' @details \code{print.returnLevel} prints the call to
-#'   \code{\link{returnLevel}} and the estimates and 100\code{x$level}\%
-#'   confidence limits for the \code{x$m}-year return level.
+#'   \code{\link{returnLevel}} and the estimates and 100\code{object$level}\%
+#'   confidence limits for the \code{object$m}-year return level.
 #' @rdname returnLevelMethods
 #' @export
-print.returnLevel <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
-  if (!inherits(x, "returnLevel")) {
+print.returnLevel <- function(object, digits =
+                                max(3L, getOption("digits") - 3L), ...) {
+  if (!inherits(object, "returnLevel")) {
     stop("use only with \"returnLevel\" objects")
   }
-  if (!inherits(x, "lite")) {
+  if (!inherits(object, "lite")) {
     stop("use only with \"lite\" objects")
   }
-  cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"),
+  cat("\nCall:\n", paste(deparse(object$call), sep = "\n", collapse = "\n"),
       "\n\n", sep = "")
-  cat("MLE and ", 100 * x$level, "% confidence limits for the ", x$m,
+  cat("MLE and ", 100 * object$level, "% confidence limits for the ", object$m,
       "-year return level\n\n", sep = "")
   cat("Normal interval:\n")
-  print.default(format(x$rl_sym, digits = digits), print.gap = 2L,
+  print.default(format(object$rl_sym, digits = digits), print.gap = 2L,
                 quote = FALSE)
-  if (!is.null(x$rl_prof[1])) {
+  if (!is.null(object$rl_prof[1])) {
     cat("\n Profile likelihood-based interval:\n")
-    print.default(format(x$rl_prof, digits = digits), print.gap = 2L,
+    print.default(format(object$rl_prof, digits = digits), print.gap = 2L,
                   quote = FALSE)
   }
-  return(invisible(x))
+  return(invisible(object))
 }
 
 # ----------------------------- summary.returnLevel ------------------------------ #
@@ -191,20 +193,20 @@ summary.returnLevel <- function(object, digits, ...) {
 
 #' Print method for objects of class \code{"summary.returnLevel"}
 #'
-#' @param x An object of class "summary.returnLevel", a result of a call to
-#'   \code{\link{summary.returnLevel}}.
+#' @param object An object of class "summary.returnLevel", a result of a call
+#'   to \code{\link{summary.returnLevel}}.
 #' @rdname returnLevelMethods
 #' @export
-print.summary.returnLevel <- function(x, ...) {
-  if (!inherits(x, "summary.returnLevel")) {
+print.summary.returnLevel <- function(object, ...) {
+  if (!inherits(object, "summary.returnLevel")) {
     stop("use only with \"summary.returnLevel\" objects")
   }
-  cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"),
+  cat("\nCall:\n", paste(deparse(object$call), sep = "\n", collapse = "\n"),
       "\n\n", sep = "")
-  print(x$matrix, ...)
-  if (!is.null(x$warning)) {
+  print(object$matrix, ...)
+  if (!is.null(object$warning)) {
     cat("\n")
-    cat(x$warning)
+    cat(object$warning)
   }
-  invisible(x)
+  invisible(object)
 }
