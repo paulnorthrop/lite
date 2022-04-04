@@ -32,6 +32,8 @@ fitBernoulli(data)
 
 \item{pars}{A numeric parameter vector of length 1 containing a value of
 the Bernoulli success probability.}
+
+\item{...}{Further arguments. None are used currently.}
 }
 \value{
 \code{fitBernoulli} returns an object of class \code{"Bernoulli"}, a list

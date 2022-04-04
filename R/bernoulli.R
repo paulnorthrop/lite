@@ -10,6 +10,7 @@
 #' @param object A fitted model object returned from \code{fitBernoulli()}.
 #' @param pars A numeric parameter vector of length 1 containing a value of
 #'   the Bernoulli success probability.
+#' @param ... Further arguments. None are used currently.
 #' @details
 #' \code{fitBernoulli}: fit a Bernoulli distribution using maximum likelihood
 #'   estimation.
