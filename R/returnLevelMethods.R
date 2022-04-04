@@ -203,9 +203,5 @@ print.summary.returnLevel <- function(x, ...) {
   cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"),
       "\n\n", sep = "")
   print(x$matrix, ...)
-  if (!is.null(x$warning)) {
-    cat("\n")
-    cat(x$warning)
-  }
   invisible(x)
 }
