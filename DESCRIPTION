@@ -12,7 +12,6 @@ Description: Performs adjusted inferences based on model objects fitted, using
 Imports: chandwich,
     exdex,
     graphics,
-    numDeriv,
     revdbayes,
     sandwich,
     stats

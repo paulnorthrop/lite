@@ -2,17 +2,21 @@
 # Leave the default method here for the moment, even though it is not used.
 # It could be useful for testing.
 
-# Default
+#' Functions for the \code{estfun} method
+#'
+#' Functions to calculate contribution to the score vector from individual
+#' observations for a fitted model object.
+#' @param x A fitted model object.
+#' @param ... Further arguments.
+#' @name estfun
+NULL
+## NULL
 
-#' @export
-estfun.default <- function(x, loglik_fn, ...) {
-  U <- numDeriv::jacobian(loglik_fn, x = coef(x), ...)
-  colnames(U) <- names(coef(x))
-  return(U)
-}
+# Default
 
 # Bernoulli
 
+#' @rdname estfun
 #' @export
 estfun.Bernoulli <- function(x, ...) {
   U <- x$data / x$mle - (1 - x$data) / (1 - x$mle)
@@ -23,6 +27,7 @@ estfun.Bernoulli <- function(x, ...) {
 
 # GP
 
+#' @rdname estfun
 #' @export
 estfun.GP <- function(x, eps = 1e-5, m = 3, ...) {
   if (eps <= 0) {
