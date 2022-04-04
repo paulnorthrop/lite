@@ -4,9 +4,9 @@
 # lite
 
 [![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/lite?branch=master&svg=true)](https://ci.appveyor.com/project/paulnorthrop/lite)
+Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/lite?branch=main&svg=true)](https://ci.appveyor.com/project/paulnorthrop/lite)
 [![Coverage
-Status](https://codecov.io/github/paulnorthrop/lite/coverage.svg?branch=master)](https://codecov.io/github/paulnorthrop/lite?branch=master)
+Status](https://codecov.io/github/paulnorthrop/lite/coverage.svg?branch=main)](https://codecov.io/github/paulnorthrop/lite?branch=main)
 
 ## Likelihood-based Inference for Time Series Extremes
 
