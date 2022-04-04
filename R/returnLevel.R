@@ -85,10 +85,17 @@
 #'
 #'  # These data are hourly for one month (January) year so ny = 31 * 24
 #'  # Large inc set here for speed, sacrificing accuracy
+#'  # Default 95% confidence intervals
 #'  rl <- returnLevel(cfit, inc = 2.5, ny = 31 * 24)
 #'  summary(rl)
 #'  rl
-#'  plot(rl)
+#'  oldrl <- plot(rl)
+#'  oldrl
+#'
+#'  # Quickly recalculate/replot the intervals based on profile log-likelihood
+#'  # provided that level is smaller than that used to produce rl
+#'  newrl <- plot(rl, level = 0.9)
+#'  newrl
 #' }
 #' @export
 returnLevel <- function(x, m = 100, level = 0.95, ny, prof = TRUE,
