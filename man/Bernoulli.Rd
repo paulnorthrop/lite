@@ -8,7 +8,7 @@
 \alias{coef.Bernoulli}
 \alias{vcov.Bernoulli}
 \alias{logLik.Bernoulli}
-\title{Inference for the Bernoulli distribution}
+\title{Frequentist inference for the Bernoulli distribution}
 \usage{
 fitBernoulli(data)
 

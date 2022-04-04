@@ -9,7 +9,7 @@
 \alias{coef.GP}
 \alias{vcov.GP}
 \alias{logLik.GP}
-\title{Inference for the generalised Pareto distribution}
+\title{Frequentist inference for the generalised Pareto distribution}
 \usage{
 fitGP(data, u)
 

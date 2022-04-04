@@ -1,4 +1,4 @@
-#' Inference for the Bernoulli distribution
+#' Frequentist inference for the Bernoulli distribution
 #'
 #' Functions involved in making inferences about the probability of success
 #' in a Bernoulli distribution using maximum likelihood estimation.

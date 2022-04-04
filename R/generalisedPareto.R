@@ -1,4 +1,4 @@
-#' Inference for the generalised Pareto distribution
+#' Frequentist inference for the generalised Pareto distribution
 #'
 #' Functions involved in making inferences about the scale and shape
 #' parameters of a generalised Pareto distribution using maximum likelihood
