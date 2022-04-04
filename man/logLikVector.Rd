@@ -2,14 +2,20 @@
 % Please edit documentation in R/logLikVector.R
 \name{logLikVector}
 \alias{logLikVector}
-\title{Evaluate log-likelihood contributions from specific observations}
+\alias{logLik.logLikVector}
+\title{Functions for log-likelihoood contributions}
 \usage{
-logLikVector(object, ...)
+logLikVector(x, ...)
+
+\method{logLik}{logLikVector}(object, ...)
 }
 \arguments{
-\item{object}{A fitted model object.}
+\item{x}{A fitted model object.}
 
 \item{...}{Further arguments.}
+
+\item{object}{An object of class \code{"logLikVector"} returned from a
+\code{logLikVector} method.}
 }
 \description{
 Generic function for calculating log-likelihood contributions from
