@@ -55,7 +55,7 @@ A object (a list) of class \code{"retlev", "lax"} with the
     the first column (\code{ret_levs}) and the corresponding values of the
     (adjusted) profile log-likelihood (\code{prof_loglik}).}
   \item{m,level }{The input values of \code{m} and \code{level}.}
-  \item{call }{The call to \code{return_level}.}
+  \item{call }{The call to \code{returnLevel}.}
 }
 \description{
 Calculates point estimates and confidence intervals for \code{m}-year

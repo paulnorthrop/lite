@@ -25,10 +25,10 @@ Prints the call and the numeric matrix \code{x$matrix} returned from
 }
 \section{Examples}{
 
-See the examples in \code{\link{return_level}}.
+See the examples in \code{\link{returnLevel}}.
 }
 
 \seealso{
-\code{\link{return_level}} to perform inferences about return
+\code{\link{returnLevel}} to perform inferences about return
   levels.
 }

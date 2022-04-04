@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{x}{an object of class \code{c("retlev", "lax")}, a result of
-a call to \code{\link{return_level}}.}
+a call to \code{\link{returnLevel}}.}
 
 \item{digits}{The argument \code{digits} to \code{\link{print.default}}.}
 
@@ -22,15 +22,15 @@ The argument \code{x}, invisibly, as for all
 \code{print} method for an objects of class \code{c("retlev", "lax")}.
 }
 \details{
-Prints the call to \code{\link{return_level}} and the estimates
+Prints the call to \code{\link{returnLevel}} and the estimates
   and 100\code{x$level}\% confidence limits for the \code{x$m}-year
   return level.
 }
 \section{Examples}{
 
-See the examples in \code{\link{return_level}}.
+See the examples in \code{\link{returnLevel}}.
 }
 
 \seealso{
-\code{\link{return_level}}.
+\code{\link{returnLevel}}.
 }

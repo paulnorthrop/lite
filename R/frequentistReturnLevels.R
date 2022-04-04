@@ -66,7 +66,7 @@
 #'     the first column (\code{ret_levs}) and the corresponding values of the
 #'     (adjusted) profile log-likelihood (\code{prof_loglik}).}
 #'   \item{m,level }{The input values of \code{m} and \code{level}.}
-#'   \item{call }{The call to \code{return_level}.}
+#'   \item{call }{The call to \code{returnLevel}.}
 #' @references Coles, S. G. (2001) \emph{An Introduction to Statistical
 #'   Modeling of Extreme Values}, Springer-Verlag, London.
 #'   \doi{10.1007/978-1-4471-3675-0_3}
@@ -98,7 +98,7 @@ returnLevel <- function(x, m = 100, level = 0.95, ny, prof = TRUE,
   }
   Call <- match.call(expand.dots = TRUE)
   type <- match.arg(type)
-  # Check whether ny is supplied in the call to return_level
+  # Check whether ny is supplied in the call to returnLevel
   ny_given <- ifelse(missing(ny), FALSE, TRUE)
   # Make inferences about return levels
   temp <- return_level_bingp(x, m, level, ny, prof, inc, type, ny_given)
@@ -116,7 +116,7 @@ returnLevel <- function(x, m = 100, level = 0.95, ny, prof = TRUE,
 #' \code{plot} method for an objects of class \code{c("retlev", "lax")}.
 #'
 #' @param x an object of class \code{c("retlev", "lax")}, a result of
-#'   a call to \code{\link{return_level}}, using \code{prof = TRUE}.
+#'   a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.
 #' @param y Not used.
 #' @param level A numeric scalar in (0, 1).  The confidence level required for
 #'   the confidence interval for the \code{m}-year return level.
@@ -132,7 +132,7 @@ returnLevel <- function(x, m = 100, level = 0.95, ny, prof = TRUE,
 #' @param ... Further arguments to be passed to
 #'   \code{\link[graphics:plot.default]{plot}}.
 #' @details Plots the profile log-likelihood for a return level, provided that
-#'   \code{x} returned by a call to \code{\link{return_level}} using
+#'   \code{x} returned by a call to \code{\link{returnLevel}} using
 #'   \code{prof = TRUE}.  Horizontal lines indicate the values of the
 #'   maximised log-likelihood and the critical level used to calculate
 #'   the confidence limits.
@@ -141,11 +141,11 @@ returnLevel <- function(x, m = 100, level = 0.95, ny, prof = TRUE,
 #'   information contained in \code{x$for_plot}.
 #' @return A numeric vector of length 3 containing the lower
 #'   100\code{level}\% confidence limit, the MLE and the upper
-#'   100\code{level}\% confidence limit.
-#' @seealso \code{\link{return_level}} to perform inferences about return
+#'   100\code{level}\% confidence limit is returned invisibly.
+#' @seealso \code{\link{returnLevel}} to perform inferences about return
 #'   levels.
 #' @section Examples:
-#' See the examples in \code{\link{return_level}}.
+#' See the examples in \code{\link{returnLevel}}.
 #' @export
 plot.retlev <- function(x, y = NULL, level = NULL, legend = TRUE, digits = 3,
                         plot= TRUE, ...) {
@@ -156,7 +156,7 @@ plot.retlev <- function(x, y = NULL, level = NULL, legend = TRUE, digits = 3,
     stop("use only with \"lax\" objects")
   }
   if (is.null(x$rl_prof)) {
-    stop("No prof loglik info: call return_level() using prof = TRUE")
+    stop("No prof loglik info: call returnLevel() using prof = TRUE")
   }
   # If level is NULL then we use the intervals stored in x
   # Otherwise, we recalculate the confidence intervals
@@ -210,7 +210,7 @@ plot.retlev <- function(x, y = NULL, level = NULL, legend = TRUE, digits = 3,
   }
   res <- c(low_lim, x$rl_prof["mle"], up_lim)
   names(res) <- c("lower", "mle", "upper")
-  return(res)
+  return(invisible(res))
 }
 
 # ------------------------------ print.retlev ------------------------------- #
@@ -220,17 +220,17 @@ plot.retlev <- function(x, y = NULL, level = NULL, legend = TRUE, digits = 3,
 #' \code{print} method for an objects of class \code{c("retlev", "lax")}.
 #'
 #' @param x an object of class \code{c("retlev", "lax")}, a result of
-#'   a call to \code{\link{return_level}}.
+#'   a call to \code{\link{returnLevel}}.
 #' @param digits The argument \code{digits} to \code{\link{print.default}}.
 #' @param ... Additional arguments.  None are used in this function.
-#' @details Prints the call to \code{\link{return_level}} and the estimates
+#' @details Prints the call to \code{\link{returnLevel}} and the estimates
 #'   and 100\code{x$level}\% confidence limits for the \code{x$m}-year
 #'   return level.
 #' @return The argument \code{x}, invisibly, as for all
 #'   \code{\link[base]{print}} methods.
-#' @seealso \code{\link{return_level}}.
+#' @seealso \code{\link{returnLevel}}.
 #' @section Examples:
-#' See the examples in \code{\link{return_level}}.
+#' See the examples in \code{\link{returnLevel}}.
 #' @export
 print.retlev <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
   if (!inherits(x, "retlev")) {
@@ -261,7 +261,7 @@ print.retlev <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 #' \code{summary} method for an objects of class \code{c("retlev", "lax")}.
 #'
 #' @param object an object of class \code{c("retlev", "lax")}, a result of
-#'   a call to \code{\link{return_level}}.
+#'   a call to \code{\link{returnLevel}}.
 #' @param digits An integer. Used for number formatting with
 #'   \code{\link[base:Round]{signif}}.  If \code{digits} is not specified
 #'   (i.e. \code{\link{missing}}) then \code{signif()} will not be called
@@ -270,9 +270,9 @@ print.retlev <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 #' @return Returns a list containing the list element \code{object$call}
 #'   and a numeric matrix \code{matrix} containing the MLE and estimated
 #'   SE of the return level.
-#' @seealso \code{\link{return_level}}.
+#' @seealso \code{\link{returnLevel}}.
 #' @section Examples:
-#' See the examples in \code{\link{return_level}}.
+#' See the examples in \code{\link{returnLevel}}.
 #' @export
 summary.retlev <- function(object, digits, ...) {
   if (!inherits(object, "retlev")) {
@@ -308,10 +308,10 @@ summary.retlev <- function(object, digits, ...) {
 #'   \code{\link{summary.retlev}}.
 #' @return The argument \code{x}, invisibly, as for all
 #'   \code{\link[base]{print}} methods.
-#' @seealso \code{\link{return_level}} to perform inferences about return
+#' @seealso \code{\link{returnLevel}} to perform inferences about return
 #'   levels.
 #' @section Examples:
-#' See the examples in \code{\link{return_level}}.
+#' See the examples in \code{\link{returnLevel}}.
 #' @export
 print.summary.retlev <- function(x, ...) {
   if (!inherits(x, "summary.retlev")) {

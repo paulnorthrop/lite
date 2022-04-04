@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{x}{an object of class \code{c("retlev", "lax")}, a result of
-a call to \code{\link{return_level}}, using \code{prof = TRUE}.}
+a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.}
 
 \item{y}{Not used.}
 
@@ -33,14 +33,14 @@ Otherwise, it is not, but the MLE and confidence limits are returned.}
 \value{
 A numeric vector of length 3 containing the lower
   100\code{level}\% confidence limit, the MLE and the upper
-  100\code{level}\% confidence limit.
+  100\code{level}\% confidence limit is returned invisibly.
 }
 \description{
 \code{plot} method for an objects of class \code{c("retlev", "lax")}.
 }
 \details{
 Plots the profile log-likelihood for a return level, provided that
-  \code{x} returned by a call to \code{\link{return_level}} using
+  \code{x} returned by a call to \code{\link{returnLevel}} using
   \code{prof = TRUE}.  Horizontal lines indicate the values of the
   maximised log-likelihood and the critical level used to calculate
   the confidence limits.
@@ -50,10 +50,10 @@ Plots the profile log-likelihood for a return level, provided that
 }
 \section{Examples}{
 
-See the examples in \code{\link{return_level}}.
+See the examples in \code{\link{returnLevel}}.
 }
 
 \seealso{
-\code{\link{return_level}} to perform inferences about return
+\code{\link{returnLevel}} to perform inferences about return
   levels.
 }
