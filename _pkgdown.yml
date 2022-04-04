@@ -1,0 +1,34 @@
+destination: docs
+
+development:
+  mode: unreleased
+
+template:
+  params:
+    bootswatch: paper
+
+reference:
+  - title: Package
+    desc: ~
+    contents:
+      - "lite"
+  - title: Model fitting
+    desc: ~
+    contents:
+      - "flite"
+      - "generalisedPareto"
+      - "Bernoulli"
+  - title: Return level estimation
+    desc: ~
+    contents:
+      - "returnLevel"
+  - title: Generics
+    desc: ~
+    contents:
+      - "fliteMethods"
+      - "returnLevelMethods"
+  - title: Log-likelihood adjustment
+    desc: ~
+    contents:
+      - "estfun"
+      - "logLikVector"
