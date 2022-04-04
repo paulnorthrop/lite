@@ -2,7 +2,10 @@
 #'
 #' Methods for obects of class \code{"flite"} returned from
 #' \code{\link{flite}}.
-#' @param ... For \code{print.summary.flite}: additional arguments passed to
+#' @param ... For \code{plot.flite}: arguments passed to
+#'   \code{\link[stats]{plot}}, such as graphical parameters.
+#'
+#'   For \code{print.summary.flite}: additional arguments passed to
 #'   \code{\link{print.default}}.
 #' @return
 #'   \code{coef.flite}: a numeric vector of length 4 with names
@@ -181,10 +184,6 @@ print.summary.flite <- function(x, ...) {
 
 #' Plot method for objects of class \code{"flite"}
 #'
-#' \code{plot} method for an object \code{x} of class \code{"flite"}.
-#'
-#' @param x An object of class "flite", a result of a call to
-#'   \code{\link{flite}}.
 #' @param which A character scalar indicating which plot(s) to produce.
 #'   If \code{which = "all"} then all 4 plots described in \strong{Details}
 #'   are produced.  Otherwise, only one of these plots is produced, with the
@@ -200,9 +199,7 @@ print.summary.flite <- function(x, ...) {
 #'   constraint that \eqn{\xi > - \sigma_u / x_{(n)}}{\xi > \sigma_u / x_(n)},
 #'   where \eqn{x_{(n)}}{x_(n)} is the largest excesses of the threshold \eqn{u},
 #'   is preserved.
-#' @param ... Arguments to be passed to \code{\link[stats]{plot}}, such as
-#'   graphical parameters.
-#' @details If \code{which = "all"} then 4 plots are produced.
+#' @details For \code{plot.flite}, if \code{which = "all"} then 4 plots are produced.
 #'     \itemize{
 #'       \item{Top left: (adjusted) log-likelihood for the threshold exceedence
 #'         probability \eqn{p_u}, with a horizontal line indicating a
@@ -218,11 +215,13 @@ print.summary.flite <- function(x, ...) {
 #'         with a horizontal line indicating a 95\% confidence interval for
 #'         \eqn{\theta}.}
 #'     }
+#' @rdname fliteMethods
 #' @export
-plot.flite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
-                      adj_type = c("vertical", "none", "cholesky", "spectral"),
-                      ...) {
-  if (!inherits(x, "flite")) {
+plot.flite <- function(object, which = c("all", "pu", "gp", "xi", "theta"),
+                       adj_type = c("vertical", "none", "cholesky",
+                                    "spectral"),
+                       ...) {
+  if (!inherits(object, "flite")) {
     stop("use only with \"flite\" objects")
   }
   adj_type <- match.arg(adj_type)
@@ -236,7 +235,7 @@ plot.flite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
   }
   # Bernoulli (p[u])
   if ("pu" %in% which) {
-    ci <- chandwich::conf_intervals(attr(x, "Bernoulli"), type = adj_type)
+    ci <- chandwich::conf_intervals(attr(object, "Bernoulli"), type = adj_type)
     bplot <- function(obj, ..., xlab = expression(p[u]),
                       ylab = "log-likelihood") {
       plot(obj, ..., xlab = xlab, ylab = ylab)
@@ -245,7 +244,7 @@ plot.flite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
   }
   # GP - to do, perhaps plot.confreg
   if ("gp" %in% which) {
-    gp <- attr(x, "gp")
+    gp <- attr(object, "gp")
     cr <- chandwich::conf_region(gp, type = adj_type)
     gpplot <- function(obj, ..., conf = c(25, 50, 75, 90, 95)) {
       plot(obj, ..., conf = conf)
@@ -268,7 +267,7 @@ plot.flite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
     tplot <- function(obj, ..., main = "") {
       plot(obj, ..., main = main)
     }
-    tplot(confint(attr(x, "kgaps")), ...)
+    tplot(confint(attr(object, "kgaps")), ...)
   }
   return(invisible())
 }
