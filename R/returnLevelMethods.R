@@ -149,7 +149,7 @@ print.returnLevel <- function(object, digits =
   print.default(format(object$rl_sym, digits = digits), print.gap = 2L,
                 quote = FALSE)
   if (!is.null(object$rl_prof[1])) {
-    cat("\n Profile likelihood-based interval:\n")
+    cat("Profile likelihood-based interval:\n")
     print.default(format(object$rl_prof, digits = digits), print.gap = 2L,
                   quote = FALSE)
   }
