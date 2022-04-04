@@ -18,6 +18,6 @@
 #' @docType package
 #' @name lite
 #' @import sandwich
-#' @importFrom stats nobs vcov coef logLik
+#' @importFrom stats nobs vcov coef logLik confint
 #' @importFrom graphics plot
 NULL
