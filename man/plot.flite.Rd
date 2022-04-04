@@ -36,7 +36,7 @@ is preserved.}
 graphical parameters.}
 }
 \description{
-\code{print} method for an object \code{x} of class \code{"flite"}.
+\code{plot} method for an object \code{x} of class \code{"flite"}.
 }
 \details{
 If \code{which = "all"} then 4 plots are produced.
@@ -56,8 +56,3 @@ If \code{which = "all"} then 4 plots are produced.
         \eqn{\theta}.}
     }
 }
-\section{Examples}{
-
-See the examples in \code{\link{flite}}.
-}
-
