@@ -87,7 +87,7 @@ fitGP <- function(data, u) {
     stop("'u' must have length 1")
   }
   # Remove missing values
-  data <- na.omit(data)
+  data <- stats::na.omit(data)
   # Create excesses of threshold u
   excesses <- data[data > u] - u
   # Call Grimshaw (1993) function, note: k is -xi, a is sigma
