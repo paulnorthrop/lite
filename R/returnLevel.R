@@ -73,7 +73,7 @@
 #' @references Coles, S. G. (2001) \emph{An Introduction to Statistical
 #'   Modeling of Extreme Values}, Springer-Verlag, London.
 #'   \doi{10.1007/978-1-4471-3675-0_3}
-#' @seealso \code{\link{plot.returnLevel}} for plotting the profile
+#' @seealso \code{\link{returnLevelMethods}}, including plotting the profile
 #'   log-likelihood for a return level.
 #' @examples
 #' got_exdex <- requireNamespace("exdex", quietly = TRUE)

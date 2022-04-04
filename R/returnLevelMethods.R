@@ -32,6 +32,10 @@
 #'   and estimated SE of the return level.
 #'
 #'   \code{print.summary.returnLevel}: the argument \code{object}, invisibly.
+#' @seealso \code{\link{returnLevel}} to perform frequentist threshold-based
+#'   inference for return levels.
+#' @section Examples:
+#' See \code{\link{returnLevel}}.
 #' @name returnLevelMethods
 NULL
 ## NULL
@@ -57,10 +61,6 @@ NULL
 #'   If \code{level} is smaller than \code{x$level} then approximate
 #'   100\code{level}\% confidence limits are recalculated based on the
 #'   information contained in \code{x$for_plot}.
-#' @seealso \code{\link{returnLevel}} to perform inferences about return
-#'   levels.
-#' @section Examples:
-#' See \code{\link{returnLevel}}.
 #' @rdname returnLevelMethods
 #' @export
 plot.returnLevel <- function(x, level = NULL, legend = TRUE, digits = 3,

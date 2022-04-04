@@ -32,8 +32,6 @@
 #' \code{logLikVector.Bernoulli} returns an object of class
 #' \code{"logLikVector"}, a vector length \code{length(data)} containing the
 #' likelihood contributions from the individual observations in \code{data}.
-#' @seealso \code{\link[stats]{Binomial}}.  The Bernoulli distribution is the
-#'   special case where \code{size = 1}.
 #' @examples
 #' got_exdex <- requireNamespace("exdex", quietly = TRUE)
 #' if (got_exdex) {

@@ -36,6 +36,8 @@
 #'     \code{\link{print.summary.flite}}.
 #'
 #'   \code{print.summary.flite}: the argument \code{x}, invisibly.
+#' @seealso \code{\link{flite}} to perform frequentist threshold-based
+#'   inference for time series extremes.
 #' @name fliteMethods
 NULL
 ## NULL

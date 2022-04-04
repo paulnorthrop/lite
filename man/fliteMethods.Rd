@@ -117,3 +117,7 @@ For \code{plot.flite}, if \code{which = "all"} then 4 plots are produced.
         \eqn{\theta}.}
     }
 }
+\seealso{
+\code{\link{flite}} to perform frequentist threshold-based
+  inference for time series extremes.
+}

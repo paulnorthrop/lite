@@ -128,16 +128,16 @@
 #'   misspecification in peaks over threshold analysis, \emph{Annals of
 #'   Applied Statistics}, \strong{4}(1), 203-221.
 #'   \doi{10.1214/09-AOAS292}
+#' @seealso \code{\link{fliteMethods}}, including plotting (adjusted)
+#'   log-likelihoods for \eqn{(p_u, \sigma_u, \xi, \theta)}.
 #' @seealso \code{\link{Bernoulli}} for maximum likelihood inference for the
 #'   Bernoulli distribution.
-#' @seealso \code{\link[revdbayes]{grimshaw_gp_mle}} for maximum likelihood
-#'   fitting of a generalised Pareto distribution.
+#' @seealso \code{\link{generalisedPareto}} for maximum likelihood inference
+#'   for the generalised Pareto distribution.
 #' @seealso \code{\link[exdex]{kgaps}} for maximum likelihood inference from
 #'   the \eqn{K}-gaps model for the extremal index.
 #' @seealso \code{\link[exdex]{choose_uk}} to inform the choice of the
 #'   threshold \eqn{u} and run parameter \eqn{K}.
-#' @seealso \code{\link{plot.flite}} for plotting (adjusted) log-likelihoods
-#'   and confidence intervals/regions.
 #' @examples
 #' got_exdex <- requireNamespace("exdex", quietly = TRUE)
 #' if (got_exdex) {

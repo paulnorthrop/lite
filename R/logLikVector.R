@@ -1,4 +1,4 @@
-#' Functions for log-likelihoood contributions
+#' Functions for log-likelihood contributions
 #'
 #' @name logLikVector
 NULL

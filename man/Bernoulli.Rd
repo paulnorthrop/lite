@@ -86,7 +86,3 @@ if (got_exdex) {
  logLik(fit)
 }
 }
-\seealso{
-\code{\link[stats]{Binomial}}.  The Bernoulli distribution is the
-  special case where \code{size = 1}.
-}

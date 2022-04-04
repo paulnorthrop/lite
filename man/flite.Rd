@@ -175,18 +175,18 @@ Suveges, M. and Davison, A. C. (2010) Model
   \doi{10.1214/09-AOAS292}
 }
 \seealso{
+\code{\link{fliteMethods}}, including plotting (adjusted)
+  log-likelihoods for \eqn{(p_u, \sigma_u, \xi, \theta)}.
+
 \code{\link{Bernoulli}} for maximum likelihood inference for the
   Bernoulli distribution.
 
-\code{\link[revdbayes]{grimshaw_gp_mle}} for maximum likelihood
-  fitting of a generalised Pareto distribution.
+\code{\link{generalisedPareto}} for maximum likelihood inference
+  for the generalised Pareto distribution.
 
 \code{\link[exdex]{kgaps}} for maximum likelihood inference from
   the \eqn{K}-gaps model for the extremal index.
 
 \code{\link[exdex]{choose_uk}} to inform the choice of the
   threshold \eqn{u} and run parameter \eqn{K}.
-
-\code{\link{plot.flite}} for plotting (adjusted) log-likelihoods
-  and confidence intervals/regions.
 }

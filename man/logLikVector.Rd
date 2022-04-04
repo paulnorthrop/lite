@@ -3,7 +3,7 @@
 \name{logLikVector}
 \alias{logLikVector}
 \alias{logLik.logLikVector}
-\title{Functions for log-likelihoood contributions}
+\title{Functions for log-likelihood contributions}
 \usage{
 logLikVector(object, ...)
 

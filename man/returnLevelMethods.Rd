@@ -89,6 +89,6 @@ See \code{\link{returnLevel}}.
 }
 
 \seealso{
-\code{\link{returnLevel}} to perform inferences about return
-  levels.
+\code{\link{returnLevel}} to perform frequentist threshold-based
+  inference for return levels.
 }
