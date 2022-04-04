@@ -37,6 +37,97 @@
 NULL
 ## NULL
 
+# ================================= plot.flite =============================== #
+
+#' Plot method for objects of class \code{"flite"}
+#'
+#' @param which A character scalar indicating which plot(s) to produce.
+#'   If \code{which = "all"} then all 4 plots described in \strong{Details}
+#'   are produced.  Otherwise, only one of these plots is produced, with the
+#'   possible names of the arguments being in the order that the plots are
+#'   described in \strong{Details}.
+#' @param adj_type A character scalar passed to
+#'   \code{\link[chandwich]{conf_intervals}} and
+#'   \code{\link[chandwich]{conf_region}} as the argument \code{type} to select
+#'   the type of adjustment applied to the independence log-likelihood.  Of the
+#'   3 adjustments, \code{"vertical"} is preferred because it preserves
+#'   constraints on the parameters, whereas the \code{"cholesky"} and
+#'   \code{"spectral"} adjustment do not.  In the generalised Pareto case the
+#'   constraint that \eqn{\xi > - \sigma_u / x_{(n)}}{\xi > \sigma_u / x_(n)},
+#'   where \eqn{x_{(n)}}{x_(n)} is the largest excesses of the threshold \eqn{u},
+#'   is preserved.
+#' @details For \code{plot.flite}, if \code{which = "all"} then 4 plots are produced.
+#'     \itemize{
+#'       \item{Top left: (adjusted) log-likelihood for the threshold exceedence
+#'         probability \eqn{p_u}, with a horizontal line indicating a
+#'         95\% confidence interval for \eqn{p_u}.}
+#'       \item{Top right: contour plot of the (adjusted) log-likelihood for the
+#'         GP parameters \eqn{(\sigma_u, \xi)}, showing
+#'         (25, 50, 75, 90, 95)\% confidence regions. The linear constraint
+#'         \eqn{\xi > - \sigma_u / x_{(n)}}{\xi > \sigma_u / x_(n)} is drawn
+#'         on the plot.}
+#'       \item{Bottom left: (adjusted) log-likelihood for \eqn{\xi}, with a
+#'         horizontal line indicating a 95\% confidence interval for \eqn{\xi}.}
+#'       \item{Bottom right: log-likelihood for the extremal index \eqn{\theta},
+#'         with a horizontal line indicating a 95\% confidence interval for
+#'         \eqn{\theta}.}
+#'     }
+#' @rdname fliteMethods
+#' @export
+plot.flite <- function(object, which = c("all", "pu", "gp", "xi", "theta"),
+                       adj_type = c("vertical", "none", "cholesky",
+                                    "spectral"),
+                       ...) {
+  if (!inherits(object, "flite")) {
+    stop("use only with \"flite\" objects")
+  }
+  adj_type <- match.arg(adj_type)
+  which <- match.arg(which)
+  old_par <- graphics::par(no.readonly = TRUE)
+  on.exit(graphics::par(old_par))
+  graphics::par(mar = c(4, 4, 1, 1))
+  if (which == "all") {
+    which <- c("pu", "gp", "xi", "theta")
+    graphics::layout(matrix(c(1,2,3,4), 2, 2, byrow = TRUE))
+  }
+  # Bernoulli (p[u])
+  if ("pu" %in% which) {
+    ci <- chandwich::conf_intervals(attr(object, "Bernoulli"), type = adj_type)
+    bplot <- function(obj, ..., xlab = expression(p[u]),
+                      ylab = "log-likelihood") {
+      plot(obj, ..., xlab = xlab, ylab = ylab)
+    }
+    bplot(ci, ...)
+  }
+  # GP - to do, perhaps plot.confreg
+  if ("gp" %in% which) {
+    gp <- attr(object, "gp")
+    cr <- chandwich::conf_region(gp, type = adj_type)
+    gpplot <- function(obj, ..., conf = c(25, 50, 75, 90, 95)) {
+      plot(obj, ..., conf = conf)
+    }
+    gpplot(cr, ...)
+    ofit <- attr(gp, "original_fit")
+    m <- max(ofit$exceedances) - ofit$threshold
+    abline(a = 0, b = -1 / m)
+  }
+  # GP shape parameter xi
+  if ("xi" %in% which) {
+    ci_xi <- chandwich::conf_intervals(gp, which_pars = "xi", type = adj_type)
+    xiplot <- function(obj, ..., ylab = "profile log-likelihood") {
+      plot(obj, ..., ylab = ylab)
+    }
+    xiplot(ci_xi, ...)
+  }
+  # K-gaps for theta
+  if ("theta" %in% which) {
+    tplot <- function(obj, ..., main = "") {
+      plot(obj, ..., main = main)
+    }
+    tplot(confint(attr(object, "kgaps")), ...)
+  }
+  return(invisible())
+}
 
 # ================================ coef.flite =============================== #
 
@@ -179,96 +270,3 @@ print.summary.flite <- function(x, ...) {
   print(x$matrix, ...)
   invisible(x)
 }
-
-# ================================= plot.flite =============================== #
-
-#' Plot method for objects of class \code{"flite"}
-#'
-#' @param which A character scalar indicating which plot(s) to produce.
-#'   If \code{which = "all"} then all 4 plots described in \strong{Details}
-#'   are produced.  Otherwise, only one of these plots is produced, with the
-#'   possible names of the arguments being in the order that the plots are
-#'   described in \strong{Details}.
-#' @param adj_type A character scalar passed to
-#'   \code{\link[chandwich]{conf_intervals}} and
-#'   \code{\link[chandwich]{conf_region}} as the argument \code{type} to select
-#'   the type of adjustment applied to the independence log-likelihood.  Of the
-#'   3 adjustments, \code{"vertical"} is preferred because it preserves
-#'   constraints on the parameters, whereas the \code{"cholesky"} and
-#'   \code{"spectral"} adjustment do not.  In the generalised Pareto case the
-#'   constraint that \eqn{\xi > - \sigma_u / x_{(n)}}{\xi > \sigma_u / x_(n)},
-#'   where \eqn{x_{(n)}}{x_(n)} is the largest excesses of the threshold \eqn{u},
-#'   is preserved.
-#' @details For \code{plot.flite}, if \code{which = "all"} then 4 plots are produced.
-#'     \itemize{
-#'       \item{Top left: (adjusted) log-likelihood for the threshold exceedence
-#'         probability \eqn{p_u}, with a horizontal line indicating a
-#'         95\% confidence interval for \eqn{p_u}.}
-#'       \item{Top right: contour plot of the (adjusted) log-likelihood for the
-#'         GP parameters \eqn{(\sigma_u, \xi)}, showing
-#'         (25, 50, 75, 90, 95)\% confidence regions. The linear constraint
-#'         \eqn{\xi > - \sigma_u / x_{(n)}}{\xi > \sigma_u / x_(n)} is drawn
-#'         on the plot.}
-#'       \item{Bottom left: (adjusted) log-likelihood for \eqn{\xi}, with a
-#'         horizontal line indicating a 95\% confidence interval for \eqn{\xi}.}
-#'       \item{Bottom right: log-likelihood for the extremal index \eqn{\theta},
-#'         with a horizontal line indicating a 95\% confidence interval for
-#'         \eqn{\theta}.}
-#'     }
-#' @rdname fliteMethods
-#' @export
-plot.flite <- function(object, which = c("all", "pu", "gp", "xi", "theta"),
-                       adj_type = c("vertical", "none", "cholesky",
-                                    "spectral"),
-                       ...) {
-  if (!inherits(object, "flite")) {
-    stop("use only with \"flite\" objects")
-  }
-  adj_type <- match.arg(adj_type)
-  which <- match.arg(which)
-  old_par <- graphics::par(no.readonly = TRUE)
-  on.exit(graphics::par(old_par))
-  graphics::par(mar = c(4, 4, 1, 1))
-  if (which == "all") {
-    which <- c("pu", "gp", "xi", "theta")
-    graphics::layout(matrix(c(1,2,3,4), 2, 2, byrow = TRUE))
-  }
-  # Bernoulli (p[u])
-  if ("pu" %in% which) {
-    ci <- chandwich::conf_intervals(attr(object, "Bernoulli"), type = adj_type)
-    bplot <- function(obj, ..., xlab = expression(p[u]),
-                      ylab = "log-likelihood") {
-      plot(obj, ..., xlab = xlab, ylab = ylab)
-    }
-    bplot(ci, ...)
-  }
-  # GP - to do, perhaps plot.confreg
-  if ("gp" %in% which) {
-    gp <- attr(object, "gp")
-    cr <- chandwich::conf_region(gp, type = adj_type)
-    gpplot <- function(obj, ..., conf = c(25, 50, 75, 90, 95)) {
-      plot(obj, ..., conf = conf)
-    }
-    gpplot(cr, ...)
-    ofit <- attr(gp, "original_fit")
-    m <- max(ofit$exceedances) - ofit$threshold
-    abline(a = 0, b = -1 / m)
-  }
-  # GP shape parameter xi
-  if ("xi" %in% which) {
-    ci_xi <- chandwich::conf_intervals(gp, which_pars = "xi", type = adj_type)
-    xiplot <- function(obj, ..., ylab = "profile log-likelihood") {
-      plot(obj, ..., ylab = ylab)
-    }
-    xiplot(ci_xi, ...)
-  }
-  # K-gaps for theta
-  if ("theta" %in% which) {
-    tplot <- function(obj, ..., main = "") {
-      plot(obj, ..., main = main)
-    }
-    tplot(confint(attr(object, "kgaps")), ...)
-  }
-  return(invisible())
-}
-

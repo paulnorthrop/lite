@@ -2,15 +2,22 @@
 % Please edit documentation in R/fliteMethods.R
 \name{fliteMethods}
 \alias{fliteMethods}
+\alias{plot.flite}
 \alias{coef.flite}
 \alias{vcov.flite}
 \alias{nobs.flite}
 \alias{logLik.flite}
 \alias{summary.flite}
 \alias{print.summary.flite}
-\alias{plot.flite}
 \title{Methods for objects of class \code{"flite"}}
 \usage{
+\method{plot}{flite}(
+  object,
+  which = c("all", "pu", "gp", "xi", "theta"),
+  adj_type = c("vertical", "none", "cholesky", "spectral"),
+  ...
+)
+
 \method{coef}{flite}(object, ...)
 
 \method{vcov}{flite}(object, adjust = TRUE, ...)
@@ -22,34 +29,10 @@
 \method{summary}{flite}(object, adjust = TRUE, digits = max(3, getOption("digits") - 3L), ...)
 
 \method{print}{summary.flite}(x, ...)
-
-\method{plot}{flite}(
-  object,
-  which = c("all", "pu", "gp", "xi", "theta"),
-  adj_type = c("vertical", "none", "cholesky", "spectral"),
-  ...
-)
 }
 \arguments{
 \item{object}{An object inheriting from class \code{"flite"}, a result of a
 call to \code{\link{flite}}.}
-
-\item{...}{For \code{plot.flite}: arguments passed to
-  \code{\link[stats]{plot}}, such as graphical parameters.
-
-  For \code{print.summary.flite}: additional arguments passed to
-  \code{\link{print.default}}.}
-
-\item{adjust}{A logical scalar.  If \code{adjust = TRUE} then the
-standard errors of \eqn{(p_u, \sigma_u, \xi)} are estimated via a sandwich
-estimator of the variance-covariance matrix. See \code{\link{flite}}.
-Otherwise, the inverse of the observed information matrix is used.}
-
-\item{digits}{An integer. Passed to \code{\link[base:Round]{signif}} to
-round the values in the summary.}
-
-\item{x}{An object of class "summary.flite", a result of a call to
-\code{\link{summary.flite}}.}
 
 \item{which}{A character scalar indicating which plot(s) to produce.
 If \code{which = "all"} then all 4 plots described in \strong{Details}
@@ -67,6 +50,23 @@ constraints on the parameters, whereas the \code{"cholesky"} and
 constraint that \eqn{\xi > - \sigma_u / x_{(n)}}{\xi > \sigma_u / x_(n)},
 where \eqn{x_{(n)}}{x_(n)} is the largest excesses of the threshold \eqn{u},
 is preserved.}
+
+\item{...}{For \code{plot.flite}: arguments passed to
+  \code{\link[stats]{plot}}, such as graphical parameters.
+
+  For \code{print.summary.flite}: additional arguments passed to
+  \code{\link{print.default}}.}
+
+\item{adjust}{A logical scalar.  If \code{adjust = TRUE} then the
+standard errors of \eqn{(p_u, \sigma_u, \xi)} are estimated via a sandwich
+estimator of the variance-covariance matrix. See \code{\link{flite}}.
+Otherwise, the inverse of the observed information matrix is used.}
+
+\item{digits}{An integer. Passed to \code{\link[base:Round]{signif}} to
+round the values in the summary.}
+
+\item{x}{An object of class "summary.flite", a result of a call to
+\code{\link{summary.flite}}.}
 }
 \value{
 \code{coef.flite}: a numeric vector of length 4 with names
