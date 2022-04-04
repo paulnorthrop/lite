@@ -189,7 +189,7 @@ summary.returnLevel <- function(object, digits, ...) {
   return(res)
 }
 
-# ---------------------------- print.summary.spm ---------------------------- #
+# -------------------------- print.summary.returnLevel ---------------------- #
 
 #' Print method for objects of class \code{"summary.returnLevel"}
 #'
