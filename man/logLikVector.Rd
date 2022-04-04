@@ -18,6 +18,6 @@ logLikVector(x, ...)
 \code{logLikVector} method.}
 }
 \description{
-Generic function for calculating log-likelihood contributions from
-individual observations for a fitted model.
+Generic function to calculate log-likelihood contributions from
+individual observations for a fitted model object.
 }

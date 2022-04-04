@@ -6,8 +6,8 @@ NULL
 
 #' Evaluate log-likelihood contributions from specific observations
 #'
-#' Generic function for calculating log-likelihood contributions from
-#' individual observations for a fitted model.
+#' Generic function to calculate log-likelihood contributions from
+#' individual observations for a fitted model object.
 #'
 #' @param x A fitted model object.
 #' @param ... Further arguments.
