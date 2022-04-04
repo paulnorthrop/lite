@@ -3,9 +3,9 @@
 \docType{package}
 \name{lite}
 \alias{lite}
-\title{lite: Likelihood-based Inference for Time Series Extremes}
+\title{lite: Likelihood-Based Inference for Time Series Extremes}
 \description{
-Performs likelihood-based inference for stationary time series extremes.
+Performs likelihood-Based inference for stationary time series extremes.
 The general approach follows Fawcett and Walshaw (2012). Marginal extreme
 value inferences are adjusted for cluster dependence in the data using the
 methodology in Chandler and Bate (2007), producing an adjusted

@@ -1,5 +1,5 @@
 Package: lite
-Title: Likelihood-based Inference for Time Series Extremes
+Title: Likelihood-Based Inference for Time Series Extremes
 Version: 1.0.0
 Date: 2022-04-05
 Authors@R: person(c("Paul", "J."), "Northrop", email = "p.northrop@ucl.ac.uk",

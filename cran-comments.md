@@ -2,6 +2,8 @@
 
 0 errors | 0 warnings | 0 notes
 
+win-builder flags 5 possibly misspelled words in DESCRIPTION
+
 ## Test environments
 
 - Debian Linux, GCC (R-patched and R-devel) on R-hub

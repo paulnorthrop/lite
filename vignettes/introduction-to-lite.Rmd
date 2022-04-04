@@ -1,12 +1,12 @@
 ---
-title: "Introducing lite: Likelihood-based Inference for Time Series Extremes"
+title: "Introducing lite: Likelihood-Based Inference for Time Series Extremes"
 author: "Paul Northrop"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Introducing lite: Likelihood-based Inference for Time Series Extremes}
+  %\VignetteIndexEntry{Introducing lite: Likelihood-Based Inference for Time Series Extremes}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: lite.bib
@@ -34,7 +34,7 @@ The **lite** package performs likelihood-based inference for stationary time ser
 
 For parts 1 and 2, inferences based on a mis-specified independence log-likelihood are adjusted to account for clustering in the data. The adjustment does not affect the point estimates of $(p_u, \sigma_u, \xi)$ but it ensures that estimates of uncertainty associated with these estimates account for dependence in the data.  Otherwise, uncertainty in these parameters will tend to be underestimated. 
 
-Here, we follow @CB2007 to estimate adjusted log-likelihood functions for $p_u$ and for ($\sigma_u, \xi$), using the **chandwich** package [@chandwich].  For details of the log-likelihood adjustments see the [introductory vignette for the chandwich package](https://cran.r-project.org/web/packages/chandwich/vignettes/chandwich-vignette.html).  We will see below that although there is more than one way to perform this adjustment there is a strong argument in favour of the so-called **vertical** adjustment.  A vertical adjustment adjusts on the log-likelihood scale, thereby respecting constraints on the parameter values, whereas the **horizontal** adjustment adjusts on the parameter scale.
+Here, we follow @CB2007 to estimate adjusted log-likelihood functions for $p_u$ and for ($\sigma_u, \xi$), using the **chandwich** package [@chandwich].  For details of the log-likelihood adjustments see the [introductory vignette for the chandwich package](https://cran.r-project.org/package=chandwich).  We will see below that although there is more than one way to perform this adjustment there is a strong argument in favour of the so-called **vertical** adjustment.  A vertical adjustment adjusts on the log-likelihood scale, thereby respecting constraints on the parameter values, whereas the **horizontal** adjustment adjusts on the parameter scale.
 
 For part 3, the methodology described in @SD2010 is used, implemented by the function `kgaps` in the **exdex** package [@exdex].  The $K$-gaps model involves a tuning parameter $K$ that defines how distant in time threshold exceedances need to be before they are considered to be from separate clusters of threshold exceedances. In addition to providing an estimator of $\theta$, @SD2010 provides a diagnostic to inform the choice of $K$ and the threshold $u$.  We use this diagnostic below, but it would also be advisable also to examine graphically the effect of $(u, K)$ on extremes value inferences, by plotting point estimates and confidence intervals for key quantities such as the generalised Pareto shape parameter $\xi$ or return levels of interest.
 
@@ -61,7 +61,7 @@ For estimating $(p_u, \sigma_u, \xi)$ we treat observations from different years
 
 ## Inferences for model parameters
 
-We need to choose values for the tuning parameters threshold $u$ and $K$-gaps run parameter $K$.  There is no definitive way to do this but the information matrix test developed in @SD2010 can help to make this choice.  Based on the [$K$-gaps section](https://cran.r-project.org/web/packages/exdex/vignettes/exdex-vignette.html#k-gaps) of the [introductory vignette for the exdex package](https://cran.r-project.org/web/packages/exdex/vignettes/exdex-vignette.html) we choose $u = 45$mph and $K = 3$.
+We need to choose values for the tuning parameters threshold $u$ and $K$-gaps run parameter $K$.  There is no definitive way to do this but the information matrix test developed in @SD2010 can help to make this choice.  Based on the $K$-gaps section of the [introductory vignette for the exdex package](https://cran.r-project.org/package=exdex) we choose $u = 45$mph and $K = 3$.
 
 ```{r cheeseboro}
 library(lite)

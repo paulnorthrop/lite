@@ -8,7 +8,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/lite?bra
 [![Coverage
 Status](https://codecov.io/github/paulnorthrop/lite/coverage.svg?branch=main)](https://codecov.io/github/paulnorthrop/lite?branch=main)
 
-## Likelihood-based Inference for Time Series Extremes
+## Likelihood-Based Inference for Time Series Extremes
 
 The **lite** package performs likelihood-based inference for stationary
 time series extremes. The general approach follows [Fawcett and Walshaw
@@ -25,9 +25,9 @@ to the inference, all performed using maximum likelihood estimation.
 For parts 1 and 2 it is necessary to adjust the inferences because we
 expect that the data will exhibit cluster dependence. This is achieved
 using the methodology developed in [Chandler and Bate
-(2007)](https://doi.org/10.1002/env.2133%7D10.1093/biomet/asm015) to
-produce a log-likelihood that is adjusted for this dependence. This is
-achieved using the [chandwich
+(2007)](https://doi.org/10.1093/biomet/asm015) to produce a
+log-likelihood that is adjusted for this dependence. This is achieved
+using the [chandwich
 package](https://cran.r-project.org/package=chandwich). For part 3, the
 methodology described in [Süveges and Davison
 (2010)](https://doi.org/10.1214/09-AOAS292) is used, implemented by the
