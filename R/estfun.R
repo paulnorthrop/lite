@@ -28,6 +28,14 @@ estfun.Bernoulli <- function(x, ...) {
 # GP
 
 #' @rdname estfun
+#' @param eps,m These arguments control the estimation of the observed
+#'   information in \code{gpObsInfo} when the GP shape parameter \eqn{\xi} is
+#'   very close to zero.  In these cases, direct calculation is unreliable.
+#'   \code{eps} is a (small, positive) numeric scalar.  If the absolute value
+#'   of the input value of \eqn{\xi}, that is, \code{pars[2]}, is smaller than
+#'   \code{eps} then we approximate the \code{[2, 2]} element using a Taylor
+#'   series expansion in \eqn{\xi}, evaluated up to and including the
+#'   \code{m}th term.
 #' @export
 estfun.GP <- function(x, eps = 1e-5, m = 3, ...) {
   if (eps <= 0) {
