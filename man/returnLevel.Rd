@@ -55,6 +55,7 @@ A object (a list) of class \code{"returnLevels", "lite"} with the
     the first column (\code{ret_levs}) and the corresponding values of the
     (adjusted) profile log-likelihood (\code{prof_loglik}).}
   \item{m,level }{The input values of \code{m} and \code{level}.}
+  \item{ny }{The value of \code{ny} used to infer the return level.}
   \item{call }{The call to \code{returnLevel}.}
 }
 \description{

@@ -69,6 +69,7 @@
 #'     the first column (\code{ret_levs}) and the corresponding values of the
 #'     (adjusted) profile log-likelihood (\code{prof_loglik}).}
 #'   \item{m,level }{The input values of \code{m} and \code{level}.}
+#'   \item{ny }{The value of \code{ny} used to infer the return level.}
 #'   \item{call }{The call to \code{returnLevel}.}
 #' @references Coles, S. G. (2001) \emph{An Introduction to Statistical
 #'   Modeling of Extreme Values}, Springer-Verlag, London.
@@ -115,6 +116,7 @@ returnLevel <- function(x, m = 100, level = 0.95, ny, prof = TRUE,
   temp <- return_level_bingp(x, m, level, ny, prof, inc, type, ny_given)
   temp$m <- m
   temp$level <- level
+  temp$ny <- ny
   temp$call <- Call
   class(temp) <- c("returnLevel", "lite")
   return(temp)
