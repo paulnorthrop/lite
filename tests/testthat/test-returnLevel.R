@@ -11,7 +11,7 @@ if (got_exdex) {
   # Fit model
   cdata <- exdex::cheeseboro
   cfit <- flite(cdata, u = 45, k = 3)
-  rl <- returnLevel(cfit, inc = 2.5, ny = 31 * 24)
+  rl <- returnLevel(cfit, inc = 5, ny = 31 * 24)
 
   test_that("plot.returnLevel error case", {
     testthat::expect_error(plot(rl, level = 0.99))

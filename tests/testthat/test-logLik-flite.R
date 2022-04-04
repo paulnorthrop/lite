@@ -17,7 +17,7 @@ if (got_exdex) {
   res1 <- logLik(cfit)
   res2 <- check_logLik_flite(cfit)
 
-  test_that("Fitted object and summary() agree", {
+  test_that("Overall logLik value va the sum of the 3 individual logLiks", {
     testthat::expect_equal(res1, res2, ignore_attr = TRUE)
   })
 }
