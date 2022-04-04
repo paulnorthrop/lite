@@ -168,23 +168,23 @@ print.returnLevel <- function(x, digits =
 #'   (i.e. no rounding will be performed).
 #' @rdname returnLevelMethods
 #' @export
-summary.returnLevel <- function(x, digits, ...) {
-  if (!inherits(x, "returnLevel")) {
+summary.returnLevel <- function(object, digits, ...) {
+  if (!inherits(object, "returnLevel")) {
     stop("use only with \"returnLevel\" objects")
   }
-  if (!inherits(x, "lite")) {
+  if (!inherits(object, "lite")) {
     stop("use only with \"lite\" objects")
   }
-  res <- x["call"]
+  res <- object["call"]
   if (missing(digits)) {
-    res$matrix <- cbind(`Estimate` = x$rl_sym["mle"],
-                        `Std. Error` = x$rl_se)
+    res$matrix <- cbind(`Estimate` = object$rl_sym["mle"],
+                        `Std. Error` = object$rl_se)
   } else {
-    res$matrix <- cbind(`Estimate` = signif(x$rl_sym["mle"],
+    res$matrix <- cbind(`Estimate` = signif(object$rl_sym["mle"],
                                             digits = digits),
-                        `Std. Error` = signif(x$rl_se, digits = digits))
+                        `Std. Error` = signif(object$rl_se, digits = digits))
   }
-  rownames(res$matrix) <- paste0("m = ", x$m)
+  rownames(res$matrix) <- paste0("m = ", object$m)
   class(res) <- "summary.returnLevel"
   return(res)
 }

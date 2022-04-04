@@ -12,7 +12,7 @@
 
 \method{print}{returnLevel}(x, digits = max(3L, getOption("digits") - 3L), ...)
 
-\method{summary}{returnLevel}(x, digits, ...)
+\method{summary}{returnLevel}(object, digits, ...)
 
 \method{print}{summary.returnLevel}(x, ...)
 }
