@@ -104,7 +104,7 @@ plot.flite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
     }
     bplot(ci, ...)
   }
-  # GP - to do, perhaps plot.confreg
+  # GP (sigma[u], xi)
   if ("gp" %in% which) {
     gp <- attr(x, "gp")
     cr <- chandwich::conf_region(gp, type = adj_type)
