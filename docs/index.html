@@ -12,11 +12,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Likelihood-based Inference for Time Series Extremes">
-<meta property="og:description" content="Performs adjusted inferences based on model objects fitted, using 
-    maximum likelihood estimation, by the extreme value analysis packages
-    exdex &lt;https://cran.r-project.org/package=exdex&gt;, 
-    lax &lt;https://cran.r-project.org/package=lax&gt;, 
-    revdbayes &lt;https://cran.r-project.org/package=revdbayes&gt;. ">
+<meta property="og:description" content="Performs likelihood-based inference for stationary time series 
+    extremes.  The general approach follows Fawcett and Walshaw (2012)
+    &lt;doi:10.1002/env.2133&gt;.  Marginal extreme value inferences are adjusted for 
+    cluster dependence in the data using the methodology in Chandler and Bate 
+    (2007) &lt;doi:10.1093/biomet/asm015&gt;, producing an adjusted log-likelihood 
+    for the model parameters.  A log-likelihood for the extremal index is 
+    produced using the K-gaps model of Suveges and Davison (2010) 
+    &lt;doi:10.1214/09-AOAS292&gt;. These log-likelihoods are combined to make 
+    inferences about return levels.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -91,7 +95,7 @@
 <li>A generalised Pareto, GP(<em>σ</em><sub><em>u</em></sub>,<em>ξ</em>), model for the marginal distribution of threshold excesses.</li>
 <li>The <em>K</em>-gaps model for the extremal index <em>θ</em>, based on inter-exceedance times.</li>
 </ol>
-<p>For parts 1 and 2 it is necessary to adjust the inferences because we expect that the data will exhibit cluster dependence. This is achieved using the methodology developed in <a href="https://doi.org/10.1002/env.2133%7D10.1093/biomet/asm015" class="external-link">Chandler and Bate (2007)</a> to produce a log-likelihood that is adjusted for this dependence. The (adjusted) log-likelihoods from parts 1, 2 and 3 are combined to make inferences about return levels.</p>
+<p>For parts 1 and 2 it is necessary to adjust the inferences because we expect that the data will exhibit cluster dependence. This is achieved using the methodology developed in <a href="https://doi.org/10.1002/env.2133%7D10.1093/biomet/asm015" class="external-link">Chandler and Bate (2007)</a> to produce a log-likelihood that is adjusted for this dependence. This is achieved using the <a href="https://cran.r-project.org/package=chandwich" class="external-link">chandwich package</a>. For part 3, the methodology described in <a href="https://doi.org/10.1214/09-AOAS292" class="external-link">Süveges and Davison (2010)</a> is used, implemented by the function <code>kgaps</code> in the <a href="https://cran.r-project.org/package=exdex" class="external-link">exdex package</a>. The (adjusted) log-likelihoods from parts 1, 2 and 3 are combined to make inferences about return levels.</p>
 <div class="section level3">
 <h3 id="an-example-cheeseboro-wind-gusts">An example: Cheeseboro wind gusts<a class="anchor" aria-label="anchor" href="#an-example-cheeseboro-wind-gusts"></a>
 </h3>
