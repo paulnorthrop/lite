@@ -15,6 +15,15 @@ csl: taylor-and-francis-chicago-author-date.csl
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
+
+required <- c("exdex")
+
+if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
+  knitr::opts_chunk$set(eval = FALSE)
+```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 ```
 
 The **lite** package performs likelihood-based inference for stationary time series extremes.  The general approach follows @FW2012. There are 3 independent parts to the inference, all performed using maximum likelihood estimation.
@@ -27,7 +36,7 @@ For parts 1 and 2, inferences based on a mis-specified independence log-likeliho
 
 Here, we follow @CB2007 to estimate adjusted log-likelihood functions for $p_u$ and for ($\sigma_u, \xi$), using the **chandwich** package [@chandwich].  For details of the log-likelihood adjustments see the [introductory vignette for the chandwich package](https://cran.r-project.org/web/packages/chandwich/vignettes/chandwich-vignette.html).  We will see below that although there is more than one way to perform this adjustment there is a strong argument in favour of the so-called **vertical** adjustment.  A vertical adjustment adjusts on the log-likelihood scale, thereby respecting constraints on the parameter values, whereas the **horizontal** adjustment adjusts on the parameter scale.
 
-In part 3, the methodology described in @SD2010 is used, implemented by the **exdex** package [@exdex].  The $K$-gaps model involves a tuning parameter $K$ that defines how distant in time threshold exceedances need to be before they are considered to be from separate clusters. In addition to providing an estimator of $\theta$ @SD2010 provides a diagnostic to inform the choice of $K$ and the threshold $u$.  We use this diagnostic below, but it would also be advisable to examine graphically the effect of $(u, K)$ on extremes value inferences, by plotting point estimates and confidence intervals for key quantities such as the generalised Pareto shape parameter $\xi$ or return levels of interest.
+In part 3, the methodology described in @SD2010 is used, implemented by the function `kgaps` in the **exdex** package [@exdex].  The $K$-gaps model involves a tuning parameter $K$ that defines how distant in time threshold exceedances need to be before they are considered to be from separate clusters of threshold exceedances. In addition to providing an estimator of $\theta$, @SD2010 provides a diagnostic to inform the choice of $K$ and the threshold $u$.  We use this diagnostic below, but it would also be advisable also to examine graphically the effect of $(u, K)$ on extremes value inferences, by plotting point estimates and confidence intervals for key quantities such as the generalised Pareto shape parameter $\xi$ or return levels of interest.
 
 The (adjusted) log-likelihoods produced in parts 1, 2 and 3 are combined to form a log-likelihood for $(p_u, \sigma_u, \xi, \theta)$ from which extreme value inferences can be made.
 
@@ -48,7 +57,7 @@ axis(1, at = c(-1000, seq(from = 372, by = 744 + 250, length = 10), 100000),
 axis(2)
 ```
 
-For estimating $(p_u, \sigma_u, \xi)$ we treat observations from different years as being in separate clusters.  In the code below we do not need to set the argument `cluster` explicitly because when the data are supplied in the form of a matrix the function `flite` sets `cluster` automatically to achieve this.  A total of 42 observations are missing in `cheeseboro`. This causes no problems for inferences about $(p_u, \sigma_u, \xi)$.  For making inferences about $\theta$ using the $K$-gaps model we split the data further into sequences of non-missing values and construct the $K$-gaps separately for each sequence.
+For estimating $(p_u, \sigma_u, \xi)$ we treat observations from different years as being in separate clusters.  In the code below we do not need to set the argument `cluster` explicitly because when the data are supplied as a matrix the function `flite` sets `cluster` automatically to achieve this.  A total of 42 observations are missing in `cheeseboro`. This causes no problems for inferences about $(p_u, \sigma_u, \xi)$.  For making inferences about $\theta$ using the $K$-gaps model the `kgaps` function splits the data further into sequences of non-missing values and constructs the sample $K$-gaps separately for each sequence.
 
 ## Inferences for model parameters
 
@@ -64,7 +73,7 @@ summary(cfit)
 summary(cfit, adjust = FALSE)
 ```
 
-The effect of the adjustment of the log-likelihood for clustering is to increase the estimated standard errors for the parameters $p_u$ and $(\sigma_ \xi)$ in comparison to those obtained with no adjustment.
+The effect of the adjustment of the log-likelihood for clustering is to increase the estimated standard errors for the parameters $p_u$ and $(\sigma_u, \xi)$ in comparison to those obtained with no adjustment.
 
 A plot method for objects inheriting from class `"flite"` enables us to inspect the log-likelihood functions for $p_u$, $(\sigma_u, \xi)$ and $\theta$.  This first set of plots use the default vertical adjustment to the log-likelihoods for $p_u$ and $(\sigma_u, \xi)$.
 
@@ -72,7 +81,7 @@ A plot method for objects inheriting from class `"flite"` enables us to inspect 
 plot(cfit)
 ```
 
-The line superimposed on the on the plot on the top right show the boundary of the log-likelihood imposed by the constraint $\xi > -\sigma_u / x_{(n)}$, where $x_{(n)}$ is the largest threshold excess.  Using the vertical adjustment ensures that this constraint is respected after adjustment.  However, if we use one of the horizontal adjustments, **cholesky** or **spectral** then the adjusted log-likelihood has non-zero density values outside of the correct support. This is the reason why the "vertical" adjustment is the default.
+The line superimposed on the on the plot on the top right shows the boundary of the log-likelihood imposed by the constraint $\xi > -\sigma_u / x_{(n)}$, where $x_{(n)}$ is the largest threshold excess.  Using the vertical adjustment ensures that this constraint is respected after adjustment.  However, if we use one of the horizontal adjustments, **cholesky** or **spectral**, then the adjusted log-likelihood has non-zero density values outside of the correct support. This is the reason why the vertical adjustment is the default.
 
 ```{r spectral, fig.width = 7, fig.height = 5, message = FALSE}
 plot(cfit, which = "gp", adj_type = "spectral")
