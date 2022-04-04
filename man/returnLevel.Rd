@@ -67,7 +67,10 @@ estimate, and (b) profile likelihood-based intervals based on an (adjusted)
 log-likelihood.
 }
 \details{
-\code{ny} provides information about the (intended) frequency of
+For information about return levels see the "Introducing lite"
+  vignette.
+
+  \code{ny} provides information about the (intended) frequency of
   sampling in time, that is, the number of observations that would be
   observed in a year if there are no missing values.  If the number of
   observations may vary between years then \code{ny} should be set equal to
