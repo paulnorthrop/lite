@@ -2,6 +2,10 @@
 #'
 #' Methods for objects of class \code{"flite"} returned from
 #' \code{\link{flite}}.
+#' @param x An object inheriting from class \code{"flite"}, a result of a
+#'   call to \code{\link{flite}}.
+#' @param object An object inheriting from class \code{"flite"}, a result of a
+#'   call to \code{\link{flite}}.
 #' @param ... For \code{plot.flite}: arguments passed to
 #'   \code{\link[graphics:plot.default]{plot}}, such as graphical parameters.
 #'
@@ -73,11 +77,11 @@ NULL
 #'     }
 #' @rdname fliteMethods
 #' @export
-plot.flite <- function(object, which = c("all", "pu", "gp", "xi", "theta"),
+plot.flite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
                        adj_type = c("vertical", "none", "cholesky",
                                     "spectral"),
                        ...) {
-  if (!inherits(object, "flite")) {
+  if (!inherits(x, "flite")) {
     stop("use only with \"flite\" objects")
   }
   adj_type <- match.arg(adj_type)
@@ -91,7 +95,7 @@ plot.flite <- function(object, which = c("all", "pu", "gp", "xi", "theta"),
   }
   # Bernoulli (p[u])
   if ("pu" %in% which) {
-    ci <- chandwich::conf_intervals(attr(object, "Bernoulli"), type = adj_type)
+    ci <- chandwich::conf_intervals(attr(x, "Bernoulli"), type = adj_type)
     bplot <- function(obj, ..., xlab = expression(p[u]),
                       ylab = "log-likelihood") {
       plot(obj, ..., xlab = xlab, ylab = ylab)
@@ -100,7 +104,7 @@ plot.flite <- function(object, which = c("all", "pu", "gp", "xi", "theta"),
   }
   # GP - to do, perhaps plot.confreg
   if ("gp" %in% which) {
-    gp <- attr(object, "gp")
+    gp <- attr(x, "gp")
     cr <- chandwich::conf_region(gp, type = adj_type)
     gpplot <- function(obj, ..., conf = c(25, 50, 75, 90, 95)) {
       plot(obj, ..., conf = conf)
@@ -123,7 +127,7 @@ plot.flite <- function(object, which = c("all", "pu", "gp", "xi", "theta"),
     tplot <- function(obj, ..., main = "") {
       plot(obj, ..., main = main)
     }
-    tplot(confint(attr(object, "kgaps")), ...)
+    tplot(confint(attr(x, "kgaps")), ...)
   }
   return(invisible())
 }
@@ -132,8 +136,6 @@ plot.flite <- function(object, which = c("all", "pu", "gp", "xi", "theta"),
 
 #' Extract model coefficients method for objects of class \code{"flite"}
 #'
-#' @param object An object inheriting from class \code{"flite"}, a result of a
-#'   call to \code{\link{flite}}.
 #' @rdname fliteMethods
 #' @export
 coef.flite <- function(object, ...) {
