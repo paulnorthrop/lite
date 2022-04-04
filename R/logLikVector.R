@@ -9,11 +9,11 @@ NULL
 #' Generic function to calculate log-likelihood contributions from
 #' individual observations for a fitted model object.
 #'
-#' @param x A fitted model object.
+#' @param object A fitted model object.
 #' @param ... Further arguments.
 #' @rdname logLikVector
 #' @export
-logLikVector <- function(x, ...) {
+logLikVector <- function(object, ...) {
   UseMethod("logLikVector")
 }
 

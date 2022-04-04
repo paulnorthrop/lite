@@ -5,17 +5,15 @@
 \alias{logLik.logLikVector}
 \title{Functions for log-likelihoood contributions}
 \usage{
-logLikVector(x, ...)
+logLikVector(object, ...)
 
 \method{logLik}{logLikVector}(object, ...)
 }
 \arguments{
-\item{x}{A fitted model object.}
-
-\item{...}{Further arguments.}
-
 \item{object}{An object of class \code{"logLikVector"} returned from a
 \code{logLikVector} method.}
+
+\item{...}{Further arguments.}
 }
 \description{
 Generic function to calculate log-likelihood contributions from
