@@ -2,7 +2,7 @@
 
 0 errors | 0 warnings | 0 notes
 
-win-builder flags 5 possibly misspelled words in DESCRIPTION
+win-builder: I think that the 5 possibly misspelled words are OK and the 2 possibly invalid https://doi.org URLs seem to be correct
 
 ## Test environments
 
