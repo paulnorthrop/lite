@@ -32,9 +32,6 @@
 #' sample \code{excesses} from the generalized Pareto distribution, that is,
 #' the negated Hessian matrix of the generalized Pareto independence
 #' log-likelihood, evaluated at \code{pars}.
-#'
-#' \code{logLikVector.GP}: calculates contributions to an independence
-#' log-likelihood based on the generalised Pareto distribution.
 #' @return
 #' \code{fitGP} returns an object of class \code{"GP"}, a list
 #' with components: \code{maxLogLik}, \code{threshold}, \code{mle},
@@ -47,10 +44,6 @@
 #' \code{c("sigma[u]", "xi")}.
 #' \code{nobs}, \code{coef}, \code{vcov} and \code{logLik} methods are
 #' provided.
-#'
-#' \code{logLikVector.GP} returns an object of class \code{"logLikVector"}, a
-#' vector of length \code{length(data)} containing the likelihood contributions
-#' from the individual observations in \code{data}.
 #' @examples
 #' got_exdex <- requireNamespace("exdex", quietly = TRUE)
 #' if (got_exdex) {

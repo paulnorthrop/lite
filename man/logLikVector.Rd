@@ -20,14 +20,23 @@ logLikVector(object, ...)
 
 \item{...}{Further arguments. None are currently used for
 \code{logLikVector.Bernoulli} or \code{logLikVector.GP}.}
+
+\item{pars}{A numeric parameter vector.
+
+  For \code{logLikVector.Bernoulli} this is a vector of length 1 containing
+  a value of the Bernoulli success probability.
+
+  For \code{logLikVector.GP} this is a numeric vector of length 2 containing
+  the values of the generalised Pareto scale (\eqn{\sigma_u}) and shape
+  (\eqn{\xi}) parameters.}
 }
 \value{
 For \code{logLikVector}: an object of class \code{logLikVec}.
   This is a numeric vector of length \eqn{n} containing contributions to the
-  score function from \eqn{n} observations, with attributes \code{"df"}
-  (degrees of freedom), giving the number of estimated parameters in the
-  model, and \code{"nobs"}, giving the number observations used to perform
-  the estimation.
+  the independence log-likelihood from \eqn{n} observations, with attributes
+  \code{"df"} (degrees of freedom), giving the number of estimated
+  parameters in the model, and \code{"nobs"}, giving the number observations
+  used to perform the estimation.
 
   For \code{logLik.logLikVector}: an object of class \code{logLik}.  This is
   a number with the attributes \code{"df"} and \code{"nobs"} as described

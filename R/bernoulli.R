@@ -8,16 +8,10 @@
 #'    for a failure and TRUE for a success. Missing values are removed using
 #'   \code{\link[stats:na.fail]{na.omit}}.
 #' @param object A fitted model object returned from \code{fitBernoulli()}.
-#' @param pars A numeric parameter vector of length 1 containing a value of
-#'   the Bernoulli success probability.
 #' @param ... Further arguments. None are used currently.
 #' @details
 #' \code{fitBernoulli}: fit a Bernoulli distribution using maximum likelihood
 #'   estimation.
-#'
-#' \code{logLikVector.Bernoulli}: calculates contributions to an independence
-#' log-likelihood based on the Bernoulli distribution.  The log-likelihood is
-#' calculated up to an additive constant.
 #'
 #' \code{nobs, coef, vcov} and \code{logLik} methods are provided.
 #' @return
@@ -28,10 +22,6 @@
 #' values have been removed, using \code{\link[stats:na.fail]{na.omit}} and
 #' \code{n0} and \code{n1} are, respectively, the number of failures and the
 #' number of successes.
-#'
-#' \code{logLikVector.Bernoulli} returns an object of class
-#' \code{"logLikVector"}, a vector length \code{length(data)} containing the
-#' likelihood contributions from the individual observations in \code{data}.
 #' @examples
 #' got_exdex <- requireNamespace("exdex", quietly = TRUE)
 #' if (got_exdex) {
