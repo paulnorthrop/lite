@@ -39,7 +39,6 @@
 #' @docType package
 #' @name lite
 #' @import sandwich
-#' @importFrom sandwich estfun
 #' @importFrom stats nobs vcov coef logLik confint
 #' @importFrom graphics plot
 NULL
