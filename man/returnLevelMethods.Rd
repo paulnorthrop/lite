@@ -57,13 +57,14 @@ of a call to \code{\link{returnLevel}}, using \code{prof = TRUE}.}
   lower 100\code{level}\% confidence limit, the MLE and the upper
   100\code{level}\% confidence limit is returned invisibly.
 
-  \code{print.returnLevel}: the argument \code{object}, invisibly.
+  \code{print.returnLevel}: the argument \code{x} is returned, invisibly.
 
   \code{summary.returnLevel}: a list containing the list element
   \code{object$call} and a numeric matrix \code{matrix} containing the MLE
   and estimated SE of the return level.
 
-  \code{print.summary.returnLevel}: the argument \code{object}, invisibly.
+  \code{print.summary.returnLevel}: the argument \code{x} is returned,
+  invisibly.
 }
 \description{
 Methods for objects of class \code{"returnLevel"} returned from
