@@ -27,7 +27,6 @@
 #' @seealso \code{\link{generalisedPareto}} for maximum likelihood inference
 #'   for the generalised Pareto distribution.
 #' @examples
-#' library(lite)
 #' got_exdex <- requireNamespace("exdex", quietly = TRUE)
 #' if (got_exdex) {
 #'
@@ -41,6 +40,10 @@
 #'
 #' }
 #' @name estfun
+#' @export
+estfun <- function(x, ...) {
+  UseMethod("estfun")
+}
 NULL
 ## NULL
 

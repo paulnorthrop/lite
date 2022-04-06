@@ -6,6 +6,8 @@
 \alias{estfun.GP}
 \title{Functions for the \code{estfun} method}
 \usage{
+estfun(x, ...)
+
 \method{estfun}{Bernoulli}(x, ...)
 
 \method{estfun}{GP}(x, eps = 1e-05, m = 3, ...)
@@ -51,7 +53,6 @@ A \code{\link[sandwich]{estfun}} method is required by
   the argument \code{V} passed to \code{\link[chandwich]{adjust_loglik}}.
 }
 \examples{
-library(lite)
 got_exdex <- requireNamespace("exdex", quietly = TRUE)
 if (got_exdex) {
 
