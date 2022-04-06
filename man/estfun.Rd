@@ -51,6 +51,7 @@ A \code{\link[sandwich]{estfun}} method is required by
   the argument \code{V} passed to \code{\link[chandwich]{adjust_loglik}}.
 }
 \examples{
+library(lite)
 got_exdex <- requireNamespace("exdex", quietly = TRUE)
 if (got_exdex) {
 
