@@ -2,42 +2,68 @@
 % Please edit documentation in R/logLikVector.R
 \name{logLikVector}
 \alias{logLikVector}
+\alias{logLikVector.Bernoulli}
+\alias{logLikVector.GP}
 \alias{logLik.logLikVector}
 \title{Functions for log-likelihood contributions}
 \usage{
 logLikVector(object, ...)
 
+\method{logLikVector}{Bernoulli}(object, pars = NULL, ...)
+
+\method{logLikVector}{GP}(object, pars = NULL, ...)
+
 \method{logLik}{logLikVector}(object, ...)
 }
 \arguments{
-\item{object}{For \code{logLikVector}: a fitted model object.
-For the \code{loglik} method: a object of class \code{"logLikVector"}
-returned from a \code{logLikVector} method.}
+\item{object}{A fitted model object.}
 
-\item{...}{Further arguments.}
+\item{...}{Further arguments. None are currently used for
+\code{logLikVector.Bernoulli} or \code{logLikVector.GP}.}
 }
 \value{
-\code{logLikVector} returns a vector of
+For \code{logLikVector}: an object of class \code{logLikVec}.
+  This is a numeric vector of length \eqn{n} containing contributions to the
+  score function from \eqn{n} observations, with attributes \code{"df"}
+  (degrees of freedom), giving the number of estimated parameters in the
+  model, and \code{"nobs"}, giving the number observations used to perform
+  the estimation.
+
+  For \code{logLik.logLikVector}: an object of class \code{logLik}.  This is
+  a number with the attributes \code{"df"} and \code{"nobs"} as described
+  above.
 }
 \description{
 Generic function for calculating log-likelihood contributions from
 individual observations for a fitted model object.
 }
 \details{
-The \code{logLik} method \code{logLik.LogLikVector} sums the
+A \code{logLikVector} method is used to construct a log-likelihood
+  function to supply as the argument \code{loglik} to the function
+  \code{\link[chandwich]{adjust_loglik}}, which performs log-likelihood
+  adjustment for parts 1 and 2 of the inferences performed by
+  \code{\link{flite}}.
+
+  The \code{logLik} method \code{logLik.LogLikVector} sums the
   log-likelihood contributions from individual observations.
 }
 \examples{
 # logLikVector.Bernoulli
 bfit <- fitBernoulli(c(exdex::cheeseboro) > 45)
-head(logLikVector(bfit))
+bvec <- logLikVector(bfit)
+logLik(bvec)
+logLik(bfit)
 
 # estfun.generalisedPareto
 gpfit <- fitGP(c(exdex::cheeseboro), u = 45)
-head(logLikVector(gpfit))
+gpvec <- logLikVector(gpfit)
+logLik(gpvec)
+logLik(gpfit)
 }
 \seealso{
-\code{\link{Bernoulli}}
+\code{\link{Bernoulli}} for maximum likelihood inference for the
+  Bernoulli distribution.
 
-\code{\link{generalisedPareto}}
+\code{\link{generalisedPareto}} for maximum likelihood inference
+  for the generalised Pareto distribution.
 }
