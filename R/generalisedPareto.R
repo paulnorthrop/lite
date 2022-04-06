@@ -35,10 +35,6 @@
 #'
 #' \code{logLikVector.GP}: calculates contributions to an independence
 #' log-likelihood based on the generalised Pareto distribution.
-#'
-#' \code{gpObsInfo} returns a 2 by 2 matrix with row and columns names
-#' \code{c("sigma[u]", "xi")}.
-#' \code{nobs, coef, vcov} and \code{logLik} methods are provided.
 #' @return
 #' \code{fitGP} returns an object of class \code{"GP"}, a list
 #' with components: \code{maxLogLik}, \code{threshold}, \code{mle},
@@ -46,8 +42,14 @@
 #' where \code{exceedances} is a vector containing the values that exceed the
 #' threshold \code{threshold} and \code{nexc} is the length of this vector.
 #'
+#'
+#' \code{gpObsInfo} returns a 2 by 2 matrix with row and columns names
+#' \code{c("sigma[u]", "xi")}.
+#' \code{nobs}, \code{coef}, \code{vcov} and \code{logLik} methods are
+#' provided.
+#'
 #' \code{logLikVector.GP} returns an object of class \code{"logLikVector"}, a
-#' vector length \code{length(data)} containing the likelihood contributions
+#' vector of length \code{length(data)} containing the likelihood contributions
 #' from the individual observations in \code{data}.
 #' @examples
 #' got_exdex <- requireNamespace("exdex", quietly = TRUE)
