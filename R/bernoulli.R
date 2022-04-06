@@ -62,6 +62,9 @@ NULL
 #' @rdname Bernoulli
 #' @export
 fitBernoulli <- function(data) {
+  if (!is.vector(data)) {
+    stop("'data' must be a vector")
+  }
   res <- list()
   res$data <- data
   obs_data <- stats::na.omit(data)
