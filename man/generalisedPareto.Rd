@@ -41,7 +41,7 @@ the generalised Pareto scale and shape parameters.}
 \item{excesses}{A numeric vector of threshold excesses, that is, amounts
 by which exceedances of \code{u} exceed \code{u}.}
 
-\item{eps, m}{These arguments control the estimation of the observed
+\item{eps, m}{These control the estimation of the observed
 information in \code{gpObsInfo} when the GP shape parameter \eqn{\xi} is
 very close to zero.  In these cases, direct calculation is unreliable.
 \code{eps} is a (small, positive) numeric scalar.  If the absolute value
@@ -61,10 +61,10 @@ threshold \code{threshold} and \code{nexc} is the length of this vector.
     \code{c("sigma[u]", "xi")}.  The MLEs of the GP parameters
     \eqn{\sigma_u} and \eqn{\xi}.
 
-  \code{vcov.GP}: a 2 by 2 numeric matrix with row and column names
-    \code{c("sigma[u]", "xi")}.  The estimated variance-covariance matrix
-    for the model parameters. No adjustment for cluster dependence has been
-    made.
+  \code{vcov.GP}: a \eqn{2 \times 2}{2 x 2} matrix with row and
+    column names \code{c("sigma[u]", "xi")}.  The estimated
+    variance-covariance matrix for the model parameters. No adjustment for
+    cluster dependence has been made.
 
   \code{nobs.GP}: a numeric vector of length 1.  The number of
     observations used to estimate (\eqn{\sigma_u}, \eqn{\xi}).

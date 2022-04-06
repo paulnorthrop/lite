@@ -29,9 +29,10 @@
 #'   \code{coef.Bernoulli}: a numeric vector of length 1 with name \code{prob}.
 #'     The MLE of the probability of success.
 #'
-#'   \code{vcov.Bernoulli}: a 1 by 1 numeric matrix with row and column name
-#'     \code{prob}.  The estimated variance of the estimator of the probability
-#'     of success. No adjustment for cluster dependence has been made.
+#'   \code{vcov.Bernoulli}: a \eqn{1 \times 1}{1 x 1} matrix with row
+#'     and column name \code{prob}.  The estimated variance of the estimator of
+#'     the probability of success. No adjustment for cluster dependence has
+#'     been made.
 #'
 #'   \code{nobs.Bernoulli}: a numeric vector of length 1 with name \code{prob}.
 #'   The number of observations used to estimate the probability of success.

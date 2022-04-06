@@ -12,7 +12,7 @@
 #'   For \code{logLikVector.GP} this is a numeric vector of length 2 containing
 #'   the values of the generalised Pareto scale (\eqn{\sigma_u}) and shape
 #'   (\eqn{\xi}) parameters.
-#' @param ... Further arguments. None are currently used for
+#' @param ... Further arguments. None are used for either
 #'   \code{logLikVector.Bernoulli} or \code{logLikVector.GP}.
 #' @details A \code{logLikVector} method is used to construct a log-likelihood
 #'   function to supply as the argument \code{loglik} to the function

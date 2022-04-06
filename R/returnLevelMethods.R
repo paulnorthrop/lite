@@ -12,14 +12,14 @@
 #'   For \code{print.returnLevel}: the argument \code{digits} to
 #'   \code{\link{print.default}}.
 #'
-#'   For \code{summary.returnLevel}: an integer. Used for number formatting
+#'   For \code{summary.returnLevel}: an integer. For number formatting
 #'   with \code{\link[base:Round]{signif}}.  If \code{digits} is not specified
 #'   (i.e. \code{\link{missing}}) then \code{signif()} will not be called
 #'   (i.e. no rounding will be performed).
 #' @param ... For \code{plot.returnLevel}: arguments passed to
 #'   \code{\link[graphics:plot.default]{plot}}, such as graphical parameters.
 #'
-#'   For \code{print.summary.returnLevel}: additional arguments passed to
+#'   For \code{print.summary.returnLevel}: arguments passed to
 #'   \code{\link{print.default}}.
 #' @return \code{plot.returnLevel}: a numeric vector of length 3 containing the
 #'   lower 100\code{level}\% confidence limit, the MLE and the upper
@@ -28,7 +28,7 @@
 #'   \code{print.returnLevel}: the argument \code{x} is returned, invisibly.
 #'
 #'   \code{summary.returnLevel}: a list containing the list element
-#'   \code{object$call} and a numeric matrix \code{matrix} containing the MLE
+#'   \code{object$call} and a matrix \code{matrix} containing the MLE
 #'   and estimated SE of the return level.
 #'
 #'   \code{print.summary.returnLevel}: the argument \code{x} is returned,

@@ -3,7 +3,7 @@
 #' Functions to calculate contributions to the score vector from individual
 #' observations for a fitted model object.
 #' @param x A fitted model object.
-#' @param ... Further arguments.  None are currently used for
+#' @param ... Further arguments.  None are used for
 #'   \code{estfun.Bernoulli} or \code{estfun.GP}.
 #' @details An \code{\link[sandwich]{estfun}} method is used by
 #'   \code{\link[sandwich:vcovCL]{meatCL}} to calculate the
@@ -11,7 +11,7 @@
 #'   the log-likelihood adjustments in \code{\link{flite}} are based.
 #'   Specifically, \code{\link[sandwich:vcovCL]{meatCL}} is used to calculate
 #'   the argument \code{V} passed to \code{\link[chandwich]{adjust_loglik}}.
-#' @return An \eqn{n \times k}{n x k} numeric matrix containing contributions
+#' @return An \eqn{n \times k}{n x k} matrix containing contributions
 #'   to the score function from \eqn{n} observations for each of the \eqn{k}
 #'   parameters.
 #'
@@ -54,7 +54,7 @@ estfun.Bernoulli <- function(x, ...) {
 # GP
 
 #' @rdname estfun
-#' @param eps,m These arguments control the estimation of the observed
+#' @param eps,m These control the estimation of the observed
 #'   information in \code{gpObsInfo} when the GP shape parameter \eqn{\xi} is
 #'   very close to zero.  In these cases, direct calculation is unreliable.
 #'   \code{eps} is a (small, positive) numeric scalar.  If the absolute value

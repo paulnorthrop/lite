@@ -76,8 +76,8 @@ round the values in the summary.}
     \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The MLEs of the parameters
     \eqn{p_u}, \eqn{\sigma_u}, \eqn{\xi} and \eqn{\theta}.
 
-  \code{vcov.flite}: a 4 by 4 numeric matrix with row and column names
-    \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The estimated
+  \code{vcov.flite}: a \eqn{4 \times 4}{4 x 4} matrix with row and
+    column names \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The estimated
     variance-covariance matrix for the model parameters.  If
     \code{adjust = TRUE} then the elements corresponding to \eqn{p_u},
     \eqn{\sigma_u} and \eqn{\xi} are adjusted for cluster dependence using

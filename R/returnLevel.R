@@ -23,7 +23,7 @@
 #'   limits.  If this is not supplied then \code{inc} is set to one hundredth
 #'   of the length of the symmetric confidence interval for return level.
 #' @param type A character scalar.  The argument \code{type} to the function
-#'   returned by \code{\link[chandwich]{adjust_loglik}}, that is, the type of
+#'   returned by the function \code{\link[chandwich]{adjust_loglik}}, that is, the type of
 #'   adjustment made to the independence log-likelihood function in creating
 #'   an adjusted log-likelihood function.  See \strong{Details} and
 #'   \strong{Value} in \code{\link[chandwich]{adjust_loglik}}.

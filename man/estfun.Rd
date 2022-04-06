@@ -13,10 +13,10 @@
 \arguments{
 \item{x}{A fitted model object.}
 
-\item{...}{Further arguments.  None are currently used for
+\item{...}{Further arguments.  None are used for
 \code{estfun.Bernoulli} or \code{estfun.GP}.}
 
-\item{eps, m}{These arguments control the estimation of the observed
+\item{eps, m}{These control the estimation of the observed
 information in \code{gpObsInfo} when the GP shape parameter \eqn{\xi} is
 very close to zero.  In these cases, direct calculation is unreliable.
 \code{eps} is a (small, positive) numeric scalar.  If the absolute value
@@ -26,7 +26,7 @@ series expansion in \eqn{\xi}, evaluated up to and including the
 \code{m}th term.}
 }
 \value{
-An \eqn{n \times k}{n x k} numeric matrix containing contributions
+An \eqn{n \times k}{n x k} matrix containing contributions
   to the score function from \eqn{n} observations for each of the \eqn{k}
   parameters.
 
