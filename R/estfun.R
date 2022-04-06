@@ -27,17 +27,17 @@
 #' @seealso \code{\link{generalisedPareto}} for maximum likelihood inference
 #'   for the generalised Pareto distribution.
 #' @examples
-#' library(lite)
+#' library(sandwich)
 #' got_exdex <- requireNamespace("exdex", quietly = TRUE)
 #' if (got_exdex) {
 #'
 #'  # estfun.Bernoulli
 #'  bfit <- fitBernoulli(exdex::cheeseboro > 45)
-#' head(estfun.Bernoulli(bfit))
+#'  head(estfun(bfit))
 #'
 #'  # estfun.generalisedPareto
 #'  gpfit <- fitGP(c(exdex::cheeseboro), u = 45)
-#' # head(estfun(gpfit))
+#'  head(estfun(gpfit))
 #'
 #' }
 #' @name estfun
