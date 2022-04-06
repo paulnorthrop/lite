@@ -28,18 +28,14 @@
 #'   for the generalised Pareto distribution.
 #' @examples
 #' library(sandwich)
-#' got_exdex <- requireNamespace("exdex", quietly = TRUE)
-#' if (got_exdex) {
 #'
-#'  # estfun.Bernoulli
-#'  bfit <- fitBernoulli(exdex::cheeseboro > 45)
-#'  head(estfun(bfit))
+#' # estfun.Bernoulli
+#' bfit <- fitBernoulli(c(exdex::cheeseboro) > 45)
+#' head(estfun(bfit))
 #'
-#'  # estfun.generalisedPareto
-#'  gpfit <- fitGP(c(exdex::cheeseboro), u = 45)
-#'  head(estfun(gpfit))
-#'
-#' }
+#' # estfun.generalisedPareto
+#' gpfit <- fitGP(c(exdex::cheeseboro), u = 45)
+#' head(estfun(gpfit))
 #' @name estfun
 NULL
 ## NULL
