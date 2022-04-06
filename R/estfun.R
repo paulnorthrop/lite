@@ -5,7 +5,7 @@
 #' @param x A fitted model object.
 #' @param ... Further arguments.  None are currently used for
 #'   \code{estfun.Bernoulli} or \code{estfun.GP}.
-#' @details A \code{\link[sandwich]{estfun}} method is required by
+#' @details An \code{\link[sandwich]{estfun}} method is used by
 #'   \code{\link[sandwich:vcovCL]{meatCL}} to calculate the
 #'   \code{\link[sandwich]{meat}} in the sandwich covariance estimator on which
 #'   the log-likelihood adjustments in \code{\link{flite}} are based.

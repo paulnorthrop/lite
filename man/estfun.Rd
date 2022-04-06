@@ -43,7 +43,7 @@ Functions to calculate contributions to the score vector from individual
 observations for a fitted model object.
 }
 \details{
-A \code{\link[sandwich]{estfun}} method is required by
+An \code{\link[sandwich]{estfun}} method is used by
   \code{\link[sandwich:vcovCL]{meatCL}} to calculate the
   \code{\link[sandwich]{meat}} in the sandwich covariance estimator on which
   the log-likelihood adjustments in \code{\link{flite}} are based.
