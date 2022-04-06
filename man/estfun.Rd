@@ -13,7 +13,8 @@
 \arguments{
 \item{x}{A fitted model object.}
 
-\item{...}{Further arguments.}
+\item{...}{Further arguments.  None are currently used for
+\code{estfun.Bernoulli} or \code{estfun.GP}.}
 
 \item{eps, m}{These arguments control the estimation of the observed
 information in \code{gpObsInfo} when the GP shape parameter \eqn{\xi} is
@@ -24,7 +25,49 @@ of the input value of \eqn{\xi}, that is, \code{pars[2]}, is smaller than
 series expansion in \eqn{\xi}, evaluated up to and including the
 \code{m}th term.}
 }
+\value{
+An \eqn{n \times k}{n x k} numeric matrix containing contributions
+  to the score function from \eqn{n} observations for each of the \eqn{k}
+  parameters.
+
+  \strong{estfun.Bernoulli}: an \eqn{n \times 2}{n x 1} matrix, where
+  \eqn{n} is the sample size, the length of the input \code{data} to
+  \code{\link{fitBernoulli}}.  The column is named \code{prob}.
+
+  \strong{estfun.generalisedPareto}: an \eqn{n \times 2}{n x 2} matrix, where
+  \eqn{n} is the sample size, the length of the input \code{data} to
+  \code{\link{fitGP}}.  The columns are named \code{sigma[u]} and \code{xi}
+}
 \description{
-Functions to calculate contribution to the score vector from individual
+Functions to calculate contributions to the score vector from individual
 observations for a fitted model object.
+}
+\details{
+A \code{\link[sandwich]{estfun}} method is required by
+  \code{\link[sandwich:vcovCL]{meatCL}} to calculate the
+  \code{\link[sandwich]{meat}} in the sandwich covariance estimator on which
+  the log-likelihood adjustments in \code{\link{flite}} are based.
+  Specifically, \code{\link[sandwich:vcovCL]{meatCL}} is used to calculate
+  the argument \code{V} passed to \code{\link[chandwich]{adjust_loglik}}.
+}
+\examples{
+got_exdex <- requireNamespace("exdex", quietly = TRUE)
+if (got_exdex) {
+
+ # estfun.Bernoulli
+ bfit <- fitBernoulli(exdex::cheeseboro > 45)
+ head(estfun(bfit))
+
+ # estfun.generalisedPareto
+ gpfit <- fitGP(c(exdex::cheeseboro), u = 45)
+ head(estfun(gpfit))
+
+}
+}
+\seealso{
+\code{\link{Bernoulli}} for maximum likelihood inference for the
+  Bernoulli distribution.
+
+\code{\link{generalisedPareto}} for maximum likelihood inference
+  for the generalised Pareto distribution.
 }

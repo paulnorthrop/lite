@@ -1,13 +1,44 @@
-# Create an estfun methods for the "Bernoulli" and GP" classes.
-# Leave the default method here for the moment, even though it is not used.
-# It could be useful for testing.
-
 #' Functions for the \code{estfun} method
 #'
-#' Functions to calculate contribution to the score vector from individual
+#' Functions to calculate contributions to the score vector from individual
 #' observations for a fitted model object.
 #' @param x A fitted model object.
-#' @param ... Further arguments.
+#' @param ... Further arguments.  None are currently used for
+#'   \code{estfun.Bernoulli} or \code{estfun.GP}.
+#' @details A \code{\link[sandwich]{estfun}} method is required by
+#'   \code{\link[sandwich:vcovCL]{meatCL}} to calculate the
+#'   \code{\link[sandwich]{meat}} in the sandwich covariance estimator on which
+#'   the log-likelihood adjustments in \code{\link{flite}} are based.
+#'   Specifically, \code{\link[sandwich:vcovCL]{meatCL}} is used to calculate
+#'   the argument \code{V} passed to \code{\link[chandwich]{adjust_loglik}}.
+#' @return An \eqn{n \times k}{n x k} numeric matrix containing contributions
+#'   to the score function from \eqn{n} observations for each of the \eqn{k}
+#'   parameters.
+#'
+#'   \strong{estfun.Bernoulli}: an \eqn{n \times 2}{n x 1} matrix, where
+#'   \eqn{n} is the sample size, the length of the input \code{data} to
+#'   \code{\link{fitBernoulli}}.  The column is named \code{prob}.
+#'
+#'   \strong{estfun.generalisedPareto}: an \eqn{n \times 2}{n x 2} matrix, where
+#'   \eqn{n} is the sample size, the length of the input \code{data} to
+#'   \code{\link{fitGP}}.  The columns are named \code{sigma[u]} and \code{xi}
+#' @seealso \code{\link{Bernoulli}} for maximum likelihood inference for the
+#'   Bernoulli distribution.
+#' @seealso \code{\link{generalisedPareto}} for maximum likelihood inference
+#'   for the generalised Pareto distribution.
+#' @examples
+#' got_exdex <- requireNamespace("exdex", quietly = TRUE)
+#' if (got_exdex) {
+#'
+#'  # estfun.Bernoulli
+#'  bfit <- fitBernoulli(exdex::cheeseboro > 45)
+#'  head(estfun(bfit))
+#'
+#'  # estfun.generalisedPareto
+#'  gpfit <- fitGP(c(exdex::cheeseboro), u = 45)
+#'  head(estfun(gpfit))
+#'
+#' }
 #' @name estfun
 NULL
 ## NULL
