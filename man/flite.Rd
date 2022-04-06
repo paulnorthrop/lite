@@ -58,7 +58,7 @@ In particular, the clustering adjustment argument \code{cadjust}
 may make a difference if the number of clusters is not large.}
 }
 \value{
-An object of class \code{"flite", "lite", "chandwich"}.
+An object of class \code{c("flite", "lite", "chandwich")}.
   Objects inheriting from class \code{"flite"} have \code{coef},
   \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
   methods.  This object is a function with 2 arguments:

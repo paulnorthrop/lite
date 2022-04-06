@@ -87,7 +87,7 @@
 #'   \eqn{(p_u, \sigma_u, \xi, \theta)}.  Return levels are a function of these
 #'   parameters and therefore inferences for return levels can be based on
 #'   this log-likelihood.
-#' @return An object of class \code{"flite", "lite", "chandwich"}.
+#' @return An object of class \code{c("flite", "lite", "chandwich")}.
 #'   Objects inheriting from class \code{"flite"} have \code{coef},
 #'   \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
 #'   methods.  This object is a function with 2 arguments:
