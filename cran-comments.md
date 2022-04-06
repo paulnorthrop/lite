@@ -1,3 +1,11 @@
+## Resubmission
+
+In this version I have
+
+* Provided the \value tags in estfun.Rd and logLikVector.Rd that were missing in the original submission.
+* Improved the explanations in the \value tags elsewhere, particularly those that were flagged.
+* Reset the par() settings after they were changed in the package vignette.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
