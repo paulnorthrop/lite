@@ -59,9 +59,7 @@ may make a difference if the number of clusters is not large.}
 }
 \value{
 An object of class \code{c("flite", "lite", "chandwich")}.
-  Objects inheriting from class \code{"flite"} have \code{coef},
-  \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
-  methods.  This object is a function with 2 arguments:
+  This object is a function with 2 arguments:
     \itemize{
       \item{\code{pars}, a numeric vector of length 4 to supply the value of
         the parameter vector \eqn{(p_u, \sigma_u, \xi, \theta)},}
@@ -80,6 +78,10 @@ An object of class \code{c("flite", "lite", "chandwich")}.
 
  The named input arguments are returned in a list as the attribute
  \code{inputs}.  If \code{ny} was not supplied then its value is \code{NA}.
+
+  Objects inheriting from class \code{"flite"} have \code{coef},
+  \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
+  methods.  See \code{\link{fliteMethods}}.
 }
 \description{
 Performs threshold-based frequentist inference for 3 aspects of stationary

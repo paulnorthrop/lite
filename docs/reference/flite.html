@@ -122,9 +122,8 @@ may make a difference if the number of clusters is not large.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class <code>"flite", "lite", "chandwich"</code>.
-  Objects inheriting from class <code>"flite"</code> have <code>coef</code>,
-<code>logLik</code>, <code>nobs</code>, <code>plot</code>, <code>summary</code> and <code>vcov</code>  methods.  This object is a function with 2 arguments:</p><ul><li><p><code>pars</code>, a numeric vector of length 4 to supply the value of
+    <p>An object of class <code>c("flite", "lite", "chandwich")</code>.
+  This object is a function with 2 arguments:</p><ul><li><p><code>pars</code>, a numeric vector of length 4 to supply the value of
         the parameter vector \((p_u, \sigma_u, \xi, \theta)\),</p></li>
 <li><p><code>type</code>, a character scalar specifying the type of
         adjustment made to the independence log-likelihood in parts
@@ -138,7 +137,9 @@ may make a difference if the number of clusters is not large.</p></dd>
 <code><a href="https://paulnorthrop.github.io/chandwich/reference/adjust_loglik.html" class="external-link">adjust_loglik</a></code> (for <code>"Bernoulli"</code> and
 <code>"gp"</code>) and <code><a href="https://paulnorthrop.github.io/exdex/reference/kgaps.html" class="external-link">kgaps</a></code> (for <code>"kgaps"</code>).
  The named input arguments are returned in a list as the attribute
-<code>inputs</code>.  If <code>ny</code> was not supplied then its value is <code>NA</code>.</p>
+<code>inputs</code>.  If <code>ny</code> was not supplied then its value is <code>NA</code>.
+  Objects inheriting from class <code>"flite"</code> have <code>coef</code>,
+<code>logLik</code>, <code>nobs</code>, <code>plot</code>, <code>summary</code> and <code>vcov</code>  methods.  See <code><a href="fliteMethods.html">fliteMethods</a></code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -212,30 +213,38 @@ for Bayesian Extreme Value Analysis. R package version 1.3.9.
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">got_exdex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"exdex"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="va">got_exdex</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"> <span class="co">### Cheeseboro wind gusts</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">### Cheeseboro wind gusts</span></span>
 <span class="r-in"></span>
-<span class="r-in"> <span class="co"># Make inferences</span></span>
-<span class="r-in"> <span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span></span>
-<span class="r-in"> <span class="co"># Each column of the matrix cdata corresponds to data from a different year</span></span>
-<span class="r-in"> <span class="co"># flite() sets cluster automatically to correspond to column (year)</span></span>
-<span class="r-in"> <span class="va">cfit</span> <span class="op">&lt;-</span> <span class="fu">flite</span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
+<span class="r-in"><span class="co"># Make inferences</span></span>
+<span class="r-in"><span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span></span>
+<span class="r-in"><span class="co"># Each column of the matrix cdata corresponds to data from a different year</span></span>
+<span class="r-in"><span class="co"># flite() sets cluster automatically to correspond to column (year)</span></span>
+<span class="r-in"><span class="va">cfit</span> <span class="op">&lt;-</span> <span class="fu">flite</span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> flite(data = cdata, u = 45, k = 3)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Estimate Std. Error</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p[u]      0.02771   0.005988</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sigma[u]  9.27400   2.071000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> xi       -0.09368   0.084250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> theta     0.36390   0.026530</span>
 <span class="r-in"></span>
-<span class="r-in"> <span class="co"># 2 ways to find the maximised log-likelihood value</span></span>
-<span class="r-in"> <span class="fu">cfit</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"> <span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
+<span class="r-in"><span class="co"># 2 ways to find the maximised log-likelihood value</span></span>
+<span class="r-in"><span class="fu">cfit</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -1855.404</span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 'log Lik.' -1855.404 (df=4)</span>
 <span class="r-in"></span>
-<span class="r-in"> <span class="co"># Plots of (adjusted) log-likelihoods</span></span>
-<span class="r-in"> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
-<span class="r-in"> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span>, which <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
+<span class="r-in"><span class="co"># Plots of (adjusted) log-likelihoods</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
 <span class="r-plt img"><img src="flite-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span>, which <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
 <span class="r-plt img"><img src="flite-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>

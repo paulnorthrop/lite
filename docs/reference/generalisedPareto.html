@@ -66,14 +66,6 @@ estimation.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fitGP</span><span class="op">(</span><span class="va">data</span>, <span class="va">u</span><span class="op">)</span>
 
-<span class="fu">gpObsInfo</span><span class="op">(</span><span class="va">pars</span>, <span class="va">excesses</span>, eps <span class="op">=</span> <span class="fl">1e-05</span>, m <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-
-<span class="co"># S3 method for GP</span>
-<span class="fu"><a href="logLikVector.html">logLikVector</a></span><span class="op">(</span><span class="va">object</span>, pars <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for GP</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/nobs.html" class="external-link">nobs</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-
 <span class="co"># S3 method for GP</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
 
@@ -81,7 +73,12 @@ estimation.</p>
 <span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S3 method for GP</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/stats/nobs.html" class="external-link">nobs</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
+
+<span class="co"># S3 method for GP</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
+
+<span class="fu">gpObsInfo</span><span class="op">(</span><span class="va">pars</span>, <span class="va">excesses</span>, eps <span class="op">=</span> <span class="fl">1e-05</span>, m <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -91,6 +88,13 @@ estimation.</p>
 <code><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></code>.</p></dd>
 <dt>u</dt>
 <dd><p>A numeric scalar.  The extremal value threshold.</p></dd>
+<dt>object</dt>
+<dd><p>A fitted model object returned from <code>fitGP()</code>.</p></dd>
+<dt>...</dt>
+<dd><p>Further arguments to be passed to the functions in the
+sandwich package <code><a href="https://sandwich.R-Forge.R-project.org//reference/meat.html" class="external-link">meat</a></code> (if <code>cluster = NULL</code>),
+or <code><a href="https://sandwich.R-Forge.R-project.org//reference/vcovCL.html" class="external-link">meatCL</a></code> (if <code>cluster</code> is not
+<code>NULL</code>).</p></dd>
 <dt>pars</dt>
 <dd><p>A numeric parameter vector of length 2 containing the values of
 the generalised Pareto scale and shape parameters.</p></dd>
@@ -106,13 +110,6 @@ of the input value of \(\xi\), that is, <code>pars[2]</code>, is smaller than
 <code>eps</code> then we approximate the <code>[2, 2]</code> element using a Taylor
 series expansion in \(\xi\), evaluated up to and including the
 <code>m</code>th term.</p></dd>
-<dt>object</dt>
-<dd><p>A fitted model object returned from <code>fitGP()</code>.</p></dd>
-<dt>...</dt>
-<dd><p>Further arguments to be passed to the functions in the
-sandwich package <code><a href="https://sandwich.R-Forge.R-project.org//reference/meat.html" class="external-link">meat</a></code> (if <code>cluster = NULL</code>),
-or <code><a href="https://sandwich.R-Forge.R-project.org//reference/vcovCL.html" class="external-link">meatCL</a></code> (if <code>cluster</code> is not
-<code>NULL</code>).</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -121,47 +118,65 @@ with components: <code>maxLogLik</code>, <code>threshold</code>, <code>mle</code
 <code>vcov</code>, <code>exceedances</code>, <code>nexc</code>,
 where <code>exceedances</code> is a vector containing the values that exceed the
 threshold <code>threshold</code> and <code>nexc</code> is the length of this vector.
-<code>logLikVector.GP</code> returns an object of class <code>"logLikVector"</code>, a
-vector length <code>length(data)</code> containing the likelihood contributions
-from the individual observations in <code>data</code>.</p>
+<code>coef.GP</code>: a numeric vector of length 2 with names
+<code>c("sigma[u]", "xi")</code>.  The MLEs of the GP parameters
+\(\sigma_u\) and \(\xi\).
+<code>vcov.GP</code>: a 2 by 2 numeric matrix with row and column names
+<code>c("sigma[u]", "xi")</code>.  The estimated variance-covariance matrix
+    for the model parameters. No adjustment for cluster dependence has been
+    made.
+<code>nobs.GP</code>: a numeric vector of length 1.  The number of
+    observations used to estimate (\(\sigma_u\), \(\xi\)).
+<code>logLik.GP</code>: an object of class <code>"logLik"</code>: a numeric scalar
+    with value equal to the maximised log-likelihood. The returned object
+    also has attributes <code>nobs</code>, the numbers of observations used in
+    each of these model fits, and <code>"df"</code> (degrees of freedom), which is
+    equal to the number of total number of parameters estimated (2).
+<code>gpObsInfo</code> returns a 2 by 2 matrix with row and columns names
+<code>c("sigma[u]", "xi")</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p><code>fitGP</code>: fit a generalised Pareto distribution using maximum likelihood
-  estimation.  This function calls <code><a href="https://paulnorthrop.github.io/revdbayes/reference/grimshaw_gp_mle.html" class="external-link">grimshaw_gp_mle</a></code>.</p>
+  estimation, using an <strong>independence</strong> log-likelihood formed by
+  summing contributions from individual observations. No adjustment for
+  cluster dependence has been made in estimating the variance-covariance
+  matrix stored as component in <code>vcov</code> in the returned object. This
+  function calls <code><a href="https://paulnorthrop.github.io/revdbayes/reference/grimshaw_gp_mle.html" class="external-link">grimshaw_gp_mle</a></code>.</p>
+<p><code>coef</code>, <code>vcov</code>, <code>nobs</code> and <code>logLik</code> methods are
+provided for objects of class <code>"GP"</code> returned from <code>fitGP</code>.</p>
 <p><code>gpObsInfo</code>: calculates the observed information matrix for a random
 sample <code>excesses</code> from the generalized Pareto distribution, that is,
 the negated Hessian matrix of the generalized Pareto independence
 log-likelihood, evaluated at <code>pars</code>.</p>
-<p><code>logLikVector.GP</code>: calculates contributions to an independence
-log-likelihood based on the generalised Pareto distribution.</p>
-<p><code>gpObsInfo</code> returns a 2 by 2 matrix with row and columns names
-<code>c("sigma[u]", "xi")</code>.
-<code>nobs, coef, vcov</code> and <code>logLik</code> methods are provided.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">got_exdex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"exdex"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="va">got_exdex</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"> <span class="co"># Set up data and set a threshold</span></span>
-<span class="r-in"> <span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Set up data and set a threshold</span></span>
+<span class="r-in"><span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"> <span class="co"># Fit a generalised Pareto distribution</span></span>
-<span class="r-in"> <span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">fitGP</span><span class="op">(</span><span class="va">cdata</span>, <span class="fl">45</span><span class="op">)</span></span>
+<span class="r-in"><span class="co"># Fit a generalised Pareto distribution</span></span>
+<span class="r-in"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">fitGP</span><span class="op">(</span><span class="va">cdata</span>, <span class="fl">45</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"> <span class="co"># Calculate the log-likelihood at the MLE</span></span>
-<span class="r-in"> <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="logLikVector.html">logLikVector</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
+<span class="r-in"><span class="co"># Calculate the log-likelihood at the MLE</span></span>
+<span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="logLikVector.html">logLikVector</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"> <span class="co"># The logLik method sums the individual log-likelihood contributions.</span></span>
-<span class="r-in"> <span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span class="r-in"><span class="co"># The logLik method sums the individual log-likelihood contributions.</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 'log Lik.' -642.3738 (df=2)</span>
 <span class="r-in"></span>
-<span class="r-in"> <span class="co"># nobs, coef, vcov, logLik methods for objects returned from fitGP()</span></span>
-<span class="r-in"> <span class="fu"><a href="https://rdrr.io/r/stats/nobs.html" class="external-link">nobs</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
-<span class="r-in"> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
-<span class="r-in"> <span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
-<span class="r-in"> <span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span class="co"># nobs, coef, vcov, logLik methods for objects returned from fitGP()</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/nobs.html" class="external-link">nobs</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 205</span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    sigma[u]          xi </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9.27393360 -0.09367672 </span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             sigma[u]           xi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sigma[u]  0.73625550 -0.038388888</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> xi       -0.03838889  0.003725287</span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'log Lik.' -642.3738 (df=2)</span>
 </code></pre></div>
     </div>

@@ -114,7 +114,7 @@ an adjusted log-likelihood function.  See <strong>Details</strong> and
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A object (a list) of class <code>"returnLevels", "lite"</code> with the
+    <p>A object (a list) of class <code>"returnLevel", "lite"</code> with the
   components</p>
 <dl><dt>rl_sym,rl_prof </dt>
 <dd><p>Named numeric vectors containing the respective
@@ -172,38 +172,55 @@ an adjusted log-likelihood function.  See <strong>Details</strong> and
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p><code><a href="returnLevelMethods.html">returnLevelMethods</a></code>, including plotting the profile
-  log-likelihood for a return level.</p></div>
+    <div class="dont-index"><p><code><a href="returnLevelMethods.html">returnLevelMethods</a></code>, including plotting the (adjusted)
+  profile log-likelihood for a return level.</p></div>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">got_exdex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"exdex"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="va">got_exdex</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"> <span class="co">### Cheeseboro wind gusts</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">### Cheeseboro wind gusts</span></span>
 <span class="r-in"></span>
-<span class="r-in"> <span class="co"># Make inferences</span></span>
-<span class="r-in"> <span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span></span>
-<span class="r-in"> <span class="co"># Each column of the matrix cdata corresponds to data from a different year</span></span>
-<span class="r-in"> <span class="co"># flite() sets cluster automatically to correspond to column (year)</span></span>
-<span class="r-in"> <span class="va">cfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="flite.html">flite</a></span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span class="co"># Make inferences</span></span>
+<span class="r-in"><span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span></span>
+<span class="r-in"><span class="co"># Each column of the matrix cdata corresponds to data from a different year</span></span>
+<span class="r-in"><span class="co"># flite() sets cluster automatically to correspond to column (year)</span></span>
+<span class="r-in"><span class="va">cfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="flite.html">flite</a></span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"> <span class="co"># These data are hourly for one month (January) year so ny = 31 * 24</span></span>
-<span class="r-in"> <span class="co"># Large inc set here for speed, sacrificing accuracy</span></span>
-<span class="r-in"> <span class="co"># Default 95% confidence intervals</span></span>
-<span class="r-in"> <span class="va">rl</span> <span class="op">&lt;-</span> <span class="fu">returnLevel</span><span class="op">(</span><span class="va">cfit</span>, inc <span class="op">=</span> <span class="fl">2.5</span>, ny <span class="op">=</span> <span class="fl">31</span> <span class="op">*</span> <span class="fl">24</span><span class="op">)</span></span>
-<span class="r-in"> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">rl</span><span class="op">)</span></span>
-<span class="r-in"> <span class="va">rl</span></span>
-<span class="r-in"> <span class="va">oldrl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rl</span><span class="op">)</span></span>
-<span class="r-in"> <span class="va">oldrl</span></span>
-<span class="r-in"></span>
-<span class="r-in"> <span class="co"># Quickly recalculate/replot the intervals based on profile log-likelihood</span></span>
-<span class="r-in"> <span class="co"># provided that level is smaller than that used to produce rl</span></span>
-<span class="r-in"> <span class="va">newrl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rl</span>, level <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
-<span class="r-in"> <span class="va">newrl</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span class="co"># These data are hourly for one month (January) year so ny = 31 * 24</span></span>
+<span class="r-in"><span class="co"># Large inc set here for speed, sacrificing accuracy</span></span>
+<span class="r-in"><span class="co"># Default 95% confidence intervals</span></span>
+<span class="r-in"><span class="va">rl</span> <span class="op">&lt;-</span> <span class="fu">returnLevel</span><span class="op">(</span><span class="va">cfit</span>, inc <span class="op">=</span> <span class="fl">2.5</span>, ny <span class="op">=</span> <span class="fl">31</span> <span class="op">*</span> <span class="fl">24</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">rl</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> returnLevel(x = cfit, ny = 31 * 24, inc = 2.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Estimate Std. Error</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> m = 100 90.72766   10.39134</span>
+<span class="r-in"><span class="va">rl</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> returnLevel(x = cfit, ny = 31 * 24, inc = 2.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> MLE and 95% confidence limits for the 100-year return level</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Normal interval:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  lower     mle   upper  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  70.36   90.73  111.09  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Profile likelihood-based interval:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  lower     mle   upper  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  77.41   90.73  132.59  </span>
+<span class="r-in"><span class="va">oldrl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rl</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="returnLevel-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span class="va">oldrl</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     lower       mle     upper </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  77.40789  90.72766 132.59250 </span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Quickly recalculate/replot the intervals based on profile log-likelihood</span></span>
+<span class="r-in"><span class="co"># provided that level is smaller than that used to produce rl</span></span>
+<span class="r-in"><span class="va">newrl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rl</span>, level <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="returnLevel-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span class="va">newrl</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     lower       mle     upper </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  78.93789  90.72766 120.95866 </span>
 </code></pre></div>

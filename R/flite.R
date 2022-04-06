@@ -88,9 +88,7 @@
 #'   parameters and therefore inferences for return levels can be based on
 #'   this log-likelihood.
 #' @return An object of class \code{c("flite", "lite", "chandwich")}.
-#'   Objects inheriting from class \code{"flite"} have \code{coef},
-#'   \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
-#'   methods.  This object is a function with 2 arguments:
+#'   This object is a function with 2 arguments:
 #'     \itemize{
 #'       \item{\code{pars}, a numeric vector of length 4 to supply the value of
 #'         the parameter vector \eqn{(p_u, \sigma_u, \xi, \theta)},}
@@ -109,6 +107,10 @@
 #'
 #'  The named input arguments are returned in a list as the attribute
 #'  \code{inputs}.  If \code{ny} was not supplied then its value is \code{NA}.
+#'
+#'   Objects inheriting from class \code{"flite"} have \code{coef},
+#'   \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
+#'   methods.  See \code{\link{fliteMethods}}.
 #' @references Chandler, R. E. and Bate, S. (2007). Inference for clustered.
 #'   data using the independence loglikelihood. \emph{Biometrika},
 #'   \strong{94}(1), 167-183. \doi{10.1093/biomet/asm015}

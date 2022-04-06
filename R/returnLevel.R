@@ -56,7 +56,7 @@
 #'   estimated by interpolating linearly between the cases lying either side of
 #'   the critical value. The smaller \code{inc} the more accurate (but slower)
 #'   the calculation will be.
-#' @return A object (a list) of class \code{"returnLevels", "lite"} with the
+#' @return A object (a list) of class \code{"returnLevel", "lite"} with the
 #'   components
 #'   \item{rl_sym,rl_prof }{Named numeric vectors containing the respective
 #'     lower 100\code{level}\% limit, the MLE and the upper
@@ -74,8 +74,8 @@
 #' @references Coles, S. G. (2001) \emph{An Introduction to Statistical
 #'   Modeling of Extreme Values}, Springer-Verlag, London.
 #'   \doi{10.1007/978-1-4471-3675-0_3}
-#' @seealso \code{\link{returnLevelMethods}}, including plotting the profile
-#'   log-likelihood for a return level.
+#' @seealso \code{\link{returnLevelMethods}}, including plotting the (adjusted)
+#'   profile log-likelihood for a return level.
 #' @examples
 #' ### Cheeseboro wind gusts
 #'
