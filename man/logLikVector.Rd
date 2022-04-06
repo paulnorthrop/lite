@@ -10,12 +10,34 @@ logLikVector(object, ...)
 \method{logLik}{logLikVector}(object, ...)
 }
 \arguments{
-\item{object}{An object of class \code{"logLikVector"} returned from a
-\code{logLikVector} method.}
+\item{object}{For \code{logLikVector}: a fitted model object.
+For the \code{loglik} method: a object of class \code{"logLikVector"}
+returned from a \code{logLikVector} method.}
 
 \item{...}{Further arguments.}
 }
+\value{
+\code{logLikVector} returns a vector of
+}
 \description{
-Generic function to calculate log-likelihood contributions from
+Generic function for calculating log-likelihood contributions from
 individual observations for a fitted model object.
+}
+\details{
+The \code{logLik} method \code{logLik.LogLikVector} sums the
+  log-likelihood contributions from individual observations.
+}
+\examples{
+# logLikVector.Bernoulli
+bfit <- fitBernoulli(c(exdex::cheeseboro) > 45)
+head(logLikVector(bfit))
+
+# estfun.generalisedPareto
+gpfit <- fitGP(c(exdex::cheeseboro), u = 45)
+head(logLikVector(gpfit))
+}
+\seealso{
+\code{\link{Bernoulli}}
+
+\code{\link{generalisedPareto}}
 }

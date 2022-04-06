@@ -3,7 +3,6 @@
 \name{Bernoulli}
 \alias{Bernoulli}
 \alias{fitBernoulli}
-\alias{logLikVector.Bernoulli}
 \alias{nobs.Bernoulli}
 \alias{coef.Bernoulli}
 \alias{vcov.Bernoulli}
@@ -11,8 +10,6 @@
 \title{Frequentist inference for the Bernoulli distribution}
 \usage{
 fitBernoulli(data)
-
-\method{logLikVector}{Bernoulli}(object, pars = NULL, ...)
 
 \method{nobs}{Bernoulli}(object, ...)
 
@@ -30,10 +27,10 @@ fitBernoulli(data)
 
 \item{object}{A fitted model object returned from \code{fitBernoulli()}.}
 
+\item{...}{Further arguments. None are used currently.}
+
 \item{pars}{A numeric parameter vector of length 1 containing a value of
 the Bernoulli success probability.}
-
-\item{...}{Further arguments. None are used currently.}
 }
 \value{
 \code{fitBernoulli} returns an object of class \code{"Bernoulli"}, a list

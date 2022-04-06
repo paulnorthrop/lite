@@ -4,7 +4,6 @@
 \alias{generalisedPareto}
 \alias{fitGP}
 \alias{gpObsInfo}
-\alias{logLikVector.GP}
 \alias{nobs.GP}
 \alias{coef.GP}
 \alias{vcov.GP}
@@ -14,8 +13,6 @@
 fitGP(data, u)
 
 gpObsInfo(pars, excesses, eps = 1e-05, m = 3)
-
-\method{logLikVector}{GP}(object, pars = NULL, ...)
 
 \method{nobs}{GP}(object, ...)
 

@@ -85,28 +85,6 @@ fitBernoulli <- function(data) {
 
 #' @rdname Bernoulli
 #' @export
-logLikVector.Bernoulli <- function(object, pars = NULL, ...) {
-  # If the parameter estimates have not been provided in pars then extract
-  # them from the fitted object
-  if (is.null(pars)) {
-    pars <- coef(object)
-  }
-  n_pars <- length(pars)
-  prob <- pars[1]
-  if (prob < 0 || prob > 1) {
-    val <- -Inf
-  } else {
-    val <- stats::dbinom(object$obs_data, 1, prob, log = TRUE)
-  }
-  # Return the usual attributes for a "logLik" object
-  attr(val, "nobs") <- nobs(object)
-  attr(val, "df") <- n_pars
-  class(val) <- "logLikVector"
-  return(val)
-}
-
-#' @rdname Bernoulli
-#' @export
 nobs.Bernoulli <- function(object, ...) {
   return(object$nobs)
 }
