@@ -33,7 +33,7 @@
 #'
 #'  # estfun.Bernoulli
 #'  bfit <- fitBernoulli(exdex::cheeseboro > 45)
-#' head(estfun(bfit))
+#' head(estfun.Bernoulli(bfit))
 #'
 #'  # estfun.generalisedPareto
 #'  gpfit <- fitGP(c(exdex::cheeseboro), u = 45)
