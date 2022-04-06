@@ -94,7 +94,7 @@ of the plot) that gives the approximate values of the MLE and
   <code>signif</code> to round the values in the legend.</p>
 <p>For <code>print.returnLevel</code>: the argument <code>digits</code> to
   <code><a href="https://rdrr.io/r/base/print.default.html" class="external-link">print.default</a></code>.</p>
-<p>For <code>summary.returnLevel</code>: an integer. Used for number formatting
+<p>For <code>summary.returnLevel</code>: an integer. For number formatting
   with <code>signif</code>.  If <code>digits</code> is not specified
   (i.e. <code><a href="https://rdrr.io/r/base/missing.html" class="external-link">missing</a></code>) then <code><a href="https://rdrr.io/r/base/Round.html" class="external-link">signif()</a></code> will not be called
   (i.e. no rounding will be performed).</p></dd>
@@ -104,7 +104,7 @@ Otherwise, it is not, but the MLE and confidence limits are returned.</p></dd>
 <dt>...</dt>
 <dd><p>For <code>plot.returnLevel</code>: arguments passed to
   <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></code>, such as graphical parameters.</p>
-<p>For <code>print.summary.returnLevel</code>: additional arguments passed to
+<p>For <code>print.summary.returnLevel</code>: arguments passed to
   <code><a href="https://rdrr.io/r/base/print.default.html" class="external-link">print.default</a></code>.</p></dd>
 <dt>object</dt>
 <dd><p>an object of class <code>c("returnLevel", "lite")</code>, a result
@@ -117,7 +117,7 @@ of a call to <code><a href="returnLevel.html">returnLevel</a></code>, using <cod
   100<code>level</code>% confidence limit is returned invisibly.
 <code>print.returnLevel</code>: the argument <code>x</code> is returned, invisibly.
 <code>summary.returnLevel</code>: a list containing the list element
-<code>object$call</code> and a numeric matrix <code>matrix</code> containing the MLE
+<code>object$call</code> and a matrix <code>matrix</code> containing the MLE
   and estimated SE of the return level.
 <code>print.summary.returnLevel</code>: the argument <code>x</code> is returned,
   invisibly.</p>

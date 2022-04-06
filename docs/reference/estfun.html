@@ -74,10 +74,10 @@ observations for a fitted model object.</p>
     <dl><dt>x</dt>
 <dd><p>A fitted model object.</p></dd>
 <dt>...</dt>
-<dd><p>Further arguments.  None are currently used for
+<dd><p>Further arguments.  None are used for
 <code>estfun.Bernoulli</code> or <code>estfun.GP</code>.</p></dd>
 <dt>eps, m</dt>
-<dd><p>These arguments control the estimation of the observed
+<dd><p>These control the estimation of the observed
 information in <code>gpObsInfo</code> when the GP shape parameter \(\xi\) is
 very close to zero.  In these cases, direct calculation is unreliable.
 <code>eps</code> is a (small, positive) numeric scalar.  If the absolute value
@@ -88,7 +88,7 @@ series expansion in \(\xi\), evaluated up to and including the
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An \(n \times k\) numeric matrix containing contributions
+    <p>An \(n \times k\) matrix containing contributions
   to the score function from \(n\) observations for each of the \(k\)  parameters.
 <code>estfun.Bernoulli</code>: an \(n \times 2\) matrix, where
 \(n\) is the sample size, the length of the input <code>data</code> to

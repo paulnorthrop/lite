@@ -135,8 +135,8 @@ round the values in the summary.</p></dd>
 <code>coef.flite</code>: a numeric vector of length 4 with names
 <code>c("p[u]", "sigma[u]", "xi", "theta")</code>.  The MLEs of the parameters
 \(p_u\), \(\sigma_u\), \(\xi\) and \(\theta\).
-<code>vcov.flite</code>: a 4 by 4 numeric matrix with row and column names
-<code>c("p[u]", "sigma[u]", "xi", "theta")</code>.  The estimated
+<code>vcov.flite</code>: a \(4 \times 4\) matrix with row and
+    column names <code>c("p[u]", "sigma[u]", "xi", "theta")</code>.  The estimated
     variance-covariance matrix for the model parameters.  If
 <code>adjust = TRUE</code> then the elements corresponding to \(p_u\),
 \(\sigma_u\) and \(\xi\) are adjusted for cluster dependence using

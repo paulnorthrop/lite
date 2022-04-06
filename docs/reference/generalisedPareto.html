@@ -102,7 +102,7 @@ the generalised Pareto scale and shape parameters.</p></dd>
 <dd><p>A numeric vector of threshold excesses, that is, amounts
 by which exceedances of <code>u</code> exceed <code>u</code>.</p></dd>
 <dt>eps, m</dt>
-<dd><p>These arguments control the estimation of the observed
+<dd><p>These control the estimation of the observed
 information in <code>gpObsInfo</code> when the GP shape parameter \(\xi\) is
 very close to zero.  In these cases, direct calculation is unreliable.
 <code>eps</code> is a (small, positive) numeric scalar.  If the absolute value
@@ -121,10 +121,10 @@ threshold <code>threshold</code> and <code>nexc</code> is the length of this vec
 <code>coef.GP</code>: a numeric vector of length 2 with names
 <code>c("sigma[u]", "xi")</code>.  The MLEs of the GP parameters
 \(\sigma_u\) and \(\xi\).
-<code>vcov.GP</code>: a 2 by 2 numeric matrix with row and column names
-<code>c("sigma[u]", "xi")</code>.  The estimated variance-covariance matrix
-    for the model parameters. No adjustment for cluster dependence has been
-    made.
+<code>vcov.GP</code>: a \(2 \times 2\) matrix with row and
+    column names <code>c("sigma[u]", "xi")</code>.  The estimated
+    variance-covariance matrix for the model parameters. No adjustment for
+    cluster dependence has been made.
 <code>nobs.GP</code>: a numeric vector of length 1.  The number of
     observations used to estimate (\(\sigma_u\), \(\xi\)).
 <code>logLik.GP</code>: an object of class <code>"logLik"</code>: a numeric scalar
