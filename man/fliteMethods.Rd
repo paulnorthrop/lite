@@ -93,7 +93,7 @@ round the values in the summary.}
     \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The object is printed by
     \code{\link{print.summary.flite}}.
 
-  \code{print.summary.flite}: the argument \code{x}, invisibly.
+  \code{print.summary.flite}: the argument \code{x} is returned, invisibly.
 }
 \description{
 Methods for objects of class \code{"flite"} returned from

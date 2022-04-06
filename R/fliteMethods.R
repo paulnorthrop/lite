@@ -35,7 +35,7 @@
 #'     \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The object is printed by
 #'     \code{\link{print.summary.flite}}.
 #'
-#'   \code{print.summary.flite}: the argument \code{x}, invisibly.
+#'   \code{print.summary.flite}: the argument \code{x} is returned, invisibly.
 #' @seealso \code{\link{flite}} to perform frequentist threshold-based
 #'   inference for time series extremes.
 #' @name fliteMethods
