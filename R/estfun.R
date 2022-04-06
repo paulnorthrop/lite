@@ -44,8 +44,6 @@
 NULL
 ## NULL
 
-# Default
-
 # Bernoulli
 
 #' @rdname estfun
