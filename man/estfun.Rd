@@ -6,8 +6,6 @@
 \alias{estfun.GP}
 \title{Functions for the \code{estfun} method}
 \usage{
-estfun(x, ...)
-
 \method{estfun}{Bernoulli}(x, ...)
 
 \method{estfun}{GP}(x, eps = 1e-05, m = 3, ...)
@@ -59,11 +57,11 @@ if (got_exdex) {
 
  # estfun.Bernoulli
  bfit <- fitBernoulli(exdex::cheeseboro > 45)
- head(estfun(bfit))
+# head(estfun(bfit))
 
  # estfun.generalisedPareto
  gpfit <- fitGP(c(exdex::cheeseboro), u = 45)
- head(estfun(gpfit))
+# head(estfun(gpfit))
 
 }
 }
