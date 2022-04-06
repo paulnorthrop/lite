@@ -139,25 +139,22 @@
 #' @seealso \code{\link[exdex]{choose_uk}} to inform the choice of the
 #'   threshold \eqn{u} and run parameter \eqn{K}.
 #' @examples
-#' got_exdex <- requireNamespace("exdex", quietly = TRUE)
-#' if (got_exdex) {
-#'  ### Cheeseboro wind gusts
+#' ### Cheeseboro wind gusts
 #'
-#'  # Make inferences
-#'  cdata <- exdex::cheeseboro
-#'  # Each column of the matrix cdata corresponds to data from a different year
-#'  # flite() sets cluster automatically to correspond to column (year)
-#'  cfit <- flite(cdata, u = 45, k = 3)
-#'  summary(cfit)
+#' # Make inferences
+#' cdata <- exdex::cheeseboro
+#' # Each column of the matrix cdata corresponds to data from a different year
+#' # flite() sets cluster automatically to correspond to column (year)
+#' cfit <- flite(cdata, u = 45, k = 3)
+#' summary(cfit)
 #'
-#'  # 2 ways to find the maximised log-likelihood value
-#'  cfit(coef(cfit))
-#'  logLik(cfit)
+#' # 2 ways to find the maximised log-likelihood value
+#' cfit(coef(cfit))
+#' logLik(cfit)
 #'
-#'  # Plots of (adjusted) log-likelihoods
-#'  plot(cfit)
-#'  plot(cfit, which = "gp")
-#' }
+#' # Plots of (adjusted) log-likelihoods
+#' plot(cfit)
+#' plot(cfit, which = "gp")
 #' @export
 flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, ny, ...) {
   # Check that the threshold does not lie above all the data

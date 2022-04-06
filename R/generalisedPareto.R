@@ -26,7 +26,14 @@
 #'   \code{NULL}).
 #' @details
 #' \code{fitGP}: fit a generalised Pareto distribution using maximum likelihood
-#'   estimation.  This function calls \code{\link[revdbayes]{grimshaw_gp_mle}}.
+#'   estimation, using an \strong{independence} log-likelihood formed by
+#'   summing contributions from individual observations. No adjustment for
+#'   cluster dependence has been made in estimating the variance-covariance
+#'   matrix stored as component in \code{vcov} in the returned object. This
+#'   function calls \code{\link[revdbayes]{grimshaw_gp_mle}}.
+#'
+#' \code{coef}, \code{vcov}, \code{nobs} and \code{logLik} methods are
+#' provided for objects of class \code{"GP"} returned from \code{fitGP}.
 #'
 #' \code{gpObsInfo}: calculates the observed information matrix for a random
 #' sample \code{excesses} from the generalized Pareto distribution, that is,
@@ -39,32 +46,44 @@
 #' where \code{exceedances} is a vector containing the values that exceed the
 #' threshold \code{threshold} and \code{nexc} is the length of this vector.
 #'
+#'   \code{coef.GP}: a numeric vector of length 2 with names
+#'     \code{c("sigma[u]", "xi")}.  The MLEs of the GP parameters
+#'     \eqn{\sigma_u} and \eqn{\xi}.
+#'
+#'   \code{vcov.GP}: a 2 by 2 numeric matrix with row and column names
+#'     \code{c("sigma[u]", "xi")}.  The estimated variance-covariance matrix
+#'     for the model parameters. No adjustment for cluster dependence has been
+#'     made.
+#'
+#'   \code{nobs.GP}: a numeric vector of length 1.  The number of
+#'     observations used to estimate (\eqn{\sigma_u}, \eqn{\xi}).
+#'
+#'   \code{logLik.GP}: an object of class \code{"logLik"}: a numeric scalar
+#'     with value equal to the maximised log-likelihood. The returned object
+#'     also has attributes \code{nobs}, the numbers of observations used in
+#'     each of these model fits, and \code{"df"} (degrees of freedom), which is
+#'     equal to the number of total number of parameters estimated (2).
 #'
 #' \code{gpObsInfo} returns a 2 by 2 matrix with row and columns names
 #' \code{c("sigma[u]", "xi")}.
-#' \code{nobs}, \code{coef}, \code{vcov} and \code{logLik} methods are
-#' provided.
 #' @examples
-#' got_exdex <- requireNamespace("exdex", quietly = TRUE)
-#' if (got_exdex) {
-#'  # Set up data and set a threshold
-#'  cdata <- c(exdex::cheeseboro)
+#' # Set up data and set a threshold
+#' cdata <- c(exdex::cheeseboro)
 #'
-#'  # Fit a generalised Pareto distribution
-#'  fit <- fitGP(cdata, 45)
+#' # Fit a generalised Pareto distribution
+#' fit <- fitGP(cdata, 45)
 #'
-#'  # Calculate the log-likelihood at the MLE
-#'  res <- logLikVector(fit)
+#' # Calculate the log-likelihood at the MLE
+#' res <- logLikVector(fit)
 #'
-#'  # The logLik method sums the individual log-likelihood contributions.
-#'  logLik(res)
+#' # The logLik method sums the individual log-likelihood contributions.
+#' logLik(res)
 #'
-#'  # nobs, coef, vcov, logLik methods for objects returned from fitGP()
-#'  nobs(fit)
-#'  coef(fit)
-#'  vcov(fit)
-#'  logLik(fit)
-#' }
+#' # nobs, coef, vcov, logLik methods for objects returned from fitGP()
+#' nobs(fit)
+#' coef(fit)
+#' vcov(fit)
+#' logLik(fit)
 #' @name generalisedPareto
 NULL
 ## NULL
@@ -102,6 +121,40 @@ fitGP <- function(data, u) {
   res$threshold <- u
   class(res) <- "GP"
   return(res)
+}
+
+# Methods for class "GP"
+
+#' @rdname generalisedPareto
+#' @export
+coef.GP <- function(object, ...) {
+  val <- object$mle
+  names(val) <- c("sigma[u]", "xi")
+  return(val)
+}
+
+#' @rdname generalisedPareto
+#' @export
+vcov.GP <- function(object, ...) {
+  vc <- object$vcov
+  dimnames(vc) <- list(c("sigma[u]", "xi"), c("sigma[u]", "xi"))
+  return(vc)
+}
+
+#' @rdname generalisedPareto
+#' @export
+nobs.GP <- function(object, ...) {
+  return(object$nexc)
+}
+
+#' @rdname generalisedPareto
+#' @export
+logLik.GP <- function(object, ...) {
+  val <- object$maxLogLik
+  attr(val, "nobs") <- nobs(object)
+  attr(val, "df") <- length(coef(object))
+  class(val) <- "logLik"
+  return(val)
 }
 
 # ============================== gpObsInfo ================================== #
@@ -149,38 +202,4 @@ gpObsInfo <- function(pars, excesses, eps = 1e-5, m = 3) {
   }
   dimnames(i) <- list(c("sigma[u]", "xi"), c("sigma[u]", "xi"))
   return(i)
-}
-
-# Methods for class "GP"
-
-#' @rdname generalisedPareto
-#' @export
-nobs.GP <- function(object, ...) {
-  return(object$nexc)
-}
-
-#' @rdname generalisedPareto
-#' @export
-coef.GP <- function(object, ...) {
-  val <- object$mle
-  names(val) <- c("sigma[u]", "xi")
-  return(val)
-}
-
-#' @rdname generalisedPareto
-#' @export
-vcov.GP <- function(object, ...) {
-  vc <- object$vcov
-  dimnames(vc) <- list(c("sigma[u]", "xi"), c("sigma[u]", "xi"))
-  return(vc)
-}
-
-#' @rdname generalisedPareto
-#' @export
-logLik.GP <- function(object, ...) {
-  val <- object$maxLogLik
-  attr(val, "nobs") <- nobs(object)
-  attr(val, "df") <- length(coef(object))
-  class(val) <- "logLik"
-  return(val)
 }

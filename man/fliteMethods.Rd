@@ -70,14 +70,23 @@ observed information matrix.}
 round the values in the summary.}
 }
 \value{
-\code{coef.flite}: a numeric vector of length 4 with names
-    \code{c("p[u]", "sigma[u]", "xi", "theta")}.
+\code{plot.flite}: No return value, only the plot is produced.
+
+  \code{coef.flite}: a numeric vector of length 4 with names
+    \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The MLEs of the parameters
+    \eqn{p_u}, \eqn{\sigma_u}, \eqn{\xi} and \eqn{\theta}.
 
   \code{vcov.flite}: a 4 by 4 numeric matrix with row and column names
-    \code{c("p[u]", "sigma[u]", "xi", "theta")}.
+    \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The estimated
+    variance-covariance matrix for the model parameters.  If
+    \code{adjust = TRUE} then the elements corresponding to \eqn{p_u},
+    \eqn{\sigma_u} and \eqn{\xi} are adjusted for cluster dependence using
+    a sandwich estimator; otherwise they are not adjusted.
 
   \code{nobs.flite}: a numeric vector of length 3 with names
-    \code{c("p[u]", "gp", "theta")}.
+    \code{c("p[u]", "gp", "theta")}.  The respective number of observations
+    used to estimate \eqn{p_u}, (\eqn{\sigma_u}, \eqn{\xi}) and
+    \eqn{\theta}.
 
   \code{logLik.flite}: an object of class \code{"logLik"}: a numeric scalar
     with value equal to the maximised log-likelihood.  This is the sum of
@@ -85,8 +94,9 @@ round the values in the summary.}
     occurrences of threshold exceedances, a generalised Pareto model for
     threshold excesses and a \eqn{K}-gaps model for the extremal index.
     The returned object also has attributes \code{nobs}, the numbers of
-    observations used in each of these model fits, and \code{"df"}, which is
-    equal to the number of total number of parameters estimated (4).
+    observations used in each of these model fits, and \code{"df"} (degrees
+    of freedom), which is equal to the number of total number of parameters
+    estimated (4).
 
   \code{summary.flite}: an object containing the original function call and
     a matrix of estimates and estimated standard errors with row names

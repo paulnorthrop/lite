@@ -11,9 +11,12 @@
 #' @param ... Further arguments. None are used currently.
 #' @details
 #' \code{fitBernoulli}: fit a Bernoulli distribution using maximum likelihood
-#'   estimation.
+#'   estimation, using an \strong{independence} log-likelihood formed by
+#'   summing contributions from individual observations. No adjustment for
+#'   cluster dependence has been made in estimating the variance-covariance
+#'   matrix stored as component in \code{vcov} in the returned object.
 #'
-#' \code{nobs, coef, vcov} and \code{logLik} methods are provided.
+#' \code{coef, vcov, nobs} and \code{logLik} methods are provided.
 #' @return
 #' \code{fitBernoulli} returns an object of class \code{"Bernoulli"}, a list
 #' with components: \code{maxLogLik}, \code{mle}, \code{nobs}, \code{vcov},
@@ -22,29 +25,42 @@
 #' values have been removed, using \code{\link[stats:na.fail]{na.omit}} and
 #' \code{n0} and \code{n1} are, respectively, the number of failures and the
 #' number of successes.
+#'
+#'   \code{coef.Bernoulli}: a numeric vector of length 1 with name \code{prob}.
+#'     The MLE of the probability of success.
+#'
+#'   \code{vcov.Bernoulli}: a 1 by 1 numeric matrix with row and column name
+#'     \code{prob}.  The estimated variance of the estimator of the probability
+#'     of success. No adjustment for cluster dependence has been made.
+#'
+#'   \code{nobs.Bernoulli}: a numeric vector of length 1 with name \code{prob}.
+#'   The number of observations used to estimate the probability of success.
+#'
+#'   \code{logLik.Bernoulli}: an object of class \code{"logLik"}: a numeric
+#'     scalar with value equal to the maximised log-likelihood. The returned
+#'     object also has attributes \code{nobs}, the numbers of observations used
+#'     in this model fit, and \code{"df"} (degrees of freedom), which is equal
+#'     to the number of total number of parameters estimated (1).
 #' @examples
-#' got_exdex <- requireNamespace("exdex", quietly = TRUE)
-#' if (got_exdex) {
-#'  # Set up data
-#'  cdata <- c(exdex::cheeseboro)
-#'  u <- 45
-#'  exc <- cdata > u
+#' # Set up data
+#' cdata <- c(exdex::cheeseboro)
+#' u <- 45
+#' exc <- cdata > u
 #'
-#'  # Fit a Bernoulli distribution
-#'  fit <- fitBernoulli(exc)
+#' # Fit a Bernoulli distribution
+#' fit <- fitBernoulli(exc)
 #'
-#'  # Calculate the log-likelihood at the MLE
-#'  res <- logLikVector(fit)
+#' # Calculate the log-likelihood at the MLE
+#' res <- logLikVector(fit)
 #'
-#'  # The logLik method sums the individual log-likelihood contributions.
-#'  logLik(res)
+#' # The logLik method sums the individual log-likelihood contributions.
+#' logLik(res)
 #'
-#'  # nobs, coef, vcov, logLik methods for objects returned from fitBernoulli()
-#'  nobs(fit)
-#'  coef(fit)
-#'  vcov(fit)
-#'  logLik(fit)
-#' }
+#' # nobs, coef, vcov, logLik methods for objects returned from fitBernoulli()
+#' nobs(fit)
+#' coef(fit)
+#' vcov(fit)
+#' logLik(fit)
 #' @name Bernoulli
 NULL
 ## NULL
@@ -75,12 +91,6 @@ fitBernoulli <- function(data) {
 
 #' @rdname Bernoulli
 #' @export
-nobs.Bernoulli <- function(object, ...) {
-  return(object$nobs)
-}
-
-#' @rdname Bernoulli
-#' @export
 coef.Bernoulli <- function(object, ...) {
   val <- object$mle
   names(val) <- "prob"
@@ -93,6 +103,12 @@ vcov.Bernoulli <- function(object, ...) {
   vc <- object$vcov
   dimnames(vc) <- list("prob", "prob")
   return(vc)
+}
+
+#' @rdname Bernoulli
+#' @export
+nobs.Bernoulli <- function(object, ...) {
+  return(object$nobs)
 }
 
 #' @rdname Bernoulli

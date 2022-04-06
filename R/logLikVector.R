@@ -40,12 +40,14 @@
 #' # logLikVector.Bernoulli
 #' bfit <- fitBernoulli(c(exdex::cheeseboro) > 45)
 #' bvec <- logLikVector(bfit)
+#' head(bvec)
 #' logLik(bvec)
 #' logLik(bfit)
 #'
 #' # estfun.generalisedPareto
 #' gpfit <- fitGP(c(exdex::cheeseboro), u = 45)
 #' gpvec <- logLikVector(gpfit)
+#' head(gpvec)
 #' logLik(gpvec)
 #' logLik(gpfit)
 #' @name logLikVector

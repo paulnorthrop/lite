@@ -30,13 +30,13 @@ An \eqn{n \times k}{n x k} numeric matrix containing contributions
   to the score function from \eqn{n} observations for each of the \eqn{k}
   parameters.
 
-  \strong{estfun.Bernoulli}: an \eqn{n \times 2}{n x 1} matrix, where
+  \code{estfun.Bernoulli}: an \eqn{n \times 2}{n x 1} matrix, where
   \eqn{n} is the sample size, the length of the input \code{data} to
   \code{\link{fitBernoulli}}.  The column is named \code{prob}.
 
-  \strong{estfun.generalisedPareto}: an \eqn{n \times 2}{n x 2} matrix, where
-  \eqn{n} is the sample size, the length of the input \code{data} to
-  \code{\link{fitGP}}.  The columns are named \code{sigma[u]} and \code{xi}
+  \code{estfun.GP}: an \eqn{n \times 2}{n x 2} matrix, where \eqn{n} is the
+  sample size, the length of the input \code{data} to \code{\link{fitGP}}.
+  The columns are named \code{sigma[u]} and \code{xi}
 }
 \description{
 Functions to calculate contributions to the score vector from individual
