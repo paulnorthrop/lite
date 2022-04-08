@@ -82,7 +82,7 @@ A plot method for objects inheriting from class `"flite"` enables us to inspect 
 plot(cfit)
 ```
 
-The line superimposed on the on the plot on the top right shows the boundary of the log-likelihood imposed by the constraint $\xi > -\sigma_u / x_{(n)}$, where $x_{(n)}$ is the largest threshold excess.  Using the vertical adjustment ensures that this constraint is respected after adjustment.  However, if we use one of the horizontal adjustments, **cholesky** or **spectral**, then the adjusted log-likelihood has non-zero density values outside of the correct support. This is the reason why the vertical adjustment is the default.
+The line superimposed on the on the plot on the top right shows the boundary of the log-likelihood imposed by the constraint $\xi > -\sigma_u / x_{(n)}$, where $x_{(n)}$ is the largest threshold excess.  Using the vertical adjustment ensures that this constraint is respected after adjustment.  However, if we use one of the horizontal adjustments, **cholesky** or **spectral**, then the adjusted log-likelihood has non-zero density values outside of the correct support. This is why the vertical adjustment is the default.
 
 ```{r spectral, fig.width = 7, fig.height = 5, message = FALSE}
 plot(cfit, which = "gp", adj_type = "spectral")
