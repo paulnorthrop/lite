@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">lite</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.0.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -53,6 +53,9 @@
       <a href="../articles/introduction-to-lite.html">Introducing lite: Likelihood-Based Inference for Time Series Extremes</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -78,7 +81,7 @@
       <h1 data-toc-skip>Introducing lite: Likelihood-Based Inference for Time Series Extremes</h1>
                         <h4 data-toc-skip class="author">Paul Northrop</h4>
             
-            <h4 data-toc-skip class="date">2022-04-06</h4>
+            <h4 data-toc-skip class="date">2022-04-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/lite/blob/HEAD/vignettes/introduction-to-lite.Rmd" class="external-link"><code>vignettes/introduction-to-lite.Rmd</code></a></small>
       <div class="hidden name"><code>introduction-to-lite.Rmd</code></div>
@@ -139,7 +142,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></code></pre></div>
 <p><img src="introduction-to-lite_files/figure-html/vertical-1.png" width="672"></p>
-<p>The line superimposed on the on the plot on the top right shows the boundary of the log-likelihood imposed by the constraint <span class="math inline">\(\xi &gt; -\sigma_u / x_{(n)}\)</span>, where <span class="math inline">\(x_{(n)}\)</span> is the largest threshold excess. Using the vertical adjustment ensures that this constraint is respected after adjustment. However, if we use one of the horizontal adjustments, <strong>cholesky</strong> or <strong>spectral</strong>, then the adjusted log-likelihood has non-zero density values outside of the correct support. This is the reason why the vertical adjustment is the default.</p>
+<p>The line superimposed on the on the plot on the top right shows the boundary of the log-likelihood imposed by the constraint <span class="math inline">\(\xi &gt; -\sigma_u / x_{(n)}\)</span>, where <span class="math inline">\(x_{(n)}\)</span> is the largest threshold excess. Using the vertical adjustment ensures that this constraint is respected after adjustment. However, if we use one of the horizontal adjustments, <strong>cholesky</strong> or <strong>spectral</strong>, then the adjusted log-likelihood has non-zero density values outside of the correct support. This is why the vertical adjustment is the default.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span>, which <span class="op">=</span> <span class="st">"gp"</span>, adj_type <span class="op">=</span> <span class="st">"spectral"</span><span class="op">)</span></code></pre></div>
 <p><img src="introduction-to-lite_files/figure-html/spectral-1.png" width="672"></p>

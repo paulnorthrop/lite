@@ -7,6 +7,11 @@
 Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/lite?branch=main&svg=true)](https://ci.appveyor.com/project/paulnorthrop/lite)
 [![Coverage
 Status](https://codecov.io/github/paulnorthrop/lite/coverage.svg?branch=main)](https://codecov.io/github/paulnorthrop/lite?branch=main)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/lite)](https://cran.r-project.org/package=lite)
+[![Downloads
+(monthly)](https://cranlogs.r-pkg.org/badges/lite?color=brightgreen)](https://cran.r-project.org/package=lite)
+[![Downloads
+(total)](https://cranlogs.r-pkg.org/badges/grand-total/lite?color=brightgreen)](https://cran.r-project.org/package=lite)
 
 ## Likelihood-Based Inference for Time Series Extremes
 
