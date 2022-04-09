@@ -36,7 +36,7 @@ An \eqn{n \times k}{n x k} matrix containing contributions
 
   \code{estfun.GP}: an \eqn{n \times 2}{n x 2} matrix, where \eqn{n} is the
   sample size, the length of the input \code{data} to \code{\link{fitGP}}.
-  The columns are named \code{sigma[u]} and \code{xi}
+  The columns are named \code{sigma[u]} and \code{xi}.
 }
 \description{
 Functions to calculate contributions to the score vector from individual
