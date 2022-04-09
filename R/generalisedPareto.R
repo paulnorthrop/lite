@@ -185,7 +185,7 @@ gpObsInfo <- function(pars, excesses, eps = 1e-5, m = 3) {
   t0 <- 1 + zy
   t4 <- y ^ 2 / t0 ^ 2
   if (any(t0 <= 0)) {
-    stop("The log-likelihood is 0 for this combination of data and parameters")
+    stop("The likelihood is 0 for this combination of data and parameters")
   }
   if (abs(x) < eps) {
     j <- 0:m
