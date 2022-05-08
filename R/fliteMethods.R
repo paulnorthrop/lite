@@ -241,7 +241,7 @@ logLik.flite <- function(object, ...) {
 #' @rdname fliteMethods
 #' @export
 summary.flite <- function(object, adjust = TRUE,
-                         digits = max(3, getOption("digits") - 3L), ...) {
+                          digits = max(3, getOption("digits") - 3L), ...) {
   if (!inherits(object, "flite")) {
     stop("use only with \"flite\" objects")
   }
