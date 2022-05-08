@@ -157,7 +157,6 @@
 #' @examples
 #' ### Cheeseboro wind gusts
 #'
-#' # Make inferences
 #' cdata <- exdex::cheeseboro
 #' # Each column of the matrix cdata corresponds to data from a different year
 #' # blite() sets cluster automatically to correspond to column (year)
