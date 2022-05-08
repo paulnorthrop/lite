@@ -17,6 +17,7 @@ Imports: chandwich,
     exdex,
     graphics,
     revdbayes,
+    rust,
     sandwich,
     stats
 License: GPL (>= 2)
