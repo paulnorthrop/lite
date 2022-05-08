@@ -47,9 +47,11 @@ the type of adjustment applied to the independence log-likelihood.  Of the
 3 adjustments, \code{"vertical"} is preferred because it preserves
 constraints on the parameters, whereas the \code{"cholesky"} and
 \code{"spectral"} adjustment do not.  In the generalised Pareto case the
-constraint that \eqn{\xi > - \sigma_u / x_{(n)}}{\xi > \sigma_u / x_(n)},
-where \eqn{x_{(n)}}{x_(n)} is the largest excesses of the threshold \eqn{u},
-is preserved.}
+constraint that
+\ifelse{html}{\eqn{\xi} > -\eqn{\sigma}\out{<sub>u</sub>} /
+\eqn{x}\out{<sub>(n)</sub>}}{\eqn{\xi > -\sigma_u / x_{(n)}}}
+where \ifelse{html}{\eqn{x}\out{<sub>(n)</sub>}}{\eqn{x_{(n)}}}
+is the largest excesses of the threshold \eqn{u}, is preserved.}
 
 \item{...}{For \code{plot.flite}: arguments passed to
   \code{\link[graphics:plot.default]{plot}}, such as graphical parameters.
@@ -62,7 +64,8 @@ call to \code{\link{flite}}.}
 
 \item{adjust}{A logical scalar.  If \code{adjust = TRUE} then the elements
 of the variance-covariance matrix corresponding to
-\eqn{(p_u, \sigma_u, \xi)} are estimated using a sandwich estimator.
+(\ifelse{html}{\eqn{p}\out{<sub>u</sub>},
+\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{p_u}, \eqn{\sigma_u}}, \eqn{\xi}), are estimated using a sandwich estimator.
 See \code{\link{flite}}.  Otherwise, this matrix is the inverse of the
 observed information matrix.}
 
@@ -74,19 +77,24 @@ round the values in the summary.}
 
   \code{coef.flite}: a numeric vector of length 4 with names
     \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The MLEs of the parameters
-    \eqn{p_u}, \eqn{\sigma_u}, \eqn{\xi} and \eqn{\theta}.
+    \ifelse{html}{p\out{<sub>u</sub>}}{\eqn{p_u}},
+    \ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+    \eqn{\xi} and \eqn{\theta}.
 
   \code{vcov.flite}: a \eqn{4 \times 4}{4 x 4} matrix with row and
     column names \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The estimated
     variance-covariance matrix for the model parameters.  If
-    \code{adjust = TRUE} then the elements corresponding to \eqn{p_u},
-    \eqn{\sigma_u} and \eqn{\xi} are adjusted for cluster dependence using
+    \code{adjust = TRUE} then the elements corresponding to
+    \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
+    \ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+    and \eqn{\xi} are adjusted for cluster dependence using
     a sandwich estimator; otherwise they are not adjusted.
 
   \code{nobs.flite}: a numeric vector of length 3 with names
     \code{c("p[u]", "gp", "theta")}.  The respective number of observations
-    used to estimate \eqn{p_u}, (\eqn{\sigma_u}, \eqn{\xi}) and
-    \eqn{\theta}.
+    used to estimate \ifelse{html}{p\out{<sub>u</sub>}}{\eqn{p_u}},
+    (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+    \eqn{\xi}) and \eqn{\theta}.
 
   \code{logLik.flite}: an object of class \code{"logLik"}: a numeric scalar
     with value equal to the maximised log-likelihood.  This is the sum of
@@ -116,10 +124,14 @@ For \code{plot.flite}, if \code{which = "all"} then 4 plots are produced.
         probability \eqn{p_u}, with a horizontal line indicating a
         95\% confidence interval for \eqn{p_u}.}
       \item{Top right: contour plot of the (adjusted) log-likelihood for the
-        GP parameters \eqn{(\sigma_u, \xi)}, showing
-        (25, 50, 75, 90, 95)\% confidence regions. The linear constraint
-        \eqn{\xi > - \sigma_u / x_{(n)}}{\xi > \sigma_u / x_(n)} is drawn
-        on the plot.}
+        GP parameters
+        (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+        \eqn{\xi}),
+        showing (25, 50, 75, 90, 95)\% confidence regions. The linear
+        constraint
+        \ifelse{html}{\eqn{\xi} > -\eqn{\sigma}\out{<sub>u</sub>} / \eqn{x}
+        \out{<sub>(n)</sub>}}{\eqn{\xi > -\sigma_u / x_{(n)}}} is drawn on
+        the plot.}
       \item{Bottom left: (adjusted) log-likelihood for \eqn{\xi}, with a
         horizontal line indicating a 95\% confidence interval for \eqn{\xi}.}
       \item{Bottom right: log-likelihood for the extremal index \eqn{\theta},
