@@ -81,7 +81,6 @@ plot.blite <- function(x, which = c("all", "pu", "gp", "xi", "theta"), ...) {
   if (!inherits(x, "blite")) {
     stop("use only with \"blite\" objects")
   }
-  adj_type <- match.arg(adj_type)
   which <- match.arg(which)
   old_par <- graphics::par(no.readonly = TRUE)
   on.exit(graphics::par(old_par))
@@ -203,10 +202,10 @@ summary.blite <- function(object, short = TRUE, mean = TRUE,
       res$matrix <- cbind(`Posterior mean` = posterior_means,
                           `Posterior SD` = posterior_sds)
     } else {
-      posterior_medians <- signif(as.vector(coef(object, fun = median)),
+      posterior_medians <- signif(as.vector(coef(object, fun = stats::median)),
                                   digits = digits)
-      uq <- as.vector(coef(object, fun = quantile, probs = 0.75))
-      lq <- as.vector(coef(object, fun = quantile, probs = 0.25))
+      uq <- as.vector(coef(object, fun = stats::quantile, probs = 0.75))
+      lq <- as.vector(coef(object, fun = stats::quantile, probs = 0.25))
       posterior_iqrs <- signif(uq - lq, digits = digits)
       res$matrix <- cbind(`Posterior median` = posterior_medians,
                           `Posterior IQR` = posterior_iqrs)

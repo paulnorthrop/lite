@@ -48,7 +48,7 @@
 #' @param gp_prior A list to specify a prior distribution for the GP parameters
 #'   (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
 #'   \eqn{\xi}), set using \code{\link[revdbayes]{set_prior}}.
-#' @param gp_prior A list to specify a prior distribution for the Bernoulli
+#' @param b_prior A list to specify a prior distribution for the Bernoulli
 #'   parameter \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{\sigma_u}}, set
 #'   using \code{\link[revdbayes]{set_bin_prior}}.
 #' @param theta_prior_pars A numerical vector of length 2 containing the

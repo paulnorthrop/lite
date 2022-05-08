@@ -65,7 +65,11 @@ a later call to \code{\link{returnLevel}}.  If \code{ny} is supplied to
 both \code{flite} and \code{\link{returnLevel}} then the value supplied to
 \code{\link{returnLevel}} will take precedence.}
 
-\item{gp_prior}{A list to specify a prior distribution for the Bernoulli
+\item{gp_prior}{A list to specify a prior distribution for the GP parameters
+(\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+\eqn{\xi}), set using \code{\link[revdbayes]{set_prior}}.}
+
+\item{b_prior}{A list to specify a prior distribution for the Bernoulli
 parameter \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{\sigma_u}}, set
 using \code{\link[revdbayes]{set_bin_prior}}.}
 
