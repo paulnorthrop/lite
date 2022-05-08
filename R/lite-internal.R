@@ -83,7 +83,7 @@ check_logLik_flite <- function(object, ...) {
   }
   bfit <- attr(object, "Bernoulli")
   gfit <- attr(object, "gp")
-  kfit <- attr(object, "kgaps")
+  kfit <- attr(object, "theta")
   bloglik <- attr(bfit, "max_loglik")
   gloglik <- attr(gfit, "max_loglik")
   kloglik <- kfit$max_loglik
@@ -287,4 +287,60 @@ box_cox_deriv <- function(x, lambda = 1, lambda_tol = 1 / 50,
     retval <- sum(lnx ^ (i + 2) * lambda ^ i / ((i + 2) * factorial(i)))
   }
   return(retval)
+}
+
+# ========================== create_ru_list ================================= #
+
+#' @keywords internal
+#' @rdname lite-internal
+make_ru_list <- function(model, trans, rotate, min_xi, max_xi) {
+  #
+  # Creates a list of arguments to pass to the functions ru() or ru_rcpp()
+  # in the rust package to perform ratio-of-uniforms sampling from a
+  # posterior density.
+  #
+  # Args:
+  #   model     : character string specifying the extreme value model.
+  #   trans     : "none", no transformation.
+  #               "BC", marginal Box-Cox transformation
+  #   rotate    : if TRUE rotate posterior using Cholesky decomposition of
+  #               Hessian of negated log-posterior.
+  #   min_xi    : the smallest xi with a non-zero posterior density
+  #   max_xi    : the largest xi with a non-zero posterior density
+  #
+  # Returns: a list containing the inputs model, trans, rotate and
+  #   d         : the dimension of the density (number of model parameters)
+  #   lower     : vector of lower bounds on the arguments of logf.
+  #   upper     : vector of upper bounds on the arguments of logf.
+  #   var_names : the names of the variables (posterior parameters)
+  #
+  if (model == "gp") {
+    d <- 2L
+    if (trans == "none") {
+      lower <- c(0, min_xi)
+      upper <- c(Inf, max_xi)
+    } else if (trans == "BC") {
+      lower <- c(0, 0)
+      upper <- c(Inf, Inf)
+    } else {
+      lower <- rep(-Inf, 2)
+      upper <- rep(Inf, 2)
+    }
+    var_names <- c("sigma[u]", "xi")
+  }
+  if (model == "pp") {
+    d <- 3L
+    if (trans == "none") {
+      lower <- c(-Inf, 0, min_xi)
+      upper <- c(Inf, Inf, max_xi)
+    } else if (trans == "BC") {
+      lower <- c(-Inf, 0, 0)
+      upper <- c(Inf, Inf, Inf)
+    } else {
+      lower <- rep(-Inf, 3)
+      upper <- rep(Inf, 3)
+    }
+    var_names = c("mu","sigma", "xi")
+  }
+  return(list(d = d, lower = lower, upper = upper, var_names = var_names))
 }

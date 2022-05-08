@@ -9,6 +9,7 @@
 \alias{bingp_rl_CI}
 \alias{bingp_rl_prof}
 \alias{box_cox_deriv}
+\alias{make_ru_list}
 \title{Internal lite functions}
 \usage{
 adjust_object(x, cluster = NULL, ...)
@@ -24,6 +25,8 @@ bingp_rl_CI(x, m, level, ny, type, u)
 bingp_rl_prof(x, m, level, ny, inc, type, rl_sym, u)
 
 box_cox_deriv(x, lambda = 1, lambda_tol = 1/50, poly_order = 3)
+
+make_ru_list(model, trans, rotate, min_xi, max_xi)
 }
 \description{
 Internal lite functions
