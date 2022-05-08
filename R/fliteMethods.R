@@ -139,7 +139,7 @@ plot.flite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
     tplot <- function(obj, ..., main = "") {
       plot(obj, ..., main = main)
     }
-    tplot(confint(attr(x, "kgaps")), ...)
+    tplot(confint(attr(x, "theta")), ...)
   }
   return(invisible())
 }
@@ -156,7 +156,7 @@ coef.flite <- function(object, ...) {
   }
   bfit <- attr(object, "Bernoulli")
   gfit <- attr(object, "gp")
-  kfit <- attr(object, "kgaps")
+  kfit <- attr(object, "theta")
   cf <- c(attr(bfit, "MLE"), attr(gfit, "MLE"), kfit$theta)
   names(cf) <- c("p[u]", "sigma[u]", "xi", "theta")
   return(cf)
@@ -180,7 +180,7 @@ vcov.flite <- function(object, adjust = TRUE, ...) {
   }
   bfit <- attr(object, "Bernoulli")
   gfit <- attr(object, "gp")
-  kfit <- attr(object, "kgaps")
+  kfit <- attr(object, "theta")
   vc <- matrix(0, 4, 4)
   if (adjust) {
     vc[1, 1] <- attr(bfit, "adjVC")
@@ -208,7 +208,7 @@ nobs.flite <- function(object,  ...) {
   }
   bnobs <- attr(attr(object, "Bernoulli"), "nobs")
   gnobs <- attr(attr(object, "gp"), "nobs")
-  knobs <-  attr(object, "kgaps")$ss$n_kgaps
+  knobs <-  attr(object, "theta")$ss$n_kgaps
   n <- c(bnobs, gnobs, knobs)
   names(n) <- c("p[u]", "gp", "theta")
   return(n)

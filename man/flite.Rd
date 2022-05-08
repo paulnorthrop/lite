@@ -72,9 +72,9 @@ An object of class \code{c("flite", "lite", "chandwich")}.
         \code{\link{plot.flite}}.}
     }
  The object also has the attributes \code{"Bernoulli"}, \code{"gp"},
- \code{"kgaps"}, which provide the fitted model objects returned from
+ \code{"theta"}, which provide the fitted model objects returned from
  \code{\link[chandwich]{adjust_loglik}} (for \code{"Bernoulli"} and
- \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"kgaps"}).
+ \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"theta"}).
 
  The named input arguments are returned in a list as the attribute
  \code{inputs}.  If \code{ny} was not supplied then its value is \code{NA}.

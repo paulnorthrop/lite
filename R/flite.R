@@ -101,9 +101,9 @@
 #'         \code{\link{plot.flite}}.}
 #'     }
 #'  The object also has the attributes \code{"Bernoulli"}, \code{"gp"},
-#'  \code{"kgaps"}, which provide the fitted model objects returned from
+#'  \code{"theta"}, which provide the fitted model objects returned from
 #'  \code{\link[chandwich]{adjust_loglik}} (for \code{"Bernoulli"} and
-#'  \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"kgaps"}).
+#'  \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"theta"}).
 #'
 #'  The named input arguments are returned in a list as the attribute
 #'  \code{inputs}.  If \code{ny} was not supplied then its value is \code{NA}.
@@ -243,10 +243,11 @@ flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, ny, ...) {
     names(val) <- NULL
     return(val)
   }
+  # Set the class of the return object and add attributes
   class(bernoulli_gp_theta_loglik) <- c("flite", "lite", "chandwich")
   attr(bernoulli_gp_theta_loglik, "Bernoulli") <- aloglik_bernoulli
   attr(bernoulli_gp_theta_loglik, "gp") <- aloglik_gp
-  attr(bernoulli_gp_theta_loglik, "kgaps") <- theta_fit
+  attr(bernoulli_gp_theta_loglik, "theta") <- theta_fit
   attr(bernoulli_gp_theta_loglik, "call") <- match.call(expand.dots = TRUE)
   inputs <- list(data = data, u = u, cluster = cluster, k = k,
                  inc_cens = inc_cens, ny = ny)
