@@ -90,30 +90,27 @@ In particular, the clustering adjustment argument \code{cadjust}
 may make a difference if the number of clusters is not large.}
 }
 \value{
-An object of class \code{c("flite", "lite", "chandwich")}.
-  This object is a function with 2 arguments:
-    \itemize{
-      \item{\code{pars}, a numeric vector of length 4 to supply the value of
-        the parameter vector \eqn{(p_u, \sigma_u, \xi, \theta)},}
-      \item{\code{type}, a character scalar specifying the type of
-        adjustment made to the independence log-likelihood in parts
-        1 and 2, one of \code{"vertical"}, \code{"none"}, \code{"cholesky"},
-        or \code{"spectral"}.  For details see Chandler and Bate (2007).
-        The default is \code{"vertical"} for the reason given in
-        the description of the argument \code{adj_type} in
-        \code{\link{plot.flite}}.}
-    }
+An object of class \code{c("blite", "lite", "chandwich")}.
+  This object is an \code{n} \eqn{\times 4}{x 4} matrix containing the
+  posterior samples, with column names
+  \code{c("p[u]", "sigma[u]", "xi", "theta")}.
+
  The object also has the attributes \code{"Bernoulli"}, \code{"gp"},
  \code{"theta"}, which provide the fitted model objects returned from
  \code{\link[chandwich]{adjust_loglik}} (for \code{"Bernoulli"} and
  \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"theta"}).
-
  The named input arguments are returned in a list as the attribute
  \code{inputs}.  If \code{ny} was not supplied then its value is \code{NA}.
+ The call to \code{blite} is provided in the attribute \code{"call"}.
+ A call to \code{\link{flite}} is used to create adjusted log-likelihoods
+ for \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}} and
+ (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}}, \eqn{\xi}).
+ The object returned from the call is provided as the attribute
+ \code{"flite_object"}.
 
-  Objects inheriting from class \code{"flite"} have \code{coef},
-  \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
-  methods.  See \code{\link{bliteMethods}}.
+ Objects inheriting from class \code{"blite"} have \code{coef},
+ \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
+ methods.  See \code{\link{bliteMethods}}.
 }
 \description{
 Performs threshold-based Bayesian inference for 3 aspects of stationary
@@ -122,49 +119,49 @@ marginal distribution of threshold excesses and the extent of clustering of
 extremes, as summarised by the extremal index.
 }
 \details{
-There are 3 independent parts to the inference, all performed using
-  maximum likelihood estimation.
+See \code{\link{flite}} for details of the (adjusted) likelihoods
+  on which these Bayesian inferences are based.
+
+  The likelihood is based on a model for 3 independent aspects.
     \enumerate{
-      \item{A Bernoulli(\eqn{p_u}) model for whether a given observation
-        exceeds the threshold \eqn{u}.}
-      \item{A generalised Pareto, GP(\eqn{\sigma_u}, \eqn{\xi}), model for
-        the marginal distribution of threshold excesses.}
+      \item{A Bernoulli(\ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}}) model
+        for whether a given observation exceeds the threshold \eqn{u}.}
+      \item{A generalised Pareto,
+        GP(\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+        \eqn{\xi}), model for the marginal distribution of threshold
+        excesses.}
       \item{The \eqn{K}-gaps model for the extremal index \eqn{\theta}.}
     }
   The general approach follows Fawcett and Walshaw (2012).
 
-  For parts 1 and 2, inferences based on a mis-specified independence
-  log-likelihood are adjusted to account for clustering in the data. Here,
-  we follow Chandler and Bate (2007) to estimate adjusted log-likelihood
-  functions for \eqn{p_u} and for (\eqn{\sigma_u}, \eqn{\xi}), with the
-  argument \code{cluster} defining the clusters. This aspect of the
-  calculations is performed using the \code{\link[chandwich]{adjust_loglik}}
-  in the \code{\link[chandwich]{chandwich}} package (Northrop and Chandler,
-  2021). The GP distribution initial fit of the GP distribution to threshold
-  excesses is performed using the \code{\link[revdbayes]{grimshaw_gp_mle}}
-  function in the \code{\link[revdbayes]{revdbayes}} package
-  (Northrop, 2020).
-
-  In part 3, the methodology described in Suveges and Davison (2010) is
-  implemented using the \code{\link[exdex]{exdex}} package
-  (Northrop and Christodoulides, 2022).
+  The contributions to the likelihood for
+  \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}} and
+  (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}}, \eqn{\xi})
+  are based on the vertically-adjusted likelihoods described in
+  \code{\link{flite}}.  This is an example of Bayesian inference using a
+  composite likelihood Ribatet et al (2012). Priors for
+  \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}}
+  (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}}, \eqn{\xi})
+  and \eqn{\theta} are set using the arguments \code{gp_prior},
+  \code{b_prior} and \code{theta_prior_pars}.
+  Currently, only priors where
+  \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}}
+  (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}}, \eqn{\xi})
+  and \eqn{\theta} are independent a priori are allowed.
 
   Two tuning parameters need to be chosen: a threshold \eqn{u} and the
   \eqn{K}-gaps run parameter \eqn{K}.  The \code{\link[exdex]{exdex}}
   package has a function \code{\link[exdex]{choose_uk}} to inform this
   choice.
 
-  Each of part of the inference produces a log-likelihood function (adjusted
-  for parts 1 and 2).  These log-likelihoods are combined (summed) to form
-  a log-likelihood function for the parameter vector
-  \eqn{(p_u, \sigma_u, \xi, \theta)}.  Return levels are a function of these
-  parameters and therefore inferences for return levels can be based on
-  this log-likelihood.
+  Random samples are simulated from the posteriors for
+  \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}} and
+  (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}}, \eqn{\xi})
+  (using \code{\link[rust]{ru}}) and \eqn{\theta} (using
+  \code{\link[revdbayes]{kgaps_post}}).
 }
 \examples{
 ### Cheeseboro wind gusts
-
-# Needs revdbayes v1.4.9 ...
 
 cdata <- exdex::cheeseboro
 # Each column of the matrix cdata corresponds to data from a different year
@@ -173,43 +170,20 @@ cpost <- blite(cdata, u = 45, k = 3)
 summary(cpost)
 }
 \references{
-Chandler, R. E. and Bate, S. (2007). Inference for clustered.
-  data using the independence loglikelihood. \emph{Biometrika},
-  \strong{94}(1), 167-183. \doi{10.1093/biomet/asm015}
-
 Fawcett, L. and Walshaw, D. (2012), Estimating return levels
   from serially dependent extremes. \emph{Environmetrics}, \strong{23},
   272-283. \doi{10.1002/env.2133}
 
-Northrop, P. J. and Chandler, R. E. (2021).
-  chandwich: Chandler-Bate Sandwich Loglikelihood Adjustment. R package
-  version 1.1.5. \url{https://CRAN.R-project.org/package=chandwich}.
-
-Northrop, P. J. and Christodoulides, C. (2022). exdex:
-Estimation of the Extremal Index. R package version 1.1.1.
-\url{https://CRAN.R-project.org/package=exdex/}.
-
-Northrop, P. J. (2020). revdbayes: Ratio-of-Uniforms Sampling
-for Bayesian Extreme Value Analysis. R package version 1.3.9.
-\url{https://paulnorthrop.github.io/revdbayes/}
-
-Suveges, M. and Davison, A. C. (2010) Model
-  misspecification in peaks over threshold analysis, \emph{Annals of
-  Applied Statistics}, \strong{4}(1), 203-221.
-  \doi{10.1214/09-AOAS292}
+Ribatet, M., Cooley, D., & Davison, A. C. (2012). Bayesian
+  inference from composite likelihoods, with an application to spatial
+  extremes. \emph{Statistica Sinica}, \strong{22}(2), 813-845.
 }
 \seealso{
-\code{\link{fliteMethods}}, including plotting (adjusted)
-  log-likelihoods for \eqn{(p_u, \sigma_u, \xi, \theta)}.
+\code{\link{bliteMethods}}, including plotting the posterior
+  samples.
 
-\code{\link{Bernoulli}} for maximum likelihood inference for the
-  Bernoulli distribution.
-
-\code{\link{generalisedPareto}} for maximum likelihood inference
-  for the generalised Pareto distribution.
-
-\code{\link[exdex]{kgaps}} for maximum likelihood inference from
-  the \eqn{K}-gaps model for the extremal index.
+\code{\link{flite}} for frequentist threshold-based inference
+  for time series extremes.
 
 \code{\link[exdex]{choose_uk}} to inform the choice of the
   threshold \eqn{u} and run parameter \eqn{K}.
