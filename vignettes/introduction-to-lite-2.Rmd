@@ -1,0 +1,59 @@
+---
+title: "Bayesian Likelihood-Based Inference for Time Series Extremes"
+author: "Paul Northrop"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Bayesian Likelihood-Based Inference for Time Series Extremes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: lite.bib
+csl: taylor-and-francis-chicago-author-date.csl
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
+
+required <- c("exdex", "revdbayes")
+
+if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = TRUE)))))
+  knitr::opts_chunk$set(eval = FALSE)
+```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
+```
+
+For information about the model underlying the inferences performed in this vignette, including the adjusted likelihood for $(p_u, \sigma_u, \xi)$ and the Cheeseboro wind gusts dataset used below, see the [Introducing lite](introduction-to-lite.html) vignette. 
+
+## Bayesian inferences for model parameters
+
+We perform Bayesian inference for $(p_u, \sigma_u, \xi, \theta)$, combining a likelihood with a prior distribution for these parameters. For $\theta$ the likelihood is based on the $K$-gaps model. For $(p_u, \sigma_u, \xi)$ the likelihood is based on vertically-adjusted log-likelihoods for $p_u$ and  $(\sigma_u, \xi)$.  This latter aspect is an example of Bayesian inference using a composite likelihood (@RCD2012).  
+
+Currently, **lite** allows only priors where $p_u$, $(\sigma_u, \xi$) and $\theta$ are independent a priori.  In the example below, we use the `blite` function's default priors for the exceedance probability $p_u$ (the Jeffreys' prior), the generalised Pareto parameters $(\sigma_u, \xi)$ (and maximal data information prior) and $\theta$ (a uniform prior on [0,1]).  Different priors can be set using the respective arguments `gp_prior`, `b_prior` and `theta_prior_pars`.
+
+The `blite` function samples from the posterior distribution for $(p_u, \sigma_u, \xi)$ based on vertically-adjusted log-likelihoods for $p_u$ and $(\sigma_u, \xi)$.  To use unadjusted log-likelihoods set the argument `type = "none"`.
+
+```{r cheeseboro}
+library(lite)
+cdata <- exdex::cheeseboro
+# Each column of the matrix cdata corresponds to data from a different year
+# blite() sets cluster automatically to correspond to column (year)
+cpost <- blite(cdata, u = 45, k = 3)
+```
+
+The `summary` and `plot` methods produce numerical and graphical marginal summaries of the posterior samples.
+
+```{r vertical, fig.width = 7, fig.height = 5, message = FALSE}
+summary(cpost)
+plot(cpost)
+```
+
+
+## References
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
+</script>
