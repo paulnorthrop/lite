@@ -90,7 +90,7 @@ plot(cfit, which = "gp", adj_type = "spectral")
 
 ## Inferences for return levels
 
-The $1/p$-year return level is the value that is exceeded with probability $p$ in any given year.  To infer this from time series data we need to take account of the (intended) sampling frequency of the data.  In the context of the Cheeseboro data, a year is effectively one month because we are making inferences about extremal behaviour in January.  If there are no missing values then there are $31 \times 24 = 744$ hourly values per January.  We denote this by $n_y$ (number of observations per year).  
+The $m$-year return level is the value that is exceeded with probability $1/m$ in any given year.  To infer this from time series data we need to take account of the (intended) sampling frequency of the data.  In the context of the Cheeseboro data, a year is effectively one month because we are making inferences about extremal behaviour in January.  If there are no missing values then there are $31 \times 24 = 744$ hourly values per January.  We denote this by $n_y$ (number of observations per year).  
 
 The $m$-year return level is given by 
 $$x_m = u+\frac{\sigma_u}{\xi} \left[ p_u^\xi \left\{ 1-\left( 1-\displaystyle \frac1m\right)^{1/n_{y}\theta} \right\}^{-\xi} - 1 \right].$$
