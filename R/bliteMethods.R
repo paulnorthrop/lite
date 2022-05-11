@@ -27,7 +27,7 @@
 #'
 #'   \code{nobs.blite}: a numeric vector of length 3 with names
 #'     \code{c("p[u]", "gp", "theta")}.  The respective number of observations
-#'     used to infer \ifelse{html}{p\out{<sub>u</sub>}}{\eqn{p_u}},
+#'     used to infer \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
 #'     (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
 #'     \eqn{\xi}) and \eqn{\theta}.
 #'
@@ -210,12 +210,12 @@ summary.blite <- function(object, short = TRUE, mean = TRUE,
       res$matrix <- cbind(`Posterior median` = posterior_medians,
                           `Posterior IQR` = posterior_iqrs)
     }
-    rownames(res$matrix) <- names(coef(object))
+    rownames(res$matrix) <- colnames(coef(object))
   } else {
     temp <- object
     class(temp) <- "matrix"
     res$matrix <- summary(temp)
-    colnames(res$matrix) <- names(coef(object))
+    colnames(res$matrix) <- colnames(coef(object))
   }
   class(res) <- "summary.blite"
   return(res)

@@ -76,7 +76,7 @@ round the values in the summary.}
 
   \code{nobs.blite}: a numeric vector of length 3 with names
     \code{c("p[u]", "gp", "theta")}.  The respective number of observations
-    used to infer \ifelse{html}{p\out{<sub>u</sub>}}{\eqn{p_u}},
+    used to infer \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
     (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
     \eqn{\xi}) and \eqn{\theta}.
 
