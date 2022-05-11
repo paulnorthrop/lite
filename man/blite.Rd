@@ -112,8 +112,8 @@ An object of class \code{c("flite", "lite", "chandwich")}.
  \code{inputs}.  If \code{ny} was not supplied then its value is \code{NA}.
 
   Objects inheriting from class \code{"flite"} have \code{coef},
-  \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
-  methods.  See \code{\link{fliteMethods}}.
+  \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
+  methods.  See \code{\link{bliteMethods}}.
 }
 \description{
 Performs threshold-based Bayesian inference for 3 aspects of stationary
@@ -169,8 +169,8 @@ There are 3 independent parts to the inference, all performed using
 cdata <- exdex::cheeseboro
 # Each column of the matrix cdata corresponds to data from a different year
 # blite() sets cluster automatically to correspond to column (year)
-#cpost <- blite(cdata, u = 45, k = 3)
-#summary(cpost)
+cpost <- blite(cdata, u = 45, k = 3)
+summary(cpost)
 }
 \references{
 Chandler, R. E. and Bate, S. (2007). Inference for clustered.

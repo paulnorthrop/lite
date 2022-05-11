@@ -123,8 +123,8 @@
 #'  \code{inputs}.  If \code{ny} was not supplied then its value is \code{NA}.
 #'
 #'   Objects inheriting from class \code{"flite"} have \code{coef},
-#'   \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
-#'   methods.  See \code{\link{fliteMethods}}.
+#'   \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
+#'   methods.  See \code{\link{bliteMethods}}.
 #' @references Chandler, R. E. and Bate, S. (2007). Inference for clustered.
 #'   data using the independence loglikelihood. \emph{Biometrika},
 #'   \strong{94}(1), 167-183. \doi{10.1093/biomet/asm015}
@@ -162,8 +162,8 @@
 #' cdata <- exdex::cheeseboro
 #' # Each column of the matrix cdata corresponds to data from a different year
 #' # blite() sets cluster automatically to correspond to column (year)
-#' #cpost <- blite(cdata, u = 45, k = 3)
-#' #summary(cpost)
+#' cpost <- blite(cdata, u = 45, k = 3)
+#' summary(cpost)
 #' @export
 blite <- function(data, u, cluster, k = 1, inc_cens = TRUE, ny,
                   gp_prior = revdbayes::set_prior(prior = "mdi", model = "gp"),
@@ -252,6 +252,7 @@ blite <- function(data, u, cluster, k = 1, inc_cens = TRUE, ny,
   posterior_sample[, 1] <- b_posterior$bin_sim_vals
   posterior_sample[, 2:3] <- gp_posterior$sim_vals
   posterior_sample[, 4] <- theta_posterior$sim_vals
+  colnames(posterior_sample) <- c("p[u]", "sigma[u]", "xi", "theta")
   names(posterior_sample) <- c("p[u]", "sigma[u]", "xi", "theta")
   # Set the class of the return object and add attributes
   class(posterior_sample) <- c("blite", "lite", "chandwich")
