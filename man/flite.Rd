@@ -62,7 +62,10 @@ An object of class \code{c("flite", "lite", "chandwich")}.
   This object is a function with 2 arguments:
     \itemize{
       \item{\code{pars}, a numeric vector of length 4 to supply the value of
-        the parameter vector \eqn{(p_u, \sigma_u, \xi, \theta)},}
+        the parameter vector
+        (\ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
+        \ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+        \eqn{\xi}, \eqn{\theta}),}
       \item{\code{type}, a character scalar specifying the type of
         adjustment made to the independence log-likelihood in parts
         1 and 2, one of \code{"vertical"}, \code{"none"}, \code{"cholesky"},
@@ -75,13 +78,13 @@ An object of class \code{c("flite", "lite", "chandwich")}.
  \code{"theta"}, which provide the fitted model objects returned from
  \code{\link[chandwich]{adjust_loglik}} (for \code{"Bernoulli"} and
  \code{"gp"}) and \code{\link[exdex]{kgaps}} (for \code{"theta"}).
-
  The named input arguments are returned in a list as the attribute
  \code{inputs}.  If \code{ny} was not supplied then its value is \code{NA}.
+ The call to \code{flite} is provided in the attribute \code{"call"}.
 
-  Objects inheriting from class \code{"flite"} have \code{coef},
-  \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
-  methods.  See \code{\link{fliteMethods}}.
+ Objects inheriting from class \code{"flite"} have \code{coef},
+ \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
+ methods.  See \code{\link{fliteMethods}}.
 }
 \description{
 Performs threshold-based frequentist inference for 3 aspects of stationary
@@ -93,10 +96,13 @@ extremes, as summarised by the extremal index.
 There are 3 independent parts to the inference, all performed using
   maximum likelihood estimation.
     \enumerate{
-      \item{A Bernoulli(\eqn{p_u}) model for whether a given observation
-        exceeds the threshold \eqn{u}.}
-      \item{A generalised Pareto, GP(\eqn{\sigma_u}, \eqn{\xi}), model for
-        the marginal distribution of threshold excesses.}
+      \item{A Bernoulli(\ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}})
+        model for whether a given observation exceeds the threshold
+        \eqn{u}.}
+      \item{A generalised Pareto,
+        GP(\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+        \eqn{\xi}), model for the marginal distribution of threshold
+        excesses.}
       \item{The \eqn{K}-gaps model for the extremal index \eqn{\theta}.}
     }
   The general approach follows Fawcett and Walshaw (2012).
@@ -104,7 +110,9 @@ There are 3 independent parts to the inference, all performed using
   For parts 1 and 2, inferences based on a mis-specified independence
   log-likelihood are adjusted to account for clustering in the data. Here,
   we follow Chandler and Bate (2007) to estimate adjusted log-likelihood
-  functions for \eqn{p_u} and for (\eqn{\sigma_u}, \eqn{\xi}), with the
+  functions for \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}}
+  and for (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+  \eqn{\xi}), with the
   argument \code{cluster} defining the clusters. This aspect of the
   calculations is performed using the \code{\link[chandwich]{adjust_loglik}}
   in the \code{\link[chandwich]{chandwich}} package (Northrop and Chandler,
@@ -122,10 +130,12 @@ There are 3 independent parts to the inference, all performed using
   package has a function \code{\link[exdex]{choose_uk}} to inform this
   choice.
 
-  Each of part of the inference produces a log-likelihood function (adjusted
+  Each part of the inference produces a log-likelihood function (adjusted
   for parts 1 and 2).  These log-likelihoods are combined (summed) to form
   a log-likelihood function for the parameter vector
-  \eqn{(p_u, \sigma_u, \xi, \theta)}.  Return levels are a function of these
+  (\ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
+  \ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+  \eqn{\xi}, \eqn{\theta}).  Return levels are a function of these
   parameters and therefore inferences for return levels can be based on
   this log-likelihood.
 }
@@ -175,7 +185,13 @@ Suveges, M. and Davison, A. C. (2010) Model
 }
 \seealso{
 \code{\link{fliteMethods}}, including plotting (adjusted)
-  log-likelihoods for \eqn{(p_u, \sigma_u, \xi, \theta)}.
+  log-likelihoods for
+  (\ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
+  \ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+  \eqn{\xi}, \eqn{\theta}).
+
+\code{\link{blite}} for Bayesian threshold-based inference
+  for time series extremes.
 
 \code{\link{Bernoulli}} for maximum likelihood inference for the
   Bernoulli distribution.
