@@ -77,7 +77,7 @@ round the values in the summary.}
 
   \code{coef.flite}: a numeric vector of length 4 with names
     \code{c("p[u]", "sigma[u]", "xi", "theta")}.  The MLEs of the parameters
-    \ifelse{html}{p\out{<sub>u</sub>}}{\eqn{p_u}},
+    \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
     \ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
     \eqn{\xi} and \eqn{\theta}.
 
@@ -92,7 +92,7 @@ round the values in the summary.}
 
   \code{nobs.flite}: a numeric vector of length 3 with names
     \code{c("p[u]", "gp", "theta")}.  The respective number of observations
-    used to estimate \ifelse{html}{p\out{<sub>u</sub>}}{\eqn{p_u}},
+    used to estimate \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
     (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
     \eqn{\xi}) and \eqn{\theta}.
 
@@ -121,8 +121,9 @@ Methods for objects of class \code{"flite"} returned from
 For \code{plot.flite}, if \code{which = "all"} then 4 plots are produced.
     \itemize{
       \item{Top left: (adjusted) log-likelihood for the threshold exceedence
-        probability \eqn{p_u}, with a horizontal line indicating a
-        95\% confidence interval for \eqn{p_u}.}
+        probability \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
+        with a horizontal line indicating a 95\% confidence interval for
+        \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}}.}
       \item{Top right: contour plot of the (adjusted) log-likelihood for the
         GP parameters
         (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
