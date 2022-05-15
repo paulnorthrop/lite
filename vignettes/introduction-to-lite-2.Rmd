@@ -41,7 +41,7 @@ library(lite)
 cdata <- exdex::cheeseboro
 # Each column of the matrix cdata corresponds to data from a different year
 # blite() sets cluster automatically to correspond to column (year)
-cpost <- blite(cdata, u = 45, k = 3)
+cpost <- blite(cdata, u = 45, k = 3, ny = 31 * 24, n = 10000)
 ```
 
 The `summary` and `plot` methods produce numerical and graphical marginal summaries of the posterior samples.
@@ -51,6 +51,19 @@ summary(cpost)
 plot(cpost)
 ```
 
+## Predictive inference
+
+See the [Posterior predictive extreme value inference](https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-c-predictive-vignette.html#posterior-predictive-extreme-value-inference) section of the  
+
+```{r predinterval}
+# Interval estimation
+predict(cpost, hpd = TRUE)$short
+```
+
+```{r preddensity, fig.width = 7, fig.height = 5, message = FALSE}
+# Density function
+plot(predict(cpost, type = "d", n_years = c(100, 1000)))
+```
 
 ## References
 
