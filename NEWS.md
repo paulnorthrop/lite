@@ -1,1 +1,5 @@
 # lite 1.0.0.9000
+
+* The new function `blite()` performs Bayesian threshold-based inference for time series extremes.  It is a Bayesian version of the existing function `flite()`, which performs frequentist inference.  
+
+* Objects returned from `blite()` have a predict S3 method `predict.blite()` based on the `predict.evpost()` method from the `revdbayes`package.
