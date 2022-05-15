@@ -56,14 +56,15 @@ inter-exceedance times are used. See \strong{Details} for information
 about choosing \code{k}.}
 
 \item{ny}{A numeric scalar.  The (mean) number of observations per year.
-Setting this appropriately is important when making inferences about
-return levels, using \code{\link{returnLevel}}, but \code{ny} is not
-used by \code{flite} so it need not be supplied now.  If \code{ny} is
-supplied to \code{flite} then it is stored for use by
-\code{\link{returnLevel}}.  Alternatively, \code{ny} can be supplied in
-a later call to \code{\link{returnLevel}}.  If \code{ny} is supplied to
-both \code{flite} and \code{\link{returnLevel}} then the value supplied to
-\code{\link{returnLevel}} will take precedence.}
+Setting this appropriately is important when making predictive inferences
+using \code{\link{predict.blite}}, but \code{ny} is not used by
+\code{blite} so it need not be supplied now.  If \code{ny} is supplied to
+\code{blite} then it is stored for use by \code{\link{predict.blite}}.
+Alternatively, \code{ny} can be supplied in a later call to
+\code{\link{predict.blite}}.  If \code{ny} is supplied to
+both \code{blite} and \code{\link{predict.blite}} then the value supplied
+to \code{\link{predict.blite}} will take precedence, with no warning
+given.}
 
 \item{gp_prior}{A list to specify a prior distribution for the GP parameters
 (\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
