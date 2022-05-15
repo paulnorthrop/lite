@@ -50,7 +50,7 @@ supplied to \code{flite} then it is stored for use by
 \code{\link{returnLevel}}.  Alternatively, \code{ny} can be supplied in
 a later call to \code{\link{returnLevel}}.  If \code{ny} is supplied to
 both \code{flite} and \code{\link{returnLevel}} then the value supplied to
-\code{\link{returnLevel}} will take precedence.}
+\code{\link{returnLevel}} will take precedence, with no warning given.}
 
 \item{...}{Further arguments to be passed to the function
 \code{\link[sandwich:vcovCL]{meatCL}} in the sandwich package.
