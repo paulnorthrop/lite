@@ -38,7 +38,7 @@ if (got_exdex) {
     testthat::expect_error(returnLevel(cfit))
   })
 
-  # Suppling ny twice
+  # Supplying ny twice
   cfit2 <- flite(cdata, u = 45, k = 3, ny = 1)
   rl2 <- returnLevel(cfit2, prof = FALSE, ny = 31 * 24)
   test_that("returnLevel ny twice", {
