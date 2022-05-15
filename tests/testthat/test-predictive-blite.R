@@ -38,22 +38,24 @@ if (got_exdex) {
     testthat::expect_lt(hpd_length, equi_tailed_length)
   })
 
-  # (d) Replace simulated values of theta with 1s
-  # (i) Predictive intervals
-  theta_eq_1 <- cpost
-  theta_eq_1[, "theta"] <- 1
-  hpd2 <- predict(theta_eq_1, hpd = TRUE)$short
-  test_that("If theta = 1 then lower predictive interval limit increases", {
-    testthat::expect_gt(hpd2[1, 1], hpd[1, 1])
-  })
-  test_that("If theta = 1 then upper predictive interval limit increases", {
-    testthat::expect_gt(hpd2[1, 2], hpd[1, 2])
-  })
-  # (ii) Predictive quantiles
-  q1 <- predict(cpost, type = "q", n_years = c(100, 1000))$y
-  q2 <- predict(temp, type = "q", n_years = c(100, 1000))$y
-  test_that("If theta = 1 then predictive quantiles increase", {
-    testthat::expect_true(all(q2 > q1))
-  })
+  # Reveal these tests once revdbayes 1.5.9 is on CRAN
+
+#  # (d) Replace simulated values of theta with 1s
+#  # (i) Predictive intervals
+#  theta_eq_1 <- cpost
+#  theta_eq_1[, "theta"] <- 1
+#  hpd2 <- predict(theta_eq_1, hpd = TRUE)$short
+#  test_that("If theta = 1 then lower predictive interval limit increases", {
+#    testthat::expect_gt(hpd2[1, 1], hpd[1, 1])
+#  })
+#  test_that("If theta = 1 then upper predictive interval limit increases", {
+#    testthat::expect_gt(hpd2[1, 2], hpd[1, 2])
+#  })
+#  # (ii) Predictive quantiles
+#  q1 <- predict(cpost, type = "q", n_years = c(100, 1000))$y
+#  q2 <- predict(temp, type = "q", n_years = c(100, 1000))$y
+#  test_that("If theta = 1 then predictive quantiles increase", {
+#    testthat::expect_true(all(q2 > q1))
+#  })
 
 }
