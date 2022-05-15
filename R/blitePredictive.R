@@ -89,7 +89,8 @@
 #' # blite() sets cluster automatically to correspond to column (year)
 #' cpost <- blite(cdata, u = 45, k = 3, ny = 31 * 24)
 #'
-#' # Need revdbayes v1.5.9 for the following examples
+#' # Need revdbayes v1.5.9 for the following examples to be correct
+#'   (At the moment they are based on theta = 1)
 #'
 #' # Interval estimation
 #' predict(cpost)$long
