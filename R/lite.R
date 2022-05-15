@@ -40,6 +40,6 @@
 #' @name lite
 #' @import sandwich
 #' @import revdbayes
-#' @importFrom stats nobs vcov coef logLik confint
+#' @importFrom stats nobs vcov coef logLik confint predict
 #' @importFrom graphics plot
 NULL
