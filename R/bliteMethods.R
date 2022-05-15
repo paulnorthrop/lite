@@ -44,6 +44,8 @@
 #'   \code{print.summary.blite}: the argument \code{x} is returned, invisibly.
 #' @seealso \code{\link{blite}} to perform frequentist threshold-based
 #'   inference for time series extremes.
+#' @seealso \code{\link{predict.blite}}: for predictive inference for the
+#'   largest value observed in \eqn{N} years.
 #' @name bliteMethods
 NULL
 ## NULL

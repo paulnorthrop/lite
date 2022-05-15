@@ -119,4 +119,7 @@ For \code{plot.blite}, if \code{which = "all"} then 4 plots are produced.
 \seealso{
 \code{\link{blite}} to perform frequentist threshold-based
   inference for time series extremes.
+
+\code{\link{predict.blite}}: for predictive inference for the
+  largest value observed in \eqn{N} years.
 }

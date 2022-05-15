@@ -2,7 +2,7 @@
 % Please edit documentation in R/predictive.R
 \name{predict.blite}
 \alias{predict.blite}
-\title{Predictive inference for the largest value observed in N years.}
+\title{Predictive inference for the largest value observed in \eqn{N} years.}
 \usage{
 \method{predict}{blite}(
   object,
@@ -50,7 +50,7 @@
       correspond to a predictive quantile that is below the threshold,
       \code{attr(object, "inputs")$u}.  That is, no element of \code{p} can
       be less than the value of \code{predict.evpost(object,}
-      \code{type = "q", x = \code{attr(object, "inputs")$u})}.
+      \code{type = "q", x = attr(object, "inputs")$u)}.
 
       If \code{x} is not supplied then a default value of
       \code{c(0.025, 0.25, 0.5, 0.75, 0.975)} is used.
@@ -138,7 +138,7 @@ An object of class "evpred", a list containing a subset of the
 \description{
 \code{predict} method for class "blite".  Performs predictive inference
 about the largest value to be observed over a future time period of
-N years.  Predictive inferences accounts for uncertainty in model
+\eqn{N} years.  Predictive inferences accounts for uncertainty in model
 parameters and for uncertainty owing to the variability of future
 observations.
 }
