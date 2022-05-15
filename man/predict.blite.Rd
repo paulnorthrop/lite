@@ -20,14 +20,8 @@
 )
 }
 \arguments{
-\item{object}{An object of class "evpost", a result of a call to
-\code{\link[revdbayes]{rpost}} or \code{\link[revdbayes]{rpost_rcpp}} with \code{model = "gev"},
-\code{model = "os"}, \code{model = "pp"} or \code{model == "bingp"}.
-Calling these functions after a call to \code{rpost} or \code{rpost_rcpp}
-with \code{model == "gp"} will produce an error, because inferences about
-the probability of threshold exceedance are required, in addition to the
-distribution of threshold excesses. The model is stored in
-\code{object$model}.}
+\item{object}{An object of class \code{"blite"} returned from
+\code{\link{blite}}.}
 
 \item{type}{A character vector.  Indicates which type of inference is
   required:
@@ -44,23 +38,19 @@ distribution of threshold excesses. The model is stored in
   \itemize{
     \item{\code{type = "p"} or \code{type = "d"}:} \code{x} contains
       quantiles at which to evaluate the distribution or density function.
-
-      If \code{object$model == "bingp"} then no element of \code{x} can be
-      less than the threshold \code{object$thresh}.
+      No element of \code{x} can be less than the threshold
+      \code{attr(object, "inputs")$u}.
 
       If \code{x} is not supplied then \code{n_year}-specific defaults are
       set: vectors of length \code{x_num} from the 0.1\% quantile to the
       99\% quantile, subject all values being greater than the threshold.
-
     \item{\code{type = "q"}:} \code{x} contains probabilities in (0,1)
       at which to evaluate the quantile function.  Any values outside
-      (0, 1) will be removed without warning.
-
-      If \code{object$model == "bingp"} then no element of \code{p} can
+      (0, 1) will be removed without warning. No element of \code{p} can
       correspond to a predictive quantile that is below the threshold,
-      \code{object$thresh}.  That is, no element of \code{p} can be less
-      than the value of \code{predict.evpost(object,}
-      \code{type = "q", x = object$thresh)}.
+      \code{attr(object, "inputs")$u}.  That is, no element of \code{p} can
+      be less than the value of \code{predict.evpost(object,}
+      \code{type = "q", x = \code{attr(object, "inputs")$u})}.
 
       If \code{x} is not supplied then a default value of
       \code{c(0.025, 0.25, 0.5, 0.75, 0.975)} is used.
@@ -72,6 +62,9 @@ and \code{x} is not supplied then \code{x_num} gives the number of values
 in \code{x} for each value in \code{n_years}.}
 
 \item{n_years}{A numeric vector. Values of N.}
+
+\item{ny}{A numeric scalar.  The (mean) number of observations per year.
+\strong{Setting this appropriately is important}. See \strong{Details}.}
 
 \item{level}{A numeric vector of values in (0, 100).
 Only relevant when \code{type = "i"}.
@@ -108,6 +101,40 @@ then it is increased until it does provide an upper bound.}
 \item{...}{Additional optional arguments. At present no optional
 arguments are used.}
 }
+\value{
+An object of class "evpred", a list containing a subset of the
+  following components:
+    \item{type}{The argument \code{type} supplied to \code{predict.blite}.
+    Which of the following components are present depends \code{type}.}
+    \item{x}{A matrix containing the argument \code{x} supplied to
+      \code{predict.blite}, or set within \code{predict.blite} if \code{x}
+      was not supplied, replicated to have \code{n_years} columns
+      if necessary.
+      Only present if \code{type} is \code{"p", "d"} or \code{"q"}.}
+    \item{y}{The content of \code{y} depends on \code{type}:
+    \itemize{
+      \item{\code{type = "p", "d", "q"}:}  A matrix with the same
+      dimensions as \code{x}.  Contains distribution function values
+      (\code{type = "p"}), predictive density (\code{type = "d"})
+      or quantiles (\code{type = "q"}).
+      \item{\code{type = "r"}:} A numeric matrix with \code{length(n_years)}
+      columns and number of rows equal to the size of the posterior sample.
+      \item{\code{type = "i"}:} \code{y} is not present.
+      }}
+      \item{long}{A \code{length(n_years)*length(level)} by 4 numeric
+        matrix containing the equi-tailed limits with columns:
+        lower limit, upper limit, n_years, level.
+        Only present if \code{type = "i"}.  If an interval extends below
+        the threshold then \code{NA} is returned.}
+      \item{short}{A matrix with the same structure as \code{long}
+        containing the HPD limits.  Only present if \code{type = "i"}.
+        Columns 1 and 2 contain \code{NA}s if \code{hpd = FALSE}
+        or if the corresponding equi-tailed interval extends below
+        the threshold.}
+  The arguments \code{n_years, level, hpd, lower_tail, log} supplied
+  to \code{predict.blite} are also included, as is the value of \code{ny}
+  and \code{model = "bingp"}.
+}
 \description{
 \code{predict} method for class "blite".  Performs predictive inference
 about the largest value to be observed over a future time period of
@@ -115,13 +142,43 @@ N years.  Predictive inferences accounts for uncertainty in model
 parameters and for uncertainty owing to the variability of future
 observations.
 }
+\details{
+\code{ny} provides information about the (intended) frequency of
+  sampling in time, that is, the number of observations that would be
+  observed in a year if there are no missing values.  If the number of
+  observations may vary between years then \code{ny} should be set equal to
+  the mean number of observations per year.
+
+  \strong{Supplying \code{ny}.}
+  The value of \code{ny} may have been set in the call to
+  \code{\link{blite}}.  If \code{ny} is supplied by the user in the call to
+  \code{predict.blite} then this will be used in preference to the value
+  stored in the fitted model object.  If these two values differ then no
+  warning will be given.
+}
 \examples{
 ### Cheeseboro wind gusts
 
 cdata <- exdex::cheeseboro
 # Each column of the matrix cdata corresponds to data from a different year
 # blite() sets cluster automatically to correspond to column (year)
-cpost <- blite(cdata, u = 45, k = 3)
-summary(cpost)
-predict(cpost, ny = 31 * 24)$long
+cpost <- blite(cdata, u = 45, k = 3, ny = 31 * 24)
+
+# Need revdbayes v1.5.9 for the following examples
+
+# Interval estimation
+predict(cpost)$long
+predict(cpost, hpd = TRUE)$short
+
+# Density function
+plot(predict(cpost, type = "d", n_years = c(100, 1000)))
+
+# Distribution function
+plot(predict(cpost, type = "p", n_years = c(100, 1000)))
+
+# Quantiles
+predict(cpost, type = "q", n_years = c(100, 1000))$y
+
+# Random generation
+plot(predict(cpost, type = "r"))
 }
