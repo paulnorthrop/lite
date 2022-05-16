@@ -28,7 +28,7 @@ perform frequentist and Bayesian inference for time series extremes,
 respectively.
 
 See the vignettes
-\code{vignette("lite-1-frequentist", package = "lite")} and
+\code{vignette("lite-1-frequentist", package = "lite")} and \cr
 \code{vignette("lite-1-bayesian", package = "lite")}
 for an overview of the package.
 }

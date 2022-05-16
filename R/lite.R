@@ -22,7 +22,7 @@
 #' respectively.
 #'
 #' See the vignettes
-#' \code{vignette("lite-1-frequentist", package = "lite")} and
+#' \code{vignette("lite-1-frequentist", package = "lite")} and \cr
 #' \code{vignette("lite-1-bayesian", package = "lite")}
 #' for an overview of the package.
 #' @references Chandler, R. E. and Bate, S. (2007). Inference for clustered.
