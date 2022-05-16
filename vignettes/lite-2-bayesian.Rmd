@@ -53,7 +53,7 @@ plot(cpost)
 
 ## Predictive inference
 
-We perform posterior predictive inference for the largest value $M_N$ to be observed over a future time period of length $N$ years.  Objects returned from the `blite` function have a `predict` method based on the `predict.evpost` method in the @revdbayes package. The effect of adjusting for the values of the extremal index \eqn{\theta} in the posterior sample is to change the effective time horizon from $N$ to $\theta N$. See the Posterior predictive extreme value inference section of the [Posterior Predictive Extreme Value Inference using the revdbayes Package](https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-c-predictive-vignette.html) vignette.
+We perform posterior predictive inference for the largest value $M_N$ to be observed over a future time period of length $N$ years.  Objects returned from the `blite` function have a `predict` method based on the `predict.evpost` method in the **revdbayes** package [@revdbayes]. See the [Posterior Predictive Extreme Value Inference using the revdbayes Package](https://cran.r-project.org/package=revdbayes) vignette for information. The effect of adjusting for the values of the extremal index \eqn{\theta} in the posterior sample is to change the effective time horizon from $N$ to $\theta N$. 
 
 The function `predict.blite` can estimate predictive intervals, quantiles, distribution and density functions for $M_N$ and simulate from the predictive distribution for $M_N$.  For example, the following code estimates a 95\% highest predictive density (HPD) interval for $M_{100}$ and plots the predictive densities of $M_{100}$ and $M_{1000}$.
 
