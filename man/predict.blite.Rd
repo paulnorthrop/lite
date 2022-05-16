@@ -147,7 +147,7 @@ The function \code{\link[revdbayes]{predict.evpost}} in the
   \code{\link[revdbayes]{revdbayes}} package is used to perform the
   predictive inferences.  The effect of adjusting for the values of the
   extremal index \eqn{\theta} in the posterior sample in
-  \code{object$sim_vals[, "theta]} is to change the effective time horizon
+  \code{object$sim_vals[, "theta"]} is to change the effective time horizon
   from \eqn{N} to \eqn{\theta N}.
 
   \code{ny} provides information about the (intended) frequency of
