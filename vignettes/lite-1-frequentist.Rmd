@@ -1,12 +1,12 @@
 ---
-title: "Introducing lite: Likelihood-Based Inference for Time Series Extremes"
+title: "Frequentist Likelihood-Based Inference for Time Series Extremes"
 author: "Paul Northrop"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Introducing lite: Likelihood-Based Inference for Time Series Extremes}
+  %\VignetteIndexEntry{Frequentist Likelihood-Based Inference for Time Series Extremes}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: lite.bib
@@ -26,7 +26,9 @@ if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = T
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 ```
 
-The **lite** package performs likelihood-based inference for stationary time series extremes.  The general approach follows @FW2012. There are 3 independent parts to the inference, all performed using maximum likelihood estimation.
+The **lite** package performs likelihood-based inference for stationary time series extremes. This vignette concentrates on frequentist inference, using maximum likelihood estimation.  See the vignette [Bayesian Likelihood-Based Inference for Time Series Extremes](lite-1-bayesian.html) for information about Bayesian inference.
+
+The general approach follows @FW2012. There are 3 independent parts to the inference, all performed using maximum likelihood estimation.
 
 1. A Bernoulli$(p_u)$ model for whether a given observation exceeds the threshold $u$.
 2. A generalised Pareto, GP$(\sigma_u, \xi)$, model for the marginal distribution of threshold excesses.

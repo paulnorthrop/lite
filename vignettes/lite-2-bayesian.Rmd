@@ -26,7 +26,7 @@ if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = T
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 ```
 
-For information about the model underlying the inferences performed in this vignette, including the adjusted likelihood for $(p_u, \sigma_u, \xi)$ and the Cheeseboro wind gusts dataset used below, see the [Introducing lite](introduction-to-lite.html) vignette. 
+For information about the model underlying the inferences performed in this vignette, including the (adjusted) likelihood for $(p_u, \sigma_u, \xi, \theta)$ and the Cheeseboro wind gusts dataset used below, see the vignette [Frequentist Likelihood-Based Inference for Time Series Extremes](lite-1-frequentist.html). 
 
 ## Bayesian inferences for model parameters
 
@@ -53,7 +53,9 @@ plot(cpost)
 
 ## Predictive inference
 
-See the [Posterior predictive extreme value inference](https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-c-predictive-vignette.html#posterior-predictive-extreme-value-inference) section of the  
+We perform posterior predictive inference for the largest value $M_N$ to be observed over a future time period of length $N$ years.  Objects returned from the `blite` function have a `predict` method based on the `predict.evpost` method in the @revdbayes package. The effect of adjusting for the values of the extremal index \eqn{\theta} in the posterior sample is to change the effective time horizon from $N$ to $\theta N$. See the Posterior predictive extreme value inference section of the [Posterior Predictive Extreme Value Inference using the revdbayes Package](https://cran.r-project.org/web/packages/revdbayes/vignettes/revdbayes-c-predictive-vignette.html) vignette.
+
+The function `predict.blite` can estimate predictive intervals, quantiles, distribution and density functions for $M_N$ and simulate from the predictive distribution for $M_N$.  For example, the following code estimates a 95\% highest predictive density (HPD) interval for $M_{100}$ and plots the predictive densities of $M_{100}$ and $M_{1000}$.
 
 ```{r predinterval}
 # Interval estimation
