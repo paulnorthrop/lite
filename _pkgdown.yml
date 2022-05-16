@@ -15,16 +15,19 @@ reference:
   - title: Model fitting
     desc: ~
     contents:
+      - "blite"
       - "flite"
       - "generalisedPareto"
       - "Bernoulli"
-  - title: Return level estimation
+  - title: Extreme value inferences
     desc: ~
     contents:
+      - "predict.blite"
       - "returnLevel"
   - title: Generics
     desc: ~
     contents:
+      - "bliteMethods"
       - "fliteMethods"
       - "returnLevelMethods"
   - title: Log-likelihood adjustment
