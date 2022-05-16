@@ -32,7 +32,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/introduction-to-lite.html">Introducing lite: Likelihood-Based Inference for Time Series Extremes</a>
+      <a href="../articles/lite-1-frequentist.html">Frequentist Likelihood-Based Inference for Time Series Extremes</a>
+    </li>
+    <li>
+      <a href="../articles/lite-2-bayesian.html">Bayesian Likelihood-Based Inference for Time Series Extremes</a>
     </li>
   </ul></li>
 <li>
@@ -59,7 +62,9 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.0.9000" id="lite-1009000">lite 1.0.0.9000<a class="anchor" aria-label="anchor" href="#lite-1009000"></a></h2>
-</div>
+<ul><li><p>The new function <code><a href="../reference/blite.html">blite()</a></code> performs Bayesian threshold-based inference for time series extremes. It is a Bayesian version of the existing function <code><a href="../reference/flite.html">flite()</a></code>, which performs frequentist inference.</p></li>
+<li><p>Objects returned from <code><a href="../reference/blite.html">blite()</a></code> have a predict S3 method <code><a href="../reference/predict.blite.html">predict.blite()</a></code> based on the <code>predict.evpost()</code> method from the <code>revdbayes</code>package. It provides predictive inferences for the largest value observed in <em>N</em> years.</p></li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

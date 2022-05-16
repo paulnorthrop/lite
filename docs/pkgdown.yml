@@ -2,6 +2,7 @@ pandoc: 2.14.0.3
 pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
-  introduction-to-lite: introduction-to-lite.html
-last_built: 2022-04-08T16:43Z
+  lite-1-frequentist: lite-1-frequentist.html
+  lite-2-bayesian: lite-2-bayesian.html
+last_built: 2022-05-16T16:54Z
 

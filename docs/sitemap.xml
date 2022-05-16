@@ -10,6 +10,12 @@
     <loc>/articles/introduction-to-lite.html</loc>
   </url>
   <url>
+    <loc>/articles/lite-1-frequentist.html</loc>
+  </url>
+  <url>
+    <loc>/articles/lite-2-bayesian.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -20,6 +26,12 @@
   </url>
   <url>
     <loc>/reference/Bernoulli.html</loc>
+  </url>
+  <url>
+    <loc>/reference/blite.html</loc>
+  </url>
+  <url>
+    <loc>/reference/bliteMethods.html</loc>
   </url>
   <url>
     <loc>/reference/estfun.html</loc>
@@ -44,6 +56,9 @@
   </url>
   <url>
     <loc>/reference/logLikVector.html</loc>
+  </url>
+  <url>
+    <loc>/reference/predict.blite.html</loc>
   </url>
   <url>
     <loc>/reference/returnLevel.html</loc>

@@ -38,7 +38,10 @@ These log-likelihoods are combined to make inferences about return levels."><!--
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/introduction-to-lite.html">Introducing lite: Likelihood-Based Inference for Time Series Extremes</a>
+      <a href="../articles/lite-1-frequentist.html">Frequentist Likelihood-Based Inference for Time Series Extremes</a>
+    </li>
+    <li>
+      <a href="../articles/lite-2-bayesian.html">Bayesian Likelihood-Based Inference for Time Series Extremes</a>
     </li>
   </ul></li>
 <li>
@@ -82,10 +85,12 @@ These log-likelihoods are combined to make inferences about return levels.</p>
   parameters.</p></li>
 <li><p><code><a href="returnLevel.html">returnLevel</a></code>: performs inference for return levels
   using the adjusted log-likelihood.</p></li>
-</ul><p>The main function is <code><a href="flite.html">flite</a></code>, which performs frequentist
-inference for time series extremes.</p>
-<p>See <code><a href="../articles/introduction-to-lite.html">vignette("introduction-to-lite", package = "lite")</a></code> for an
-overview of the package.</p>
+</ul><p>The main functions are <code><a href="flite.html">flite</a></code> and <code><a href="blite.html">blite</a></code>, which
+perform frequentist and Bayesian inference for time series extremes,
+respectively.</p>
+<p>See the vignettes
+<code><a href="../articles/lite-1-frequentist.html">vignette("lite-1-frequentist", package = "lite")</a></code> and <br><code>vignette("lite-1-bayesian", package = "lite")</code>
+for an overview of the package.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -105,7 +110,11 @@ overview of the package.</p>
     <div class="dont-index"><p><code><a href="flite.html">flite</a></code> for frequentist threshold-based inference for
   time series extremes.</p>
 <p><code><a href="returnLevel.html">returnLevel</a></code> for frequentist threshold-based inference
-  for return levels.</p></div>
+  for return levels.</p>
+<p><code><a href="blite.html">blite</a></code> for Bayesian threshold-based inference for
+  time series extremes.</p>
+<p><code><a href="predict.blite.html">predict.blite</a></code> for predictive inference for the
+  largest value observed in \(N\) years.</p></div>
     </div>
 
   </div>

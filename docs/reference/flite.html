@@ -35,7 +35,10 @@ extremes, as summarised by the extremal index."><!-- mathjax --><script src="htt
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/introduction-to-lite.html">Introducing lite: Likelihood-Based Inference for Time Series Extremes</a>
+      <a href="../articles/lite-1-frequentist.html">Frequentist Likelihood-Based Inference for Time Series Extremes</a>
+    </li>
+    <li>
+      <a href="../articles/lite-2-bayesian.html">Bayesian Likelihood-Based Inference for Time Series Extremes</a>
     </li>
   </ul></li>
 <li>
@@ -116,7 +119,7 @@ supplied to <code>flite</code> then it is stored for use by
 <code><a href="returnLevel.html">returnLevel</a></code>.  Alternatively, <code>ny</code> can be supplied in
 a later call to <code><a href="returnLevel.html">returnLevel</a></code>.  If <code>ny</code> is supplied to
 both <code>flite</code> and <code><a href="returnLevel.html">returnLevel</a></code> then the value supplied to
-<code><a href="returnLevel.html">returnLevel</a></code> will take precedence.</p></dd>
+<code><a href="returnLevel.html">returnLevel</a></code> will take precedence, with no warning given.</p></dd>
 <dt>...</dt>
 <dd><p>Further arguments to be passed to the function
 <code><a href="https://sandwich.R-Forge.R-project.org//reference/vcovCL.html" class="external-link">meatCL</a></code> in the sandwich package.
@@ -127,7 +130,10 @@ may make a difference if the number of clusters is not large.</p></dd>
     <h2>Value</h2>
     <p>An object of class <code>c("flite", "lite", "chandwich")</code>.
   This object is a function with 2 arguments:</p><ul><li><p><code>pars</code>, a numeric vector of length 4 to supply the value of
-        the parameter vector \((p_u, \sigma_u, \xi, \theta)\),</p></li>
+        the parameter vector
+        (\(p\)<sub>u</sub>,
+        \(\sigma\)<sub>u</sub>,
+        \(\xi\), \(\theta\)),</p></li>
 <li><p><code>type</code>, a character scalar specifying the type of
         adjustment made to the independence log-likelihood in parts
         1 and 2, one of <code>"vertical"</code>, <code>"none"</code>, <code>"cholesky"</code>,
@@ -136,27 +142,33 @@ may make a difference if the number of clusters is not large.</p></dd>
         the description of the argument <code>adj_type</code> in
         <code><a href="fliteMethods.html">plot.flite</a></code>.</p></li>
 </ul><p>The object also has the attributes <code>"Bernoulli"</code>, <code>"gp"</code>,
-<code>"kgaps"</code>, which provide the fitted model objects returned from
+<code>"theta"</code>, which provide the fitted model objects returned from
 <code><a href="https://paulnorthrop.github.io/chandwich/reference/adjust_loglik.html" class="external-link">adjust_loglik</a></code> (for <code>"Bernoulli"</code> and
-<code>"gp"</code>) and <code><a href="https://paulnorthrop.github.io/exdex/reference/kgaps.html" class="external-link">kgaps</a></code> (for <code>"kgaps"</code>).
+<code>"gp"</code>) and <code><a href="https://paulnorthrop.github.io/exdex/reference/kgaps.html" class="external-link">kgaps</a></code> (for <code>"theta"</code>).
  The named input arguments are returned in a list as the attribute
 <code>inputs</code>.  If <code>ny</code> was not supplied then its value is <code>NA</code>.
-  Objects inheriting from class <code>"flite"</code> have <code>coef</code>,
-<code>logLik</code>, <code>nobs</code>, <code>plot</code>, <code>summary</code> and <code>vcov</code>  methods.  See <code><a href="fliteMethods.html">fliteMethods</a></code>.</p>
+ The call to <code>flite</code> is provided in the attribute <code>"call"</code>.
+ Objects inheriting from class <code>"flite"</code> have <code>coef</code>,
+<code>logLik</code>, <code>nobs</code>, <code>plot</code>, <code>summary</code> and <code>vcov</code> methods.  See <code><a href="fliteMethods.html">fliteMethods</a></code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>There are 3 independent parts to the inference, all performed using
-  maximum likelihood estimation.</p><ol><li><p>A Bernoulli(\(p_u\)) model for whether a given observation
-        exceeds the threshold \(u\).</p></li>
-<li><p>A generalised Pareto, GP(\(\sigma_u\), \(\xi\)), model for
-        the marginal distribution of threshold excesses.</p></li>
+  maximum likelihood estimation.</p><ol><li><p>A Bernoulli(\(p\)<sub>u</sub>)
+        model for whether a given observation exceeds the threshold
+        \(u\).</p></li>
+<li><p>A generalised Pareto,
+        GP(\(\sigma\)<sub>u</sub>,
+        \(\xi\)), model for the marginal distribution of threshold
+        excesses.</p></li>
 <li><p>The \(K\)-gaps model for the extremal index \(\theta\).</p></li>
 </ol><p>The general approach follows Fawcett and Walshaw (2012).</p>
 <p>For parts 1 and 2, inferences based on a mis-specified independence
   log-likelihood are adjusted to account for clustering in the data. Here,
   we follow Chandler and Bate (2007) to estimate adjusted log-likelihood
-  functions for \(p_u\) and for (\(\sigma_u\), \(\xi\)), with the
+  functions for \(p\)<sub>u</sub>
+  and for (\(\sigma\)<sub>u</sub>,
+  \(\xi\)), with the
   argument <code>cluster</code> defining the clusters. This aspect of the
   calculations is performed using the <code><a href="https://paulnorthrop.github.io/chandwich/reference/adjust_loglik.html" class="external-link">adjust_loglik</a></code>
   in the <code><a href="https://paulnorthrop.github.io/chandwich/reference/chandwich.html" class="external-link">chandwich</a></code> package (Northrop and Chandler,
@@ -171,10 +183,12 @@ may make a difference if the number of clusters is not large.</p></dd>
   \(K\)-gaps run parameter \(K\).  The <code><a href="https://paulnorthrop.github.io/exdex/reference/exdex.html" class="external-link">exdex</a></code>
   package has a function <code><a href="https://paulnorthrop.github.io/exdex/reference/choose_uk.html" class="external-link">choose_uk</a></code> to inform this
   choice.</p>
-<p>Each of part of the inference produces a log-likelihood function (adjusted
+<p>Each part of the inference produces a log-likelihood function (adjusted
   for parts 1 and 2).  These log-likelihoods are combined (summed) to form
   a log-likelihood function for the parameter vector
-  \((p_u, \sigma_u, \xi, \theta)\).  Return levels are a function of these
+  (\(p\)<sub>u</sub>,
+  \(\sigma\)<sub>u</sub>,
+  \(\xi\), \(\theta\)).  Return levels are a function of these
   parameters and therefore inferences for return levels can be based on
   this log-likelihood.</p>
     </div>
@@ -203,7 +217,12 @@ for Bayesian Extreme Value Analysis. R package version 1.3.9.
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="fliteMethods.html">fliteMethods</a></code>, including plotting (adjusted)
-  log-likelihoods for \((p_u, \sigma_u, \xi, \theta)\).</p>
+  log-likelihoods for
+  (\(p\)<sub>u</sub>,
+  \(\sigma\)<sub>u</sub>,
+  \(\xi\), \(\theta\)).</p>
+<p><code><a href="blite.html">blite</a></code> for Bayesian threshold-based inference
+  for time series extremes.</p>
 <p><code><a href="Bernoulli.html">Bernoulli</a></code> for maximum likelihood inference for the
   Bernoulli distribution.</p>
 <p><code><a href="generalisedPareto.html">generalisedPareto</a></code> for maximum likelihood inference
@@ -232,13 +251,13 @@ for Bayesian Extreme Value Analysis. R package version 1.3.9.
 <span class="r-out co"><span class="r-pr">#&gt;</span> p[u]      0.02771   0.005988</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sigma[u]  9.27400   2.071000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xi       -0.09368   0.084250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> theta     0.36390   0.026530</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> theta     0.37960   0.027220</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># 2 ways to find the maximised log-likelihood value</span></span>
 <span class="r-in"><span class="fu">cfit</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -1855.404</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -1847.334</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 'log Lik.' -1855.404 (df=4)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 'log Lik.' -1847.334 (df=4)</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Plots of (adjusted) log-likelihoods</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
