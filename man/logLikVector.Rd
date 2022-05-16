@@ -19,7 +19,8 @@ logLikVector(object, ...)
 \item{object}{A fitted model object.}
 
 \item{...}{Further arguments. None are used for either
-\code{logLikVector.Bernoulli} or \code{logLikVector.GP}.}
+\code{logLikVector.Bernoulli} or \cr
+\code{logLikVector.GP}.}
 
 \item{pars}{A numeric parameter vector.
 
