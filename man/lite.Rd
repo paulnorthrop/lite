@@ -23,11 +23,14 @@ The main functions are
   using the adjusted log-likelihood.}
 }
 
-The main function is \code{\link{flite}}, which performs frequentist
-inference for time series extremes.
+The main functions are \code{\link{flite}} and \code{\link{blite}}, which
+perform frequentist and Bayesian inference for time series extremes,
+respectively.
 
-See \code{vignette("introduction-to-lite", package = "lite")} for an
-overview of the package.
+See the vignettes
+\code{vignette("lite-1-frequentist", package = "lite")} and
+\code{vignette("lite-1-bayesian", package = "lite")}
+for an overview of the package.
 }
 \references{
 Chandler, R. E. and Bate, S. (2007). Inference for clustered.
@@ -49,4 +52,10 @@ Suveges, M. and Davison, A. C. (2010) Model
 
 \code{\link{returnLevel}} for frequentist threshold-based inference
   for return levels.
+
+\code{\link{blite}} for Bayesian threshold-based inference for
+  time series extremes.
+
+\code{\link{predict.blite}} for predictive inference for the
+  largest value observed in \eqn{N} years.
 }
