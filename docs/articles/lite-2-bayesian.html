@@ -114,10 +114,10 @@
 <span class="co">#&gt; blite(data = cdata, u = 45, k = 3, ny = 31 * 24, n = 10000)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;          Posterior mean Posterior SD</span>
-<span class="co">#&gt; p[u]            0.02833     0.006059</span>
-<span class="co">#&gt; sigma[u]        9.99200     2.397000</span>
-<span class="co">#&gt; xi             -0.07472     0.094530</span>
-<span class="co">#&gt; theta           0.24240     0.023300</span>
+<span class="co">#&gt; p[u]            0.02838     0.006061</span>
+<span class="co">#&gt; sigma[u]       10.01000     2.430000</span>
+<span class="co">#&gt; xi             -0.07294     0.094040</span>
+<span class="co">#&gt; theta           0.24230     0.023360</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span></code></pre></div>
 <p><img src="lite-2-bayesian_files/figure-html/vertical-1.png" width="672"></p>
 </div>
@@ -129,8 +129,8 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Interval estimation</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">short</span>
-<span class="co">#&gt;         lower    upper n_years level</span>
-<span class="co">#&gt; [1,] 72.73068 138.9796     100    95</span></code></pre></div>
+<span class="co">#&gt;        lower    upper n_years level</span>
+<span class="co">#&gt; [1,] 72.8932 139.4365     100    95</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Density function</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -146,7 +146,7 @@
 Northrop, Paul J. 2020. <em><span class="nocase">r</span>evdbayes: Ratio-of-Uniforms Sampling for Bayesian Extreme Value Analysis</em>. <a href="https://CRAN.R-project.org/package=revdbayes" class="external-link">https://CRAN.R-project.org/package=revdbayes</a>.
 </div>
 <div id="ref-RCD2012" class="csl-entry">
-Ribatet, Mathieu, Daniel Cooley, and Anthony C. Davison. 2012. <span>“Bayesian Inference from Composite Likelihoods, with an Application to Spatial Extremes.”</span> <em>Statistica Sinica</em> 22 (2). Institute of Statistical Science, Academia Sinica: 813–845. <a href="http://www.jstor.org/stable/24310036" class="external-link">http://www.jstor.org/stable/24310036</a>.
+Ribatet, Mathieu, Daniel Cooley, and Anthony C. Davison. 2012. <span>“Bayesian Inference from Composite Likelihoods, with an Application to Spatial Extremes.”</span> <em>Statistica Sinica</em> 22 (2): 813–845. <a href="http://www.jstor.org/stable/24310036" class="external-link">http://www.jstor.org/stable/24310036</a>.
 </div>
 </div>
 </div>
