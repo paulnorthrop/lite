@@ -57,7 +57,9 @@ is the largest excesses of the threshold \eqn{u}, is preserved.}
   \code{\link[graphics:plot.default]{plot}}, such as graphical parameters.
 
   For \code{print.summary.flite}: additional arguments passed to
-  \code{\link{print.default}}.}
+  \code{\link{print.default}}.
+
+  Otherwise \code{...} is unused.}
 
 \item{object}{An object inheriting from class \code{"flite"}, a result of a
 call to \code{\link{flite}}.}

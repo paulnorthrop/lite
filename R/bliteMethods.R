@@ -13,6 +13,8 @@
 #'
 #'   For \code{print.summary.blite}: additional arguments passed to
 #'   \code{\link{print.default}}.
+#'
+#'   Otherwise \code{...} is unused.
 #' @return
 #'   \code{plot.blite}: No return value, only the plot is produced.
 #'

@@ -11,6 +11,8 @@
 #'
 #'   For \code{print.summary.flite}: additional arguments passed to
 #'   \code{\link{print.default}}.
+#'
+#'   Otherwise \code{...} is unused.
 #' @return
 #'   \code{plot.flite}: No return value, only the plot is produced.
 #'

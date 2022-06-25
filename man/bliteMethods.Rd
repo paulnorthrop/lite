@@ -44,7 +44,9 @@ described in \strong{Details}.}
   For \code{coef.blite}: additional arguments passed to \code{fun}.
 
   For \code{print.summary.blite}: additional arguments passed to
-  \code{\link{print.default}}.}
+  \code{\link{print.default}}.
+
+  Otherwise \code{...} is unused.}
 
 \item{object}{An object inheriting from class \code{"blite"}, a result of a
 call to \code{\link{blite}}.}
