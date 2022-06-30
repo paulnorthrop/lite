@@ -80,7 +80,8 @@ NULL
 #'   \eqn{x}\out{<sub>(n)</sub>}}{\eqn{\xi > -\sigma_u / x_{(n)}}}
 #'   where \ifelse{html}{\eqn{x}\out{<sub>(n)</sub>}}{\eqn{x_{(n)}}}
 #'   is the largest excesses of the threshold \eqn{u}, is preserved.
-#' @details For \code{plot.flite}, if \code{which = "all"} then 4 plots are produced.
+#' @details For \code{plot.flite}, if \code{which = "all"} then 4 plots are
+#'   produced.
 #'     \itemize{
 #'       \item{Top left: (adjusted) log-likelihood for the threshold exceedence
 #'         probability \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},

@@ -120,7 +120,8 @@ Methods for objects of class \code{"flite"} returned from
 \code{\link{flite}}.
 }
 \details{
-For \code{plot.flite}, if \code{which = "all"} then 4 plots are produced.
+For \code{plot.flite}, if \code{which = "all"} then 4 plots are
+  produced.
     \itemize{
       \item{Top left: (adjusted) log-likelihood for the threshold exceedence
         probability \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
