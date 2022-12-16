@@ -67,9 +67,9 @@ call to \code{\link{flite}}.}
 \item{adjust}{A logical scalar.  If \code{adjust = TRUE} then the elements
 of the variance-covariance matrix corresponding to
 (\ifelse{html}{\eqn{p}\out{<sub>u</sub>},
-\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{p_u}, \eqn{\sigma_u}}, \eqn{\xi}), are estimated using a sandwich estimator.
-See \code{\link{flite}}.  Otherwise, this matrix is the inverse of the
-observed information matrix.}
+\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{p_u}, \eqn{\sigma_u}}, \eqn{\xi}),
+are estimated using a sandwich estimator. See \code{\link{flite}}.
+Otherwise, this matrix is the inverse of the observed information matrix.}
 
 \item{digits}{An integer. Passed to \code{\link[base:Round]{signif}} to
 round the values in the summary.}
@@ -137,10 +137,11 @@ For \code{plot.flite}, if \code{which = "all"} then 4 plots are
         \out{<sub>(n)</sub>}}{\eqn{\xi > -\sigma_u / x_{(n)}}} is drawn on
         the plot.}
       \item{Bottom left: (adjusted) log-likelihood for \eqn{\xi}, with a
-        horizontal line indicating a 95\% confidence interval for \eqn{\xi}.}
-      \item{Bottom right: log-likelihood for the extremal index \eqn{\theta},
-        with a horizontal line indicating a 95\% confidence interval for
-        \eqn{\theta}.}
+        horizontal line indicating a 95\% confidence interval for
+        \eqn{\xi}.}
+      \item{Bottom right: log-likelihood for the extremal index
+        \eqn{\theta}, with a horizontal line indicating a 95\% confidence
+        interval for \eqn{\theta}.}
     }
 }
 \seealso{

@@ -59,7 +59,7 @@
 NULL
 ## NULL
 
-# ================================= plot.flite =============================== #
+# ================================= plot.flite ============================== #
 
 #' Plot method for objects of class \code{"flite"}
 #'
@@ -97,10 +97,11 @@ NULL
 #'         \out{<sub>(n)</sub>}}{\eqn{\xi > -\sigma_u / x_{(n)}}} is drawn on
 #'         the plot.}
 #'       \item{Bottom left: (adjusted) log-likelihood for \eqn{\xi}, with a
-#'         horizontal line indicating a 95\% confidence interval for \eqn{\xi}.}
-#'       \item{Bottom right: log-likelihood for the extremal index \eqn{\theta},
-#'         with a horizontal line indicating a 95\% confidence interval for
-#'         \eqn{\theta}.}
+#'         horizontal line indicating a 95\% confidence interval for
+#'         \eqn{\xi}.}
+#'       \item{Bottom right: log-likelihood for the extremal index
+#'         \eqn{\theta}, with a horizontal line indicating a 95\% confidence
+#'         interval for \eqn{\theta}.}
 #'     }
 #' @rdname fliteMethods
 #' @export
@@ -185,9 +186,9 @@ coef.flite <- function(object, ...) {
 #' @param adjust A logical scalar.  If \code{adjust = TRUE} then the elements
 #'   of the variance-covariance matrix corresponding to
 #'   (\ifelse{html}{\eqn{p}\out{<sub>u</sub>},
-#'   \eqn{\sigma}\out{<sub>u</sub>}}{\eqn{p_u}, \eqn{\sigma_u}}, \eqn{\xi}), are estimated using a sandwich estimator.
-#'   See \code{\link{flite}}.  Otherwise, this matrix is the inverse of the
-#'   observed information matrix.
+#'   \eqn{\sigma}\out{<sub>u</sub>}}{\eqn{p_u}, \eqn{\sigma_u}}, \eqn{\xi}),
+#'   are estimated using a sandwich estimator. See \code{\link{flite}}.
+#'   Otherwise, this matrix is the inverse of the observed information matrix.
 #' @rdname fliteMethods
 #' @export
 vcov.flite <- function(object, adjust = TRUE, ...) {
@@ -212,7 +213,7 @@ vcov.flite <- function(object, adjust = TRUE, ...) {
   return(vc)
 }
 
-# ================================ nobs.flite =============================== #
+# ================================ nobs.flite ============================== #
 
 #' Extract the number of observations from a fit for class \code{"flite"}
 #'
@@ -230,7 +231,7 @@ nobs.flite <- function(object,  ...) {
   return(n)
 }
 
-# ================================ logLik.flite ============================== #
+# ================================ logLik.flite ============================= #
 
 #' Extract log-likelihood for objects of class \code{"flite"}
 #'
@@ -248,7 +249,7 @@ logLik.flite <- function(object, ...) {
   return(val)
 }
 
-# =============================== summary.flite ============================== #
+# =============================== summary.flite ============================= #
 
 #' Summarising times series extreme fits
 #'
@@ -270,7 +271,7 @@ summary.flite <- function(object, adjust = TRUE,
   return(res)
 }
 
-# ============================ print.summary.flite =========================== #
+# ============================ print.summary.flite ========================== #
 
 #' Print method for objects of class \code{"summary.flite"}
 #'
