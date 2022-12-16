@@ -144,6 +144,7 @@ plot.flite <- function(x, which = c("all", "pu", "gp", "xi", "theta"),
   }
   # GP shape parameter xi
   if ("xi" %in% which) {
+    gp <- attr(x, "gp")
     ci_xi <- chandwich::conf_intervals(gp, which_pars = "xi", type = adj_type)
     xiplot <- function(obj, ..., ylab = "profile log-likelihood") {
       plot(obj, ..., ylab = ylab)
