@@ -29,7 +29,7 @@ extremes, as summarised by the extremal index."><!-- mathjax --><script src="htt
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -72,7 +72,7 @@ extremes, as summarised by the extremal index.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">flite</span><span class="op">(</span><span class="va">data</span>, <span class="va">u</span>, <span class="va">cluster</span>, k <span class="op">=</span> <span class="fl">1</span>, inc_cens <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">ny</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">flite</span><span class="op">(</span><span class="va">data</span>, <span class="va">u</span>, <span class="va">cluster</span>, k <span class="op">=</span> <span class="fl">1</span>, inc_cens <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">ny</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -86,12 +86,16 @@ extremes, as summarised by the extremal index.</p>
   used to divide the data further into sequences of non-missing values,
   stored in different columns in a matrix.  Again, the log-likelihood
   is constructed as a sum of contributions from different columns.</p></dd>
+
+
 <dt>u</dt>
 <dd><p>A numeric scalar.  The extreme value threshold applied to the data.
 See <strong>Details</strong> for information about choosing <code>u</code>.</p></dd>
+
+
 <dt>cluster</dt>
 <dd><p>This argument is used to set the argument <code>cluster</code> to
-  <code><a href="https://sandwich.R-Forge.R-project.org//reference/vcovCL.html" class="external-link">meatCL</a></code>, which calculates the matrix \(V\)
+  <code><a href="https://sandwich.R-Forge.R-project.org/reference/vcovCL.html" class="external-link">meatCL</a></code>, which calculates the matrix \(V\)
   passed as the argument <code>V</code> to <code><a href="https://paulnorthrop.github.io/chandwich/reference/adjust_loglik.html" class="external-link">adjust_loglik</a></code>.
   If <code>data</code> is a matrix and <code>cluster</code> is missing then
   <code>cluster</code> is set so that data in different columns are in different
@@ -103,6 +107,8 @@ See <strong>Details</strong> for information about choosing <code>u</code>.</p><
   vector then <code>cluster</code> must be a vector of the same length as
   <code>data</code>.  Each entry in <code>cluster</code> sets the cluster of the
   corresponding component of <code>data</code>.</p></dd>
+
+
 <dt>k, inc_cens</dt>
 <dd><p>Arguments passed to <code><a href="https://paulnorthrop.github.io/exdex/reference/kgaps.html" class="external-link">kgaps</a></code>.
 <code>k</code> sets the value of the run parameter \(K\) in the \(K\)-gaps
@@ -110,6 +116,8 @@ model for the extremal index.
 <code>inc_cens</code> determines whether contributions from right-censored
 inter-exceedance times are used. See <strong>Details</strong> for information
 about choosing <code>k</code>.</p></dd>
+
+
 <dt>ny</dt>
 <dd><p>A numeric scalar.  The (mean) number of observations per year.
 Setting this appropriately is important when making inferences about
@@ -120,16 +128,23 @@ supplied to <code>flite</code> then it is stored for use by
 a later call to <code><a href="returnLevel.html">returnLevel</a></code>.  If <code>ny</code> is supplied to
 both <code>flite</code> and <code><a href="returnLevel.html">returnLevel</a></code> then the value supplied to
 <code><a href="returnLevel.html">returnLevel</a></code> will take precedence, with no warning given.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further arguments to be passed to the function
-<code><a href="https://sandwich.R-Forge.R-project.org//reference/vcovCL.html" class="external-link">meatCL</a></code> in the sandwich package.
+<code><a href="https://sandwich.R-Forge.R-project.org/reference/vcovCL.html" class="external-link">meatCL</a></code> in the sandwich package.
 In particular, the clustering adjustment argument <code>cadjust</code>
 may make a difference if the number of clusters is not large.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class <code>c("flite", "lite", "chandwich")</code>.
-  This object is a function with 2 arguments:</p><ul><li><p><code>pars</code>, a numeric vector of length 4 to supply the value of
+    
+
+<p>An object of class <code>c("flite", "lite", "chandwich")</code>.
+  This object is a function with 2 arguments:</p>
+<p></p>
+<ul><li><p><code>pars</code>, a numeric vector of length 4 to supply the value of
         the parameter vector
         (\(p\)<sub>u</sub>,
         \(\sigma\)<sub>u</sub>,
@@ -141,15 +156,25 @@ may make a difference if the number of clusters is not large.</p></dd>
         The default is <code>"vertical"</code> for the reason given in
         the description of the argument <code>adj_type</code> in
         <code><a href="fliteMethods.html">plot.flite</a></code>.</p></li>
-</ul><p>The object also has the attributes <code>"Bernoulli"</code>, <code>"gp"</code>,
-<code>"theta"</code>, which provide the fitted model objects returned from
-<code><a href="https://paulnorthrop.github.io/chandwich/reference/adjust_loglik.html" class="external-link">adjust_loglik</a></code> (for <code>"Bernoulli"</code> and
-<code>"gp"</code>) and <code><a href="https://paulnorthrop.github.io/exdex/reference/kgaps.html" class="external-link">kgaps</a></code> (for <code>"theta"</code>).
- The named input arguments are returned in a list as the attribute
-<code>inputs</code>.  If <code>ny</code> was not supplied then its value is <code>NA</code>.
- The call to <code>flite</code> is provided in the attribute <code>"call"</code>.
- Objects inheriting from class <code>"flite"</code> have <code>coef</code>,
-<code>logLik</code>, <code>nobs</code>, <code>plot</code>, <code>summary</code> and <code>vcov</code> methods.  See <code><a href="fliteMethods.html">fliteMethods</a></code>.</p>
+</ul><p>The object also has the attributes <code>"Bernoulli"</code>, <code>"gp"</code>,</p>
+<p></p>
+<p><code>"theta"</code>, which provide the fitted model objects returned from</p>
+<p></p>
+<p><code><a href="https://paulnorthrop.github.io/chandwich/reference/adjust_loglik.html" class="external-link">adjust_loglik</a></code> (for <code>"Bernoulli"</code> and</p>
+<p></p>
+<p><code>"gp"</code>) and <code><a href="https://paulnorthrop.github.io/exdex/reference/kgaps.html" class="external-link">kgaps</a></code> (for <code>"theta"</code>).
+ The named input arguments are returned in a list as the attribute</p>
+<p></p>
+<p><code>inputs</code>.  If <code>ny</code> was not supplied then its value is <code>NA</code>.
+ The call to <code>flite</code> is provided in the attribute <code>"call"</code>.</p>
+
+
+<p>Objects inheriting from class <code>"flite"</code> have <code>coef</code>,</p>
+<p></p>
+<p><code>logLik</code>, <code>nobs</code>, <code>plot</code>, <code>summary</code> and <code>vcov</code></p>
+
+
+<p>methods.  See <code><a href="fliteMethods.html">fliteMethods</a></code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -196,10 +221,10 @@ may make a difference if the number of clusters is not large.</p></dd>
     <h2>References</h2>
     <p>Chandler, R. E. and Bate, S. (2007). Inference for clustered.
   data using the independence loglikelihood. <em>Biometrika</em>,
-  <strong>94</strong>(1), 167-183. doi: <a href="https://doi.org/10.1093/biomet/asm015" class="external-link">10.1093/biomet/asm015</a></p>
+  <strong>94</strong>(1), 167-183. <a href="https://doi.org/10.1093/biomet/asm015" class="external-link">doi:10.1093/biomet/asm015</a></p>
 <p>Fawcett, L. and Walshaw, D. (2012), Estimating return levels
   from serially dependent extremes. <em>Environmetrics</em>, <strong>23</strong>,
-  272-283. doi: <a href="https://doi.org/10.1002/env.2133" class="external-link">10.1002/env.2133</a></p>
+  272-283. <a href="https://doi.org/10.1002/env.2133" class="external-link">doi:10.1002/env.2133</a></p>
 <p>Northrop, P. J. and Chandler, R. E. (2021).
   chandwich: Chandler-Bate Sandwich Loglikelihood Adjustment. R package
   version 1.1.5. <a href="https://CRAN.R-project.org/package=chandwich" class="external-link">https://CRAN.R-project.org/package=chandwich</a>.</p>
@@ -212,7 +237,7 @@ for Bayesian Extreme Value Analysis. R package version 1.3.9.
 <p>Suveges, M. and Davison, A. C. (2010) Model
   misspecification in peaks over threshold analysis, <em>Annals of
   Applied Statistics</em>, <strong>4</strong>(1), 203-221.
-  doi: <a href="https://doi.org/10.1214/09-AOAS292" class="external-link">10.1214/09-AOAS292</a></p>
+  <a href="https://doi.org/10.1214/09-AOAS292" class="external-link">doi:10.1214/09-AOAS292</a></p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -235,14 +260,14 @@ for Bayesian Extreme Value Analysis. R package version 1.3.9.
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">### Cheeseboro wind gusts</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Make inferences</span></span>
-<span class="r-in"><span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span></span>
-<span class="r-in"><span class="co"># Each column of the matrix cdata corresponds to data from a different year</span></span>
-<span class="r-in"><span class="co"># flite() sets cluster automatically to correspond to column (year)</span></span>
-<span class="r-in"><span class="va">cfit</span> <span class="op">&lt;-</span> <span class="fu">flite</span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### Cheeseboro wind gusts</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Make inferences</span></span></span>
+<span class="r-in"><span><span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span></span></span>
+<span class="r-in"><span><span class="co"># Each column of the matrix cdata corresponds to data from a different year</span></span></span>
+<span class="r-in"><span><span class="co"># flite() sets cluster automatically to correspond to column (year)</span></span></span>
+<span class="r-in"><span><span class="va">cfit</span> <span class="op">&lt;-</span> <span class="fu">flite</span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> flite(data = cdata, u = 45, k = 3)</span>
@@ -252,22 +277,41 @@ for Bayesian Extreme Value Analysis. R package version 1.3.9.
 <span class="r-out co"><span class="r-pr">#&gt;</span> sigma[u]  9.27400   2.071000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xi       -0.09368   0.084250</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> theta     0.37960   0.027220</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># 2 ways to find the maximised log-likelihood value</span></span>
-<span class="r-in"><span class="fu">cfit</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># 2 ways to find the maximised log-likelihood value</span></span></span>
+<span class="r-in"><span><span class="fu">cfit</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -1847.334</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'log Lik.' -1847.334 (df=4)</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plots of (adjusted) log-likelihoods</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plots of (adjusted) log-likelihoods</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
 <span class="r-plt img"><img src="flite-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span>, which <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span>, which <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
 <span class="r-plt img"><img src="flite-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Confidence intervals</span></span></span>
+<span class="r-in"><span><span class="co"># Based on an adjusted profile log-likelihood</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               2.5%       97.5%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> pu      0.01758135  0.04107051</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sigmau  6.11637816 14.69866203</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> xi     -0.26574658  0.12007715</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> theta   0.32782936  0.43431727</span>
+<span class="r-in"><span><span class="co"># Symmetric intervals based on large sample normality</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">cfit</span>, profile<span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              2.5%       97.5%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> pu      0.0159747  0.03944569</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sigmau  5.2143559 13.33351127</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> xi     -0.2588087  0.07145532</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> theta   0.3262336  0.43294996</span>
 </code></pre></div>
     </div>
   </div>
@@ -282,7 +326,7 @@ for Bayesian Extreme Value Analysis. R package version 1.3.9.
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -27,7 +27,7 @@ observations for a fitted model object."><!-- mathjax --><script src="https://cd
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -68,20 +68,24 @@ observations for a fitted model object.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for Bernoulli</span>
-<span class="fu">estfun</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for GP</span>
-<span class="fu">estfun</span><span class="op">(</span><span class="va">x</span>, eps <span class="op">=</span> <span class="fl">1e-05</span>, m <span class="op">=</span> <span class="fl">3</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for Bernoulli</span></span>
+<span><span class="fu">estfun</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for GP</span></span>
+<span><span class="fu">estfun</span><span class="op">(</span><span class="va">x</span>, eps <span class="op">=</span> <span class="fl">1e-05</span>, m <span class="op">=</span> <span class="fl">3</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A fitted model object.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further arguments.  None are used for
 <code>estfun.Bernoulli</code> or <code>estfun.GP</code>.</p></dd>
+
+
 <dt>eps, m</dt>
 <dd><p>These control the estimation of the observed
 information in <code>gpObsInfo</code> when the GP shape parameter \(\xi\) is
@@ -91,25 +95,35 @@ of the input value of \(\xi\), that is, <code>pars[2]</code>, is smaller than
 <code>eps</code> then we approximate the <code>[2, 2]</code> element using a Taylor
 series expansion in \(\xi\), evaluated up to and including the
 <code>m</code>th term.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An \(n \times k\) matrix containing contributions
-  to the score function from \(n\) observations for each of the \(k\)  parameters.
-<code>estfun.Bernoulli</code>: an \(n \times 2\) matrix, where
-\(n\) is the sample size, the length of the input <code>data</code> to
-<code><a href="Bernoulli.html">fitBernoulli</a></code>.  The column is named <code>prob</code>.
-<code>estfun.GP</code>: an \(n \times 2\) matrix, where \(n\) is the
+    
+
+<p>An \(n \times k\) matrix containing contributions
+  to the score function from \(n\) observations for each of the \(k\)</p>
+
+
+<p>parameters.</p>
+<p></p>
+<p><code>estfun.Bernoulli</code>: an \(n \times 2\) matrix, where</p>
+<p></p>
+<p>\(n\) is the sample size, the length of the input <code>data</code> to</p>
+<p></p>
+<p><code><a href="Bernoulli.html">fitBernoulli</a></code>.  The column is named <code>prob</code>.</p>
+<p></p>
+<p><code>estfun.GP</code>: an \(n \times 2\) matrix, where \(n\) is the
   sample size, the length of the input <code>data</code> to <code><a href="generalisedPareto.html">fitGP</a></code>.
   The columns are named <code>sigma[u]</code> and <code>xi</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>An <code><a href="https://sandwich.R-Forge.R-project.org//reference/estfun.html" class="external-link">estfun</a></code> method is used by
-  <code><a href="https://sandwich.R-Forge.R-project.org//reference/vcovCL.html" class="external-link">meatCL</a></code> to calculate the
-  <code><a href="https://sandwich.R-Forge.R-project.org//reference/meat.html" class="external-link">meat</a></code> in the sandwich covariance estimator on which
+    <p>An <code><a href="https://sandwich.R-Forge.R-project.org/reference/estfun.html" class="external-link">estfun</a></code> method is used by
+  <code><a href="https://sandwich.R-Forge.R-project.org/reference/vcovCL.html" class="external-link">meatCL</a></code> to calculate the
+  <code><a href="https://sandwich.R-Forge.R-project.org/reference/meat.html" class="external-link">meat</a></code> in the sandwich covariance estimator on which
   the log-likelihood adjustments in <code><a href="flite.html">flite</a></code> are based.
-  Specifically, <code><a href="https://sandwich.R-Forge.R-project.org//reference/vcovCL.html" class="external-link">meatCL</a></code> is used to calculate
+  Specifically, <code><a href="https://sandwich.R-Forge.R-project.org/reference/vcovCL.html" class="external-link">meatCL</a></code> is used to calculate
   the argument <code>V</code> passed to <code><a href="https://paulnorthrop.github.io/chandwich/reference/adjust_loglik.html" class="external-link">adjust_loglik</a></code>.</p>
     </div>
     <div id="see-also">
@@ -122,11 +136,11 @@ series expansion in \(\xi\), evaluated up to and including the
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sandwich.R-Forge.R-project.org/" class="external-link">sandwich</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># estfun.Bernoulli</span></span>
-<span class="r-in"><span class="va">bfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="Bernoulli.html">fitBernoulli</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">45</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">estfun</span><span class="op">(</span><span class="va">bfit</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sandwich.R-Forge.R-project.org/" class="external-link">sandwich</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># estfun.Bernoulli</span></span></span>
+<span class="r-in"><span><span class="va">bfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="Bernoulli.html">fitBernoulli</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">45</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">estfun</span><span class="op">(</span><span class="va">bfit</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         prob</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.0285</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -1.0285</span>
@@ -134,10 +148,10 @@ series expansion in \(\xi\), evaluated up to and including the
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -1.0285</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -1.0285</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,] -1.0285</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># estfun.generalisedPareto</span></span>
-<span class="r-in"><span class="va">gpfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="generalisedPareto.html">fitGP</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span><span class="op">)</span>, u <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">estfun</span><span class="op">(</span><span class="va">gpfit</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># estfun.generalisedPareto</span></span></span>
+<span class="r-in"><span><span class="va">gpfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="generalisedPareto.html">fitGP</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span><span class="op">)</span>, u <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">estfun</span><span class="op">(</span><span class="va">gpfit</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          sigma[u]         xi</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.063902582 -0.3512112</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.086318699 -0.1962096</span>
@@ -159,7 +173,7 @@ series expansion in \(\xi\), evaluated up to and including the
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

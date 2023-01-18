@@ -27,7 +27,7 @@ returnLevel.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -68,17 +68,17 @@ returnLevel.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for returnLevel</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, level <span class="op">=</span> <span class="cn">NULL</span>, legend <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">3</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for returnLevel</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3L</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3L</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for returnLevel</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">digits</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for summary.returnLevel</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for returnLevel</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, level <span class="op">=</span> <span class="cn">NULL</span>, legend <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">3</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for returnLevel</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3L</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3L</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for returnLevel</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">digits</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for summary.returnLevel</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -86,15 +86,21 @@ returnLevel.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
     <dl><dt>x</dt>
 <dd><p>an object of class <code>c("returnLevel", "lite")</code>, a result
 of a call to <code><a href="returnLevel.html">returnLevel</a></code>, using <code>prof = TRUE</code>.</p></dd>
+
+
 <dt>level</dt>
 <dd><p>A numeric scalar in (0, 1).  The confidence level required for
 the confidence interval for the <code>m</code>-year return level.
 If <code>level</code> is not supplied then <code>x$level</code> is used.
 <code>level</code> must be no larger than <code>x$level</code>.</p></dd>
+
+
 <dt>legend</dt>
 <dd><p>A logical scalar.  Should we add a legend (in the top right
 of the plot) that gives the approximate values of the MLE and
 100<code>level</code>% confidence limits?</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>For <code>plot.returnLevel</code>: an integer. Passed to
   <code>signif</code> to round the values in the legend.</p>
@@ -104,28 +110,41 @@ of the plot) that gives the approximate values of the MLE and
   with <code>signif</code>.  If <code>digits</code> is not specified
   (i.e. <code><a href="https://rdrr.io/r/base/missing.html" class="external-link">missing</a></code>) then <code><a href="https://rdrr.io/r/base/Round.html" class="external-link">signif()</a></code> will not be called
   (i.e. no rounding will be performed).</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>A logical scalar.  If <code>TRUE</code> then the plot is produced.
 Otherwise, it is not, but the MLE and confidence limits are returned.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>For <code>plot.returnLevel</code>: arguments passed to
   <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></code>, such as graphical parameters.</p>
 <p>For <code>print.summary.returnLevel</code>: arguments passed to
   <code><a href="https://rdrr.io/r/base/print.default.html" class="external-link">print.default</a></code>.</p></dd>
+
+
 <dt>object</dt>
 <dd><p>an object of class <code>c("returnLevel", "lite")</code>, a result
 of a call to <code><a href="returnLevel.html">returnLevel</a></code>, using <code>prof = TRUE</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>plot.returnLevel</code>: a numeric vector of length 3 containing the
+    
+
+<p><code>plot.returnLevel</code>: a numeric vector of length 3 containing the
   lower 100<code>level</code>% confidence limit, the MLE and the upper
-  100<code>level</code>% confidence limit is returned invisibly.
-<code>print.returnLevel</code>: the argument <code>x</code> is returned, invisibly.
-<code>summary.returnLevel</code>: a list containing the list element
-<code>object$call</code> and a matrix <code>matrix</code> containing the MLE
-  and estimated SE of the return level.
-<code>print.summary.returnLevel</code>: the argument <code>x</code> is returned,
+  100<code>level</code>% confidence limit is returned invisibly.</p>
+<p></p>
+<p><code>print.returnLevel</code>: the argument <code>x</code> is returned, invisibly.</p>
+<p></p>
+<p><code>summary.returnLevel</code>: a list containing the list element</p>
+<p></p>
+<p><code>object$call</code> and a matrix <code>matrix</code> containing the MLE
+  and estimated SE of the return level.</p>
+<p></p>
+<p><code>print.summary.returnLevel</code>: the argument <code>x</code> is returned,
   invisibly.</p>
     </div>
     <div id="details">
@@ -166,7 +185,7 @@ of a call to <code><a href="returnLevel.html">returnLevel</a></code>, using <cod
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

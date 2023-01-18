@@ -30,7 +30,7 @@ observations.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -74,21 +74,21 @@ observations.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for blite</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span>
-  <span class="va">object</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"i"</span>, <span class="st">"p"</span>, <span class="st">"d"</span>, <span class="st">"q"</span>, <span class="st">"r"</span><span class="op">)</span>,
-  x <span class="op">=</span> <span class="cn">NULL</span>,
-  x_num <span class="op">=</span> <span class="fl">100</span>,
-  n_years <span class="op">=</span> <span class="fl">100</span>,
-  ny <span class="op">=</span> <span class="cn">NULL</span>,
-  level <span class="op">=</span> <span class="fl">95</span>,
-  hpd <span class="op">=</span> <span class="cn">FALSE</span>,
-  lower_tail <span class="op">=</span> <span class="cn">TRUE</span>,
-  log <span class="op">=</span> <span class="cn">FALSE</span>,
-  big_q <span class="op">=</span> <span class="fl">1000</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for blite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"i"</span>, <span class="st">"p"</span>, <span class="st">"d"</span>, <span class="st">"q"</span>, <span class="st">"r"</span><span class="op">)</span>,</span>
+<span>  x <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  x_num <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  n_years <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  ny <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  level <span class="op">=</span> <span class="fl">95</span>,</span>
+<span>  hpd <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  lower_tail <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  log <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  big_q <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -96,6 +96,8 @@ observations.</p>
     <dl><dt>object</dt>
 <dd><p>An object of class <code>"blite"</code> returned from
 <code><a href="blite.html">blite</a></code>.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>A character vector.  Indicates which type of inference is
   required:</p><ul><li><p>"i" for predictive intervals,</p></li>
@@ -104,6 +106,8 @@ observations.</p>
 <li><p>"q" for the predictive quantile function,</p></li>
 <li><p>"r" for random generation from the predictive distribution.</p></li>
 </ul></dd>
+
+
 <dt>x</dt>
 <dd><p>A numeric vector or a matrix with <code>n_years</code> columns.
   The meaning of <code>x</code> depends on <code>type</code>.</p><ul><li><p><code>type = "p"</code> or <code>type = "d"</code>: <code>x</code> contains
@@ -124,20 +128,30 @@ observations.</p>
       <code>c(0.025, 0.25, 0.5, 0.75, 0.975)</code> is used.</p></li>
 <li><p><code>type = "i"</code> or <code>type = "r"</code>: <code>x</code> is not relevant.</p></li>
 </ul></dd>
+
+
 <dt>x_num</dt>
 <dd><p>A numeric scalar.  If <code>type = "p"</code> or <code>type = "d"</code>
 and <code>x</code> is not supplied then <code>x_num</code> gives the number of values
 in <code>x</code> for each value in <code>n_years</code>.</p></dd>
+
+
 <dt>n_years</dt>
 <dd><p>A numeric vector. Values of \(N\).</p></dd>
+
+
 <dt>ny</dt>
 <dd><p>A numeric scalar.  The (mean) number of observations per year.
 <strong>Setting this appropriately is important</strong>. See <strong>Details</strong>.</p></dd>
+
+
 <dt>level</dt>
 <dd><p>A numeric vector of values in (0, 100).
 Only relevant when <code>type = "i"</code>.
 Levels of predictive intervals for the largest value observed in
 \(N\) years, i.e. level% predictive intervals are returned.</p></dd>
+
+
 <dt>hpd</dt>
 <dd><p>A logical scalar.
   Only relevant when <code>type = "i"</code>.</p>
@@ -148,38 +162,51 @@ Levels of predictive intervals for the largest value observed in
   the shortest possible level% interval is calculated.
   If the predictive distribution is unimodal then this
   is a highest predictive density (HPD) interval.</p></dd>
+
+
 <dt>lower_tail</dt>
 <dd><p>A logical scalar.
 Only relevant when <code>type = "p"</code> or <code>type = "q"</code>.
 If TRUE (default), (output or input) probabilities are
 \(P[X \leq x]\), otherwise, \(P[X &gt; x]\).</p></dd>
+
+
 <dt>log</dt>
 <dd><p>A logical scalar.  Only relevant when <code>type = "d"</code>.
 If TRUE the log-density is returned.</p></dd>
+
+
 <dt>big_q</dt>
 <dd><p>A numeric scalar.  Only relevant when <code>type = "q"</code>.
 An initial upper bound for the desired quantiles to be passed to
 <code><a href="https://rdrr.io/r/stats/uniroot.html" class="external-link">uniroot</a></code> (its argument <code>upper</code>) in the
 search for the predictive quantiles.  If this is not sufficiently large
 then it is increased until it does provide an upper bound.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional optional arguments. At present no optional
 arguments are used.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class "evpred", a list containing a subset of the
+    
+
+<p>An object of class "evpred", a list containing a subset of the
   following components:</p>
 <dl><dt>type</dt>
 <dd><p>The argument <code>type</code> supplied to <code>predict.blite</code>.
     Which of the following components are present depends <code>type</code>.</p></dd>
-<dt>x</dt>
+
+    <dt>x</dt>
 <dd><p>A matrix containing the argument <code>x</code> supplied to
       <code>predict.blite</code>, or set within <code>predict.blite</code> if <code>x</code>
       was not supplied, replicated to have <code>n_years</code> columns
       if necessary.
       Only present if <code>type</code> is <code>"p", "d"</code> or <code>"q"</code>.</p></dd>
-<dt>y</dt>
+
+    <dt>y</dt>
 <dd><p>The content of <code>y</code> depends on <code>type</code>:</p><ul><li><p><code>type = "p", "d", "q"</code>:  A matrix with the same
       dimensions as <code>x</code>.  Contains distribution function values
       (<code>type = "p"</code>), predictive density (<code>type = "d"</code>)
@@ -188,20 +215,26 @@ arguments are used.</p></dd>
       columns and number of rows equal to the size of the posterior sample.</p></li>
 <li><p><code>type = "i"</code>: <code>y</code> is not present.</p></li>
 </ul></dd>
-<dt>long</dt>
+
+      <dt>long</dt>
 <dd><p>A <code>length(n_years)*length(level)</code> by 4 numeric
         matrix containing the equi-tailed limits with columns:
         lower limit, upper limit, n_years, level.
         Only present if <code>type = "i"</code>.  If an interval extends below
         the threshold then <code>NA</code> is returned.</p></dd>
-<dt>short</dt>
+
+      <dt>short</dt>
 <dd><p>A matrix with the same structure as <code>long</code>
         containing the HPD limits.  Only present if <code>type = "i"</code>.
         Columns 1 and 2 contain <code>NA</code>s if <code>hpd = FALSE</code>
         or if the corresponding equi-tailed interval extends below
         the threshold.</p></dd>
+
 </dl><p>The arguments <code>n_years, level, hpd, lower_tail, log</code> supplied
-  to <code>predict.blite</code> are also included, as is the value of <code>ny</code>  and <code>model = "bingp"</code>.</p>
+  to <code>predict.blite</code> are also included, as is the value of <code>ny</code></p>
+
+
+<p>and <code>model = "bingp"</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -226,43 +259,43 @@ arguments are used.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">### Cheeseboro wind gusts</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span></span>
-<span class="r-in"><span class="co"># Each column of the matrix cdata corresponds to data from a different year</span></span>
-<span class="r-in"><span class="co"># blite() sets cluster automatically to correspond to column (year)</span></span>
-<span class="r-in"><span class="va">cpost</span> <span class="op">&lt;-</span> <span class="fu"><a href="blite.html">blite</a></span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span>, ny <span class="op">=</span> <span class="fl">31</span> <span class="op">*</span> <span class="fl">24</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Need revdbayes v1.5.9 for the following examples to be correct</span></span>
-<span class="r-in"><span class="co"># (At the moment they are based on theta = 1)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Interval estimation</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span><span class="op">$</span><span class="va">long</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### Cheeseboro wind gusts</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span></span></span>
+<span class="r-in"><span><span class="co"># Each column of the matrix cdata corresponds to data from a different year</span></span></span>
+<span class="r-in"><span><span class="co"># blite() sets cluster automatically to correspond to column (year)</span></span></span>
+<span class="r-in"><span><span class="va">cpost</span> <span class="op">&lt;-</span> <span class="fu"><a href="blite.html">blite</a></span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span>, ny <span class="op">=</span> <span class="fl">31</span> <span class="op">*</span> <span class="fl">24</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Need revdbayes v1.5.9 for the following examples to be correct</span></span></span>
+<span class="r-in"><span><span class="co"># (At the moment they are based on theta = 1)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Interval estimation</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span><span class="op">$</span><span class="va">long</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         lower    upper n_years level</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 77.37367 155.3501     100    95</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">short</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 76.97255 158.1026     100    95</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">short</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         lower    upper n_years level</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 73.02392 138.2024     100    95</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Density function</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 72.36998 139.6774     100    95</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Density function</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="predict.blite-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Distribution function</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, type <span class="op">=</span> <span class="st">"p"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Distribution function</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, type <span class="op">=</span> <span class="st">"p"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="predict.blite-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Quantiles</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, type <span class="op">=</span> <span class="st">"q"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">y</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Quantiles</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, type <span class="op">=</span> <span class="st">"q"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">y</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  77.37367  85.98140</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  87.02914  96.21705</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  94.25247 105.96748</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 105.27600 122.27967</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 155.35008 211.02453</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Random generation</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, type <span class="op">=</span> <span class="st">"r"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  76.97255  85.39317</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  86.94597  95.69072</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  94.13459 105.58332</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 105.30437 122.43600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 158.10260 219.22988</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Random generation</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, type <span class="op">=</span> <span class="st">"r"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="predict.blite-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -278,7 +311,7 @@ arguments are used.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

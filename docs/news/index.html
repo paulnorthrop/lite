@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -62,9 +62,16 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.0.9000" id="lite-1009000">lite 1.0.0.9000<a class="anchor" aria-label="anchor" href="#lite-1009000"></a></h2>
-<ul><li><p>The new function <code><a href="../reference/blite.html">blite()</a></code> performs Bayesian threshold-based inference for time series extremes. It is a Bayesian version of the existing function <code><a href="../reference/flite.html">flite()</a></code>, which performs frequentist inference.</p></li>
+<div class="section level3">
+<h3 id="new-features-1-0-0-9000">New features<a class="anchor" aria-label="anchor" href="#new-features-1-0-0-9000"></a></h3>
+<ul><li><p>Objects of class <code>flite</code> returned from <code><a href="../reference/flite.html">flite()</a></code> now have a <code>confint</code> method.</p></li>
+<li><p>The new function <code><a href="../reference/blite.html">blite()</a></code> performs Bayesian threshold-based inference for time series extremes. It is a Bayesian version of the existing function <code><a href="../reference/flite.html">flite()</a></code>, which performs frequentist inference.</p></li>
 <li><p>Objects returned from <code><a href="../reference/blite.html">blite()</a></code> have a predict S3 method <code><a href="../reference/predict.blite.html">predict.blite()</a></code> based on the <code>predict.evpost()</code> method from the <code>revdbayes</code>package. It provides predictive inferences for the largest value observed in <em>N</em> years.</p></li>
 </ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-and-minor-improvements-1-0-0-9000">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-1-0-0-9000"></a></h3>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -79,7 +86,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

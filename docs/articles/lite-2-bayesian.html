@@ -43,7 +43,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -81,10 +81,12 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Bayesian Likelihood-Based Inference for Time Series Extremes</h1>
-                        <h4 data-toc-skip class="author">Paul Northrop</h4>
+      <h1 data-toc-skip>Bayesian Likelihood-Based Inference for Time
+Series Extremes</h1>
+                        <h4 data-toc-skip class="author">Paul
+Northrop</h4>
             
-            <h4 data-toc-skip class="date">2022-05-16</h4>
+            <h4 data-toc-skip class="date">2023-01-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/lite/blob/HEAD/vignettes/lite-2-bayesian.Rmd" class="external-link"><code>vignettes/lite-2-bayesian.Rmd</code></a></small>
       <div class="hidden name"><code>lite-2-bayesian.Rmd</code></div>
@@ -93,47 +95,80 @@
 
     
     
-<p>For information about the model underlying the inferences performed in this vignette, including the (adjusted) likelihood for <span class="math inline">\((p_u, \sigma_u, \xi, \theta)\)</span> and the Cheeseboro wind gusts dataset used below, see the vignette <a href="lite-1-frequentist.html">Frequentist Likelihood-Based Inference for Time Series Extremes</a>.</p>
+<p>For information about the model underlying the inferences performed
+in this vignette, including the (adjusted) likelihood for <span class="math inline">\((p_u, \sigma_u, \xi, \theta)\)</span> and the
+Cheeseboro wind gusts dataset used below, see the vignette <a href="lite-1-frequentist.html">Frequentist Likelihood-Based Inference
+for Time Series Extremes</a>.</p>
 <div class="section level2">
 <h2 id="bayesian-inferences-for-model-parameters">Bayesian inferences for model parameters<a class="anchor" aria-label="anchor" href="#bayesian-inferences-for-model-parameters"></a>
 </h2>
-<p>We perform Bayesian inference for <span class="math inline">\((p_u, \sigma_u, \xi, \theta)\)</span>, combining a likelihood with a prior distribution for these parameters. For <span class="math inline">\(\theta\)</span> the likelihood is based on the <span class="math inline">\(K\)</span>-gaps model. For <span class="math inline">\((p_u, \sigma_u, \xi)\)</span> the likelihood is based on vertically-adjusted log-likelihoods for <span class="math inline">\(p_u\)</span> and <span class="math inline">\((\sigma_u, \xi)\)</span>. This latter aspect is an example of Bayesian inference using a composite likelihood (<span class="citation">Ribatet, Cooley, and Davison (2012)</span>).</p>
-<p>Currently, <strong>lite</strong> allows only priors where <span class="math inline">\(p_u\)</span>, <span class="math inline">\((\sigma_u, \xi\)</span>) and <span class="math inline">\(\theta\)</span> are independent a priori. In the example below, we use the <code>blite</code> function’s default priors for the exceedance probability <span class="math inline">\(p_u\)</span> (the Jeffreys’ prior), the generalised Pareto parameters <span class="math inline">\((\sigma_u, \xi)\)</span> (and maximal data information prior) and <span class="math inline">\(\theta\)</span> (a uniform prior on [0,1]). Different priors can be set using the respective arguments <code>gp_prior</code>, <code>b_prior</code> and <code>theta_prior_pars</code>.</p>
-<p>The <code>blite</code> function samples from the posterior distribution for <span class="math inline">\((p_u, \sigma_u, \xi)\)</span> based on vertically-adjusted log-likelihoods for <span class="math inline">\(p_u\)</span> and <span class="math inline">\((\sigma_u, \xi)\)</span>. To use unadjusted log-likelihoods set the argument <code>type = "none"</code>.</p>
+<p>We perform Bayesian inference for <span class="math inline">\((p_u,
+\sigma_u, \xi, \theta)\)</span>, combining a likelihood with a prior
+distribution for these parameters. For <span class="math inline">\(\theta\)</span> the likelihood is based on the
+<span class="math inline">\(K\)</span>-gaps model. For <span class="math inline">\((p_u, \sigma_u, \xi)\)</span> the likelihood is
+based on vertically-adjusted log-likelihoods for <span class="math inline">\(p_u\)</span> and <span class="math inline">\((\sigma_u, \xi)\)</span>. This latter aspect is an
+example of Bayesian inference using a composite likelihood (<span class="citation">Ribatet, Cooley, and Davison (2012)</span>).</p>
+<p>Currently, <strong>lite</strong> allows only priors where <span class="math inline">\(p_u\)</span>, <span class="math inline">\((\sigma_u, \xi\)</span>) and <span class="math inline">\(\theta\)</span> are independent a priori. In the
+example below, we use the <code>blite</code> function’s default priors
+for the exceedance probability <span class="math inline">\(p_u\)</span>
+(the Jeffreys’ prior), the generalised Pareto parameters <span class="math inline">\((\sigma_u, \xi)\)</span> (and maximal data
+information prior) and <span class="math inline">\(\theta\)</span> (a
+uniform prior on [0,1]). Different priors can be set using the
+respective arguments <code>gp_prior</code>, <code>b_prior</code> and
+<code>theta_prior_pars</code>.</p>
+<p>The <code>blite</code> function samples from the posterior
+distribution for <span class="math inline">\((p_u, \sigma_u,
+\xi)\)</span> based on vertically-adjusted log-likelihoods for <span class="math inline">\(p_u\)</span> and <span class="math inline">\((\sigma_u, \xi)\)</span>. To use unadjusted
+log-likelihoods set the argument <code>type = "none"</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/lite/" class="external-link">lite</a></span><span class="op">)</span>
-<span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span>
-<span class="co"># Each column of the matrix cdata corresponds to data from a different year</span>
-<span class="co"># blite() sets cluster automatically to correspond to column (year)</span>
-<span class="va">cpost</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/blite.html">blite</a></span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span>, ny <span class="op">=</span> <span class="fl">31</span> <span class="op">*</span> <span class="fl">24</span>, n <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></code></pre></div>
-<p>The <code>summary</code> and <code>plot</code> methods produce numerical and graphical marginal summaries of the posterior samples.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/lite/" class="external-link">lite</a></span><span class="op">)</span></span>
+<span><span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span></span>
+<span><span class="co"># Each column of the matrix cdata corresponds to data from a different year</span></span>
+<span><span class="co"># blite() sets cluster automatically to correspond to column (year)</span></span>
+<span><span class="va">cpost</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/blite.html">blite</a></span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span>, ny <span class="op">=</span> <span class="fl">31</span> <span class="op">*</span> <span class="fl">24</span>, n <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span></code></pre></div>
+<p>The <code>summary</code> and <code>plot</code> methods produce
+numerical and graphical marginal summaries of the posterior samples.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; blite(data = cdata, u = 45, k = 3, ny = 31 * 24, n = 10000)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;          Posterior mean Posterior SD</span>
-<span class="co">#&gt; p[u]            0.02838     0.006061</span>
-<span class="co">#&gt; sigma[u]       10.01000     2.430000</span>
-<span class="co">#&gt; xi             -0.07294     0.094040</span>
-<span class="co">#&gt; theta           0.24230     0.023360</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; blite(data = cdata, u = 45, k = 3, ny = 31 * 24, n = 10000)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;          Posterior mean Posterior SD</span></span>
+<span><span class="co">#&gt; p[u]            0.02835     0.006087</span></span>
+<span><span class="co">#&gt; sigma[u]        9.96600     2.379000</span></span>
+<span><span class="co">#&gt; xi             -0.07283     0.094780</span></span>
+<span><span class="co">#&gt; theta           0.24210     0.023510</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span></span></code></pre></div>
 <p><img src="lite-2-bayesian_files/figure-html/vertical-1.png" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="predictive-inference">Predictive inference<a class="anchor" aria-label="anchor" href="#predictive-inference"></a>
 </h2>
-<p>We perform posterior predictive inference for the largest value <span class="math inline">\(M_N\)</span> to be observed over a future time period of length <span class="math inline">\(N\)</span> years. Objects returned from the <code>blite</code> function have a <code>predict</code> method based on the <code>predict.evpost</code> method in the <strong>revdbayes</strong> package <span class="citation">(Northrop 2020)</span>. See the <a href="https://cran.r-project.org/package=revdbayes" class="external-link">Posterior Predictive Extreme Value Inference using the revdbayes Package</a> vignette for information. The effect of adjusting for the values of the extremal index  in the posterior sample is to change the effective time horizon from <span class="math inline">\(N\)</span> to <span class="math inline">\(\theta N\)</span>.</p>
-<p>The function <code>predict.blite</code> can estimate predictive intervals, quantiles, distribution and density functions for <span class="math inline">\(M_N\)</span> and simulate from the predictive distribution for <span class="math inline">\(M_N\)</span>. For example, the following code estimates a 95% highest predictive density (HPD) interval for <span class="math inline">\(M_{100}\)</span> and plots the predictive densities of <span class="math inline">\(M_{100}\)</span> and <span class="math inline">\(M_{1000}\)</span>.</p>
+<p>We perform posterior predictive inference for the largest value <span class="math inline">\(M_N\)</span> to be observed over a future time
+period of length <span class="math inline">\(N\)</span> years. Objects
+returned from the <code>blite</code> function have a
+<code>predict</code> method based on the <code>predict.evpost</code>
+method in the <strong>revdbayes</strong> package <span class="citation">(Northrop 2020)</span>. See the <a href="https://cran.r-project.org/package=revdbayes" class="external-link">Posterior Predictive
+Extreme Value Inference using the revdbayes Package</a> vignette for
+information. The effect of adjusting for the values of the extremal
+index in the posterior sample is to change the effective time horizon
+from <span class="math inline">\(N\)</span> to <span class="math inline">\(\theta N\)</span>.</p>
+<p>The function <code>predict.blite</code> can estimate predictive
+intervals, quantiles, distribution and density functions for <span class="math inline">\(M_N\)</span> and simulate from the predictive
+distribution for <span class="math inline">\(M_N\)</span>. For example,
+the following code estimates a 95% highest predictive density (HPD)
+interval for <span class="math inline">\(M_{100}\)</span> and plots the
+predictive densities of <span class="math inline">\(M_{100}\)</span> and
+<span class="math inline">\(M_{1000}\)</span>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Interval estimation</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">short</span>
-<span class="co">#&gt;        lower    upper n_years level</span>
-<span class="co">#&gt; [1,] 72.8932 139.4365     100    95</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Interval estimation</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">short</span></span>
+<span><span class="co">#&gt;         lower    upper n_years level</span></span>
+<span><span class="co">#&gt; [1,] 73.26224 140.7363     100    95</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Density function</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Density function</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="lite-2-bayesian_files/figure-html/preddensity-1.png" width="672"></p>
 </div>
 <div class="section level2">
@@ -143,10 +178,14 @@
    MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
 </script><div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-revdbayes" class="csl-entry">
-Northrop, Paul J. 2020. <em><span class="nocase">r</span>evdbayes: Ratio-of-Uniforms Sampling for Bayesian Extreme Value Analysis</em>. <a href="https://CRAN.R-project.org/package=revdbayes" class="external-link">https://CRAN.R-project.org/package=revdbayes</a>.
+Northrop, Paul J. 2020. <em><span class="nocase">r</span>evdbayes:
+Ratio-of-Uniforms Sampling for Bayesian Extreme Value Analysis</em>. <a href="https://CRAN.R-project.org/package=revdbayes" class="external-link">https://CRAN.R-project.org/package=revdbayes</a>.
 </div>
 <div id="ref-RCD2012" class="csl-entry">
-Ribatet, Mathieu, Daniel Cooley, and Anthony C. Davison. 2012. <span>“Bayesian Inference from Composite Likelihoods, with an Application to Spatial Extremes.”</span> <em>Statistica Sinica</em> 22 (2): 813–845. <a href="http://www.jstor.org/stable/24310036" class="external-link">http://www.jstor.org/stable/24310036</a>.
+Ribatet, Mathieu, Daniel Cooley, and Anthony C. Davison. 2012.
+<span>“Bayesian Inference from Composite Likelihoods, with an
+Application to Spatial Extremes.”</span> <em>Statistica Sinica</em> 22
+(2): 813–845. <a href="http://www.jstor.org/stable/24310036" class="external-link">http://www.jstor.org/stable/24310036</a>.
 </div>
 </div>
 </div>
@@ -169,7 +208,7 @@ Ribatet, Mathieu, Daniel Cooley, and Anthony C. Davison. 2012. <span>“Bayesian
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

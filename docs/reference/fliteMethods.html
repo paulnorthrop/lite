@@ -27,7 +27,7 @@ flite.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/math
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -68,31 +68,41 @@ flite.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/math
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for flite</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">x</span>,
-  which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"pu"</span>, <span class="st">"gp"</span>, <span class="st">"xi"</span>, <span class="st">"theta"</span><span class="op">)</span>,
-  adj_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vertical"</span>, <span class="st">"none"</span>, <span class="st">"cholesky"</span>, <span class="st">"spectral"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for flite</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for flite</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">object</span>, adjust <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for flite</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/nobs.html" class="external-link">nobs</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for flite</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for flite</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, adjust <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3L</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for summary.flite</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for flite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"pu"</span>, <span class="st">"gp"</span>, <span class="st">"xi"</span>, <span class="st">"theta"</span><span class="op">)</span>,</span>
+<span>  adj_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vertical"</span>, <span class="st">"none"</span>, <span class="st">"cholesky"</span>, <span class="st">"spectral"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for flite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for flite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">object</span>, adjust <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for flite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/nobs.html" class="external-link">nobs</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for flite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for flite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, adjust <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3L</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for summary.flite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for flite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  parm <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>  adj_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vertical"</span>, <span class="st">"none"</span>, <span class="st">"cholesky"</span>, <span class="st">"spectral"</span><span class="op">)</span>,</span>
+<span>  profile <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -100,12 +110,16 @@ flite.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/math
     <dl><dt>x</dt>
 <dd><p>An object inheriting from class <code>"flite"</code>, a result of a
 call to <code><a href="flite.html">flite</a></code>.</p></dd>
+
+
 <dt>which</dt>
 <dd><p>A character scalar indicating which plot(s) to produce.
 If <code>which = "all"</code> then all 4 plots described in <strong>Details</strong>
 are produced.  Otherwise, only one of these plots is produced, with the
 possible names of the arguments being in the order that the plots are
 described in <strong>Details</strong>.</p></dd>
+
+
 <dt>adj_type</dt>
 <dd><p>A character scalar passed to
 <code><a href="https://paulnorthrop.github.io/chandwich/reference/conf_intervals.html" class="external-link">conf_intervals</a></code> and
@@ -119,47 +133,96 @@ constraint that
 \(x\)<sub>(n)</sub>
 where \(x\)<sub>(n)</sub>
 is the largest excesses of the threshold \(u\), is preserved.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>For <code>plot.flite</code>: arguments passed to
   <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></code>, such as graphical parameters.</p>
 <p>For <code>print.summary.flite</code>: additional arguments passed to
-  <code><a href="https://rdrr.io/r/base/print.default.html" class="external-link">print.default</a></code>.</p></dd>
+  <code><a href="https://rdrr.io/r/base/print.default.html" class="external-link">print.default</a></code>.</p>
+<p>Otherwise <code>...</code> is unused.</p></dd>
+
+
 <dt>object</dt>
-<dd><p>An object inheriting from class <code>"flite"</code>, a result of a
-call to <code><a href="flite.html">flite</a></code>.</p></dd>
+<dd><p>An object of class <code>"flite"</code>, returned by
+<code><a href="flite.html">flite</a></code>.</p></dd>
+
+
 <dt>adjust</dt>
 <dd><p>A logical scalar.  If <code>adjust = TRUE</code> then the elements
 of the variance-covariance matrix corresponding to
 (\(p\)<sub>u</sub>,
-\(\sigma\)<sub>u</sub>, \(\xi\)), are estimated using a sandwich estimator.
-See <code><a href="flite.html">flite</a></code>.  Otherwise, this matrix is the inverse of the
-observed information matrix.</p></dd>
+\(\sigma\)<sub>u</sub>, \(\xi\)),
+are estimated using a sandwich estimator. See <code><a href="flite.html">flite</a></code>.
+Otherwise, this matrix is the inverse of the observed information matrix.</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>An integer. Passed to <code>signif</code> to
 round the values in the summary.</p></dd>
+
+
+<dt>parm</dt>
+<dd><p>A character vector specifying the parameters for which
+confidence intervals are required. The default, <code>which = "all"</code>,
+produces confidence intervals for all the parameters, that is,
+\(p\)<sub>u</sub>,
+\(\sigma\)<sub>u</sub>,
+\(\xi\) and \(\theta\). If <code>which = "gp"</code> then intervals are
+produced only for
+\(\sigma\)<sub>u</sub> and
+\(\xi\). Otherwise, <code>parm</code> must be a subset of
+<code>c("pu", "sigmau", "xi", "theta")</code>.</p></dd>
+
+
+<dt>level</dt>
+<dd><p>The confidence level required.  A numeric scalar in (0, 1).</p></dd>
+
+
+<dt>profile</dt>
+<dd><p>A logical scalar. If <code>TRUE</code> then confidence intervals
+based on an (adjusted) profile loglikelihood are returned.  If
+<code>FALSE</code> then intervals based on approximate large sample normal
+theory, which are symmetric about the MLE, are returned.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>plot.flite</code>: No return value, only the plot is produced.
-<code>coef.flite</code>: a numeric vector of length 4 with names
-<code>c("p[u]", "sigma[u]", "xi", "theta")</code>.  The MLEs of the parameters
-\(p\)<sub>u</sub>,
-\(\sigma\)<sub>u</sub>,
-\(\xi\) and \(\theta\).
-<code>vcov.flite</code>: a \(4 \times 4\) matrix with row and
+    
+
+<p><code>plot.flite</code>: No return value, only the plot is produced.</p>
+<p></p>
+<p><code>coef.flite</code>: a numeric vector of length 4 with names</p>
+<p></p>
+<p><code>c("p[u]", "sigma[u]", "xi", "theta")</code>.  The MLEs of the parameters</p>
+<p></p>
+<p>\(p\)<sub>u</sub>,</p>
+<p></p>
+<p>\(\sigma\)<sub>u</sub>,</p>
+<p></p>
+<p>\(\xi\) and \(\theta\).</p>
+<p></p>
+<p><code>vcov.flite</code>: a \(4 \times 4\) matrix with row and
     column names <code>c("p[u]", "sigma[u]", "xi", "theta")</code>.  The estimated
-    variance-covariance matrix for the model parameters.  If
-<code>adjust = TRUE</code> then the elements corresponding to
-\(p\)<sub>u</sub>,
-\(\sigma\)<sub>u</sub>,
+    variance-covariance matrix for the model parameters.  If</p>
+<p></p>
+<p><code>adjust = TRUE</code> then the elements corresponding to</p>
+<p></p>
+<p>\(p\)<sub>u</sub>,</p>
+<p></p>
+<p>\(\sigma\)<sub>u</sub>,
     and \(\xi\) are adjusted for cluster dependence using
-    a sandwich estimator; otherwise they are not adjusted.
-<code>nobs.flite</code>: a numeric vector of length 3 with names
-<code>c("p[u]", "gp", "theta")</code>.  The respective number of observations
+    a sandwich estimator; otherwise they are not adjusted.</p>
+<p></p>
+<p><code>nobs.flite</code>: a numeric vector of length 3 with names</p>
+<p></p>
+<p><code>c("p[u]", "gp", "theta")</code>.  The respective number of observations
     used to estimate \(p\)<sub>u</sub>,
-    (\(\sigma\)<sub>u</sub>,
-\(\xi\)) and \(\theta\).
-<code>logLik.flite</code>: an object of class <code>"logLik"</code>: a numeric scalar
+    (\(\sigma\)<sub>u</sub>,</p>
+<p></p>
+<p>\(\xi\)) and \(\theta\).</p>
+<p></p>
+<p><code>logLik.flite</code>: an object of class <code>"logLik"</code>: a numeric scalar
     with value equal to the maximised log-likelihood.  This is the sum of
     contributions from three fitted models, from a Bernoulli model for
     occurrences of threshold exceedances, a generalised Pareto model for
@@ -167,16 +230,27 @@ round the values in the summary.</p></dd>
     The returned object also has attributes <code>nobs</code>, the numbers of
     observations used in each of these model fits, and <code>"df"</code> (degrees
     of freedom), which is equal to the number of total number of parameters
-    estimated (4).
-<code>summary.flite</code>: an object containing the original function call and
-    a matrix of estimates and estimated standard errors with row names
-<code>c("p[u]", "sigma[u]", "xi", "theta")</code>.  The object is printed by
-<code>print.summary.flite</code>.
-<code>print.summary.flite</code>: the argument <code>x</code> is returned, invisibly.</p>
+    estimated (4).</p>
+<p></p>
+<p><code>summary.flite</code>: an object containing the original function call and
+    a matrix of estimates and estimated standard errors with row names</p>
+<p></p>
+<p><code>c("p[u]", "sigma[u]", "xi", "theta")</code>.  The object is printed by</p>
+<p></p>
+<p><code>print.summary.flite</code>.</p>
+<p></p>
+<p><code>print.summary.flite</code>: the argument <code>x</code> is returned, invisibly.</p>
+<p></p>
+<p><code>confint.flite</code>: a numeric matrix with 2 columns giving the lower and
+    upper confidence limits for each parameter. These columns are labelled
+    as <code>(1-level)/2</code> and <code>1-(1-level)/2</code>, expressed as a
+    percentage, by default <code>2.5%</code> and <code>97.5%</code>.  The row names
+    are the names of the parameters supplied in <code>parm</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>For <code>plot.flite</code>, if <code>which = "all"</code> then 4 plots are produced.</p><ul><li><p>Top left: (adjusted) log-likelihood for the threshold exceedence
+    <p>For <code>plot.flite</code>, if <code>which = "all"</code> then 4 plots are
+  produced.</p><ul><li><p>Top left: (adjusted) log-likelihood for the threshold exceedence
         probability \(p\)<sub>u</sub>,
         with a horizontal line indicating a 95% confidence interval for
         \(p\)<sub>u</sub>.</p></li>
@@ -190,10 +264,11 @@ round the values in the summary.</p></dd>
         <sub>(n)</sub> is drawn on
         the plot.</p></li>
 <li><p>Bottom left: (adjusted) log-likelihood for \(\xi\), with a
-        horizontal line indicating a 95% confidence interval for \(\xi\).</p></li>
-<li><p>Bottom right: log-likelihood for the extremal index \(\theta\),
-        with a horizontal line indicating a 95% confidence interval for
-        \(\theta\).</p></li>
+        horizontal line indicating a 95% confidence interval for
+        \(\xi\).</p></li>
+<li><p>Bottom right: log-likelihood for the extremal index
+        \(\theta\), with a horizontal line indicating a 95% confidence
+        interval for \(\theta\).</p></li>
 </ul></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -213,7 +288,7 @@ round the values in the summary.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

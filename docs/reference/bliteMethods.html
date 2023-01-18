@@ -27,7 +27,7 @@ blite.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/math
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -68,29 +68,29 @@ blite.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/math
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for blite</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"pu"</span>, <span class="st">"gp"</span>, <span class="st">"xi"</span>, <span class="st">"theta"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for blite</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">fun</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for blite</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for blite</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/nobs.html" class="external-link">nobs</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for blite</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>
-  <span class="va">object</span>,
-  short <span class="op">=</span> <span class="cn">TRUE</span>,
-  mean <span class="op">=</span> <span class="cn">TRUE</span>,
-  digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3L</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for summary.blite</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for blite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"pu"</span>, <span class="st">"gp"</span>, <span class="st">"xi"</span>, <span class="st">"theta"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for blite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">fun</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for blite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for blite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/nobs.html" class="external-link">nobs</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for blite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  short <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  mean <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3L</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for summary.blite</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -98,60 +98,88 @@ blite.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/math
     <dl><dt>x</dt>
 <dd><p>An object inheriting from class <code>"blite"</code>, a result of a
 call to <code><a href="blite.html">blite</a></code>.</p></dd>
+
+
 <dt>which</dt>
 <dd><p>A character scalar indicating which plot(s) to produce.
 If <code>which = "all"</code> then all 4 plots described in <strong>Details</strong>
 are produced.  Otherwise, only one of these plots is produced, with the
 possible names of the arguments being in the order that the plots are
 described in <strong>Details</strong>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>For <code>plot.blite</code>: arguments passed to
   <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></code>, such as graphical parameters.</p>
 <p>For <code>coef.blite</code>: additional arguments passed to <code>fun</code>.</p>
 <p>For <code>print.summary.blite</code>: additional arguments passed to
-  <code><a href="https://rdrr.io/r/base/print.default.html" class="external-link">print.default</a></code>.</p></dd>
+  <code><a href="https://rdrr.io/r/base/print.default.html" class="external-link">print.default</a></code>.</p>
+<p>Otherwise <code>...</code> is unused.</p></dd>
+
+
 <dt>object</dt>
 <dd><p>An object inheriting from class <code>"blite"</code>, a result of a
 call to <code><a href="blite.html">blite</a></code>.</p></dd>
+
+
 <dt>fun</dt>
 <dd><p>A summary function to be applied to each column of the simulated
 values in <code>object</code>.  If <code>fun</code> is missing then
 <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></code> is used.</p></dd>
+
+
 <dt>short</dt>
 <dd><p>A logical scalar that determines the form of the output. See
 <strong>Details</strong>.</p></dd>
+
+
 <dt>mean</dt>
 <dd><p>A logical scalar.  Determines the form of the output if
 <code>short = TRUE</code>. See <strong>Details</strong>.</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>An integer. Passed to <code>signif</code> to
 round the values in the summary.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>plot.blite</code>: No return value, only the plot is produced.
-<code>coef.blite</code>: a numeric vector of length 4 with names
-<code>c("p[u]", "sigma[u]", "xi", "theta")</code>.  The values of summary
-    statistics calculated using the function <code>fun</code>.
-<code>vcov.blite</code>: a \(4 \times 4\) matrix with row and
+    
+
+<p><code>plot.blite</code>: No return value, only the plot is produced.</p>
+<p></p>
+<p><code>coef.blite</code>: a numeric vector of length 4 with names</p>
+<p></p>
+<p><code>c("p[u]", "sigma[u]", "xi", "theta")</code>.  The values of summary
+    statistics calculated using the function <code>fun</code>.</p>
+<p></p>
+<p><code>vcov.blite</code>: a \(4 \times 4\) matrix with row and
     column names <code>c("p[u]", "sigma[u]", "xi", "theta")</code>.  An estimate
-    of the posterior covariance matrix, calculated using
-<code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cov</a></code>.
-<code>nobs.blite</code>: a numeric vector of length 3 with names
-<code>c("p[u]", "gp", "theta")</code>.  The respective number of observations
+    of the posterior covariance matrix, calculated using</p>
+<p></p>
+<p><code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cov</a></code>.</p>
+<p></p>
+<p><code>nobs.blite</code>: a numeric vector of length 3 with names</p>
+<p></p>
+<p><code>c("p[u]", "gp", "theta")</code>.  The respective number of observations
     used to infer \(p\)<sub>u</sub>,
-    (\(\sigma\)<sub>u</sub>,
-\(\xi\)) and \(\theta\).
-<code>summary.blite</code>: an object containing the original function call and
+    (\(\sigma\)<sub>u</sub>,</p>
+<p></p>
+<p>\(\xi\)) and \(\theta\).</p>
+<p></p>
+<p><code>summary.blite</code>: an object containing the original function call and
     a matrix of summaries of the posterior samples for each of the
     parameters.  If <code>short = TRUE</code> then there are 2 columns, containing
     either the sample posterior means and standard deviations
     (<code>mean = TRUE</code>) or the sample posterior medians and inter-quartile
     ranges (<code>mean = FALSE</code>).  If <code>short = FALSE</code> then there are 4
     columns, with each column containing the usual 6-number summary produced
-    by <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></code>. The object is printed by
-<code>print.summary.blite</code>.
-<code>print.summary.blite</code>: the argument <code>x</code> is returned, invisibly.</p>
+    by <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></code>. The object is printed by</p>
+<p></p>
+<p><code>print.summary.blite</code>.</p>
+<p></p>
+<p><code>print.summary.blite</code>: the argument <code>x</code> is returned, invisibly.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -191,7 +219,7 @@ round the values in the summary.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

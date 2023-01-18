@@ -29,7 +29,7 @@ extremes, as summarised by the extremal index."><!-- mathjax --><script src="htt
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -72,20 +72,20 @@ extremes, as summarised by the extremal index.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">blite</span><span class="op">(</span>
-  <span class="va">data</span>,
-  <span class="va">u</span>,
-  <span class="va">cluster</span>,
-  k <span class="op">=</span> <span class="fl">1</span>,
-  inc_cens <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">ny</span>,
-  gp_prior <span class="op">=</span> <span class="fu">revdbayes</span><span class="fu">::</span><span class="fu"><a href="https://paulnorthrop.github.io/revdbayes/reference/set_prior.html" class="external-link">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"mdi"</span>, model <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span>,
-  b_prior <span class="op">=</span> <span class="fu">revdbayes</span><span class="fu">::</span><span class="fu"><a href="https://paulnorthrop.github.io/revdbayes/reference/set_bin_prior.html" class="external-link">set_bin_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"jeffreys"</span><span class="op">)</span>,
-  theta_prior_pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
-  n <span class="op">=</span> <span class="fl">1000</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vertical"</span>, <span class="st">"none"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">blite</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">u</span>,</span>
+<span>  <span class="va">cluster</span>,</span>
+<span>  k <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  inc_cens <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">ny</span>,</span>
+<span>  gp_prior <span class="op">=</span> <span class="fu">revdbayes</span><span class="fu">::</span><span class="fu"><a href="https://paulnorthrop.github.io/revdbayes/reference/set_prior.html" class="external-link">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"mdi"</span>, model <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span>,</span>
+<span>  b_prior <span class="op">=</span> <span class="fu">revdbayes</span><span class="fu">::</span><span class="fu"><a href="https://paulnorthrop.github.io/revdbayes/reference/set_bin_prior.html" class="external-link">set_bin_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"jeffreys"</span><span class="op">)</span>,</span>
+<span>  theta_prior_pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vertical"</span>, <span class="st">"none"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -99,12 +99,16 @@ extremes, as summarised by the extremal index.</p>
   used to divide the data further into sequences of non-missing values,
   stored in different columns in a matrix.  Again, the log-likelihood
   is constructed as a sum of contributions from different columns.</p></dd>
+
+
 <dt>u</dt>
 <dd><p>A numeric scalar.  The extreme value threshold applied to the data.
 See <strong>Details</strong> for information about choosing <code>u</code>.</p></dd>
+
+
 <dt>cluster</dt>
 <dd><p>This argument is used to set the argument <code>cluster</code> to
-  <code><a href="https://sandwich.R-Forge.R-project.org//reference/vcovCL.html" class="external-link">meatCL</a></code>, which calculates the matrix \(V\)
+  <code><a href="https://sandwich.R-Forge.R-project.org/reference/vcovCL.html" class="external-link">meatCL</a></code>, which calculates the matrix \(V\)
   passed as the argument <code>V</code> to <code><a href="https://paulnorthrop.github.io/chandwich/reference/adjust_loglik.html" class="external-link">adjust_loglik</a></code>.
   If <code>data</code> is a matrix and <code>cluster</code> is missing then
   <code>cluster</code> is set so that data in different columns are in different
@@ -116,6 +120,8 @@ See <strong>Details</strong> for information about choosing <code>u</code>.</p><
   vector then <code>cluster</code> must be a vector of the same length as
   <code>data</code>.  Each entry in <code>cluster</code> sets the cluster of the
   corresponding component of <code>data</code>.</p></dd>
+
+
 <dt>k, inc_cens</dt>
 <dd><p>Arguments passed to <code><a href="https://paulnorthrop.github.io/exdex/reference/kgaps.html" class="external-link">kgaps</a></code>.
 <code>k</code> sets the value of the run parameter \(K\) in the \(K\)-gaps
@@ -123,6 +129,8 @@ model for the extremal index.
 <code>inc_cens</code> determines whether contributions from right-censored
 inter-exceedance times are used. See <strong>Details</strong> for information
 about choosing <code>k</code>.</p></dd>
+
+
 <dt>ny</dt>
 <dd><p>A numeric scalar.  The (mean) number of observations per year.
 Setting this appropriately is important when making predictive inferences
@@ -134,51 +142,82 @@ Alternatively, <code>ny</code> can be supplied in a later call to
 both <code>blite</code> and <code><a href="predict.blite.html">predict.blite</a></code> then the value supplied
 to <code><a href="predict.blite.html">predict.blite</a></code> will take precedence, with no warning
 given.</p></dd>
+
+
 <dt>gp_prior</dt>
 <dd><p>A list to specify a prior distribution for the GP parameters
 (\(\sigma\)<sub>u</sub>,
 \(\xi\)), set using <code><a href="https://paulnorthrop.github.io/revdbayes/reference/set_prior.html" class="external-link">set_prior</a></code>.</p></dd>
+
+
 <dt>b_prior</dt>
 <dd><p>A list to specify a prior distribution for the Bernoulli
 parameter \(p\)<sub>u</sub>, set
 using <code><a href="https://paulnorthrop.github.io/revdbayes/reference/set_bin_prior.html" class="external-link">set_bin_prior</a></code>.</p></dd>
+
+
 <dt>theta_prior_pars</dt>
 <dd><p>A numerical vector of length 2 containing the
 respective values of the parameters \(\alpha\) and \(\beta\) of a
 Beta(\(\alpha\), \(\beta\)) prior for the extremal index \(\theta\).</p></dd>
+
+
 <dt>n</dt>
 <dd><p>An integer scalar.  The size of posterior sample required.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>A character scalar.  Either <code>"vertical"</code> to adjust the
 independence log-likelihood vertically, or <code>"none"</code> for no
 adjustment.  Horizontal adjustment is not offered because it does not
 preserve the correct support of the posterior distribution.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further arguments to be passed to the function
-<code><a href="https://sandwich.R-Forge.R-project.org//reference/vcovCL.html" class="external-link">meatCL</a></code> in the sandwich package.
+<code><a href="https://sandwich.R-Forge.R-project.org/reference/vcovCL.html" class="external-link">meatCL</a></code> in the sandwich package.
 In particular, the clustering adjustment argument <code>cadjust</code>
 may make a difference if the number of clusters is not large.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class <code>c("blite", "lite", "chandwich")</code>.
-  This object is an <code>n</code>\(\times 4\) matrix containing the
-  posterior samples, with column names
-<code>c("p[u]", "sigma[u]", "xi", "theta")</code>.
- The object also has the attributes <code>"Bernoulli"</code>, <code>"gp"</code>,
-<code>"theta"</code>, which provide the fitted model objects returned from
-<code><a href="https://paulnorthrop.github.io/chandwich/reference/adjust_loglik.html" class="external-link">adjust_loglik</a></code> (for <code>"Bernoulli"</code> and
-<code>"gp"</code>) and <code><a href="https://paulnorthrop.github.io/exdex/reference/kgaps.html" class="external-link">kgaps</a></code> (for <code>"theta"</code>).
- The named input arguments are returned in a list as the attribute
-<code>inputs</code>.  If <code>ny</code> was not supplied then its value is <code>NA</code>.
+    
+
+<p>An object of class <code>c("blite", "lite", "chandwich")</code>.
+  This object is an <code>n</code></p>
+<p></p>
+<p>\(\times 4\) matrix containing the
+  posterior samples, with column names</p>
+<p></p>
+<p><code>c("p[u]", "sigma[u]", "xi", "theta")</code>.</p>
+
+
+<p>The object also has the attributes <code>"Bernoulli"</code>, <code>"gp"</code>,</p>
+<p></p>
+<p><code>"theta"</code>, which provide the fitted model objects returned from</p>
+<p></p>
+<p><code><a href="https://paulnorthrop.github.io/chandwich/reference/adjust_loglik.html" class="external-link">adjust_loglik</a></code> (for <code>"Bernoulli"</code> and</p>
+<p></p>
+<p><code>"gp"</code>) and <code><a href="https://paulnorthrop.github.io/exdex/reference/kgaps.html" class="external-link">kgaps</a></code> (for <code>"theta"</code>).
+ The named input arguments are returned in a list as the attribute</p>
+<p></p>
+<p><code>inputs</code>.  If <code>ny</code> was not supplied then its value is <code>NA</code>.
  The call to <code>blite</code> is provided in the attribute <code>"call"</code>.
  A call to <code><a href="flite.html">flite</a></code> is used to create adjusted log-likelihoods
  for \(p\)<sub>u</sub> and
  (\(\sigma\)<sub>u</sub>, \(\xi\)).
- The object returned from the call is provided as the attribute
-<code>"flite_object"</code>.
- Objects inheriting from class <code>"blite"</code> have <code>coef</code>,
-<code>nobs</code>, <code>plot</code>, <code>summary</code> and <code>vcov</code> methods.  See <code><a href="bliteMethods.html">bliteMethods</a></code>.</p>
+ The object returned from the call is provided as the attribute</p>
+<p></p>
+<p><code>"flite_object"</code>.</p>
+
+
+<p>Objects inheriting from class <code>"blite"</code> have <code>coef</code>,</p>
+<p></p>
+<p><code>nobs</code>, <code>plot</code>, <code>summary</code> and <code>vcov</code></p>
+
+
+<p>methods.  See <code><a href="bliteMethods.html">bliteMethods</a></code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -220,7 +259,7 @@ may make a difference if the number of clusters is not large.</p></dd>
     <h2>References</h2>
     <p>Fawcett, L. and Walshaw, D. (2012), Estimating return levels
   from serially dependent extremes. <em>Environmetrics</em>, <strong>23</strong>,
-  272-283. doi: <a href="https://doi.org/10.1002/env.2133" class="external-link">10.1002/env.2133</a></p>
+  272-283. <a href="https://doi.org/10.1002/env.2133" class="external-link">doi:10.1002/env.2133</a></p>
 <p>Ribatet, M., Cooley, D., &amp; Davison, A. C. (2012). Bayesian
   inference from composite likelihoods, with an application to spatial
   extremes. <em>Statistica Sinica</em>, <strong>22</strong>(2), 813-845.</p>
@@ -237,22 +276,22 @@ may make a difference if the number of clusters is not large.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">### Cheeseboro wind gusts</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span></span>
-<span class="r-in"><span class="co"># Each column of the matrix cdata corresponds to data from a different year</span></span>
-<span class="r-in"><span class="co"># blite() sets cluster automatically to correspond to column (year)</span></span>
-<span class="r-in"><span class="va">cpost</span> <span class="op">&lt;-</span> <span class="fu">blite</span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### Cheeseboro wind gusts</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span></span></span>
+<span class="r-in"><span><span class="co"># Each column of the matrix cdata corresponds to data from a different year</span></span></span>
+<span class="r-in"><span><span class="co"># blite() sets cluster automatically to correspond to column (year)</span></span></span>
+<span class="r-in"><span><span class="va">cpost</span> <span class="op">&lt;-</span> <span class="fu">blite</span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> blite(data = cdata, u = 45, k = 3)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          Posterior mean Posterior SD</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> p[u]            0.02824     0.006122</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sigma[u]        9.88600     2.336000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> xi             -0.07079     0.093360</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> theta           0.24210     0.023450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p[u]            0.02850     0.006334</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sigma[u]       10.01000     2.227000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> xi             -0.07479     0.092840</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> theta           0.24230     0.023080</span>
 </code></pre></div>
     </div>
   </div>
@@ -267,7 +306,7 @@ may make a difference if the number of clusters is not large.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
