@@ -53,6 +53,12 @@
 #'     \code{\link{print.summary.flite}}.
 #'
 #'   \code{print.summary.flite}: the argument \code{x} is returned, invisibly.
+#'
+#'   \code{confint.flite}: a numeric matrix with 2 columns giving the lower and
+#'     upper confidence limits for each parameter. These columns are labelled
+#'     as \code{(1-level)/2} and \code{1-(1-level)/2}, expressed as a
+#'     percentage, by default \code{2.5\%} and \code{97.5\%}.  The row names
+#'     are the names of the parameters supplied in \code{parm}.
 #' @seealso \code{\link{flite}} to perform frequentist threshold-based
 #'   inference for time series extremes.
 #' @name fliteMethods
@@ -286,4 +292,108 @@ print.summary.flite <- function(x, ...) {
                          collapse = "\n"), "\n\n", sep = "")
   print(x$matrix, ...)
   invisible(x)
+}
+
+# ================================ confint.flite ============================ #
+
+#' Confidence intervals for \code{"flite"} objects
+#'
+#' @param object An object of class \code{"flite"}, returned by
+#'   \code{\link{flite}}.
+#' @param parm A character vector specifying the parameters for which
+#'   confidence intervals are required. The default, \code{which = "all"},
+#'   produces confidence intervals for all the parameters, that is,
+#'   \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
+#'   \ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+#'   \eqn{\xi} and \eqn{\theta}. If \code{which = "gp"} then intervals are
+#'   produced only for
+#'   \ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}} and
+#'   \eqn{\xi}. Otherwise, \code{parm} must be a subset of
+#'   \code{c("pu", "sigmau", "xi", "theta")}.
+#' @param level The confidence level required.  A numeric scalar in (0, 1).
+#' @param profile A logical scalar. If \code{TRUE} then confidence intervals
+#'   based on an (adjusted) profile loglikelihood are returned.  If
+#'   \code{FALSE} then intervals based on approximate large sample normal
+#'   theory, which are symmetric about the MLE, are returned.
+#' @rdname fliteMethods
+#' @export
+confint.flite <- function(object, parm = "all", level = 0.95,
+                          adj_type = c("vertical", "none", "cholesky",
+                                       "spectral"), profile = TRUE, ...) {
+  if (!inherits(object, "flite")) {
+    stop("use only with \"flite\" objects")
+  }
+  if (parm == "all") {
+    parm <- c("pu", "sigmau", "xi", "theta")
+  } else if (parm == "gp") {
+    parm <- c("sigmau", "xi")
+  } else {
+    parm_values <- c("pu", "sigmau", "xi", "theta")
+    parm_message <- "''pu'', ''sigmau'', ''xi'', ''theta''"
+    if (!all(is.element(parm, parm_values))) {
+      stop(paste("''parm'' must be a subset of", parm_message))
+    }
+  }
+  if (level <= 0 | level >= 1) {
+    stop("''level'' must be in (0, 1)")
+  }
+  adj_type <- match.arg(adj_type)
+  # Set up a matrix to store the results
+  ci_mat <- matrix(NA, nrow = length(parm), ncol = 2)
+  # Set a counter to keep track of the row in which to store results
+  therow <- 1L
+  # Bernoulli (p[u])
+  if ("pu" %in% parm) {
+    ci_pu <- chandwich::conf_intervals(attr(object, "Bernoulli"),
+                                       conf = 100 * level, type = adj_type,
+                                       profile = profile)
+    if (profile) {
+      ci_mat[therow, ] <- ci_pu$prof_CI
+    } else {
+      ci_mat[therow, ] <- ci_pu$sym_CI
+    }
+    therow <- therow + 1L
+  }
+  # GP scale parameter sigma[u]
+  if ("sigmau" %in% parm) {
+    gp <- attr(object, "gp")
+    ci_sigmau <- chandwich::conf_intervals(gp, which_pars = "sigma[u]",
+                                           conf = 100 * level, type = adj_type,
+                                           profile = profile)
+    if (profile) {
+      ci_mat[therow, ] <- ci_sigmau$prof_CI
+    } else {
+      ci_mat[therow, ] <- ci_sigmau$sym_CI
+    }
+    therow <- therow + 1L
+  }
+  # GP shape parameter xi
+  if ("xi" %in% parm) {
+    gp <- attr(object, "gp")
+    ci_xi <- chandwich::conf_intervals(gp, which_pars = "xi",
+                                       conf = 100 * level, type = adj_type,
+                                       profile = profile)
+    if (profile) {
+      ci_mat[therow, ] <- ci_xi$prof_CI
+    } else {
+      ci_mat[therow, ] <- ci_xi$sym_CI
+    }
+    therow <- therow + 1L
+  }
+  # K-gaps for theta
+  if ("theta" %in% parm) {
+    if (profile) {
+      interval_type <- "lik"
+    } else {
+      interval_type <- "norm"
+    }
+    ci_theta <- confint(attr(object, "theta"), level = level,
+                        interval_type = interval_type)
+    ci_mat[therow, ] <- ci_theta$cis
+  }
+  low <- paste0(100 * (1 - level)/ 2, "%")
+  up <- paste0(100 - 100 * (1 - level)/ 2, "%")
+  colnames(ci_mat) <- c(low, up)
+  rownames(ci_mat) <- parm
+  return(ci_mat)
 }

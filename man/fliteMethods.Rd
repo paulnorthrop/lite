@@ -9,6 +9,7 @@
 \alias{logLik.flite}
 \alias{summary.flite}
 \alias{print.summary.flite}
+\alias{confint.flite}
 \title{Methods for objects of class \code{"flite"}}
 \usage{
 \method{plot}{flite}(
@@ -29,6 +30,15 @@
 \method{summary}{flite}(object, adjust = TRUE, digits = max(3, getOption("digits") - 3L), ...)
 
 \method{print}{summary.flite}(x, ...)
+
+\method{confint}{flite}(
+  object,
+  parm = "all",
+  level = 0.95,
+  adj_type = c("vertical", "none", "cholesky", "spectral"),
+  profile = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{An object inheriting from class \code{"flite"}, a result of a
@@ -61,8 +71,8 @@ is the largest excesses of the threshold \eqn{u}, is preserved.}
 
   Otherwise \code{...} is unused.}
 
-\item{object}{An object inheriting from class \code{"flite"}, a result of a
-call to \code{\link{flite}}.}
+\item{object}{An object of class \code{"flite"}, returned by
+\code{\link{flite}}.}
 
 \item{adjust}{A logical scalar.  If \code{adjust = TRUE} then the elements
 of the variance-covariance matrix corresponding to
@@ -73,6 +83,24 @@ Otherwise, this matrix is the inverse of the observed information matrix.}
 
 \item{digits}{An integer. Passed to \code{\link[base:Round]{signif}} to
 round the values in the summary.}
+
+\item{parm}{A character vector specifying the parameters for which
+confidence intervals are required. The default, \code{which = "all"},
+produces confidence intervals for all the parameters, that is,
+\ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
+\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+\eqn{\xi} and \eqn{\theta}. If \code{which = "gp"} then intervals are
+produced only for
+\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}} and
+\eqn{\xi}. Otherwise, \code{parm} must be a subset of
+\code{c("pu", "sigmau", "xi", "theta")}.}
+
+\item{level}{The confidence level required.  A numeric scalar in (0, 1).}
+
+\item{profile}{A logical scalar. If \code{TRUE} then confidence intervals
+based on an (adjusted) profile loglikelihood are returned.  If
+\code{FALSE} then intervals based on approximate large sample normal
+theory, which are symmetric about the MLE, are returned.}
 }
 \value{
 \code{plot.flite}: No return value, only the plot is produced.
@@ -114,6 +142,12 @@ round the values in the summary.}
     \code{\link{print.summary.flite}}.
 
   \code{print.summary.flite}: the argument \code{x} is returned, invisibly.
+
+  \code{confint.flite}: a numeric matrix with 2 columns giving the lower and
+    upper confidence limits for each parameter. These columns are labelled
+    as \code{(1-level)/2} and \code{1-(1-level)/2}, expressed as a
+    percentage, by default \code{2.5\%} and \code{97.5\%}.  The row names
+    are the names of the parameters supplied in \code{parm}.
 }
 \description{
 Methods for objects of class \code{"flite"} returned from

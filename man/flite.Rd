@@ -156,6 +156,12 @@ logLik(cfit)
 # Plots of (adjusted) log-likelihoods
 plot(cfit)
 plot(cfit, which = "gp")
+
+## Confidence intervals
+# Based on an adjusted profile log-likelihood
+confint(cfit)
+# Symmetric intervals based on large sample normality
+confint(cfit, profile= FALSE)
 }
 \references{
 Chandler, R. E. and Bate, S. (2007). Inference for clustered.
