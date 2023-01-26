@@ -145,6 +145,7 @@
 #' # blite() sets cluster automatically to correspond to column (year)
 #' cpost <- blite(cdata, u = 45, k = 3)
 #' summary(cpost)
+#' plot(cpost)
 #' @export
 blite <- function(data, u, cluster, k = 1, inc_cens = TRUE, ny,
                   gp_prior = revdbayes::set_prior(prior = "mdi", model = "gp"),
