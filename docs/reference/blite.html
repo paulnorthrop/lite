@@ -214,10 +214,13 @@ may make a difference if the number of clusters is not large.</p></dd>
 
 <p>Objects inheriting from class <code>"blite"</code> have <code>coef</code>,</p>
 <p></p>
-<p><code>nobs</code>, <code>plot</code>, <code>summary</code> and <code>vcov</code></p>
+<p><code>nobs</code>, <code>plot</code>, <code>summary</code>, <code>vcov</code> and <code>confint</code></p>
 
 
 <p>methods.  See <code><a href="bliteMethods.html">bliteMethods</a></code>.</p>
+<p></p>
+<p><code><a href="predict.blite.html">predict.blite</a></code> can be used to make predictive inferences about
+ the largest value to be observed in <em>N</em> years.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -268,6 +271,8 @@ may make a difference if the number of clusters is not large.</p></dd>
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="bliteMethods.html">bliteMethods</a></code>, including plotting the posterior
   samples.</p>
+<p><code><a href="predict.blite.html">predict.blite</a></code> to make predictive inferences about
+ future extreme values.</p>
 <p><code><a href="flite.html">flite</a></code> for frequentist threshold-based inference
   for time series extremes.</p>
 <p><code><a href="https://paulnorthrop.github.io/exdex/reference/choose_uk.html" class="external-link">choose_uk</a></code> to inform the choice of the
@@ -288,10 +293,10 @@ may make a difference if the number of clusters is not large.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> blite(data = cdata, u = 45, k = 3)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          Posterior mean Posterior SD</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> p[u]            0.02821     0.005976</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sigma[u]       10.00000     2.377000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> xi             -0.07852     0.092970</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> theta           0.24250     0.023950</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p[u]            0.02817     0.005835</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sigma[u]        9.97100     2.406000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> xi             -0.07844     0.091180</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> theta           0.24260     0.022850</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Plots of posterior samples</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span></span></span>
@@ -300,10 +305,10 @@ may make a difference if the number of clusters is not large.</p></dd>
 <span class="r-in"><span><span class="co">## Credible intervals</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               2.5%       97.5%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> pu      0.01739726  0.04090561</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sigmau  6.25968834 15.77793954</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> xi     -0.25164821  0.13422607</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> theta   0.19871879  0.28950612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> pu      0.01794194  0.04064574</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sigmau  6.25441760 15.60507728</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> xi     -0.24979857  0.10655927</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> theta   0.20163969  0.29183153</span>
 </code></pre></div>
     </div>
   </div>
