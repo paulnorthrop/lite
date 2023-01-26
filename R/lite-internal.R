@@ -142,6 +142,9 @@ bingp_rl_CI <- function (x, m, level, ny, type, u) {
   pmny <- 1 - con ^ (1 / nt)
   p <- pmny / pu
   rp <- 1 / p
+  if (p > 1) {
+    stop("The return level required is below the threshold")
+  }
   rl_mle <- revdbayes::qgp(p, loc = u, scale = sigmau, shape = xi,
                            lower.tail = FALSE)
   delta <- matrix(0, 4, 1)
@@ -181,6 +184,10 @@ bingp_rl_prof <- function(x, m, level, ny, inc, type, rl_sym, u) {
     }
     pmny <- 1 - (1 - 1 / m) ^ (1 / (ny * a[3]))
     p <- pmny / a[1]
+    # Check that p is in [0, 1]
+    if (p > 1 || p < 0) {
+      return(10 ^ 10)
+    }
     sigmau <- (xp - u) / revdbayes::qgp(p, loc = 0, scale = 1, shape = a[2],
                                         lower.tail = FALSE)
     # Check that sigmau is positive
