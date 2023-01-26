@@ -5,6 +5,7 @@
 
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/paulnorthrop/lite?branch=main&svg=true)](https://ci.appveyor.com/project/paulnorthrop/lite)
+[![R-CMD-check](https://github.com/paulnorthrop/lite/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/paulnorthrop/lite/actions/workflows/R-CMD-check.yaml)
 [![Coverage
 Status](https://codecov.io/github/paulnorthrop/lite/coverage.svg?branch=main)](https://codecov.io/github/paulnorthrop/lite?branch=main)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/lite)](https://cran.r-project.org/package=lite)
@@ -20,11 +21,11 @@ time series extremes. The general approach follows [Fawcett and Walshaw
 (2012)](https://doi.org/10.1002/env.2133). There are 3 independent parts
 to the inference, all performed using maximum likelihood estimation.
 
-1.  A Bernoulli(*p*<sub>*u*</sub>) model for whether a given observation
-    exceeds the threshold *u*.
-2.  A generalised Pareto, GP(*σ*<sub>*u*</sub>,*ξ*), model for the
-    marginal distribution of threshold excesses.
-3.  The *K*-gaps model for the extremal index *θ*, based on
+1.  A Bernoulli$(p_u)$ model for whether a given observation exceeds the
+    threshold $u$.
+2.  A generalised Pareto, GP$(\sigma_u, \xi)$, model for the marginal
+    distribution of threshold excesses.
+3.  The $K$-gaps model for the extremal index $\theta$, based on
     inter-exceedance times.
 
 For parts 1 and 2 it is necessary to adjust the inferences because we
@@ -44,8 +45,8 @@ about return levels.
 ### An example: Cheeseboro wind gusts
 
 The function `flite` makes inferences about
-(*p*<sub>*u*</sub>,*σ*<sub>*u*</sub>,*ξ*,*θ*). We illustrate this using
-the `cheeseboro` data from the [exdex
+$(p_u, \sigma_u, \xi, \theta)$. We illustrate this using the
+`cheeseboro` data from the [exdex
 package](https://cran.r-project.org/package=exdex), which contains
 hourly wind gust data from each January over the 10-year period
 2000-2009.
@@ -62,7 +63,7 @@ cfit <- flite(cdata, u = 45, k = 3)
 
 Then, we make inferences about the 100-year return level, including 95%
 confidence intervals. The argument `ny` sets the number of observations
-per year, which is 31 × 24 = 744 for these data.
+per year, which is $31 \times 24 = 744$ for these data.
 
 ``` r
 rl <- returnLevel(cfit, m = 100, level = 0.95, ny = 31 * 24)
@@ -75,10 +76,10 @@ rl
 #> 
 #> Normal interval:
 #>  lower     mle   upper  
-#>  70.36   90.73  111.09  
+#>  69.80   88.62  107.44  
 #> Profile likelihood-based interval:
 #>  lower     mle   upper  
-#>  77.29   90.73  132.57
+#>  75.89   88.62  125.43
 ```
 
 ### Installation
