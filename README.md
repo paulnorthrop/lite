@@ -21,8 +21,8 @@ time series extremes. The general approach follows [Fawcett and Walshaw
 (2012)](https://doi.org/10.1002/env.2133). There are 3 independent parts
 to the inference, all performed using maximum likelihood estimation.
 
-1.  A Bernoulli ($p_u$) model for whether a given observation exceeds
-    the threshold $u$.
+1.  A Bernoulli (*p*<sub>*u*</sub>) model for whether a given
+    observation exceeds the threshold $u$.
 2.  A generalised Pareto, GP ($\sigma_u, \xi$), model for the marginal
     distribution of threshold excesses.
 3.  The $K$-gaps model for the extremal index $\theta$, based on
