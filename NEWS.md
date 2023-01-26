@@ -2,11 +2,11 @@
 
 ## New features
 
-* Objects of class `flite` returned from `flite()` now have a `confint` method.
-
 * The new function `blite()` performs Bayesian threshold-based inference for time series extremes.  It is a Bayesian version of the existing function `flite()`, which performs frequentist inference.  
 
 * Objects returned from `blite()` have a predict S3 method `predict.blite()` based on the `predict.evpost()` method from the `revdbayes`package.  It provides predictive inferences for the largest value observed in *N* years.
+
+* Objects of class `flite` returned from `flite()` now have a `confint` method.
 
 ## Bug fixes and minor improvements
 
@@ -14,4 +14,4 @@
 
 * In the (unexported, internal) function `bingp_rl_CI()` an error is triggered if the return level requested is lower than the threshold used to fit the model.
 
-* In the (unexported, internal) function `bingp_rl_prof()`, which calculates a confidence interval for a return level based on a profile log-likelihood, a check is made on the value `p` to be passed to `revdbayes::qgp` to check that it is in [0, 1].
+* In the (unexported, internal) function `bingp_rl_prof()`, which calculates a confidence interval for a return level based on a profile log-likelihood, a check is made on the value `p` to be passed to `revdbayes::qgp()` to check that it is in [0, 1].
