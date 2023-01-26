@@ -152,15 +152,15 @@
 <span><span class="co">#&gt; blite(data = cdata, u = 45, k = 3, ny = 31 * 24)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;          Posterior mean Posterior SD</span></span>
-<span><span class="co">#&gt; p[u]            0.02820     0.005942</span></span>
-<span><span class="co">#&gt; sigma[u]       10.16000     2.505000</span></span>
-<span><span class="co">#&gt; xi             -0.07531     0.097800</span></span>
-<span><span class="co">#&gt; theta           0.24150     0.023170</span></span></code></pre></div>
+<span><span class="co">#&gt; p[u]            0.02832     0.006008</span></span>
+<span><span class="co">#&gt; sigma[u]       10.03000     2.435000</span></span>
+<span><span class="co">#&gt; xi             -0.07196     0.094030</span></span>
+<span><span class="co">#&gt; theta           0.24250     0.024040</span></span></code></pre></div>
 <p>Then, we estimate a 95% highest predictive density (HPD) interval for the largest value <span class="math inline"><em>M</em><sub>100</sub></span> to be observed over a future time period of length <span class="math inline">100</span> years.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span>, n_years <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">$</span><span class="va">short</span></span>
 <span><span class="co">#&gt;         lower    upper n_years level</span></span>
-<span><span class="co">#&gt; [1,] 73.45208 139.7568     100    95</span></span></code></pre></div>
+<span><span class="co">#&gt; [1,] 73.09008 139.8616     100    95</span></span></code></pre></div>
 <p>Objects returned from <code>flite</code> and <code>blite</code> have <code>plot</code> methods to summarise graphically, respectively, log-likelihoods and posterior distributions.</p>
 </div>
 <div class="section level3">
