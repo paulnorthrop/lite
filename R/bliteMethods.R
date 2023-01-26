@@ -1,7 +1,8 @@
 #' Methods for objects of class \code{"blite"}
 #'
 #' Methods for objects of class \code{"blite"} returned from
-#' \code{\link{blite}}.
+#' \code{\link{blite}}. \code{confint.blite} is a misnomer: it returns
+#' Bayesian credible intervals.
 #' @param x An object inheriting from class \code{"blite"}, a result of a
 #'   call to \code{\link{blite}}.
 #' @param object An object inheriting from class \code{"blite"}, a result of a
@@ -44,6 +45,12 @@
 #'     \code{\link{print.summary.blite}}.
 #'
 #'   \code{print.summary.blite}: the argument \code{x} is returned, invisibly.
+#'
+#'   \code{confint.blite}: a numeric matrix with 2 columns giving the lower and
+#'     upper credible limits for each parameter. These columns are labelled
+#'     as \code{(1-level)/2} and \code{1-(1-level)/2}, expressed as a
+#'     percentage, by default \code{2.5\%} and \code{97.5\%}.  The row names
+#'     are the names of the parameters supplied in \code{parm}.
 #' @seealso \code{\link{blite}} to perform frequentist threshold-based
 #'   inference for time series extremes.
 #' @seealso \code{\link{predict.blite}}: for predictive inference for the
@@ -239,4 +246,55 @@ print.summary.blite <- function(x, ...) {
                          collapse = "\n"), "\n\n", sep = "")
   print(x$matrix, ...)
   invisible(x)
+}
+
+# ================================ confint.blite ============================ #
+
+#' Credible intervals for \code{"blite"} objects
+#'
+#' @param object An object of class \code{"blite"}, returned by
+#'   \code{\link{blite}}.
+#' @param parm A character vector specifying the parameters for which
+#'   confidence intervals are required. The default, \code{which = "all"},
+#'   produces confidence intervals for all the parameters, that is,
+#'   \ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
+#'   \ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+#'   \eqn{\xi} and \eqn{\theta}. If \code{which = "gp"} then intervals are
+#'   produced only for
+#'   \ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}} and
+#'   \eqn{\xi}. Otherwise, \code{parm} must be a subset of
+#'   \code{c("pu", "sigmau", "xi", "theta")}.
+#' @param level The credible level required.  A numeric scalar in (0, 1).
+#' @rdname bliteMethods
+#' @export
+confint.blite <- function(object, parm = "all", level = 0.95, ...) {
+  if (!inherits(object, "blite")) {
+    stop("use only with \"blite\" objects")
+  }
+  check_values <- c("pu", "sigmau", "xi", "theta", "all", "gp")
+  p_message <- "c(''pu'', ''sigmau'', ''xi'', ''theta'')"
+  if (!all(is.element(parm, check_values))) {
+    stop(paste("''parm'' must be ''all'', ''gp'' or a subset of", p_message))
+  }
+  if (length(parm) == 1) {
+    if (parm == "all") {
+      parm <- c("pu", "sigmau", "xi", "theta")
+    } else if (parm == "gp") {
+      parm <- c("sigmau", "xi")
+    }
+  }
+  if (level <= 0 | level >= 1) {
+    stop("''level'' must be in (0, 1)")
+  }
+  # Set up a matrix to store the results
+  ci_mat <- matrix(NA, nrow = length(parm), ncol = 2)
+  # Estimate the equi-tailed interval
+  low <- (1 - level) / 2
+  # Use only the posterior samples for the required parameters
+  parm_values <- c("pu", "sigmau", "xi", "theta")
+  colnames(object) <- parm_values
+  ci_mat <- t(apply(object[, which(is.element(parm_values, parm)),
+                           drop = FALSE], 2, quantile,
+                    probs = c(low, 1 - low)))
+  return(ci_mat)
 }
