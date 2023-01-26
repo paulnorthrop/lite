@@ -294,7 +294,7 @@ confint.blite <- function(object, parm = "all", level = 0.95, ...) {
   parm_values <- c("pu", "sigmau", "xi", "theta")
   colnames(object) <- parm_values
   ci_mat <- t(apply(object[, which(is.element(parm_values, parm)),
-                           drop = FALSE], 2, quantile,
+                           drop = FALSE], 2, stats::quantile,
                     probs = c(low, 1 - low)))
   return(ci_mat)
 }
