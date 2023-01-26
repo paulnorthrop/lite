@@ -64,15 +64,15 @@
 <h2 class="page-header" data-toc-text="1.1.0" id="lite-110">lite 1.1.0<a class="anchor" aria-label="anchor" href="#lite-110"></a></h2>
 <div class="section level3">
 <h3 id="new-features-1-1-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-1-0"></a></h3>
-<ul><li><p>Objects of class <code>flite</code> returned from <code><a href="../reference/flite.html">flite()</a></code> now have a <code>confint</code> method.</p></li>
-<li><p>The new function <code><a href="../reference/blite.html">blite()</a></code> performs Bayesian threshold-based inference for time series extremes. It is a Bayesian version of the existing function <code><a href="../reference/flite.html">flite()</a></code>, which performs frequentist inference.</p></li>
+<ul><li><p>The new function <code><a href="../reference/blite.html">blite()</a></code> performs Bayesian threshold-based inference for time series extremes. It is a Bayesian version of the existing function <code><a href="../reference/flite.html">flite()</a></code>, which performs frequentist inference.</p></li>
 <li><p>Objects returned from <code><a href="../reference/blite.html">blite()</a></code> have a predict S3 method <code><a href="../reference/predict.blite.html">predict.blite()</a></code> based on the <code>predict.evpost()</code> method from the <code>revdbayes</code>package. It provides predictive inferences for the largest value observed in <em>N</em> years.</p></li>
+<li><p>Objects of class <code>flite</code> returned from <code><a href="../reference/flite.html">flite()</a></code> now have a <code>confint</code> method.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-and-minor-improvements-1-1-0">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-1-1-0"></a></h3>
 <ul><li><p>In <code><a href="../reference/flite.html">flite()</a></code>, the arguments <code>k</code> and <code>inc_cens</code> were not passed to <code><a href="https://paulnorthrop.github.io/exdex/reference/kgaps.html" class="external-link">exdex::kgaps()</a></code>. This has been corrected.</p></li>
 <li><p>In the (unexported, internal) function <code><a href="../reference/lite-internal.html">bingp_rl_CI()</a></code> an error is triggered if the return level requested is lower than the threshold used to fit the model.</p></li>
-<li><p>In the (unexported, internal) function <code><a href="../reference/lite-internal.html">bingp_rl_prof()</a></code>, which calculates a confidence interval for a return level based on a profile log-likelihood, a check is made on the value <code>p</code> to be passed to <code><a href="https://paulnorthrop.github.io/revdbayes/reference/gp.html" class="external-link">revdbayes::qgp</a></code> to check that it is in [0, 1].</p></li>
+<li><p>In the (unexported, internal) function <code><a href="../reference/lite-internal.html">bingp_rl_prof()</a></code>, which calculates a confidence interval for a return level based on a profile log-likelihood, a check is made on the value <code>p</code> to be passed to <code><a href="https://paulnorthrop.github.io/revdbayes/reference/gp.html" class="external-link">revdbayes::qgp()</a></code> to check that it is in [0, 1].</p></li>
 </ul></div>
 </div>
   </div>

@@ -135,10 +135,10 @@ numerical and graphical marginal summaries of the posterior samples.</p>
 <span><span class="co">#&gt; blite(data = cdata, u = 45, k = 3, ny = 31 * 24, n = 10000)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;          Posterior mean Posterior SD</span></span>
-<span><span class="co">#&gt; p[u]            0.02836     0.006017</span></span>
-<span><span class="co">#&gt; sigma[u]        9.96700     2.372000</span></span>
-<span><span class="co">#&gt; xi             -0.07369     0.094330</span></span>
-<span><span class="co">#&gt; theta           0.24230     0.023540</span></span>
+<span><span class="co">#&gt; p[u]            0.02831     0.006071</span></span>
+<span><span class="co">#&gt; sigma[u]        9.97800     2.350000</span></span>
+<span><span class="co">#&gt; xi             -0.07297     0.094100</span></span>
+<span><span class="co">#&gt; theta           0.24220     0.023500</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span></span></code></pre></div>
 <p><img src="lite-2-bayesian_files/figure-html/vertical-1.png" width="672"></p>
 </div>
@@ -165,7 +165,7 @@ predictive densities of <span class="math inline">\(M_{100}\)</span> and
 <code class="sourceCode R"><span><span class="co"># Interval estimation</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">short</span></span>
 <span><span class="co">#&gt;         lower    upper n_years level</span></span>
-<span><span class="co">#&gt; [1,] 72.57515 138.3361     100    95</span></span></code></pre></div>
+<span><span class="co">#&gt; [1,] 72.74157 139.9194     100    95</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Density function</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, type <span class="op">=</span> <span class="st">"d"</span>, n_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
