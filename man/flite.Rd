@@ -83,8 +83,8 @@ An object of class \code{c("flite", "lite", "chandwich")}.
  The call to \code{flite} is provided in the attribute \code{"call"}.
 
  Objects inheriting from class \code{"flite"} have \code{coef},
- \code{logLik}, \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
- methods.  See \code{\link{fliteMethods}}.
+ \code{logLik}, \code{nobs}, \code{plot}, \code{summary}, \code{vcov}
+ and \code{confint} methods.  See \code{\link{fliteMethods}}.
 }
 \description{
 Performs threshold-based frequentist inference for 3 aspects of stationary
