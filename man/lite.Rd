@@ -14,22 +14,13 @@ index is produced using the K-gaps model of Suveges and Davison (2010).
 These log-likelihoods are combined to make inferences about return levels.
 }
 \details{
-The main functions are
-\itemize{
-  \item{\code{\link{flite}}: makes frequentist threshold-based inference for
-  time series extremes to produce an adjusted log-likelihood for the model
-  parameters.}
-  \item{\code{\link{returnLevel}}: performs inference for return levels
-  using the adjusted log-likelihood.}
-}
-
-The main functions are \code{\link{flite}} and \code{\link{blite}}, which
-perform frequentist and Bayesian inference for time series extremes,
+The main functions are \code{\link{flite}} and \code{\link{blite}},
+which perform frequentist and Bayesian inference for time series extremes,
 respectively.
 
 See the vignettes
 \code{vignette("lite-1-frequentist", package = "lite")} and \cr
-\code{vignette("lite-1-bayesian", package = "lite")}
+\code{vignette("lite-2-bayesian", package = "lite")}
 for an overview of the package.
 }
 \references{

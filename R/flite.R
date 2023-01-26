@@ -121,6 +121,9 @@
 #'  Objects inheriting from class \code{"flite"} have \code{coef},
 #'  \code{logLik}, \code{nobs}, \code{plot}, \code{summary}, \code{vcov}
 #'  and \code{confint} methods.  See \code{\link{fliteMethods}}.
+#'
+#'  \code{\link{returnLevel}} can be used to make frequentist inferences about
+#'   return levels.
 #' @references Chandler, R. E. and Bate, S. (2007). Inference for clustered.
 #'   data using the independence loglikelihood. \emph{Biometrika},
 #'   \strong{94}(1), 167-183. \doi{10.1093/biomet/asm015}
@@ -145,6 +148,8 @@
 #'   (\ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
 #'   \ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
 #'   \eqn{\xi}, \eqn{\theta}).
+#' @seealso \code{\link{returnLevel}} to make frequentist inferences about
+#'   return levels.
 #' @seealso \code{\link{blite}} for Bayesian threshold-based inference
 #'   for time series extremes.
 #' @seealso \code{\link{Bernoulli}} for maximum likelihood inference for the

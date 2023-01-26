@@ -85,6 +85,9 @@ An object of class \code{c("flite", "lite", "chandwich")}.
  Objects inheriting from class \code{"flite"} have \code{coef},
  \code{logLik}, \code{nobs}, \code{plot}, \code{summary}, \code{vcov}
  and \code{confint} methods.  See \code{\link{fliteMethods}}.
+
+ \code{\link{returnLevel}} can be used to make frequentist inferences about
+  return levels.
 }
 \description{
 Performs threshold-based frequentist inference for 3 aspects of stationary
@@ -195,6 +198,9 @@ Suveges, M. and Davison, A. C. (2010) Model
   (\ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
   \ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
   \eqn{\xi}, \eqn{\theta}).
+
+\code{\link{returnLevel}} to make frequentist inferences about
+  return levels.
 
 \code{\link{blite}} for Bayesian threshold-based inference
   for time series extremes.

@@ -123,8 +123,11 @@
 #'  \code{"flite_object"}.
 #'
 #'  Objects inheriting from class \code{"blite"} have \code{coef},
-#'  \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
+#'  \code{nobs}, \code{plot}, \code{summary}, \code{vcov} and \code{confint}
 #'  methods.  See \code{\link{bliteMethods}}.
+#'
+#'  \code{\link{predict.blite}} can be used to make predictive inferences about
+#'  the largest value to be observed in \emph{N} years.
 #' @references Fawcett, L. and Walshaw, D. (2012), Estimating return levels
 #'   from serially dependent extremes. \emph{Environmetrics}, \strong{23},
 #'   272-283. \doi{10.1002/env.2133}
@@ -133,6 +136,8 @@
 #'   extremes. \emph{Statistica Sinica}, \strong{22}(2), 813-845.
 #' @seealso \code{\link{bliteMethods}}, including plotting the posterior
 #'   samples.
+#' @seealso  \code{\link{predict.blite}} to make predictive inferences about
+#'  future extreme values.
 #' @seealso \code{\link{flite}} for frequentist threshold-based inference
 #'   for time series extremes.
 #' @seealso \code{\link[exdex]{choose_uk}} to inform the choice of the

@@ -110,8 +110,11 @@ An object of class \code{c("blite", "lite", "chandwich")}.
  \code{"flite_object"}.
 
  Objects inheriting from class \code{"blite"} have \code{coef},
- \code{nobs}, \code{plot}, \code{summary} and \code{vcov}
+ \code{nobs}, \code{plot}, \code{summary}, \code{vcov} and \code{confint}
  methods.  See \code{\link{bliteMethods}}.
+
+ \code{\link{predict.blite}} can be used to make predictive inferences about
+ the largest value to be observed in \emph{N} years.
 }
 \description{
 Performs threshold-based Bayesian inference for 3 aspects of stationary
@@ -188,6 +191,9 @@ Ribatet, M., Cooley, D., & Davison, A. C. (2012). Bayesian
 \seealso{
 \code{\link{bliteMethods}}, including plotting the posterior
   samples.
+
+\code{\link{predict.blite}} to make predictive inferences about
+ future extreme values.
 
 \code{\link{flite}} for frequentist threshold-based inference
   for time series extremes.
