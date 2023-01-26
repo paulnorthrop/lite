@@ -323,15 +323,17 @@ confint.flite <- function(object, parm = "all", level = 0.95,
   if (!inherits(object, "flite")) {
     stop("use only with \"flite\" objects")
   }
-  if (parm == "all") {
-    parm <- c("pu", "sigmau", "xi", "theta")
-  } else if (parm == "gp") {
-    parm <- c("sigmau", "xi")
-  } else {
-    parm_values <- c("pu", "sigmau", "xi", "theta")
-    parm_message <- "''pu'', ''sigmau'', ''xi'', ''theta''"
-    if (!all(is.element(parm, parm_values))) {
-      stop(paste("''parm'' must be a subset of", parm_message))
+  parm_values <- c("pu", "sigmau", "xi", "theta")
+  check_values <- c("pu", "sigmau", "xi", "theta", "all", "gp")
+  p_message <- "c(''pu'', ''sigmau'', ''xi'', ''theta'')"
+  if (!all(is.element(parm, check_values))) {
+    stop(paste("''parm'' must be ''all'', ''gp'' or a subset of", p_message))
+  }
+  if (length(parm) == 1) {
+    if (parm == "all") {
+      parm <- c("pu", "sigmau", "xi", "theta")
+    } else if (parm == "gp") {
+      parm <- c("sigmau", "xi")
     }
   }
   if (level <= 0 | level >= 1) {
