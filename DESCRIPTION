@@ -12,8 +12,8 @@ Description: Performs likelihood-based inference for stationary time series
     for the model parameters.  A log-likelihood for the extremal index is 
     produced using the K-gaps model of Suveges and Davison (2010) 
     <doi:10.1214/09-AOAS292>. These log-likelihoods are combined to make 
-    inferences about extreme values, using both frequentist (maximum 
-    likelihood) and Bayesian approaches.
+    inferences about extreme values. Both maximum likelihood and Bayesian 
+    approaches are available.
 Imports: chandwich,
     exdex,
     graphics,
