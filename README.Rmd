@@ -61,6 +61,10 @@ rl
 
 The function `blite` performs Bayesian inferences about $(p_u, \sigma_u, \xi, \theta)$, based on a likelihood constructed from the (adjusted) log-likelihoods detailed above.  First, we sample from the posterior distribution of the parameters, using the default priors.
 
+```{r seed, echo = FALSE}
+set.seed(26012023)
+```
+
 ```{r Bayes, eval = got_exdex}
 cpost <- blite(cdata, u = 45, k = 3, ny = 31 * 24)
 summary(cpost)

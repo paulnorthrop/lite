@@ -108,10 +108,10 @@ summary(cpost)
 #> blite(data = cdata, u = 45, k = 3, ny = 31 * 24)
 #> 
 #>          Posterior mean Posterior SD
-#> p[u]            0.02820     0.005942
-#> sigma[u]       10.16000     2.505000
-#> xi             -0.07531     0.097800
-#> theta           0.24150     0.023170
+#> p[u]            0.02832     0.006008
+#> sigma[u]       10.03000     2.435000
+#> xi             -0.07196     0.094030
+#> theta           0.24250     0.024040
 ```
 
 Then, we estimate a 95% highest predictive density (HPD) interval for
@@ -121,7 +121,7 @@ length $100$ years.
 ``` r
 predict(cpost, hpd = TRUE, n_years = 100)$short
 #>         lower    upper n_years level
-#> [1,] 73.45208 139.7568     100    95
+#> [1,] 73.09008 139.8616     100    95
 ```
 
 Objects returned from `flite` and `blite` have `plot` methods to
