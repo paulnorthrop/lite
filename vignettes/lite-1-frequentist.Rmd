@@ -26,7 +26,7 @@ if (!all(unlist(lapply(required, function(pkg) requireNamespace(pkg, quietly = T
 knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 ```
 
-The **lite** package performs likelihood-based inference for stationary time series extremes. This vignette concentrates on frequentist inference, using maximum likelihood estimation.  See the vignette [Bayesian Likelihood-Based Inference for Time Series Extremes](lite-1-bayesian.html) for information about Bayesian inference.
+The **lite** package performs likelihood-based inference for stationary time series extremes. This vignette concentrates on frequentist inference, using maximum likelihood estimation.  See the vignette [Bayesian Likelihood-Based Inference for Time Series Extremes](lite-2-bayesian.html) for information about Bayesian inference.
 
 The general approach follows @FW2012. There are 3 independent parts to the inference, all performed using maximum likelihood estimation.
 

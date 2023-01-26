@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">lite</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.0.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.1.0</span>
       </span>
     </div>
 
@@ -91,29 +91,39 @@
 <div class="section level1">
 <div class="page-header"><h1 id="lite">lite<a class="anchor" aria-label="anchor" href="#lite"></a>
 </h1></div>
-
+<p><a href="https://ci.appveyor.com/project/paulnorthrop/lite" class="external-link"><img src="https://ci.appveyor.com/api/projects/status/github/paulnorthrop/lite?branch=main&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://github.com/paulnorthrop/lite/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/paulnorthrop/lite/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <a href="https://codecov.io/github/paulnorthrop/lite?branch=main" class="external-link"><img src="https://codecov.io/github/paulnorthrop/lite/coverage.svg?branch=main" alt="Coverage Status"></a> <a href="https://cran.r-project.org/package=lite" class="external-link"><img src="https://www.r-pkg.org/badges/version/lite" alt="CRAN_Status_Badge"></a> <a href="https://cran.r-project.org/package=lite" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/lite?color=brightgreen" alt="Downloads (monthly)"></a> <a href="https://cran.r-project.org/package=lite" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/lite?color=brightgreen" alt="Downloads (total)"></a></p>
 <div class="section level2">
 <h2 id="likelihood-based-inference-for-time-series-extremes">Likelihood-Based Inference for Time Series Extremes<a class="anchor" aria-label="anchor" href="#likelihood-based-inference-for-time-series-extremes"></a>
 </h2>
-<p>The <strong>lite</strong> package performs likelihood-based inference for stationary time series extremes. The general approach follows <a href="https://doi.org/10.1002/env.2133" class="external-link">Fawcett and Walshaw (2012)</a>. There are 3 independent parts to the inference, all performed using maximum likelihood estimation.</p>
+<p>The <strong>lite</strong> package performs likelihood-based inference for stationary time series extremes. The general approach follows <a href="https://doi.org/10.1002/env.2133" class="external-link">Fawcett and Walshaw (2012)</a>. There are 3 independent parts to the inference.</p>
 <ol style="list-style-type: decimal">
-<li>A Bernoulli(<em>p</em><sub><em>u</em></sub>) model for whether a given observation exceeds the threshold <em>u</em>.</li>
-<li>A generalised Pareto, GP(<em>σ</em><sub><em>u</em></sub>,<em>ξ</em>), model for the marginal distribution of threshold excesses.</li>
-<li>The <em>K</em>-gaps model for the extremal index <em>θ</em>, based on inter-exceedance times.</li>
+<li>A Bernoulli (<em>p</em><sub><em>u</em></sub>) model for whether a given observation exceeds the threshold <span class="math inline"><em>u</em></span>.</li>
+<li>A generalised Pareto, GP (<em>σ</em><sub><em>u</em></sub>,<em>ξ</em>), model for the marginal distribution of threshold excesses.</li>
+<li>The <span class="math inline"><em>K</em></span>-gaps model for the extremal index <span class="math inline"><em>θ</em></span>, based on inter-exceedance times.</li>
 </ol>
 <p>For parts 1 and 2 it is necessary to adjust the inferences because we expect that the data will exhibit cluster dependence. This is achieved using the methodology developed in <a href="https://doi.org/10.1093/biomet/asm015" class="external-link">Chandler and Bate (2007)</a> to produce a log-likelihood that is adjusted for this dependence. This is achieved using the <a href="https://cran.r-project.org/package=chandwich" class="external-link">chandwich package</a>. For part 3, the methodology described in <a href="https://doi.org/10.1214/09-AOAS292" class="external-link">Süveges and Davison (2010)</a> is used, implemented by the function <code>kgaps</code> in the <a href="https://cran.r-project.org/package=exdex" class="external-link">exdex package</a>. The (adjusted) log-likelihoods from parts 1, 2 and 3 are combined to make inferences about return levels.</p>
+<p>We illustrate the main functions in <code>lite</code> using the <code>cheeseboro</code> wind gusts data from the <a href="https://cran.r-project.org/package=exdex" class="external-link">exdex package</a>, which contains hourly wind gust data from each January over the 10-year period 2000-2009.</p>
 <div class="section level3">
-<h3 id="an-example-cheeseboro-wind-gusts">An example: Cheeseboro wind gusts<a class="anchor" aria-label="anchor" href="#an-example-cheeseboro-wind-gusts"></a>
+<h3 id="frequentist-inference">Frequentist inference<a class="anchor" aria-label="anchor" href="#frequentist-inference"></a>
 </h3>
-<p>The function <code>flite</code> makes inferences about (<em>p</em><sub><em>u</em></sub>,<em>σ</em><sub><em>u</em></sub>,<em>ξ</em>,<em>θ</em>). We illustrate this using the <code>cheeseboro</code> data from the <a href="https://cran.r-project.org/package=exdex" class="external-link">exdex package</a>, which contains hourly wind gust data from each January over the 10-year period 2000-2009.</p>
-<p>First, we make inferences about the model parameters.</p>
+<p>The function <code>flite</code> makes frequentist inferences about <span class="math inline">(<em>p</em><sub><em>u</em></sub>,<em>σ</em><sub><em>u</em></sub>,<em>ξ</em>,<em>θ</em>)</span> using maximum likelihood estimation. First, we make inferences about the model parameters.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/lite/" class="external-link">lite</a></span><span class="op">)</span></span>
 <span><span class="va">cdata</span> <span class="op">&lt;-</span> <span class="fu">exdex</span><span class="fu">::</span><span class="va"><a href="https://paulnorthrop.github.io/exdex/reference/cheeseboro.html" class="external-link">cheeseboro</a></span></span>
 <span><span class="co"># Each column of the matrix cdata corresponds to data from a different year</span></span>
 <span><span class="co"># flite() sets cluster automatically to correspond to column (year)</span></span>
-<span><span class="va">cfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flite.html">flite</a></span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p>Then, we make inferences about the 100-year return level, including 95% confidence intervals. The argument <code>ny</code> sets the number of observations per year, which is 31 × 24 = 744 for these data.</p>
+<span><span class="va">cfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flite.html">flite</a></span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; flite(data = cdata, u = 45, k = 3)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;          Estimate Std. Error</span></span>
+<span><span class="co">#&gt; p[u]      0.02771   0.005988</span></span>
+<span><span class="co">#&gt; sigma[u]  9.27400   2.071000</span></span>
+<span><span class="co">#&gt; xi       -0.09368   0.084250</span></span>
+<span><span class="co">#&gt; theta     0.24050   0.023360</span></span></code></pre></div>
+<p>Then, we make inferences about the 100-year return level, including 95% confidence intervals. The argument <code>ny</code> sets the number of observations per year, which is <span class="math inline">31 × 24 = 744</span> for these data.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rl</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/returnLevel.html">returnLevel</a></span><span class="op">(</span><span class="va">cfit</span>, m <span class="op">=</span> <span class="fl">100</span>, level <span class="op">=</span> <span class="fl">0.95</span>, ny <span class="op">=</span> <span class="fl">31</span> <span class="op">*</span> <span class="fl">24</span><span class="op">)</span></span>
 <span><span class="va">rl</span></span>
@@ -125,22 +135,45 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Normal interval:</span></span>
 <span><span class="co">#&gt;  lower     mle   upper  </span></span>
-<span><span class="co">#&gt;  70.36   90.73  111.09  </span></span>
+<span><span class="co">#&gt;  69.80   88.62  107.44  </span></span>
 <span><span class="co">#&gt; Profile likelihood-based interval:</span></span>
 <span><span class="co">#&gt;  lower     mle   upper  </span></span>
-<span><span class="co">#&gt;  77.29   90.73  132.57</span></span></code></pre></div>
+<span><span class="co">#&gt;  75.89   88.62  125.43</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="bayesian-inference">Bayesian inference<a class="anchor" aria-label="anchor" href="#bayesian-inference"></a>
+</h3>
+<p>The function <code>blite</code> performs Bayesian inferences about <span class="math inline">(<em>p</em><sub><em>u</em></sub>,<em>σ</em><sub><em>u</em></sub>,<em>ξ</em>,<em>θ</em>)</span>, based on a likelihood constructed from the (adjusted) log-likelihoods detailed above. First, we sample from the posterior distribution of the parameters, using the default priors.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cpost</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/blite.html">blite</a></span><span class="op">(</span><span class="va">cdata</span>, u <span class="op">=</span> <span class="fl">45</span>, k <span class="op">=</span> <span class="fl">3</span>, ny <span class="op">=</span> <span class="fl">31</span> <span class="op">*</span> <span class="fl">24</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cpost</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; blite(data = cdata, u = 45, k = 3, ny = 31 * 24)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;          Posterior mean Posterior SD</span></span>
+<span><span class="co">#&gt; p[u]            0.02820     0.005942</span></span>
+<span><span class="co">#&gt; sigma[u]       10.16000     2.505000</span></span>
+<span><span class="co">#&gt; xi             -0.07531     0.097800</span></span>
+<span><span class="co">#&gt; theta           0.24150     0.023170</span></span></code></pre></div>
+<p>Then, we estimate a 95% highest predictive density (HPD) interval for the largest value <span class="math inline"><em>M</em><sub>100</sub></span> to be observed over a future time period of length <span class="math inline">100</span> years.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cpost</span>, hpd <span class="op">=</span> <span class="cn">TRUE</span>, n_years <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">$</span><span class="va">short</span></span>
+<span><span class="co">#&gt;         lower    upper n_years level</span></span>
+<span><span class="co">#&gt; [1,] 73.45208 139.7568     100    95</span></span></code></pre></div>
+<p>Objects returned from <code>flite</code> and <code>blite</code> have <code>plot</code> methods to summarise graphically, respectively, log-likelihoods and posterior distributions.</p>
 </div>
 <div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
 <p>To get the current released version from CRAN:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"lite"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="vignette">Vignette<a class="anchor" aria-label="anchor" href="#vignette"></a>
+<h3 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
 </h3>
-<p>See <code>vignette("introduction-to-lite", package = "lite")</code> for an overview of the package.</p>
+<p>See <code><a href="articles/lite-1-frequentist.html">vignette("lite-1-frequentist", package = "lite")</a></code> and <code><a href="articles/lite-2-bayesian.html">vignette("lite-2-bayesian", package = "lite")</a></code>.</p>
 </div>
 </div>
 </div>
@@ -178,16 +211,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://ci.appveyor.com/project/paulnorthrop/lite" class="external-link"><img src="https://ci.appveyor.com/api/projects/status/github/paulnorthrop/lite?branch=main&amp;svg=true" alt="AppVeyor Build Status"></a></li>
-<li><a href="https://codecov.io/github/paulnorthrop/lite?branch=main" class="external-link"><img src="https://codecov.io/github/paulnorthrop/lite/coverage.svg?branch=main" alt="Coverage Status"></a></li>
-<li><a href="https://cran.r-project.org/package=lite" class="external-link"><img src="https://www.r-pkg.org/badges/version/lite" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://cran.r-project.org/package=lite" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/lite?color=brightgreen" alt="Downloads (monthly)"></a></li>
-<li><a href="https://cran.r-project.org/package=lite" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/lite?color=brightgreen" alt="Downloads (total)"></a></li>
-</ul>
-</div>
+
 
   </div>
 </div>
@@ -200,7 +224,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

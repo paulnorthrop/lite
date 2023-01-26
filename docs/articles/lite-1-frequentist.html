@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">lite</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.0.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.1.0</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@ Series Extremes</h1>
                         <h4 data-toc-skip class="author">Paul
 Northrop</h4>
             
-            <h4 data-toc-skip class="date">2023-01-18</h4>
+            <h4 data-toc-skip class="date">2023-01-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/lite/blob/HEAD/vignettes/lite-1-frequentist.Rmd" class="external-link"><code>vignettes/lite-1-frequentist.Rmd</code></a></small>
       <div class="hidden name"><code>lite-1-frequentist.Rmd</code></div>
@@ -98,7 +98,7 @@ Northrop</h4>
 <p>The <strong>lite</strong> package performs likelihood-based inference
 for stationary time series extremes. This vignette concentrates on
 frequentist inference, using maximum likelihood estimation. See the
-vignette <a href="lite-1-bayesian.html">Bayesian Likelihood-Based
+vignette <a href="lite-2-bayesian.html">Bayesian Likelihood-Based
 Inference for Time Series Extremes</a> for information about Bayesian
 inference.</p>
 <p>The general approach follows <span class="citation">Fawcett and
@@ -201,7 +201,7 @@ vignette for the exdex package</a> we choose <span class="math inline">\(u = 45\
 <span><span class="co">#&gt; p[u]      0.02771   0.005988</span></span>
 <span><span class="co">#&gt; sigma[u]  9.27400   2.071000</span></span>
 <span><span class="co">#&gt; xi       -0.09368   0.084250</span></span>
-<span><span class="co">#&gt; theta     0.37960   0.027220</span></span>
+<span><span class="co">#&gt; theta     0.24050   0.023360</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cfit</span>, adjust <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
@@ -211,7 +211,7 @@ vignette for the exdex package</a> we choose <span class="math inline">\(u = 45\
 <span><span class="co">#&gt; p[u]      0.02771   0.001908</span></span>
 <span><span class="co">#&gt; sigma[u]  9.27400   0.858100</span></span>
 <span><span class="co">#&gt; xi       -0.09368   0.061040</span></span>
-<span><span class="co">#&gt; theta     0.37960   0.027220</span></span></code></pre></div>
+<span><span class="co">#&gt; theta     0.24050   0.023360</span></span></code></pre></div>
 <p>The effect of the adjustment of the log-likelihood for clustering is
 to increase the estimated standard errors for the parameters <span class="math inline">\(p_u\)</span> and <span class="math inline">\((\sigma_u, \xi)\)</span> in comparison to those
 obtained with no adjustment.</p>
@@ -265,7 +265,7 @@ likelihood-based intervals based on an (adjusted) log-likelihood.</p>
 <span><span class="co">#&gt; returnLevel(x = cfit, m = 100, level = 0.95, ny = 31 * 24)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;         Estimate Std. Error</span></span>
-<span><span class="co">#&gt; m = 100 90.93784   10.47438</span></span>
+<span><span class="co">#&gt; m = 100 88.61986   9.600889</span></span>
 <span><span class="va">rl</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
@@ -275,10 +275,10 @@ likelihood-based intervals based on an (adjusted) log-likelihood.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Normal interval:</span></span>
 <span><span class="co">#&gt;  lower     mle   upper  </span></span>
-<span><span class="co">#&gt;  70.41   90.94  111.47  </span></span>
+<span><span class="co">#&gt;  69.80   88.62  107.44  </span></span>
 <span><span class="co">#&gt; Profile likelihood-based interval:</span></span>
 <span><span class="co">#&gt;  lower     mle   upper  </span></span>
-<span><span class="co">#&gt;  77.43   90.94  133.33</span></span>
+<span><span class="co">#&gt;  75.89   88.62  125.43</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rl</span><span class="op">)</span></span></code></pre></div>
 <p><img src="lite-1-frequentist_files/figure-html/returnlevels-1.png" width="672"></p>
 </div>
@@ -331,7 +331,7 @@ Statistics</em> 4 (1): 203–221. doi:<a href="https://doi.org/10.1214/09-AOAS29
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
