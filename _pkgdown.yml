@@ -11,7 +11,7 @@ reference:
   - title: Package
     desc: ~
     contents:
-      - "lite"
+      - "lite-package"
   - title: Model fitting
     desc: ~
     contents:

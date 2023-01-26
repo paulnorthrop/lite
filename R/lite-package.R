@@ -35,9 +35,9 @@
 #' @seealso \code{\link{predict.blite}} for predictive inference for the
 #'   largest value observed in \eqn{N} years.
 #' @docType package
-#' @name lite
+#' @aliases lite-package
 #' @import sandwich
 #' @import revdbayes
 #' @importFrom stats nobs vcov coef logLik confint predict
 #' @importFrom graphics plot
-NULL
+"_PACKAGE"
