@@ -245,7 +245,7 @@ flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, ny, ...) {
   #    via the exdex::kgaps()
   #
   # exdex::kgaps() accept the original data matrix and omit missings itself
-  theta_fit <- exdex::kgaps(data = data, u = u, k = 1, inc_cens = TRUE)
+  theta_fit <- exdex::kgaps(data = data, u = u, k = k, inc_cens = inc_cens)
   loglik_theta <- function(tval) {
     theta_list <- c(list(theta = tval), theta_fit$ss)
     return(do.call(kgaps_loglik, theta_list))
