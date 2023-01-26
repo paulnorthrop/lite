@@ -23,8 +23,8 @@ to the inference, all performed using maximum likelihood estimation.
 
 1.  A Bernoulli (*p*<sub>*u*</sub>) model for whether a given
     observation exceeds the threshold $u$.
-2.  A generalised Pareto, GP ($\sigma_u, \xi$), model for the marginal
-    distribution of threshold excesses.
+2.  A generalised Pareto, GP (*σ*<sub>*u*</sub>,*ξ*), model for the
+    marginal distribution of threshold excesses.
 3.  The $K$-gaps model for the extremal index $\theta$, based on
     inter-exceedance times.
 
