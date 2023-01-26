@@ -8,6 +8,7 @@
 \alias{nobs.blite}
 \alias{summary.blite}
 \alias{print.summary.blite}
+\alias{confint.blite}
 \title{Methods for objects of class \code{"blite"}}
 \usage{
 \method{plot}{blite}(x, which = c("all", "pu", "gp", "xi", "theta"), ...)
@@ -27,6 +28,8 @@
 )
 
 \method{print}{summary.blite}(x, ...)
+
+\method{confint}{blite}(object, parm = "all", level = 0.95, ...)
 }
 \arguments{
 \item{x}{An object inheriting from class \code{"blite"}, a result of a
@@ -48,8 +51,8 @@ described in \strong{Details}.}
 
   Otherwise \code{...} is unused.}
 
-\item{object}{An object inheriting from class \code{"blite"}, a result of a
-call to \code{\link{blite}}.}
+\item{object}{An object of class \code{"blite"}, returned by
+\code{\link{blite}}.}
 
 \item{fun}{A summary function to be applied to each column of the simulated
 values in \code{object}.  If \code{fun} is missing then
@@ -63,6 +66,19 @@ values in \code{object}.  If \code{fun} is missing then
 
 \item{digits}{An integer. Passed to \code{\link[base:Round]{signif}} to
 round the values in the summary.}
+
+\item{parm}{A character vector specifying the parameters for which
+confidence intervals are required. The default, \code{which = "all"},
+produces confidence intervals for all the parameters, that is,
+\ifelse{html}{\eqn{p}\out{<sub>u</sub>}}{\eqn{p_u}},
+\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}},
+\eqn{\xi} and \eqn{\theta}. If \code{which = "gp"} then intervals are
+produced only for
+\ifelse{html}{\eqn{\sigma}\out{<sub>u</sub>}}{\eqn{\sigma_u}} and
+\eqn{\xi}. Otherwise, \code{parm} must be a subset of
+\code{c("pu", "sigmau", "xi", "theta")}.}
+
+\item{level}{The credible level required.  A numeric scalar in (0, 1).}
 }
 \value{
 \code{plot.blite}: No return value, only the plot is produced.
@@ -93,10 +109,17 @@ round the values in the summary.}
     \code{\link{print.summary.blite}}.
 
   \code{print.summary.blite}: the argument \code{x} is returned, invisibly.
+
+  \code{confint.blite}: a numeric matrix with 2 columns giving the lower and
+    upper credible limits for each parameter. These columns are labelled
+    as \code{(1-level)/2} and \code{1-(1-level)/2}, expressed as a
+    percentage, by default \code{2.5\%} and \code{97.5\%}.  The row names
+    are the names of the parameters supplied in \code{parm}.
 }
 \description{
 Methods for objects of class \code{"blite"} returned from
-\code{\link{blite}}.
+\code{\link{blite}}. \code{confint.blite} is a misnomer: it returns
+Bayesian credible intervals.
 }
 \details{
 For \code{plot.blite}, if \code{which = "all"} then 4 plots are produced.
