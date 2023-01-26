@@ -43,6 +43,21 @@ if (got_exdex) {
     test_that("confint: correct dim, theta parameter", {
       testthat::expect_equal(dim(res), c(1, 2), ignore_attr = TRUE)
     })
+    # Confidence interval for pu and sigmau
+    res <- confint(cfit, parm = c("pu", "sigmau"), profile = profile)
+    test_that("confint: correct dim, pu and sigma parameters", {
+      testthat::expect_equal(dim(res), c(2, 2), ignore_attr = TRUE)
+    })
+    # Confidence interval for pu and theta
+    res <- confint(cfit, parm = c("pu", "theta"), profile = profile)
+    test_that("confint: correct dim, pu and theta parameters", {
+      testthat::expect_equal(dim(res), c(2, 2), ignore_attr = TRUE)
+    })
+    # Confidence interval for pu, theta and sigmau
+    res <- confint(cfit, parm = c("pu", "theta", "sigmau"), profile = profile)
+    test_that("confint: correct dim, pu, theta and sigmau parameters", {
+      testthat::expect_equal(dim(res), c(3, 2), ignore_attr = TRUE)
+    })
   }
 
   # Supplying parm incorrectly
