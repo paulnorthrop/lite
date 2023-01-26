@@ -169,7 +169,12 @@ cdata <- exdex::cheeseboro
 # blite() sets cluster automatically to correspond to column (year)
 cpost <- blite(cdata, u = 45, k = 3)
 summary(cpost)
+
+## Plots of posterior samples
 plot(cpost)
+
+## Credible intervals
+confint(cpost)
 }
 \references{
 Fawcett, L. and Walshaw, D. (2012), Estimating return levels
