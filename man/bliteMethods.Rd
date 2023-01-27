@@ -119,7 +119,7 @@ produced only for
 \description{
 Methods for objects of class \code{"blite"} returned from
 \code{\link{blite}}. \code{confint.blite} is a misnomer: it returns
-Bayesian credible intervals.
+(equi-tailed) Bayesian credible intervals.
 }
 \details{
 For \code{plot.blite}, if \code{which = "all"} then 4 plots are produced.

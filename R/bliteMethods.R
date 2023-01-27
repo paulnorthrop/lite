@@ -2,7 +2,7 @@
 #'
 #' Methods for objects of class \code{"blite"} returned from
 #' \code{\link{blite}}. \code{confint.blite} is a misnomer: it returns
-#' Bayesian credible intervals.
+#' (equi-tailed) Bayesian credible intervals.
 #' @param x An object inheriting from class \code{"blite"}, a result of a
 #'   call to \code{\link{blite}}.
 #' @param object An object inheriting from class \code{"blite"}, a result of a
