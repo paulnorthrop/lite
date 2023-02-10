@@ -182,7 +182,7 @@
 #' # Based on an adjusted profile log-likelihood
 #' confint(cfit)
 #' # Symmetric intervals based on large sample normality
-#' confint(cfit, profile= FALSE)
+#' confint(cfit, profile = FALSE)
 #' @export
 flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, ny, ...) {
   # Check that the threshold does not lie above all the data
