@@ -10,7 +10,7 @@ returnLevel(
   level = 0.95,
   ny,
   prof = TRUE,
-  inc = NULL,
+  inc = 1/100,
   type = c("vertical", "cholesky", "spectral", "none")
 )
 }
@@ -29,11 +29,11 @@ confidence interval for the \code{m}-year return level.}
 \item{prof}{A logical scalar.  Should we calculate intervals based on
 profile log-likelihood?}
 
-\item{inc}{A numeric scalar. Only relevant if \code{prof = TRUE}. The
-increment in return level by which we move upwards and downwards from the
-MLE for the return level in the search for the lower and upper confidence
-limits.  If this is not supplied then \code{inc} is set to one hundredth
-of the length of the symmetric confidence interval for return level.}
+\item{inc}{A numeric scalar in (0, 1/2]. Only relevant if \code{prof = TRUE}.
+The increment, a fraction of the length of the symmetric confidence
+interval for the \code{m}-year return level in return level, by which we
+move upwards and downwards from the MLE for the return level in the search
+for the lower and upper confidence limits.}
 
 \item{type}{A character scalar.  The argument \code{type} to the function
 returned by the function \code{\link[chandwich]{adjust_loglik}}, that is,
@@ -93,10 +93,10 @@ For information about return levels see the "Introducing lite"
   the critical value \code{logLik(x) - 0.5 * stats::qchisq(level, 1)}.
   This is achieved by calculating the profile log-likelihood for a sequence
   of values of this return level as governed by \code{inc}. Once the profile
-  log-likelihood drops below the critical value the lower and upper limits are
-  estimated by interpolating linearly between the cases lying either side of
-  the critical value. The smaller \code{inc} the more accurate (but slower)
-  the calculation will be.
+  log-likelihood drops below the critical value the lower and upper limits
+  are estimated by interpolating linearly between the cases lying either
+  side of the critical value. The smaller \code{inc} the more accurate (but
+  slower) the calculation will be.
 }
 \examples{
 ### Cheeseboro wind gusts
@@ -110,7 +110,7 @@ cfit <- flite(cdata, u = 45, k = 3)
 # These data are hourly for one month (January) year so ny = 31 * 24
 # Large inc set here for speed, sacrificing accuracy
 # Default 95\% confidence intervals
-rl <- returnLevel(cfit, inc = 2.5, ny = 31 * 24)
+rl <- returnLevel(cfit, inc = 1 / 10, ny = 31 * 24)
 summary(rl)
 rl
 oldrl <- plot(rl)
