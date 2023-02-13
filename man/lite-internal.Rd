@@ -8,6 +8,7 @@
 \alias{return_level_bingp}
 \alias{bingp_rl_CI}
 \alias{bingp_rl_prof}
+\alias{bingp_rl_prof0}
 \alias{box_cox_deriv}
 \alias{make_ru_list}
 \title{Internal lite functions}
@@ -23,6 +24,8 @@ return_level_bingp(x, m, level, ny, prof, inc, type, ny_given)
 bingp_rl_CI(x, m, level, ny, type, u)
 
 bingp_rl_prof(x, m, level, ny, inc, type, rl_sym, u)
+
+bingp_rl_prof0(x, m, level, ny, inc, type, rl_sym, u)
 
 box_cox_deriv(x, lambda = 1, lambda_tol = 1/50, poly_order = 3)
 
