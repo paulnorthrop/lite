@@ -213,7 +213,7 @@ flite <- function(data, u, cluster, k = 1, inc_cens = TRUE, ny, ...) {
     }
   } else {
     if (is.matrix(data)) {
-      if (dim(cluster) != dim(data)) {
+      if (!all(dim(cluster) == dim(data))) {
         stop("cluster is a matrix: dim(cluster) must equal dim(data)")
       }
       # Make cluster a vector
