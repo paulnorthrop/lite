@@ -12,6 +12,9 @@
 #'   For \code{print.summary.flite}: additional arguments passed to
 #'   \code{\link{print.default}}.
 #'
+#'   For \code{confint.flite}: additional arguments passed to
+#'   \code{\link[chandwich]{conf_intervals}}.
+#'
 #'   Otherwise \code{...} is unused.
 #' @return
 #'   \code{plot.flite}: No return value, only the plot is produced.
@@ -348,7 +351,7 @@ confint.flite <- function(object, parm = "all", level = 0.95,
   if ("pu" %in% parm) {
     ci_pu <- chandwich::conf_intervals(attr(object, "Bernoulli"),
                                        conf = 100 * level, type = adj_type,
-                                       profile = profile)
+                                       profile = profile, ...)
     if (profile) {
       ci_mat[therow, ] <- ci_pu$prof_CI
     } else {
@@ -361,7 +364,7 @@ confint.flite <- function(object, parm = "all", level = 0.95,
     gp <- attr(object, "gp")
     ci_sigmau <- chandwich::conf_intervals(gp, which_pars = "sigma[u]",
                                            conf = 100 * level, type = adj_type,
-                                           profile = profile)
+                                           profile = profile, ...)
     if (profile) {
       ci_mat[therow, ] <- ci_sigmau$prof_CI
     } else {

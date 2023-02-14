@@ -69,6 +69,9 @@ is the largest excesses of the threshold \eqn{u}, is preserved.}
   For \code{print.summary.flite}: additional arguments passed to
   \code{\link{print.default}}.
 
+  For \code{confint.flite}: additional arguments passed to
+  \code{\link[chandwich]{conf_intervals}}.
+
   Otherwise \code{...} is unused.}
 
 \item{object}{An object of class \code{"flite"}, returned by
