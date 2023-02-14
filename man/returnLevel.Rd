@@ -31,9 +31,9 @@ profile log-likelihood?}
 
 \item{inc}{A numeric scalar in (0, 1/2]. Only relevant if \code{prof = TRUE}.
 The increment, a fraction of the length of the symmetric confidence
-interval for the \code{m}-year return level in return level, by which we
-move upwards and downwards from the MLE for the return level in the search
-for the lower and upper confidence limits.}
+interval for the \code{m}-year return level, by which we move upwards and
+downwards from the MLE for the return level in the search for the lower
+and upper confidence limits.}
 
 \item{type}{A character scalar.  The argument \code{type} to the function
 returned by the function \code{\link[chandwich]{adjust_loglik}}, that is,
