@@ -1,3 +1,5 @@
+A patch to fix the NOTEs at https://cran.r-project.org/web/checks/check_results_lite.html.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
