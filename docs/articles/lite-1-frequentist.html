@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Frequentist Likelihood-Based Inference for Time Series Extremes • lite</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">lite</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.1.1</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@ Series Extremes</h1>
                         <h4 data-toc-skip class="author">Paul
 Northrop</h4>
             
-            <h4 data-toc-skip class="date">2023-01-27</h4>
+            <h4 data-toc-skip class="date">2024-07-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/paulnorthrop/lite/blob/HEAD/vignettes/lite-1-frequentist.Rmd" class="external-link"><code>vignettes/lite-1-frequentist.Rmd</code></a></small>
       <div class="hidden name"><code>lite-1-frequentist.Rmd</code></div>
@@ -201,8 +201,9 @@ vignette for the exdex package</a> we choose <span class="math inline">\(u = 45\
 <span><span class="co">#&gt; p[u]      0.02771   0.005988</span></span>
 <span><span class="co">#&gt; sigma[u]  9.27400   2.071000</span></span>
 <span><span class="co">#&gt; xi       -0.09368   0.084250</span></span>
-<span><span class="co">#&gt; theta     0.24050   0.023360</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cfit</span>, adjust <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; theta     0.24050   0.023360</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cfit</span>, adjust <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
 <span><span class="co">#&gt; flite(data = cdata, u = 45, k = 3)</span></span>
@@ -218,7 +219,7 @@ obtained with no adjustment.</p>
 <p>A plot method for objects inheriting from class <code>"flite"</code>
 enables us to inspect the log-likelihood functions for <span class="math inline">\(p_u\)</span>, <span class="math inline">\((\sigma_u, \xi)\)</span> and <span class="math inline">\(\theta\)</span>. This first set of plots use the
 default vertical adjustment to the log-likelihoods for <span class="math inline">\(p_u\)</span> and <span class="math inline">\((\sigma_u, \xi)\)</span>.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span><span class="op">)</span></span></code></pre></div>
 <p><img src="lite-1-frequentist_files/figure-html/vertical-1.png" width="672"></p>
 <p>The line superimposed on the on the plot on the top right shows the
@@ -228,7 +229,7 @@ after adjustment. However, if we use one of the horizontal adjustments,
 <strong>cholesky</strong> or <strong>spectral</strong>, then the
 adjusted log-likelihood has non-zero density values outside of the
 correct support. This is why the vertical adjustment is the default.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cfit</span>, which <span class="op">=</span> <span class="st">"gp"</span>, adj_type <span class="op">=</span> <span class="st">"spectral"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="lite-1-frequentist_files/figure-html/spectral-1.png" width="672"></p>
 </div>
@@ -257,7 +258,7 @@ of (95%) confidence intervals: (a) intervals based on approximate
 large-sample normality of the maximum likelihood estimator for return
 level, which are symmetric about the point estimate, and (b) profile
 likelihood-based intervals based on an (adjusted) log-likelihood.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/returnLevel.html">returnLevel</a></span><span class="op">(</span><span class="va">cfit</span>, m <span class="op">=</span> <span class="fl">100</span>, level <span class="op">=</span> <span class="fl">0.95</span>, ny <span class="op">=</span> <span class="fl">31</span> <span class="op">*</span> <span class="fl">24</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">rl</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -265,8 +266,9 @@ likelihood-based intervals based on an (adjusted) log-likelihood.</p>
 <span><span class="co">#&gt; returnLevel(x = cfit, m = 100, level = 0.95, ny = 31 * 24)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;         Estimate Std. Error</span></span>
-<span><span class="co">#&gt; m = 100 88.61986   9.600889</span></span>
-<span><span class="va">rl</span></span>
+<span><span class="co">#&gt; m = 100 88.61986   9.600889</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rl</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
 <span><span class="co">#&gt; returnLevel(x = cfit, m = 100, level = 0.95, ny = 31 * 24)</span></span>
@@ -278,8 +280,9 @@ likelihood-based intervals based on an (adjusted) log-likelihood.</p>
 <span><span class="co">#&gt;  69.80   88.62  107.44  </span></span>
 <span><span class="co">#&gt; Profile likelihood-based interval:</span></span>
 <span><span class="co">#&gt;  lower     mle   upper  </span></span>
-<span><span class="co">#&gt;  75.89   88.62  125.43</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rl</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt;  75.89   88.62  125.43</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rl</span><span class="op">)</span></span></code></pre></div>
 <p><img src="lite-1-frequentist_files/figure-html/returnlevels-1.png" width="672"></p>
 </div>
 <div class="section level2">
@@ -331,7 +334,7 @@ Statistics</em> 4 (1): 203–221. doi:<a href="https://doi.org/10.1214/09-AOAS29
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>
