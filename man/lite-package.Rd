@@ -2,8 +2,8 @@
 % Please edit documentation in R/lite-package.R
 \docType{package}
 \name{lite-package}
+\alias{lite}
 \alias{lite-package}
-\alias{_PACKAGE}
 \title{lite: Likelihood-Based Inference for Time Series Extremes}
 \description{
 Performs likelihood-Based inference for stationary time series extremes.
