@@ -1,75 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/introduction-to-lite.html</loc>
-  </url>
-  <url>
-    <loc>/articles/lite-1-frequentist.html</loc>
-  </url>
-  <url>
-    <loc>/articles/lite-2-bayesian.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Bernoulli.html</loc>
-  </url>
-  <url>
-    <loc>/reference/blite.html</loc>
-  </url>
-  <url>
-    <loc>/reference/bliteMethods.html</loc>
-  </url>
-  <url>
-    <loc>/reference/estfun.html</loc>
-  </url>
-  <url>
-    <loc>/reference/flite.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fliteMethods.html</loc>
-  </url>
-  <url>
-    <loc>/reference/generalisedPareto.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lite-internal.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lite-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lite.html</loc>
-  </url>
-  <url>
-    <loc>/reference/logLikVector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predict.blite.html</loc>
-  </url>
-  <url>
-    <loc>/reference/returnLevel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/returnLevelMethods.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://github.com/paulnorthrop/lite/404.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/articles/index.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/articles/introduction-to-lite.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/articles/lite-1-frequentist.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/articles/lite-2-bayesian.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/authors.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/index.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/LICENSE.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/news/index.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/Bernoulli.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/blite.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/bliteMethods.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/estfun.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/flite.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/fliteMethods.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/generalisedPareto.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/index.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/lite-internal.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/lite-package.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/logLikVector.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/predict.blite.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/returnLevel.html</loc></url>
+<url><loc>https://github.com/paulnorthrop/lite/reference/returnLevelMethods.html</loc></url>
 </urlset>
+
