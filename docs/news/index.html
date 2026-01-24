@@ -63,7 +63,7 @@
 <h3 id="bug-fixes-and-minor-improvements-1-1-0">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-1-1-0"></a></h3>
 <ul><li><p>In <code><a href="../reference/flite.html">flite()</a></code>, the arguments <code>k</code> and <code>inc_cens</code> were not passed to <code><a href="https://github.com/paulnorthrop/exdex/reference/kgaps.html" class="external-link">exdex::kgaps()</a></code>. This has been corrected.</p></li>
 <li><p>In the (unexported, internal) function <code><a href="../reference/lite-internal.html">bingp_rl_CI()</a></code> an error is triggered if the return level requested is lower than the threshold used to fit the model.</p></li>
-<li><p>In the (unexported, internal) function <code><a href="../reference/lite-internal.html">bingp_rl_prof()</a></code>, which calculates a confidence interval for a return level based on a profile log-likelihood, a check is made on the value <code>p</code> to be passed to <code><a href="https://paulnorthrop.github.io/revdbayes/reference/gp.html" class="external-link">revdbayes::qgp()</a></code> to check that it is in [0, 1].</p></li>
+<li><p>In the (unexported, internal) function <code><a href="../reference/lite-internal.html">bingp_rl_prof()</a></code>, which calculates a confidence interval for a return level based on a profile log-likelihood, a check is made on the value <code>p</code> to be passed to <code><a href="https://github.com/paulnorthrop/revdbayes/reference/gp.html" class="external-link">revdbayes::qgp()</a></code> to check that it is in [0, 1].</p></li>
 </ul></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# lite
+# lite <a href="https://paulnorthrop.github.io/lite/"><img src="man/figures/lite_logo.png" align="right" style="float:right; height:150px;" alt="lite logo"/></a>
 
 [![R-CMD-check](https://github.com/paulnorthrop/lite/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/paulnorthrop/lite/actions/workflows/R-CMD-check.yaml)
 [![Coverage

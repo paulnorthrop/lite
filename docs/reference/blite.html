@@ -66,8 +66,8 @@ extremes, as summarised by the extremal index.</p>
 <span>  k <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  inc_cens <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">ny</span>,</span>
-<span>  gp_prior <span class="op">=</span> <span class="fu">revdbayes</span><span class="fu">::</span><span class="fu"><a href="https://paulnorthrop.github.io/revdbayes/reference/set_prior.html" class="external-link">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"mdi"</span>, model <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span>,</span>
-<span>  b_prior <span class="op">=</span> <span class="fu">revdbayes</span><span class="fu">::</span><span class="fu"><a href="https://paulnorthrop.github.io/revdbayes/reference/set_bin_prior.html" class="external-link">set_bin_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"jeffreys"</span><span class="op">)</span>,</span>
+<span>  gp_prior <span class="op">=</span> <span class="fu">revdbayes</span><span class="fu">::</span><span class="fu"><a href="https://github.com/paulnorthrop/revdbayes/reference/set_prior.html" class="external-link">set_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"mdi"</span>, model <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span>,</span>
+<span>  b_prior <span class="op">=</span> <span class="fu">revdbayes</span><span class="fu">::</span><span class="fu"><a href="https://github.com/paulnorthrop/revdbayes/reference/set_bin_prior.html" class="external-link">set_bin_prior</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"jeffreys"</span><span class="op">)</span>,</span>
 <span>  theta_prior_pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
 <span>  n <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vertical"</span>, <span class="st">"none"</span><span class="op">)</span>,</span>
@@ -137,13 +137,13 @@ given.</p></dd>
 <dt id="arg-gp-prior">gp_prior<a class="anchor" aria-label="anchor" href="#arg-gp-prior"></a></dt>
 <dd><p>A list to specify a prior distribution for the GP parameters
 (\(\sigma\)<sub>u</sub>,
-\(\xi\)), set using <code><a href="https://paulnorthrop.github.io/revdbayes/reference/set_prior.html" class="external-link">set_prior</a></code>.</p></dd>
+\(\xi\)), set using <code><a href="https://github.com/paulnorthrop/revdbayes/reference/set_prior.html" class="external-link">set_prior</a></code>.</p></dd>
 
 
 <dt id="arg-b-prior">b_prior<a class="anchor" aria-label="anchor" href="#arg-b-prior"></a></dt>
 <dd><p>A list to specify a prior distribution for the Bernoulli
 parameter \(p\)<sub>u</sub>, set
-using <code><a href="https://paulnorthrop.github.io/revdbayes/reference/set_bin_prior.html" class="external-link">set_bin_prior</a></code>.</p></dd>
+using <code><a href="https://github.com/paulnorthrop/revdbayes/reference/set_bin_prior.html" class="external-link">set_bin_prior</a></code>.</p></dd>
 
 
 <dt id="arg-theta-prior-pars">theta_prior_pars<a class="anchor" aria-label="anchor" href="#arg-theta-prior-pars"></a></dt>
@@ -228,7 +228,7 @@ may make a difference if the number of clusters is not large.</p></dd>
   \(p\)<sub>u</sub> and
   (\(\sigma\)<sub>u</sub>, \(\xi\))
   (using <code><a href="https://github.com/paulnorthrop/rust/reference/ru.html" class="external-link">ru</a></code>) and \(\theta\) (using
-  <code><a href="https://paulnorthrop.github.io/revdbayes/reference/kgaps_post.html" class="external-link">kgaps_post</a></code>).</p>
+  <code><a href="https://github.com/paulnorthrop/revdbayes/reference/kgaps_post.html" class="external-link">kgaps_post</a></code>).</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
